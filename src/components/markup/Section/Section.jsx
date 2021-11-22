@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 const Section = ( {
 	title,
-	titleTag = 'h1',
+	TitleTag = 'h1',
 	children,
 } ) => {
-	const TitleTag = titleTag;
 	return (
 		<section className={ 'markup-section' }>
 			<div className="markup-section__header container">
@@ -21,7 +20,7 @@ const Section = ( {
 
 Section.propTypes = {
 	name: PropTypes.string,
-	age: PropTypes.number
+	age: PropTypes.number,
 };
 
 export default Section;

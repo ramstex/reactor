@@ -1,3 +1,5 @@
+@import 'lib/_colors.scss';
+
 $offset: 32px;
 
 $breakpoints: (
@@ -19,9 +21,15 @@ $breakpoints: (
 );
 
 @function breakpoint( $device: 'mobile', $size: 'sm' ) {
-	@return map-get( map-get( $breakpoints, $device ), $size );
-};
+	@return map-get(map-get($breakpoints, $device), $size);
+}
 
 @function toRem($value) {
 	@return $value / 16 + rem;
-};
+}
+
+$duration: 0.3s;
+
+:root {
+	--transition: all #{$duration} ease;
+}

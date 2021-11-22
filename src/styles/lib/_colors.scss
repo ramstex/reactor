@@ -1,0 +1,28 @@
+:root {
+	//  Цвета
+	--clr-black: #000000;
+	--clr-white: #ffffff;
+	--clr-blue: #037ef3;
+	--clr-blue-light :#56acfd;
+	--clr-red: #f85a40;
+	--clr-green: #00c16e;
+	--clr-purple: #7552cc;
+	--clr-turquoise: #0cb9c1;
+	--clr-orange: #f48924;
+	--clr-yellow: #ffc845;
+	--clr-grey: #caccd1;
+	--clr-grey-dark: #52565e;
+	--clr-grey-light: #f3f4f7;
+
+	//  Текст
+	--clr-text: var(--clr-black);
+	--clr-text-inverse: var(--clr-grey-light);
+
+	//  Темы
+	--thm-default: var(--clr-blue);
+	--thm-default-light: var(--clr-blue-light);
+	--thm-error: var(--clr-red);
+	--thm-success: var(--clr-green);
+	--thm-warning: var(--clr-orange);
+	--thm-disabled: var(--clr-grey-light);
+}
