@@ -27,7 +27,7 @@ function App() {
 				<UiButton
 					status={ buttonState }
 					onClick={ onButtonClick }
-				>Создать пост</UiButton>
+				>Нажми на меня!</UiButton>
 			</form>
 		</div>
 	);

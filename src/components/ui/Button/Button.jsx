@@ -1,4 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Classnames from 'classnames';
+
+import Statuses from '../../../plugins/constant';
 
 import style from './Button.module.scss';
 
@@ -7,8 +11,15 @@ const Button = ( props ) => {
 		props.onClick( event );
 	};
 
+
+
+	const RootClass = Classnames([
+		style.button,
+		style[props.status]
+	]);
+
 	return (
-		<div className={ style.button + ' ' + style[props.status] }>
+		<div className={ RootClass }>
 			<div className={ style.fill } />
 			<button
 				className={ style.body }
@@ -17,6 +28,12 @@ const Button = ( props ) => {
 			>{ props.children }</button>
 		</div>
 	)
+};
+
+Button.propTypes = {
+	status: PropTypes.oneOf( Statuses ),
+	disabled: PropTypes.bool,
+	onClick: PropTypes.func,
 };
 
 export default Button;
