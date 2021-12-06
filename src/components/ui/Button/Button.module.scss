@@ -1,24 +1,24 @@
+@use "sass:math";
+
 @import './src/styles/_global.scss';
 
 .button {
 	width: fit-content;
 	position: relative;
-	&:hover, {
-		.fill {
-			//background-color: var(--thm-default-light);
-		}
-	}
 }
 
 .body {
 	display: block;
-	border: 1px solid transparent;
+	width: 100%;
+	border: none;
 	border-radius: 0;
-	padding: $offset/4 $offset/2;
+	padding: math.div($offset, 4) math.div($offset, 2);
 	position: relative;
 	color: var(--clr-text-inverse);
+	text-align: center;
 	background: none;
 	cursor: pointer;
+	transition: var(--transition);
 }
 
 .fill {
@@ -31,26 +31,49 @@
 	transition: var(--transition);
 }
 
+._full {
+	width: 100%;
+}
+
+._ghost {
+	.fill {
+		border: 1px solid var(--thm-default);
+	}
+}
+
 ._disabled {
 	.fill {
 		background-color: var(--thm-disabled);
 	}
 }
 
-._status_success {
-	.fill {
-		background-color: var(--thm-success);
-	}
-}
+._status {
+	@each $status, $values in $statuses {
+		&_#{$status} {
+			.fill {
+				background-color: map-get($values, 'default');
+			}
 
-.error {
-	.fill {
-		background-color: var(--thm-error);
-	}
-}
+			&._ghost {
+				.fill {
+					border-color: map-get($values, 'default');
+					background-color: transparent;
+				}
 
-._status_warning {
-	.fill {
-		background-color: var(--thm-warning);
+				.body {
+					color: map-get($values, 'default');
+				}
+			}
+
+			&:hover {
+				.fill {
+					border-color: map-get($values, 'hover');
+					background-color: map-get($values, 'hover');
+				}
+				.body {
+					color: var(--clr-text-inverse);
+				}
+			}
+		}
 	}
 }

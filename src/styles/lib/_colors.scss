@@ -5,7 +5,9 @@
 	--clr-blue: #037ef3;
 	--clr-blue-light :#56acfd;
 	--clr-red: #f85a40;
+	--clr-red-light: #ff9494;
 	--clr-green: #00c16e;
+	--clr-green-light: #2cfca1;
 	--clr-purple: #7552cc;
 	--clr-turquoise: #0cb9c1;
 	--clr-orange: #f48924;
@@ -22,7 +24,29 @@
 	--thm-default: var(--clr-blue);
 	--thm-default-light: var(--clr-blue-light);
 	--thm-error: var(--clr-red);
+	--thm-error-light: var(--clr-red-light);
 	--thm-success: var(--clr-green);
+	--thm-success-light: var(--clr-green-light);
 	--thm-warning: var(--clr-orange);
+	--thm-warning-light: var(--clr-yellow);
 	--thm-disabled: var(--clr-grey-light);
 }
+
+$statuses: (
+	default: (
+		default: var(--thm-default),
+		hover: var(--thm-default-light),
+	),
+	success: (
+		default: var(--thm-success),
+		hover: var(--thm-success-light),
+	),
+	warning: (
+		default: var(--thm-warning),
+		hover: var(--thm-warning-light),
+	),
+	error: (
+		default: var(--thm-error),
+		hover: var(--thm-error-light),
+	),
+)

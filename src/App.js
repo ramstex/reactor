@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React  from 'react';
 
 import MarkupSection from "./components/markup/Section/Section";
 import Post from "./components/Post/Post";
@@ -7,13 +7,6 @@ import UiButton from "./components/ui/Button/Button";
 import './styles/App.scss';
 
 function App() {
-	const [ buttonState, setButtonState] = useState('default');
-
-	const onButtonClick = (event, a) => {
-		event.preventDefault();
-		setButtonState('error')
-	};
-
 	return (
 		<div className="App">
 			<MarkupSection title={ "POSTS" }>
@@ -24,10 +17,26 @@ function App() {
 			</MarkupSection>
 			<form action="">
 				<input type="text" /> <input type="text" />
+				<UiButton>Default</UiButton>
 				<UiButton
-					status={ buttonState }
-					onClick={ onButtonClick }
-				>Нажми на меня!</UiButton>
+					status="warning"
+				>Warning</UiButton>
+				<UiButton
+					status="error"
+					full
+				>Error</UiButton>
+				<UiButton
+					ghost
+				>Default Ghost</UiButton>
+				<UiButton
+					status="warning"
+					ghost
+					full
+				>Warning Ghost</UiButton>
+				<UiButton
+					status="error"
+					ghost
+				>Error Ghost</UiButton>
 			</form>
 		</div>
 	);

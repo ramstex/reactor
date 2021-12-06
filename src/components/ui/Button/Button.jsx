@@ -2,21 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Classnames from 'classnames';
 
-import Statuses from '../../../plugins/constant';
+import { ClassModifier, Statuses } from '../../../plugins/constant';
 
 import style from './Button.module.scss';
 
 const Button = ( props ) => {
-	const onClick = ( event ) => {
-		props.onClick( event );
-	};
-
+	const statusClass = ClassModifier( `status${ ClassModifier( props.status ) }` );
 
 
 	const RootClass = Classnames([
 		style.button,
-		style[props.status]
+		style[ statusClass ],
+		{ [ style[ ClassModifier( 'ghost' ) ] ]: props.ghost },
+		{ [ style[ ClassModifier( 'full' ) ] ]: props.full },
 	]);
+
+	const onClick = ( event ) => {
+		props.onClick( event );
+	};
 
 	return (
 		<div className={ RootClass }>
@@ -30,9 +33,17 @@ const Button = ( props ) => {
 	)
 };
 
+Button.defaultProps = {
+	status: Statuses[0],
+	ghost: false,
+	full: false,
+};
+
 Button.propTypes = {
 	status: PropTypes.oneOf( Statuses ),
 	disabled: PropTypes.bool,
+	ghost: PropTypes.bool,
+	full: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 

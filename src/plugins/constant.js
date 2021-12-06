@@ -5,8 +5,11 @@ const Statuses = [
 	'error',
 ];
 
-const Output = {
-	Statuses,
+const ClassModifier = (name) => {
+	return `_${ name }`;
 }
 
-export default Output;
+export {
+	ClassModifier,
+	Statuses,
+};
