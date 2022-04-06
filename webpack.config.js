@@ -17,6 +17,8 @@ export default (env, argv) => {
 			new HtmlWebpackPlugin({
 				template: './src/index.html',
 			}),
+
+			new MiniCssExtractPlugin(),
 		],
 
 		module: {
