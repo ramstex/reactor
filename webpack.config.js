@@ -6,11 +6,15 @@ export default (env, argv) => {
 	return {
 		mode: argv.mode,
 
-		entry: './src/index.js',
+		entry: './src/index.jsx',
 
 		output: {
 			filename: 'main.js',
 			path: path.join(process.cwd(), 'dist'),
+		},
+
+		devServer: {
+			port: 3000,
 		},
 
 		plugins: [
@@ -23,6 +27,22 @@ export default (env, argv) => {
 
 		module: {
 			rules: [
+				{
+					test: /\.(js|jsx)$/,
+					exclude: /node_modules/,
+					use: [{
+						loader: 'babel-loader',
+						options: {
+							presets: [
+								['@babel/preset-env', {
+									targets: 'defaults',
+								}],
+								'@babel/preset-react',
+							],
+						},
+					}],
+				},
+
 				{
 					test: /\.(sa|sc|c)ss$/,
 					use: [
@@ -41,6 +61,27 @@ export default (env, argv) => {
 							},
 						},
 						'sass-loader',
+					],
+				},
+
+				{
+					test: /\.svg$/,
+					use: [
+						{
+							loader: 'babel-loader',
+						},
+						{
+							loader: 'react-svg-loader',
+						},
+					],
+				},
+
+				{
+					test: /\.(png|jpg|jpeg)$/,
+					use: [
+						{
+							loader: 'url-loader',
+						},
 					],
 				},
 			],

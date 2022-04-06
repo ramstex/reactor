@@ -1,0 +1,8 @@
+$colors: (
+	primary: #c0baff,
+	secondary: #c0baff,
+);
+
+@function getColor($key: 'primary') {
+	@return map-get($colors, $key);
+}
