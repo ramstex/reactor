@@ -3,24 +3,30 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 class BaseImage extends React.Component {
+	//	Классы
+	classNameRoot() {
+		const { className } = this.props;
+
+		return classnames('base-image', className);
+	}
+
 	render() {
 		const {
 			image,
 			alt,
 			title,
-			className,
 		} = this.props;
 
 		if (typeof image === 'string') {
 			return (
-				<img className={ classnames('base-image', className) } src={ image } alt={ alt } title={ title } />
+				<img className={ this.classNameRoot() } src={ image } alt={ alt } title={ title } />
 			);
 		}
 
 		const Image = image;
 
 		return (
-			<Image className={ classnames('base-image', className) } />
+			<Image className={ this.classNameRoot() } />
 		);
 	}
 }

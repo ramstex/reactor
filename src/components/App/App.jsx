@@ -5,12 +5,23 @@ import classnames from 'classnames';
 import Layout from '../Layout/Layout.jsx';
 
 class App extends React.Component {
+	//	Классы
+	classNameRoot() {
+		const { className } = this.props;
+
+		return classnames('app', className);
+	}
+
+	classNameLayout() {
+		return classnames('app__layout');
+	}
+
 	render() {
-		const { children, className } = this.props;
+		const { children } = this.props;
 
 		return (
-			<div className={ classnames('app', className) }>
-				<Layout className={ classnames('app__layout') }>
+			<div className={ this.classNameRoot() }>
+				<Layout className={ this.classNameLayout() }>
 					{ children }
 				</Layout>
 			</div>

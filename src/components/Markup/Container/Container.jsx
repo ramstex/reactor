@@ -5,11 +5,16 @@ import PropTypes from 'prop-types';
 import './Container.scss';
 
 class MarkupContainer extends React.Component {
+	//	Классы
+	classNameRoot() {
+		return classnames('markup-container');
+	}
+
 	render() {
 		const { children } = this.props;
 
 		return (
-			<div className={ classnames('markup-container') }>
+			<div className={ this.classNameRoot() }>
 				{ children }
 			</div>
 		);

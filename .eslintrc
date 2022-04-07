@@ -4,7 +4,9 @@
 		"airbnb/base"
 	],
 	"rules": {
+		"max-len": ["error", 120],
 		"arrow-body-style": "off",
+		"class-methods-use-this": "off",
 		"indent": ["error", "tab"],
 		"no-console": "off",
 		"no-tabs": "off"

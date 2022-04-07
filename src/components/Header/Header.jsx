@@ -10,11 +10,16 @@ import './Header.scss';
 import Logo from '../../assets/images/logo-racoon.svg';
 
 class Header extends React.Component {
-	render() {
+	//	Классы
+	classNameRoot() {
 		const { className } = this.props;
 
+		return classnames('header', className);
+	}
+
+	render() {
 		return (
-			<header className={ classnames('header', className) }>
+			<header className={ this.classNameRoot() }>
 				<MarkupContainer>
 					<BaseLogo image={ Logo } />
 				</MarkupContainer>

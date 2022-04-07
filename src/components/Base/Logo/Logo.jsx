@@ -7,6 +7,15 @@ import BaseImage from '../Image/Image.jsx';
 import './Logo.scss';
 
 class BaseLogo extends React.Component {
+	//	Классы
+	classNameRoot() {
+		return classnames('base-logo');
+	}
+
+	classNameImage() {
+		return classnames('base-logo__image');
+	}
+
 	render() {
 		const {
 			image,
@@ -15,8 +24,8 @@ class BaseLogo extends React.Component {
 		} = this.props;
 
 		return (
-			<div className={ classnames('base-logo') }>
-				<BaseImage className={ classnames('base-logo__image') } image={ image } title={ title } alt={ alt } />
+			<div className={ this.classNameRoot() }>
+				<BaseImage className={ this.classNameImage() } image={ image } title={ title } alt={ alt } />
 			</div>
 		);
 	}
