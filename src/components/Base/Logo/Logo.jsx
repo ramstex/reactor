@@ -3,13 +3,15 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import BaseImage from '../Image/Image.jsx';
+import BaseLink from '../Link/Link.jsx';
 
 import './Logo.scss';
 
 class BaseLogo extends React.Component {
 	//	Классы
 	classNameRoot() {
-		return classnames('base-logo');
+		const { className } = this.props;
+		return classnames('base-logo', className);
 	}
 
 	classNameImage() {
@@ -18,20 +20,25 @@ class BaseLogo extends React.Component {
 
 	render() {
 		const {
+			className,
+			href,
 			image,
 			title,
 			alt,
+			...attrs
 		} = this.props;
 
 		return (
-			<div className={ this.classNameRoot() }>
+			<BaseLink className={ this.classNameRoot() } href={ href } { ...attrs }>
 				<BaseImage className={ this.classNameImage() } image={ image } title={ title } alt={ alt } />
-			</div>
+			</BaseLink>
 		);
 	}
 }
 
 BaseLogo.propTypes = {
+	className: PropTypes.string,
+	href: PropTypes.string,
 	image: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.func,

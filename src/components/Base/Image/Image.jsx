@@ -6,7 +6,6 @@ class BaseImage extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-
 		return classnames('base-image', className);
 	}
 

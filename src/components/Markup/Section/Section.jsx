@@ -8,7 +8,6 @@ class MarkupSection extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-
 		return classnames('markup-section', className);
 	}
 

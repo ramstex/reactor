@@ -4,10 +4,11 @@
 		"airbnb/base"
 	],
 	"rules": {
-		"max-len": ["error", 120],
 		"arrow-body-style": "off",
 		"class-methods-use-this": "off",
+		"import/prefer-default-export": "off",
 		"indent": ["error", "tab"],
+		"max-len": ["error", 120],
 		"no-console": "off",
 		"no-tabs": "off"
 	}
