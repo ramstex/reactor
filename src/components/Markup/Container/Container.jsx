@@ -7,7 +7,8 @@ import './Container.scss';
 class MarkupContainer extends React.Component {
 	//	Классы
 	classNameRoot() {
-		return classnames('markup-container');
+		const { wide, tight } = this.props;
+		return classnames('markup-container', { _wide: wide }, { _tight: tight });
 	}
 
 	render() {
@@ -23,6 +24,8 @@ class MarkupContainer extends React.Component {
 
 MarkupContainer.propTypes = {
 	children: PropTypes.node,
+	tight: PropTypes.bool,
+	wide: PropTypes.bool,
 };
 
 export default MarkupContainer;

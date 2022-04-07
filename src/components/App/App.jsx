@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+} from 'react-router-dom';
 
 import Layout from '../Layout/Layout.jsx';
+import PageHome from '../../pages/Home/Home.jsx';
+import PageUiKit from '../../pages/UiKit/UiKit.jsx';
 
 class App extends React.Component {
 	//	Классы
@@ -16,13 +23,16 @@ class App extends React.Component {
 	}
 
 	render() {
-		const { children } = this.props;
-
 		return (
 			<div className={ this.classNameRoot() }>
-				<Layout className={ this.classNameLayout() }>
-					{ children }
-				</Layout>
+				<Router>
+					<Layout className={ this.classNameLayout() }>
+						<Routes>
+							<Route path={ '/' } element={ <PageHome /> } />
+							<Route path={ '/ui-kit' } element={ <PageUiKit /> } />
+						</Routes>
+					</Layout>
+				</Router>
 			</div>
 		);
 	}
