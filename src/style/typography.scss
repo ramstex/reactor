@@ -1,8 +1,19 @@
+@use './layout.scss' as layout;
+@use './media.scss' as media;
+
 @mixin h1 {
 	font-weight: 600;
-	font-size: 56px;
+	font-size: layout.resp(56);
 	line-height: 100%;
 	letter-spacing: -0.02em;
+
+	@media ( media.min( tablet, sm ) ) {
+		font-size: 36px;
+	}
+
+	@media ( media.min( desktop, sm ) ) {
+		font-size: 56px;
+	}
 }
 
 h1,

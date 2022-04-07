@@ -23,3 +23,11 @@ $bp: (
 @function bp( $device: desktop, $segment: md ) {
 	@return map.get( map.get($bp, $device), $segment );
 }
+
+@function min( $device: desktop, $segment: md ) {
+	@return #{ 'min-width:' + bp($device, $segment) };
+}
+
+@function max( $device: desktop, $segment: md ) {
+	@return #{ 'max-width:' + bp($device, $segment) - 1 };
+}
