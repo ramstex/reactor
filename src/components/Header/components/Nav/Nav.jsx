@@ -3,6 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
 import BaseLink from '../../../Base/Link/Link.jsx';
+import { Row, Col } from '../../../Grid/Grid.jsx';
+
+import './Nav.scss';
 
 class LocalNav extends React.Component {
 	//	Классы
@@ -13,14 +16,15 @@ class LocalNav extends React.Component {
 
 	render() {
 		return (
-			<ul className={ this.classNameRoot() }>
-				<li>
+			<Row className={ this.classNameRoot() } tag={ 'ul' }>
+				<Col tag={ 'li' }>
 					<BaseLink href={ '/' }>Главная</BaseLink>
-				</li>
-				<li>
+				</Col>
+
+				<Col tag={ 'li' }>
 					<BaseLink href={ '/ui-kit' }>Ui-Kit</BaseLink>
-				</li>
-			</ul>
+				</Col>
+			</Row>
 		);
 	}
 }

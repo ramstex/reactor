@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
+import { Row, Col } from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
 
 import './Header.scss';
@@ -25,14 +26,20 @@ class Header extends React.Component {
 		return (
 			<header className={ this.classNameRoot() }>
 				<MarkupContainer wide>
-					<BaseLogo
-						className={ this.classNameLogo() }
-						image={ Logo }
-						href={ 'https://google.com' }
-						target={ '_blank' }
-					/>
+					<Row alignV={ 'center' }>
+						<Col>
+							<BaseLogo
+								className={ this.classNameLogo() }
+								image={ Logo }
+								href={ 'https://google.com' }
+								target={ '_blank' }
+							/>
+						</Col>
 
-					<LocalNav />
+						<Col>
+							<LocalNav />
+						</Col>
+					</Row>
 				</MarkupContainer>
 			</header>
 		);

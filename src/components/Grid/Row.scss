@@ -1,0 +1,41 @@
+@use 'sass:math';
+@use '../../style/layout.scss' as layout;
+
+.row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-direction: row;
+	margin-left: math.div(layout.$gap, -2);
+	margin-right: math.div(layout.$gap, -2);
+
+	&._align-h {
+		$variants: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			stretch: stretch,
+		);
+
+		@each $key, $value in $variants {
+			&_#{$key} {
+				justify-content: $value;
+			}
+		}
+	}
+
+	&._align-v {
+		$variants: (
+			start: flex-start,
+			end: flex-end,
+			center: center,
+			stretch: stretch,
+		);
+
+		@each $key, $value in $variants {
+			&_#{$key} {
+				align-items: $value;
+			}
+		}
+	}
+}

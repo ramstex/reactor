@@ -22,7 +22,7 @@ class MarkupSection extends React.Component {
 
 	render() {
 		const { children, header, body } = this.props;
-		console.log(children);
+
 		return (
 			<section className={ this.classNameRoot() }>
 				<div className={ this.classNameHeader() }>
@@ -30,6 +30,7 @@ class MarkupSection extends React.Component {
 						{ getChildrenByKey(children, 'header') }
 					</MarkupContainer>
 				</div>
+
 				<div className={ this.classNameBody() }>
 					<MarkupContainer { ...body }>
 						{ getChildrenByKey(children) }
