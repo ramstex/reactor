@@ -1,3 +1,6 @@
+@use './style/typography.scss' as typography;
+@use './style/layout.scss' as layout;
+
 * {
 	margin: 0;
 	padding: 0;
