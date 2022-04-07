@@ -1,5 +1,6 @@
-@use './style/typography.scss' as typography;
 @use './style/layout.scss' as layout;
+@use './style/media.scss' as media;
+@use './style/typography.scss' as typography;
 
 * {
 	margin: 0;

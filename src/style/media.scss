@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+$bp: (
+	mobile: (
+		sm: 360px,
+		md: 520px,
+		lg: 640px,
+	),
+
+	tablet: (
+		sm: 768px,
+		md: 920px,
+		lg: 1024px,
+	),
+
+	desktop: (
+		sm: 1280px,
+		md: 1440px,
+		lg: 1680px,
+	),
+);
+
+@function bp( $device: desktop, $segment: md ) {
+	@return map.get( map.get($bp, $device), $segment );
+}
