@@ -16,18 +16,32 @@ class MarkupSection extends React.Component {
 		return classnames('markup-section__header');
 	}
 
+	classNameTitle() {
+		return classnames('markup-section__title');
+	}
+
 	classNameBody() {
 		return classnames('markup-section__body');
 	}
 
 	render() {
-		const { children, header, body } = this.props;
+		const {
+			children,
+			header,
+			body,
+			title,
+			titleTag,
+		} = this.props;
+
+		const TitleTag = titleTag || 'h2';
 
 		return (
 			<section className={ this.classNameRoot() }>
 				<div className={ this.classNameHeader() }>
 					<MarkupContainer { ...header }>
-						{ getChildrenByKey(children, 'header') }
+						<TitleTag className={ this.classNameTitle() }>
+							{ title }
+						</TitleTag>
 					</MarkupContainer>
 				</div>
 
@@ -46,6 +60,8 @@ MarkupSection.propTypes = {
 	className: PropTypes.string,
 	body: PropTypes.object,
 	header: PropTypes.object,
+	title: PropTypes.string,
+	titleTag: PropTypes.string,
 };
 
 export default MarkupSection;
