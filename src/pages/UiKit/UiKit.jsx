@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import MarkupSection from '../../components/Markup/Section/Section.jsx';
+import LocalNav from './components/Nav/Nav.jsx';
 
 class PageUiKit extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page-home', className);
+		return classnames( 'page-home', className );
 	}
 
 	render() {
 		return (
 			<div className={ this.classNameRoot() }>
 				<MarkupSection title={ 'Ui Kit' }>
+					<LocalNav />
+
 					{/* eslint-disable-next-line max-len */}
 					<p>Равным образом новая модель организационной деятельности позволяет выполнять важные задания по разработке существенных финансовых и административных условий. Таким образом рамки и место обучения кадров позволяет оценить значение направлений прогрессивного развития. Значимость этих проблем настолько очевидна, что начало повседневной работы по формированию позиции позволяет выполнять важные задания по разработке направлений прогрессивного развития. Идейные соображения высшего порядка, а также постоянное информационно-пропагандистское обеспечение нашей деятельности влечет за собой процесс внедрения и модернизации форм развития.</p>
 					{/* eslint-disable-next-line max-len */}

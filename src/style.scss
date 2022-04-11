@@ -1,4 +1,5 @@
 @use './style/layout.scss' as layout;
+@use './style/fonts.scss' as fonts;
 @use './style/media.scss' as media;
 @use './style/typography.scss' as typography;
 
@@ -6,4 +7,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+body {
+	font-family: fonts.$primary;
 }

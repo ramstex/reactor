@@ -1,4 +1,4 @@
-export const isAbsoluteUrl = (url = '') => {
+export const isAbsoluteUrl = ( url = '' ) => {
 	const list = [
 		'http://',
 		'https://',
@@ -6,20 +6,20 @@ export const isAbsoluteUrl = (url = '') => {
 		'ssh://',
 	];
 
-	return !!list.find((item) => {
-		return url.indexOf(item) === 0;
-	});
+	return !!list.find( ( item ) => {
+		return url.indexOf( item ) === 0;
+	} );
 };
 
-export const getChildrenByKey = (children = [], key = null) => {
-	if ('length' in children) {
-		return children.reduce((prev, curr) => {
-			if (curr.key === key) {
-				prev.push(curr);
+export const getChildrenByKey = ( children = [], key = null ) => {
+	if ( 'length' in children ) {
+		return children.reduce( ( prev, curr ) => {
+			if ( curr.key === key ) {
+				prev.push( curr );
 			}
 
 			return prev;
-		}, []);
+		}, [] );
 	}
 
 	return children.key === key ? children : undefined;

@@ -82,15 +82,15 @@ h6,
 }
 
 @mixin p {
-	font-size: 14px;
-}
-
-@mixin p_lg {
 	font-size: 16px;
 }
 
+@mixin p_lg {
+	font-size: 18px;
+}
+
 @mixin p_sm {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 @mixin footnote {
@@ -104,7 +104,7 @@ p {
 		@include p_lg;
 	}
 
-	&._lg{
+	&._sm{
 		@include p_sm;
 	}
 }

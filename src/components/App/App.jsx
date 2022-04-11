@@ -10,16 +10,17 @@ import {
 import Layout from '../Layout/Layout.jsx';
 import PageHome from '../../pages/Home/Home.jsx';
 import PageUiKit from '../../pages/UiKit/UiKit.jsx';
+import PageUiKitTypography from '../../pages/UiKit/pages/Typography.jsx';
 
 class App extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('app', className);
+		return classnames( 'app', className );
 	}
 
 	classNameLayout() {
-		return classnames('app__layout');
+		return classnames( 'app__layout' );
 	}
 
 	render() {
@@ -30,6 +31,7 @@ class App extends React.Component {
 						<Routes>
 							<Route path={ '/' } element={ <PageHome /> } />
 							<Route path={ '/ui-kit' } element={ <PageUiKit /> } />
+							<Route path={ '/ui-kit/typography' } element={ <PageUiKitTypography /> } />
 						</Routes>
 					</Layout>
 				</Router>

@@ -7,5 +7,5 @@ import './style.scss';
 
 ReactDOMClient.createRoot(
 	// eslint-disable-next-line no-undef
-	document.getElementById('app-root'),
-).render(<App />);
+	document.getElementById( 'app-root' ),
+).render( <App /> );

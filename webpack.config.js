@@ -2,7 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default (env, argv) => {
+export default ( env, argv ) => {
 	return {
 		mode: argv.mode,
 
@@ -10,17 +10,19 @@ export default (env, argv) => {
 
 		output: {
 			filename: 'main.js',
-			path: path.join(process.cwd(), 'dist'),
+			path: path.join( process.cwd(), 'dist' ),
+			publicPath: '/',
 		},
 
 		devServer: {
-			port: 3000,
+			port: 8080,
+			historyApiFallback: true,
 		},
 
 		plugins: [
-			new HtmlWebpackPlugin({
+			new HtmlWebpackPlugin( {
 				template: './src/index.html',
-			}),
+			} ),
 
 			new MiniCssExtractPlugin(),
 		],
@@ -47,7 +49,9 @@ export default (env, argv) => {
 					test: /\.(sa|sc|c)ss$/,
 					use: [
 						MiniCssExtractPlugin.loader,
+
 						'css-loader',
+
 						{
 							loader: 'postcss-loader',
 							options: {
@@ -60,7 +64,15 @@ export default (env, argv) => {
 								},
 							},
 						},
-						'sass-loader',
+
+						'resolve-url-loader',
+
+						{
+							loader: 'sass-loader',
+							options: {
+								sourceMap: true,
+							},
+						},
 					],
 				},
 
