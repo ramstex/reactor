@@ -1,10 +1,5 @@
 @use 'sass:math';
-
-$gap: 30px;
-
-@function resp( $value: 100, $layout: 360, $unit: vw ) {
-	@return ( math.div( $value, $layout ) * 100 ) + $unit;
-}
+@use './data.scss' as data;
 
 $sizes: (
 	margins: (
@@ -78,7 +73,7 @@ $sizes: (
 			@for $i from -12 through 12 {
 				&_#{$i} {
 					@each $prop in $props {
-						#{$prop}: math.div( $gap, 4 ) * $i;
+						#{$prop}: math.div( data.$gap, 4 ) * $i;
 					}
 				}
 			}

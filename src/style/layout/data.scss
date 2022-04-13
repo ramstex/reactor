@@ -1,0 +1,7 @@
+@use 'sass:math';
+
+$gap: 30px;
+
+@function resp( $value: 100, $layout: 360, $unit: vw ) {
+	@return ( math.div( $value, $layout ) * 100 ) + $unit;
+}

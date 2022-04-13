@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '/src/style/layout' as layout;
-@use '/src/style/colors' as colors;
+@use '../../style/layout/data' as layout;
+@use '../../style/colors/data' as colors;
 
 .header {
 	padding-top: math.div(layout.$gap, 2);

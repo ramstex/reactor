@@ -1,0 +1,77 @@
+@use 'sass:math';
+@use './data.scss' as data;
+@use '../layout/data.scss' as layout;
+
+h1,
+.h1 {
+	@include data.h1;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+h2,
+.h2 {
+	@include data.h2;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+h3,
+.h3 {
+	@include data.h3;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+h4,
+.h4 {
+	@include data.h4;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+h5,
+.h5 {
+	@include data.h5;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+h6,
+.h6 {
+	@include data.h6;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
+}
+
+p {
+	@include data.p;
+
+	&._lg{
+		@include data.p_lg;
+	}
+
+	&._sm{
+		@include data.p_sm;
+	}
+
+	& + & {
+		margin-top: math.div(layout.$gap, 2);
+	}
+}
+
+._footnote {
+	@include data.footnote;
+}

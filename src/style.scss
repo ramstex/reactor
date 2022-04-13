@@ -1,9 +1,8 @@
-@use './style/layout.scss' as layout;
-@use './style/fonts.scss' as fonts;
-@use './style/media.scss' as media;
-@use './style/typography.scss' as typography;
-
-@use './style/colors' as colors;
+@use './style/colors/data' as colors;
+@use 'style/fonts/data' as fonts;
+@use './style/layout/data' as layout;
+@use 'style/media/data' as media;
+@use 'style/typography/data' as typography;
 
 * {
 	margin: 0;
@@ -16,3 +15,9 @@ body {
 	color: colors.getColor('text');
 	background-color: colors.getColor('back');
 }
+
+@import './style/colors/index';
+@import './style/fonts/index';
+@import './style/layout/index';
+@import './style/media/index';
+@import './style/typography/index';
