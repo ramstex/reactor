@@ -5,23 +5,25 @@ import { getChildrenByKey } from '../../../plugins/helpers';
 
 import MarkupContainer from '../Container/Container.jsx';
 
+import './Section.scss';
+
 class MarkupSection extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('markup-section', className);
+		return classnames( 'markup-section', className );
 	}
 
 	classNameHeader() {
-		return classnames('markup-section__header');
+		return classnames( 'markup-section__header' );
 	}
 
 	classNameTitle() {
-		return classnames('markup-section__title');
+		return classnames( 'markup-section__title' );
 	}
 
 	classNameBody() {
-		return classnames('markup-section__body');
+		return classnames( 'markup-section__body' );
 	}
 
 	render() {
@@ -47,7 +49,7 @@ class MarkupSection extends React.Component {
 
 				<div className={ this.classNameBody() }>
 					<MarkupContainer { ...body }>
-						{ getChildrenByKey(children) }
+						{ getChildrenByKey( children ) }
 					</MarkupContainer>
 				</div>
 			</section>

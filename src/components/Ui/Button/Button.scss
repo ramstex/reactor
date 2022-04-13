@@ -5,21 +5,49 @@
 @use '../../../style/layout/data.scss' as layout;
 @use '../../../style/typography/data.scss' as typography;
 
+$themes: (
+	primary: text,
+	secondary: back,
+	success: back,
+	warning: text,
+	danger: text,
+	info: text,
+);
+
 .ui-button {
 	width: fit-content;
 	padding: math.div(layout.$gap, 2) layout.$gap;
-	border: 1px solid transparent;
+	border-width: 1px;
+	border-style: solid;
 	font-family: fonts.$primary;
-	background-color: colors.getColor('primary');
 	cursor: pointer;
 	-webkit-appearance: none;
 	transition: all 0.3s ease;
 
-	&:hover {
-		background-color: colors.getColor('primary-light');
-	}
-
 	&._wide {
 		width: 100%;
+	}
+
+	&._theme {
+		@each $theme, $text in $themes {
+			&_#{$theme} {
+				border-color: colors.getColor($theme);
+				color: colors.getColor($text);
+				background-color: colors.getColor($theme);
+
+				&._ghost {
+					color: colors.getColor($theme);
+					background-color: transparent;
+				}
+
+				&:hover,
+				&:active,
+				&._active {
+					border-color: colors.getColor($theme + '-light');
+					color: colors.getColor($text);
+					background-color: colors.getColor($theme + '-light');
+				}
+			}
+		}
 	}
 }

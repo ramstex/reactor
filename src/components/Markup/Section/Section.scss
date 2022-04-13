@@ -1,0 +1,8 @@
+@use 'sass:math';
+@use '../../../style/layout/data.scss' as layout;
+
+.markup-section {
+	&__header {
+		margin-bottom: layout.$gap;
+	}
+}

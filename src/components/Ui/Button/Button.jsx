@@ -9,10 +9,11 @@ import './Button.scss';
 class UiButton extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const { className, wide, ghost } = this.props;
+		const { className, theme, wide, ghost } = this.props;
 		return classnames(
 			'ui-button',
 			className,
+			`_theme_${theme}`,
 			{ _wide: wide },
 			{ _ghost: ghost }
 		);
@@ -45,6 +46,15 @@ UiButton.propTypes = {
 	ghost: PropTypes.bool,
 	wide: PropTypes.bool,
 
+	theme: PropTypes.oneOf( [
+		'primary',
+		'secondary',
+		'success',
+		'warning',
+		'danger',
+		'info',
+	] ),
+
 	type: PropTypes.oneOf( [
 		'button',
 		'submit',
@@ -61,6 +71,7 @@ UiButton.propTypes = {
 UiButton.defaultProps = {
 	type: 'button',
 	size: 'md',
+	theme: 'primary',
 };
 
 export default UiButton;

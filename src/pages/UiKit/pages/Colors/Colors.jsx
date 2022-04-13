@@ -60,15 +60,53 @@ class PageUiKitColors extends React.Component {
 						</Col>
 
 						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#239646' } title={ 'Success dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#69e18d' } title={ 'Success light' } />
+						</Col>
+					</Row>
+
+					<Row>
+						<Col className={ this.classNameCol() } col={ 2 }>
 							<LocalColor code={ '#F7D264' } title={ 'Warning' } />
 						</Col>
 
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#b4994a' } title={ 'Warning dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#fce5a7' } title={ 'Warning light' } />
+						</Col>
+					</Row>
+
+					<Row>
 						<Col className={ this.classNameCol() } col={ 2 }>
 							<LocalColor code={ '#F77F6E' } title={ 'Danger' } />
 						</Col>
 
 						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#9d5349' } title={ 'Danger dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#f5aea4' } title={ 'Danger light' } />
+						</Col>
+					</Row>
+
+					<Row>
+						<Col className={ this.classNameCol() } col={ 2 }>
 							<LocalColor code={ '#ABDDED' } title={ 'Info' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#75a1af' } title={ 'Info dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#c4e4ef' } title={ 'Info light' } />
 						</Col>
 					</Row>
 
