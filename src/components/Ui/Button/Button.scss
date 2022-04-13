@@ -10,16 +10,17 @@ $themes: (
 	secondary: back,
 	success: back,
 	warning: text,
-	danger: text,
+	danger: back,
 	info: text,
 );
 
 .ui-button {
 	width: fit-content;
-	padding: math.div(layout.$gap, 2) layout.$gap;
 	border-width: 1px;
 	border-style: solid;
+	font-size: 14px;
 	font-family: fonts.$primary;
+	white-space: nowrap;
 	cursor: pointer;
 	-webkit-appearance: none;
 	transition: all 0.3s ease;
@@ -48,6 +49,20 @@ $themes: (
 					background-color: colors.getColor($theme + '-light');
 				}
 			}
+		}
+	}
+
+	&._size {
+		&_lg {
+			padding: layout.$gap * 0.75 layout.$gap * 1.5;
+		}
+
+		&_md {
+			padding: math.div(layout.$gap, 2) layout.$gap;
+		}
+
+		&_sm {
+			padding: math.div(layout.$gap, 4) math.div(layout.$gap, 2);
 		}
 	}
 }

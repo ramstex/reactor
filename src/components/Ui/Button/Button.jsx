@@ -9,11 +9,12 @@ import './Button.scss';
 class UiButton extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const { className, theme, wide, ghost } = this.props;
+		const { className, theme, size, wide, ghost } = this.props;
 		return classnames(
 			'ui-button',
 			className,
-			`_theme_${theme}`,
+			`_theme_${ theme }`,
+			`_size_${ size }`,
 			{ _wide: wide },
 			{ _ghost: ghost }
 		);
