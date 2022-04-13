@@ -19,8 +19,10 @@ $themes: (
 	border-width: 1px;
 	border-style: solid;
 	font-size: 14px;
+	line-height: 1;
 	font-family: fonts.$primary;
 	white-space: nowrap;
+	text-decoration: none;
 	cursor: pointer;
 	-webkit-appearance: none;
 	transition: all 0.3s ease;
@@ -62,7 +64,8 @@ $themes: (
 		}
 
 		&_sm {
-			padding: math.div(layout.$gap, 4) math.div(layout.$gap, 2);
+			font-size: 12px;
+			padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
 		}
 	}
 }
