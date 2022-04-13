@@ -1,0 +1,25 @@
+@use 'sass:math';
+@use 'sass:color';
+@use '../../../style/colors/data.scss' as colors;
+@use '../../../style/fonts/data.scss' as fonts;
+@use '../../../style/layout/data.scss' as layout;
+@use '../../../style/typography/data.scss' as typography;
+
+.ui-button {
+	width: fit-content;
+	padding: math.div(layout.$gap, 2) layout.$gap;
+	border: 1px solid transparent;
+	font-family: fonts.$primary;
+	background-color: colors.getColor('primary');
+	cursor: pointer;
+	-webkit-appearance: none;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background-color: colors.getColor('primary-light');
+	}
+
+	&._wide {
+		width: 100%;
+	}
+}

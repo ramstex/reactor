@@ -32,7 +32,25 @@ class PageUiKitColors extends React.Component {
 						</Col>
 
 						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#7e7ab0' } title={ 'Primary dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#d6d1ff' } title={ 'Primary light' } />
+						</Col>
+					</Row>
+
+					<Row>
+						<Col className={ this.classNameCol() } col={ 2 }>
 							<LocalColor code={ '#491818' } title={ 'Secondary' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#341313' } title={ 'Secondary dark' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#813434' } title={ 'Secondary light' } />
 						</Col>
 					</Row>
 
