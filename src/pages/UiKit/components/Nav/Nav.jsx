@@ -11,7 +11,7 @@ class LocalNav extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'page-ui-kit-nav', className );
+		return classnames( 'ui-kit-nav', className );
 	}
 
 	render() {
@@ -20,6 +20,10 @@ class LocalNav extends React.Component {
 				<Row>
 					<Col>
 						<BaseLink href={ '/ui-kit/typography' }>Typography</BaseLink>
+					</Col>
+
+					<Col>
+						<BaseLink href={ '/ui-kit/colors' }>Colors</BaseLink>
 					</Col>
 				</Row>
 			</div>

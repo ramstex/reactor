@@ -1,7 +1,38 @@
 @use 'sass:math';
 @use '../../style/layout.scss' as layout;
 
+$cols: 12;
+
+@function getColSize($col: 1) {
+	@return #{ math.div($col, $cols) * 100 + '%' };
+}
+
 .col {
 	padding-left: math.div(layout.$gap, 2);
 	padding-right: math.div(layout.$gap, 2);
+
+	&._col {
+		@for $col from 1 through $cols {
+			&_#{$col} {
+				flex-shrink: 0;
+				width: getColSize($col);
+			}
+		}
+
+		&_auto {
+			width: auto;
+		}
+	}
+
+	&._offset {
+		@for $col from 1 through $cols {
+			&_#{$col} {
+				margin-left: getColSize($col);
+			}
+		}
+
+		&_auto {
+			margin-left: auto;
+		}
+	}
 }
