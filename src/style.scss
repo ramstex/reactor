@@ -3,6 +3,8 @@
 @use './style/media.scss' as media;
 @use './style/typography.scss' as typography;
 
+@use './style/colors' as colors;
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,4 +13,6 @@
 
 body {
 	font-family: fonts.$primary;
+	color: colors.getColor('text');
+	background-color: colors.getColor('back');
 }
