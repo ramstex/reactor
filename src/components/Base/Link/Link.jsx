@@ -8,17 +8,17 @@ class BaseLink extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('base-link', className);
+		return classnames( 'base-link', className );
 	}
 
 	isExternal() {
 		const { href } = this.props;
-		return !!href && isAbsoluteUrl(href);
+		return !!href && isAbsoluteUrl( href );
 	}
 
 	isInternal() {
 		const { href } = this.props;
-		return !!href && !isAbsoluteUrl(href);
+		return !!href && !isAbsoluteUrl( href );
 	}
 
 	render() {
@@ -29,7 +29,7 @@ class BaseLink extends React.Component {
 			...attrs
 		} = this.props;
 
-		if (this.isInternal()) {
+		if ( this.isInternal() ) {
 			return (
 				<Link className={ this.classNameRoot() } to={ href } { ...attrs }>
 					{ children }
@@ -37,7 +37,7 @@ class BaseLink extends React.Component {
 			);
 		}
 
-		if (this.isExternal()) {
+		if ( this.isExternal() ) {
 			return (
 				<a className={ this.classNameRoot() } href={ href } { ...attrs }>
 					{ children }

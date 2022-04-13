@@ -15,11 +15,11 @@ class Header extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('header', className);
+		return classnames( 'header', className );
 	}
 
 	classNameLogo() {
-		return classnames('header__logo');
+		return classnames( 'header__logo' );
 	}
 
 	render() {

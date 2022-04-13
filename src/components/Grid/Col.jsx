@@ -36,15 +36,15 @@ Col.propTypes = {
 
 	tag: PropTypes.string,
 
-	col: PropTypes.oneOf([
+	col: PropTypes.oneOf( [
 		'auto',
 		PropTypes.number,
-	]),
+	] ),
 
-	offset: PropTypes.oneOf([
+	offset: PropTypes.oneOf( [
 		'auto',
 		PropTypes.number,
-	]),
+	] ),
 };
 
 export default Col;

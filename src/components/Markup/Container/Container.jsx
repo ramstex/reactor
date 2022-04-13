@@ -8,7 +8,7 @@ class MarkupContainer extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { wide, tight } = this.props;
-		return classnames('markup-container', { _wide: wide }, { _tight: tight });
+		return classnames( 'markup-container', { _wide: wide }, { _tight: tight } );
 	}
 
 	render() {

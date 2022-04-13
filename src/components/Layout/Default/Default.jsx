@@ -7,7 +7,7 @@ import Header from '../../Header/Header.jsx';
 class LayoutDefault extends React.Component {
 	//	Классы
 	classNameRoot() {
-		return classnames('layout-default');
+		return classnames( 'layout-default' );
 	}
 
 	render() {

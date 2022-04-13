@@ -44,24 +44,24 @@ Row.propTypes = {
 
 	tag: PropTypes.string,
 
-	col: PropTypes.oneOf([
+	col: PropTypes.oneOf( [
 		'auto',
 		PropTypes.number,
-	]),
+	] ),
 
-	alignH: PropTypes.oneOf([
+	alignH: PropTypes.oneOf( [
 		'start',
 		'end',
 		'center',
 		'stretch',
-	]),
+	] ),
 
-	alignV: PropTypes.oneOf([
+	alignV: PropTypes.oneOf( [
 		'start',
 		'end',
 		'center',
 		'stretch',
-	]),
+	] ),
 
 	reverse: PropTypes.bool,
 };

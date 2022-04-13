@@ -6,7 +6,7 @@ class BaseImage extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('base-image', className);
+		return classnames( 'base-image', className );
 	}
 
 	render() {
@@ -16,7 +16,7 @@ class BaseImage extends React.Component {
 			title,
 		} = this.props;
 
-		if (typeof image === 'string') {
+		if ( typeof image === 'string' ) {
 			return (
 				<img className={ this.classNameRoot() } src={ image } alt={ alt } title={ title } />
 			);
@@ -32,10 +32,10 @@ class BaseImage extends React.Component {
 
 BaseImage.propTypes = {
 	className: PropTypes.string,
-	image: PropTypes.oneOfType([
+	image: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.func,
-	]),
+	] ),
 	alt: PropTypes.string,
 	title: PropTypes.string,
 };

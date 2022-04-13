@@ -11,7 +11,7 @@ class LocalNav extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('header-nav', className);
+		return classnames( 'header-nav', className );
 	}
 
 	render() {

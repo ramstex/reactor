@@ -11,11 +11,11 @@ class BaseLogo extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('base-logo', className);
+		return classnames( 'base-logo', className );
 	}
 
 	classNameImage() {
-		return classnames('base-logo__image');
+		return classnames( 'base-logo__image' );
 	}
 
 	render() {
@@ -39,10 +39,10 @@ class BaseLogo extends React.Component {
 BaseLogo.propTypes = {
 	className: PropTypes.string,
 	href: PropTypes.string,
-	image: PropTypes.oneOfType([
+	image: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.func,
-	]),
+	] ),
 	title: PropTypes.string,
 	alt: PropTypes.string,
 };

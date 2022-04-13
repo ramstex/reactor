@@ -10,7 +10,7 @@ class PageUiKitTypography extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page-home', className);
+		return classnames( 'page-home', className );
 	}
 
 	render() {
