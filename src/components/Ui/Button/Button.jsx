@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import omit from 'lodash/omit';
 
 import BaseLink from '../../Base/Link/Link.jsx';
 
@@ -13,8 +14,8 @@ class UiButton extends React.Component {
 		return classnames(
 			'ui-button',
 			className,
-			`_theme_${ theme }`,
-			`_size_${ size }`,
+			`_theme_${theme}`,
+			`_size_${size}`,
 			{ _wide: wide },
 			{ _ghost: ghost }
 		);
@@ -23,16 +24,25 @@ class UiButton extends React.Component {
 	render() {
 		const { children, href, type } = this.props;
 
+		const listeners = omit( this.props, [
+			'className',
+			'children',
+			'href',
+			'disabled',
+			'ghost',
+			'wide',
+		] );
+
 		if ( href ) {
 			return (
-				<BaseLink className={ this.classNameRoot() } href={ href }>
+				<BaseLink className={ this.classNameRoot() } href={ href } { ...listeners }>
 					{ children }
 				</BaseLink>
 			);
 		}
 
 		return (
-			<button className={ this.classNameRoot() } type={ type }>
+			<button className={ this.classNameRoot() } type={ type } { ...listeners }>
 				{ children }
 			</button>
 		);
@@ -47,26 +57,11 @@ UiButton.propTypes = {
 	ghost: PropTypes.bool,
 	wide: PropTypes.bool,
 
-	theme: PropTypes.oneOf( [
-		'primary',
-		'secondary',
-		'success',
-		'warning',
-		'danger',
-		'info',
-	] ),
+	theme: PropTypes.oneOf( ['primary', 'secondary', 'success', 'warning', 'danger', 'info'] ),
 
-	type: PropTypes.oneOf( [
-		'button',
-		'submit',
-		'reset',
-	] ),
+	type: PropTypes.oneOf( ['button', 'submit', 'reset'] ),
 
-	size: PropTypes.oneOf( [
-		'lg',
-		'md',
-		'sm',
-	] ),
+	size: PropTypes.oneOf( ['lg', 'md', 'sm'] ),
 };
 
 UiButton.defaultProps = {

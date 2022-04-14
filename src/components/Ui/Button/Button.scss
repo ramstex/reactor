@@ -15,6 +15,9 @@ $themes: (
 );
 
 .ui-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: fit-content;
 	border-width: 1px;
 	border-style: solid;
@@ -23,6 +26,7 @@ $themes: (
 	font-family: fonts.$primary;
 	white-space: nowrap;
 	text-decoration: none;
+	text-align: center;
 	cursor: pointer;
 	-webkit-appearance: none;
 	transition: all 0.3s ease;
