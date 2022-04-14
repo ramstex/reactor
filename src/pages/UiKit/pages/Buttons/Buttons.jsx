@@ -70,7 +70,7 @@ class PageUiKitButtons extends React.Component {
 										</Col>
 
 										<Col className={this.classNameCol()}>
-											<UiButton theme={theme} size={size} ghost>
+											<UiButton theme={theme} size={size} ghost active>
 												Обычная кнопка
 											</UiButton>
 										</Col>

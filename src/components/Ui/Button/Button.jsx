@@ -31,6 +31,7 @@ class UiButton extends React.Component {
 			'children',
 			'href',
 			'disabled',
+			'active',
 			'ghost',
 			'wide',
 		] );

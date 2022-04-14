@@ -53,6 +53,7 @@ $themes: (
 					border-color: colors.getColor($theme + '-light');
 					color: colors.getColor($text);
 					background-color: colors.getColor($theme + '-light');
+					outline: none;
 				}
 			}
 		}
