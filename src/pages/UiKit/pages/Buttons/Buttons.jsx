@@ -26,26 +26,26 @@ class PageUiKitButtons extends React.Component {
 	}
 
 	render() {
-		const themes = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
+		const themes = [ 'primary', 'secondary', 'success', 'warning', 'danger', 'info' ];
 
-		const sizes = ['lg', 'md', 'sm'];
+		const sizes = [ 'lg', 'md', 'sm' ];
 
 		return (
-			<div className={this.classNameRoot()}>
-				<MarkupSection title={'Ui Kit - Buttons'}>
+			<div className={ this.classNameRoot() }>
+				<MarkupSection title={ 'Ui Kit - Buttons' }>
 					<LocalNav />
 				</MarkupSection>
 
-				{themes.map( ( theme ) => (
-					<MarkupSection key={theme} title={theme} titleTag={'h4'}>
+				{ themes.map( ( theme ) => (
+					<MarkupSection key={ theme } title={ theme } titleTag={ 'h4' }>
 						<div>
-							{sizes.map( ( size ) => (
-								<div key={size}>
+							{ sizes.map( ( size ) => (
+								<div key={ size }>
 									<Row>
-										<Col className={this.classNameCol()}>
+										<Col className={ this.classNameCol() }>
 											<UiButton
-												theme={theme}
-												size={size}
+												theme={ theme }
+												size={ size }
 												href={ 'https://google.com' }
 												target={ '_blank' }
 											>
@@ -55,8 +55,8 @@ class PageUiKitButtons extends React.Component {
 
 										<Col className={this.classNameCol()} col={6}>
 											<UiButton
-												theme={theme}
-												size={size}
+												theme={theme }
+												size={size }
 												wide
 												onClick={ this.onClick }
 											>
@@ -66,23 +66,23 @@ class PageUiKitButtons extends React.Component {
 									</Row>
 
 									<Row>
-										<Col className={this.classNameCol()} col={6}>
-											<UiButton theme={theme} size={size} wide ghost disabled>
+										<Col className={ this.classNameCol() } col={ 6 }>
+											<UiButton theme={ theme } size={ size } wide ghost disabled>
 												Обычная широкая кнопка
 											</UiButton>
 										</Col>
 
-										<Col className={this.classNameCol()}>
-											<UiButton theme={theme} size={size} ghost active>
+										<Col className={ this.classNameCol() }>
+											<UiButton theme={ theme } size={ size } ghost active>
 												Обычная кнопка
 											</UiButton>
 										</Col>
 									</Row>
 								</div>
-							) )}
+							) ) }
 						</div>
 					</MarkupSection>
-				) )}
+				) ) }
 			</div>
 		);
 	}
