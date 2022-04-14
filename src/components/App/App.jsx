@@ -13,6 +13,7 @@ import PageUiKit from '../../pages/UiKit/UiKit.jsx';
 import PageUiKitTypography from '../../pages/UiKit/pages/Typography/Typography.jsx';
 import PageUiKitColors from '../../pages/UiKit/pages/Colors/Colors.jsx';
 import PageUiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons.jsx';
+import PageUiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs.jsx';
 
 class App extends React.Component {
 	//	Классы
@@ -36,6 +37,7 @@ class App extends React.Component {
 							<Route path={ '/ui-kit/typography' } element={ <PageUiKitTypography /> } />
 							<Route path={ '/ui-kit/colors' } element={ <PageUiKitColors /> } />
 							<Route path={ '/ui-kit/buttons' } element={ <PageUiKitButtons /> } />
+							<Route path={ '/ui-kit/inputs' } element={ <PageUiKitInputs /> } />
 						</Routes>
 					</Layout>
 				</Router>
