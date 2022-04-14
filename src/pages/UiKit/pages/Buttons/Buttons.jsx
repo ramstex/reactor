@@ -64,7 +64,7 @@ class PageUiKitButtons extends React.Component {
 
 									<Row>
 										<Col className={this.classNameCol()} col={6}>
-											<UiButton theme={theme} size={size} wide ghost>
+											<UiButton theme={theme} size={size} wide ghost disabled>
 												Обычная широкая кнопка
 											</UiButton>
 										</Col>

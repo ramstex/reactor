@@ -72,4 +72,18 @@ $themes: (
 			padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
 		}
 	}
+
+	&._disabled {
+		border-color: colors.getColor('muted');
+		color: colors.getColor('back');
+		background-color: colors.getColor('muted');
+		pointer-events: none;
+		cursor: default;
+
+		&._ghost {
+			border-color: colors.getColor('muted');
+			color: colors.getColor('muted');
+			background-color: transparent;
+		}
+	}
 }

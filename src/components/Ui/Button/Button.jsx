@@ -10,12 +10,14 @@ import './Button.scss';
 class UiButton extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const { className, theme, size, wide, ghost } = this.props;
+		const { className, theme, size, active, disabled, wide, ghost } = this.props;
 		return classnames(
 			'ui-button',
 			className,
 			`_theme_${theme}`,
 			`_size_${size}`,
+			{ _active: active },
+			{ _disabled: disabled },
 			{ _wide: wide },
 			{ _ghost: ghost }
 		);
@@ -24,7 +26,7 @@ class UiButton extends React.Component {
 	render() {
 		const { children, href, type } = this.props;
 
-		const listeners = omit( this.props, [
+		const attrs = omit( this.props, [
 			'className',
 			'children',
 			'href',
@@ -35,14 +37,14 @@ class UiButton extends React.Component {
 
 		if ( href ) {
 			return (
-				<BaseLink className={ this.classNameRoot() } href={ href } { ...listeners }>
+				<BaseLink className={ this.classNameRoot() } href={ href } { ...attrs }>
 					{ children }
 				</BaseLink>
 			);
 		}
 
 		return (
-			<button className={ this.classNameRoot() } type={ type } { ...listeners }>
+			<button className={ this.classNameRoot() } type={ type } { ...attrs }>
 				{ children }
 			</button>
 		);
@@ -54,6 +56,7 @@ UiButton.propTypes = {
 	children: PropTypes.node,
 	href: PropTypes.string,
 	disabled: PropTypes.bool,
+	active: PropTypes.bool,
 	ghost: PropTypes.bool,
 	wide: PropTypes.bool,
 
