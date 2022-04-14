@@ -20,6 +20,11 @@ class PageUiKitButtons extends React.Component {
 		return classnames( '_mb_4' );
 	}
 
+	onClick( event ) {
+		event.preventDefault();
+		console.log( 'CLICK', event );
+	}
+
 	render() {
 		const themes = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
 
@@ -53,9 +58,7 @@ class PageUiKitButtons extends React.Component {
 												theme={theme}
 												size={size}
 												wide
-												onClick={ () => {
-													console.log( 'CLICK' );
-												} }
+												onClick={ this.onClick }
 											>
 												Обычная широкая кнопка с событием
 											</UiButton>
