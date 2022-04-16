@@ -41,7 +41,6 @@ class PageUiKitInputs extends React.Component {
 	render() {
 		const inputs = [
 			{
-				id: 1,
 				label: 'Лейбл',
 
 				props: {
@@ -51,7 +50,6 @@ class PageUiKitInputs extends React.Component {
 			},
 
 			{
-				id: 2,
 				label: 'Лейбл 2',
 
 				props: {
@@ -62,7 +60,6 @@ class PageUiKitInputs extends React.Component {
 			},
 
 			{
-				id: 3,
 				label: 'Лейбл 3',
 
 				props: {
@@ -74,7 +71,6 @@ class PageUiKitInputs extends React.Component {
 			},
 
 			{
-				id: 4,
 				label: 'Лейбл 4',
 
 				props: {
@@ -85,7 +81,6 @@ class PageUiKitInputs extends React.Component {
 			},
 
 			{
-				id: 5,
 				label: 'Лейбл 5',
 
 				props: {
@@ -97,7 +92,6 @@ class PageUiKitInputs extends React.Component {
 			},
 
 			{
-				id: 5,
 				label: 'Лейбл 6',
 
 				props: {
@@ -115,8 +109,8 @@ class PageUiKitInputs extends React.Component {
 					<LocalNav />
 
 					<div>
-						{ inputs.map( ( item ) => (
-							<Row className={ '_mb_4' } key={ item.id }>
+						{ inputs.map( ( item, index ) => (
+							<Row className={ '_mb_4' } key={ index }>
 								<Col col={ 4 }>
 									<UiInput { ...item.props } > { item.label } </UiInput>
 								</Col>

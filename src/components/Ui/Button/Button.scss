@@ -48,8 +48,6 @@ $themes: (
 				}
 
 				&:hover,
-				&:focus,
-				&:active,
 				&._active {
 					border-color: colors.getColor($theme + '-light');
 					color: colors.getColor($text);
