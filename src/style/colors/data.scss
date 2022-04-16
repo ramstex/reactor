@@ -23,12 +23,15 @@ $colors: (
 	info-dark: #75a1af,
 	info-light: #d5edf5,
 
-	muted: #D9D9D9,
+	muted: #cbcbcb,
 	muted-dark: #999999,
 	muted-light: #EDEDED,
 
 	text: #161616,
 	back: #f5f5f5,
+
+	white: #FFFFFF,
+	black: #000000,
 );
 
 @function getColor($key: 'primary') {

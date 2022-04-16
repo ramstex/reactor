@@ -1,6 +1,79 @@
+@use 'sass:math';
+@use '../../../style/colors/data.scss' as colors;
+@use '../../../style/fonts/data.scss' as fonts;
+@use '../../../style/layout/data.scss' as layout;
+
 .ui-input {
 	&__input {
-		width: 100%;
 		display: block;
-	};
+		width: 100%;
+		padding: math.div(layout.$gap, 3);
+		border: 1px solid colors.getColor('text');
+		font-family: fonts.$primary;
+		font-size: 14px;
+		color: colors.getColor('text');
+		background-color: transparent;
+		resize: none;
+		transition: all 0.3s ease;
+
+		&:focus {
+			border-color: colors.getColor('primary');
+			outline: none;
+		}
+
+		&::placeholder {
+			color: colors.getColor('muted-dark');
+		}
+	}
+
+	&__caption {
+		margin-bottom: math.div(layout.$gap, 6);
+		font-size: 12px;
+		color: colors.getColor('text');
+	}
+	&__message {
+		margin-top: math.div(layout.$gap, 6);
+		font-size: 12px;
+		color: colors.getColor('text');
+	}
+
+	&._textarea &__input {
+		height: 150px;
+	}
+
+	&._required &__caption:after {
+		content: '*';
+		color: colors.getColor('danger');
+	}
+
+	&._success &__input {
+		border-color: colors.getColor('success');
+		color: colors.getColor('success');
+	}
+
+	&._success &__message {
+		color: colors.getColor('success');
+	}
+
+	&._error &__input {
+		border-color: colors.getColor('danger');
+		color: colors.getColor('danger');
+	}
+
+	&._error &__message {
+		color: colors.getColor('danger');
+	}
+
+	&._disabled &__input {
+		border-color: colors.getColor('muted');
+		color: colors.getColor('muted');
+
+		&::placeholder {
+			color: colors.getColor('muted');
+		}
+	}
+
+	&._disabled &__caption {
+		color: colors.getColor('muted');
+	}
 }

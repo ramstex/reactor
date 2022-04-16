@@ -112,7 +112,7 @@ class PageUiKitColors extends React.Component {
 
 					<Row>
 						<Col className={ this.classNameCol() } col={ 2 }>
-							<LocalColor code={ '#D9D9D9' } title={ 'Muted' } />
+							<LocalColor code={ '#cbcbcb' } title={ 'Muted' } />
 						</Col>
 
 						<Col className={ this.classNameCol() } col={ 2 }>
@@ -131,6 +131,16 @@ class PageUiKitColors extends React.Component {
 
 						<Col className={ this.classNameCol() } col={ 2 }>
 							<LocalColor code={ '#f5f5f5' } title={ 'Back' } border={ '#161616' } />
+						</Col>
+					</Row>
+
+					<Row>
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#FFFFFF' } title={ 'White' } />
+						</Col>
+
+						<Col className={ this.classNameCol() } col={ 2 }>
+							<LocalColor code={ '#000000' } title={ 'Black' } border={ '#161616' } />
 						</Col>
 					</Row>
 				</MarkupSection>
