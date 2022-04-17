@@ -31,6 +31,10 @@ $themes: (
 	-webkit-appearance: none;
 	transition: all 0.3s ease;
 
+	&:focus {
+		outline: none;
+	}
+
 	&._wide {
 		width: 100%;
 	}

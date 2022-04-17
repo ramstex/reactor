@@ -6,6 +6,7 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 	flex-direction: row;
+	flex-wrap: wrap;
 	margin-left: math.div(layout.$gap, -2);
 	margin-right: math.div(layout.$gap, -2);
 
