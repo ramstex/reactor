@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import validation from '../../../../config/validation';
+import auth from '../../../helper/auth.js';
 
 import { Row, Col } from '../../Grid/Grid.jsx';
 import UiButton from '../../Ui/Button/Button.jsx';
@@ -78,7 +78,7 @@ class FormRegistration extends React.Component {
 			const { fields } = this.state;
 			fields[ inputKey ] = Object.assign( fields[ inputKey ], {
 				error: true,
-				message: validation.getMessage( event.target, 'registration', inputKey ),
+				message: auth.getMessage( event.target, 'registration', inputKey ),
 			} );
 
 			this.setState( {

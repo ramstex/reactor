@@ -21,24 +21,24 @@ const messages = {
 	},
 };
 
-const getMessage = ( source, formKey, inputKey ) => {
-	const { validity } = source;
-
-	const messageKey = Object.keys( Object.getPrototypeOf( validity ) ).find( ( key ) => {
-		return !!validity[ key ];
-	} );
-
-	return (
-		messages.forms[ formKey ] &&
-		messages.forms[ formKey ][ inputKey ] &&
-		messages.forms[ formKey ][ inputKey ][ messageKey ]
-	) ||
-	messages.defaults[ messageKey ];
-};
+// const getMessage = ( source, formKey, inputKey ) => {
+// 	const { validity } = source;
+//
+// 	const messageKey = Object.keys( Object.getPrototypeOf( validity ) ).find( ( key ) => {
+// 		return !!validity[ key ];
+// 	} );
+//
+// 	return (
+// 		messages.forms[ formKey ] &&
+// 		messages.forms[ formKey ][ inputKey ] &&
+// 		messages.forms[ formKey ][ inputKey ][ messageKey ]
+// 	) ||
+// 	messages.defaults[ messageKey ];
+// };
 
 const validation = {
 	messages,
-	getMessage,
+	// getMessage,
 };
 
 export default validation;
