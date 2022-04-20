@@ -18,6 +18,12 @@ const messages = {
 				patternMismatch: 'Введённые пароли не совпадают',
 			},
 		},
+
+		login: {
+			email: {
+				typeMismatch: 'Адрес заполнен некорректно',
+			},
+		},
 	},
 };
 
