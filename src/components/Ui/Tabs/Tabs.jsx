@@ -104,7 +104,7 @@ class UiTabs extends React.Component {
 				<div className={ this.classNameBody() }>
 					{ contents.map( ( item ) => {
 						console.log( item );
-						return ( item.key == currentId && item )
+						return ( item.key === currentId && item )
 					} ) }
 				</div>
 			</div>

@@ -65,10 +65,10 @@ class PageUiKitTabs extends React.Component {
 						current={ current }
 						updateCurrent={ this.onUpdateCurrent }
 						contents={ [
-							<div key={ this.state.tabs[0].id }> AAAAAAAAAAAA 1 </div>,
-							<div key={ this.state.tabs[1].id }> AAAAAAAAAAAA 2 </div>,
-							<div key={ this.state.tabs[2].id }> AAAAAAAAAAAA 3 </div>,
-							<div key={ this.state.tabs[3].id }> AAAAAAAAAAAA 4 </div>,
+							<div key={ this.state.tabs[0].id }> Tab 1 </div>,
+							<div key={ this.state.tabs[1].id }> Tab 2 </div>,
+							<div key={ this.state.tabs[2].id }> Tab 3 </div>,
+							<div key={ this.state.tabs[3].id }> Tab 4 </div>,
 						] }
 					/>
 				</MarkupSection>
