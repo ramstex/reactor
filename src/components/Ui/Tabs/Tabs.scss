@@ -17,6 +17,8 @@
 		align-items: center;
 		justify-content: center;
 		padding: math.div( layout.$gap, 2 );
+		text-decoration: none;
+		color: colors.getColor( 'text' );
 		cursor: pointer;
 		transition: all 0.3s ease;
 

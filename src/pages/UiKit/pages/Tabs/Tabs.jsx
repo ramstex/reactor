@@ -46,6 +46,22 @@ class PageUiKitTabs extends React.Component {
 					id: 4,
 					title: 'Tab with callback',
 					content: <div key={ 4 }> Tab 4 </div>,
+
+					onClick() {
+						// eslint-disable-next-line no-alert
+						alert( 'Look into the console!' );
+						console.log( 'TAB CALLBACK', this );
+					},
+				},
+
+				{
+					id: 5,
+					title: 'Tab with link',
+					href: '/ui-kit/buttons',
+
+					onClick() {
+						console.log( 'CALLBACK', this );
+					},
 				},
 			],
 

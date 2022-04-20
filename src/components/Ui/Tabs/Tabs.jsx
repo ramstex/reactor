@@ -19,6 +19,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import BaseLink from '../../Base/Link/Link.jsx';
+import LocalTab from './components/Tab/Tab.jsx';
+
 import './Tabs.scss';
 
 class UiTabs extends React.Component {
@@ -57,7 +60,7 @@ class UiTabs extends React.Component {
 
 		return classnames( 'ui-tabs__tab', {
 			_current: currentId === tab.id,
-			_disabled: !tab.content,
+			_disabled: !tab.content && !tab.onClick && !tab.href,
 		} );
 	}
 
@@ -83,9 +86,11 @@ class UiTabs extends React.Component {
 
 	onTabClick( tab ) {
 		return () => {
-			if ( !tab.disabled ) {
-				this.setCurrentId( tab.id );
+			if ( tab.onClick ) {
+				tab.onClick();
 			}
+
+			this.setCurrentId( tab.id );
 		};
 	}
 
@@ -111,13 +116,14 @@ class UiTabs extends React.Component {
 			<div className={ this.classNameRoot() }>
 				<div className={ this.classNameHeader() }>
 					{ tabs.map( ( tab ) => (
-						<div
+						<LocalTab
 							key={ tab.id }
-							className={ this.classNameTab( tab ) }
-							onClick={ this.onTabClick( tab ) }
-						>
-							{ tab.title }
-						</div>
+							title={ tab.title }
+							content={ tab.content }
+							href={ tab.href }
+							onClick={ tab.onClick }
+							{ ...tab }
+						/>
 					) ) }
 				</div>
 
@@ -133,7 +139,6 @@ class UiTabs extends React.Component {
 
 UiTabs.propTypes = {
 	className: PropTypes.string,
-	children: PropTypes.node,
 	updateCurrent: PropTypes.func,
 
 	tabs: PropTypes.arrayOf( PropTypes.shape( {
@@ -149,6 +154,8 @@ UiTabs.propTypes = {
 		] ),
 
 		content: PropTypes.node,
+		onClick: PropTypes.func,
+		href: PropTypes.func,
 	} ) ),
 
 	current: PropTypes.oneOfType( [
