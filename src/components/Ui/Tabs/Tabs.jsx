@@ -31,26 +31,16 @@ class UiTabs extends React.Component {
 		return classnames( 'ui-tabs__header' );
 	}
 
+	classNameBody() {
+		return classnames( 'ui-tabs__body' );
+	}
+
 	classNameTab( current ) {
 		const { currentId } = this.state;
 
 		return classnames( 'ui-tabs__tab', {
 			_current: currentId === current,
 		} );
-	}
-
-	componentDidUpdate( prevProps, prevState ) {
-		const { current, updateCurrent } = this.props;
-		const { currentId } = this.state;
-
-		if ( prevProps.current !== current ) {
-			this.setCurrentId( current );
-			this.setCurrentTab();
-		}
-
-		if ( prevState.currentId !== currentId && !!updateCurrent ) {
-			updateCurrent( currentId );
-		}
 	}
 
 	getCurrentTab() {
@@ -79,8 +69,23 @@ class UiTabs extends React.Component {
 		};
 	}
 
+	componentDidUpdate( prevProps, prevState ) {
+		const { current, updateCurrent } = this.props;
+		const { currentId } = this.state;
+
+		if ( prevProps.current !== current ) {
+			this.setCurrentId( current );
+			this.setCurrentTab();
+		}
+
+		if ( prevState.currentId !== currentId && !!updateCurrent ) {
+			updateCurrent( currentId );
+		}
+	}
+
 	render() {
-		const { tabs, current } = this.props;
+		const { tabs, contents } = this.props;
+		const { currentId } = this.state;
 
 		return (
 			<div className={ this.classNameRoot() }>
@@ -96,7 +101,12 @@ class UiTabs extends React.Component {
 					) ) }
 				</div>
 
-				<p>{ current }</p>
+				<div className={ this.classNameBody() }>
+					{ contents.map( ( item ) => {
+						console.log( item );
+						return ( item.key == currentId && item )
+					} ) }
+				</div>
 			</div>
 		);
 	}
@@ -105,6 +115,7 @@ class UiTabs extends React.Component {
 UiTabs.propTypes = {
 	className: PropTypes.string,
 	children: PropTypes.node,
+	updateCurrent: PropTypes.func,
 
 	tabs: PropTypes.arrayOf( PropTypes.shape( {
 		id: PropTypes.oneOfType( [
@@ -123,7 +134,7 @@ UiTabs.propTypes = {
 		PropTypes.string,
 	] ),
 
-	updateCurrent: PropTypes.func,
+	contents: PropTypes.arrayOf( PropTypes.node ),
 };
 
 export default UiTabs;

@@ -4,7 +4,6 @@ import classnames from 'classnames';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
 import UiTabs from '../../../../components/Ui/Tabs/Tabs.jsx';
-import UiButton from '../../../../components/Ui/Button/Button.jsx';
 import LocalNav from '../../components/Nav/Nav.jsx';
 
 class PageUiKitTabs extends React.Component {
@@ -38,7 +37,6 @@ class PageUiKitTabs extends React.Component {
 			current: 1,
 		};
 
-		this.onIncreaseClick = this.onIncreaseClick.bind( this );
 		this.onUpdateCurrent = this.onUpdateCurrent.bind( this );
 	}
 
@@ -46,14 +44,6 @@ class PageUiKitTabs extends React.Component {
 	classNameRoot() {
 		const { className } = this.props;
 		return classnames( 'page-ui-kit-tabs', className );
-	}
-
-	onIncreaseClick() {
-		const { current } = this.state;
-
-		this.setState( {
-			current: current >= 4 ? 1 : current + 1,
-		} );
 	}
 
 	onUpdateCurrent( value ) {
@@ -74,9 +64,13 @@ class PageUiKitTabs extends React.Component {
 						tabs={ this.state.tabs }
 						current={ current }
 						updateCurrent={ this.onUpdateCurrent }
+						contents={ [
+							<div key={ this.state.tabs[0].id }> AAAAAAAAAAAA 1 </div>,
+							<div key={ this.state.tabs[1].id }> AAAAAAAAAAAA 2 </div>,
+							<div key={ this.state.tabs[2].id }> AAAAAAAAAAAA 3 </div>,
+							<div key={ this.state.tabs[3].id }> AAAAAAAAAAAA 4 </div>,
+						] }
 					/>
-
-					<UiButton onClick={ this.onIncreaseClick }> Increase </UiButton>
 				</MarkupSection>
 			</div>
 		);

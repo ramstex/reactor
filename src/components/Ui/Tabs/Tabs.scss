@@ -5,6 +5,11 @@
 .ui-tabs {
 	&__header {
 		display: flex;
+		background-color: colors.getColor( 'muted-light' );
+	}
+
+	&__body {
+		margin-top: layout.$gap
 	}
 
 	&__tab {
@@ -13,13 +18,13 @@
 		transition: all 0.3s ease;
 
 		&._current {
-			background-color: colors.getColor( 'muted' );
+			background-color: colors.getColor( 'primary' );
 			cursor: default;
 		}
 
 		&:not(._current) {
 			&:hover {
-				background-color: colors.getColor( 'muted-light' );
+				background-color: colors.getColor( 'primary-light' );
 			}
 		}
 	}
