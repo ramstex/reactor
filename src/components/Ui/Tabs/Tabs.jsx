@@ -35,11 +35,12 @@ class UiTabs extends React.Component {
 		return classnames( 'ui-tabs__body' );
 	}
 
-	classNameTab( current ) {
+	classNameTab( tab ) {
 		const { currentId } = this.state;
 
 		return classnames( 'ui-tabs__tab', {
-			_current: currentId === current,
+			_current: currentId === tab.id,
+			_disabled: tab.disabled,
 		} );
 	}
 
@@ -65,7 +66,9 @@ class UiTabs extends React.Component {
 
 	onTabClick( tab ) {
 		return () => {
-			this.setCurrentId( tab.id );
+			if ( !tab.disabled ) {
+				this.setCurrentId( tab.id );
+			}
 		};
 	}
 
@@ -84,7 +87,7 @@ class UiTabs extends React.Component {
 	}
 
 	render() {
-		const { tabs, contents } = this.props;
+		const { tabs } = this.props;
 		const { currentId } = this.state;
 
 		return (
@@ -93,19 +96,18 @@ class UiTabs extends React.Component {
 					{ tabs.map( ( tab ) => (
 						<div
 							key={ tab.id }
-							className={ this.classNameTab( tab.id ) }
+							className={ this.classNameTab( tab ) }
 							onClick={ this.onTabClick( tab ) }
 						>
-							<p> { tab.title } </p>
+							{ tab.title }
 						</div>
 					) ) }
 				</div>
 
 				<div className={ this.classNameBody() }>
-					{ contents.map( ( item ) => {
-						console.log( item );
-						return ( item.key === currentId && item )
-					} ) }
+					{ tabs.map( ( item ) => (
+						item.id === currentId && item.content
+					) ) }
 				</div>
 			</div>
 		);
@@ -126,15 +128,16 @@ UiTabs.propTypes = {
 		title: PropTypes.oneOfType( [
 			PropTypes.number,
 			PropTypes.string,
+			PropTypes.node,
 		] ),
+
+		content: PropTypes.node,
 	} ) ),
 
 	current: PropTypes.oneOfType( [
 		PropTypes.number,
 		PropTypes.string,
 	] ),
-
-	contents: PropTypes.arrayOf( PropTypes.node ),
 };
 
 export default UiTabs;

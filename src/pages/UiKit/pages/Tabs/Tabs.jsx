@@ -15,22 +15,26 @@ class PageUiKitTabs extends React.Component {
 				{
 					id: 1,
 					title: 'Tab 1',
+					content: <div key={ 1 }> Tab 1 </div>,
 				},
 
 				{
-					id: 2,
-					title: 'Tab 2',
+					id: '2',
+					title: <h6> BIG TAB 2</h6>,
+					content: <div key={ 2 }> Tab 2 </div>,
 				},
 
 				{
 					id: 3,
 					title: 'Tab 3',
 					disabled: true,
+					content: <div key={ 3 }> Tab 3 </div>,
 				},
 
 				{
 					id: 4,
 					title: 'Tab 4',
+					content: <div key={ 4 }> Tab 4 </div>,
 				},
 			],
 
@@ -64,12 +68,6 @@ class PageUiKitTabs extends React.Component {
 						tabs={ this.state.tabs }
 						current={ current }
 						updateCurrent={ this.onUpdateCurrent }
-						contents={ [
-							<div key={ this.state.tabs[0].id }> Tab 1 </div>,
-							<div key={ this.state.tabs[1].id }> Tab 2 </div>,
-							<div key={ this.state.tabs[2].id }> Tab 3 </div>,
-							<div key={ this.state.tabs[3].id }> Tab 4 </div>,
-						] }
 					/>
 				</MarkupSection>
 			</div>

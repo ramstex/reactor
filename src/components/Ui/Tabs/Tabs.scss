@@ -13,19 +13,27 @@
 	}
 
 	&__tab {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		padding: math.div( layout.$gap, 2 );
 		cursor: pointer;
 		transition: all 0.3s ease;
+
+		&:hover {
+			background-color: colors.getColor( 'primary-light' );
+		}
 
 		&._current {
 			background-color: colors.getColor( 'primary' );
 			cursor: default;
 		}
 
-		&:not(._current) {
-			&:hover {
-				background-color: colors.getColor( 'primary-light' );
-			}
+		&._disabled {
+			color: colors.getColor( 'muted' );
+			background-color: transparent;
+			cursor: default;
+			pointer-events: none;
 		}
 	}
 }
