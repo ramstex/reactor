@@ -1,3 +1,20 @@
+// ToDo: tab with onClick
+// ToDo: tab with href
+// ToDo: create the separate component for a single tab
+
+/**
+ * Behaviour cases:
+ * 1. ( -href, -onClick, -content ) - disabled tab
+ * 2. ( +href, -onClick, -content ) - standard following a link via BaseLink component
+ * 3. ( -href, +onClick, -content ) - executing an onClick callback
+ * 4. ( -href, -onClick, +content ) - switching to selected tab
+ * 5. ( +href, +onClick, -content ) - both 2 and 3 cases
+ * 6. ( +href, -onClick, +content ) - content has a priority, ignoring the href
+ * 7. ( -href, +onClick, +content ) - both 3 and 4 cases
+ * 8. ( +href, +onClick, +content ) - both 6 and 7 cases
+ */
+
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -40,7 +57,7 @@ class UiTabs extends React.Component {
 
 		return classnames( 'ui-tabs__tab', {
 			_current: currentId === tab.id,
-			_disabled: tab.disabled,
+			_disabled: !tab.content,
 		} );
 	}
 
