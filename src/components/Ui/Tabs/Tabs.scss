@@ -1,0 +1,26 @@
+@use 'sass:math';
+@use '../../../style/colors/data.scss' as colors;
+@use '../../../style/layout/data.scss' as layout;
+
+.ui-tabs {
+	&__header {
+		display: flex;
+	}
+
+	&__tab {
+		padding: math.div( layout.$gap, 2 );
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&._current {
+			background-color: colors.getColor( 'muted' );
+			cursor: default;
+		}
+
+		&:not(._current) {
+			&:hover {
+				background-color: colors.getColor( 'muted-light' );
+			}
+		}
+	}
+}

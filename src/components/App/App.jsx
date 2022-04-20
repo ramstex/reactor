@@ -14,6 +14,7 @@ import PageUiKitTypography from '../../pages/UiKit/pages/Typography/Typography.j
 import PageUiKitColors from '../../pages/UiKit/pages/Colors/Colors.jsx';
 import PageUiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons.jsx';
 import PageUiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs.jsx';
+import PageUiKitTabs from '../../pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitForms from '../../pages/UiKit/pages/Forms/Forms.jsx';
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
 							<Route path={ '/ui-kit/colors' } element={ <PageUiKitColors /> } />
 							<Route path={ '/ui-kit/buttons' } element={ <PageUiKitButtons /> } />
 							<Route path={ '/ui-kit/inputs' } element={ <PageUiKitInputs /> } />
+							<Route path={ '/ui-kit/tabs' } element={ <PageUiKitTabs /> } />
 							<Route path={ '/ui-kit/forms' } element={ <PageUiKitForms /> } />
 						</Routes>
 					</Layout>

@@ -78,7 +78,7 @@ class FormRegistration extends React.Component {
 			const { fields } = this.state;
 			fields[ inputKey ] = Object.assign( fields[ inputKey ], {
 				error: true,
-				message: auth.getMessage( event.target, 'registration', inputKey ),
+				message: auth.getValidationMessage( event.target, 'registration', inputKey ),
 			} );
 
 			this.setState( {
