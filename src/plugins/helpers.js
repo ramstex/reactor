@@ -19,3 +19,7 @@ export const getChildrenByKey = ( children = [], key = null ) => {
 
 	return children.key === key ? children : undefined;
 };
+
+export function  isFunction( func ) {
+	return typeof func === 'function';
+}

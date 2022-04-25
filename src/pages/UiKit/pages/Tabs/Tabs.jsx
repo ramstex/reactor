@@ -27,6 +27,12 @@ class PageUiKitTabs extends React.Component {
 							начало повседневной работы по формированию позиции способствует подготовки и реализации
 							направлений прогрессивного развития.</p>
 					</div>,
+
+					onClick( event, tab ) {
+						console.log( event );
+						console.log( tab );
+						console.log( this );
+					},
 				},
 
 				{
@@ -60,7 +66,7 @@ class PageUiKitTabs extends React.Component {
 					href: '/ui-kit/buttons',
 
 					onClick() {
-						console.log( 'CALLBACK', this );
+						console.log( 'CALLBACK LINK', this );
 					},
 				},
 			],

@@ -1,3 +1,31 @@
-.ui-tabs-tab {
+@use 'sass:math';
+@use '../../../../../style/colors/data.scss' as colors;
+@use '../../../../../style/layout/data.scss' as layout;
 
+.ui-tabs-tab {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: math.div( layout.$gap, 2 );
+	text-decoration: none;
+	color: colors.getColor( 'text' );
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background-color: colors.getColor( 'primary-light' );
+	}
+
+	&._current {
+		background-color: colors.getColor( 'primary' );
+		cursor: default;
+		pointer-events: none;
+	}
+
+	&._disabled {
+		color: colors.getColor( 'muted' );
+		background-color: transparent;
+		cursor: default;
+		pointer-events: none;
+	}
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { TabType } from '../../helpers/types.js';
 
 import BaseLink from '../../../../Base/Link/Link.jsx';
 
@@ -9,32 +10,25 @@ import './Tab.scss';
 class LocalTab extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const { className } = this.props;
+		const { className, current, disabled } = this.props;
 
-		return classnames( 'ui-tabs-tab', className );
-	}
-
-	onClick( tab ) {
-		const { id, onClick } = this.props;
-
-		return () => {
-			if ( tab.onClick ) {
-				tab.onClick();
-			}
-
-			this.setCurrentId( id );
-		};
+		return classnames( [
+			'ui-tabs-tab',
+			className,
+			{ _current: current },
+			{ _disabled: disabled },
+		] );
 	}
 
 	render() {
-		const { href, title } = this.props;
+		const { href, title, onClick } = this.props;
 
 		if ( href ) {
 			return (
 				<BaseLink
 					className={ this.classNameRoot() }
 					href={ href }
-					onClick={ this.onClick }
+					onClick={ onClick }
 				>
 					{ title }
 				</BaseLink>
@@ -43,8 +37,8 @@ class LocalTab extends React.Component {
 
 		return (
 			<div
-				className={ this.classNameTab() }
-				onClick={ this.onTabClick() }
+				className={ this.classNameRoot() }
+				onClick={ onClick }
 			>
 				{ title }
 			</div>
@@ -53,21 +47,9 @@ class LocalTab extends React.Component {
 }
 
 LocalTab.propTypes = {
+	...TabType,
 	className: PropTypes.string,
-	id: PropTypes.oneOfType( [
-		PropTypes.number,
-		PropTypes.string,
-	] ),
-
-	title: PropTypes.oneOfType( [
-		PropTypes.number,
-		PropTypes.string,
-		PropTypes.node,
-	] ),
-
-	content: PropTypes.node,
-	onClick: PropTypes.func,
-	href: PropTypes.func,
+	current: PropTypes.bool,
 };
 
 export default LocalTab;

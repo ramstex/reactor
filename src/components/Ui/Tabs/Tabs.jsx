@@ -1,25 +1,9 @@
-// ToDo: tab with onClick
-// ToDo: tab with href
-// ToDo: create the separate component for a single tab
-
-/**
- * Behaviour cases:
- * 1. ( -href, -onClick, -content ) - disabled tab
- * 2. ( +href, -onClick, -content ) - standard following a link via BaseLink component
- * 3. ( -href, +onClick, -content ) - executing an onClick callback
- * 4. ( -href, -onClick, +content ) - switching to selected tab
- * 5. ( +href, +onClick, -content ) - both 2 and 3 cases
- * 6. ( +href, -onClick, +content ) - content has a priority, ignoring the href
- * 7. ( -href, +onClick, +content ) - both 3 and 4 cases
- * 8. ( +href, +onClick, +content ) - both 6 and 7 cases
- */
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { isFunction } from '../../../plugins/helpers.js';
+import { TabType } from './helpers/types.js';
 
-import BaseLink from '../../Base/Link/Link.jsx';
 import LocalTab from './components/Tab/Tab.jsx';
 
 import './Tabs.scss';
@@ -43,7 +27,6 @@ class UiTabs extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-
 		return classnames( 'ui-tabs', className );
 	}
 
@@ -53,15 +36,6 @@ class UiTabs extends React.Component {
 
 	classNameBody() {
 		return classnames( 'ui-tabs__body' );
-	}
-
-	classNameTab( tab ) {
-		const { currentId } = this.state;
-
-		return classnames( 'ui-tabs__tab', {
-			_current: currentId === tab.id,
-			_disabled: !tab.content && !tab.onClick && !tab.href,
-		} );
 	}
 
 	getCurrentTab() {
@@ -84,14 +58,32 @@ class UiTabs extends React.Component {
 		} );
 	}
 
-	onTabClick( tab ) {
-		return () => {
-			if ( tab.onClick ) {
-				tab.onClick();
-			}
+	isTabCurrent( tab ) {
+		const { currentId } = this.state;
+		return currentId === tab.id;
+	}
 
-			this.setCurrentId( tab.id );
-		};
+	isTabDisabled( tab ) {
+		return !!tab.disabled || (
+			!tab.content &&
+			!tab.href &&
+			!tab.onClick
+		);
+	}
+
+	onTabClick( tab ) {
+		if ( !this.isTabDisabled( tab ) ) {
+			return ( event ) => {
+				this.setCurrentTab( tab );
+				this.setCurrentId( tab.id );
+
+				if ( isFunction( tab.onClick ) ) {
+					tab.onClick( event, tab );
+				}
+			}
+		}
+
+		return undefined;
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
@@ -118,11 +110,10 @@ class UiTabs extends React.Component {
 					{ tabs.map( ( tab ) => (
 						<LocalTab
 							key={ tab.id }
-							title={ tab.title }
-							content={ tab.content }
-							href={ tab.href }
-							onClick={ tab.onClick }
 							{ ...tab }
+							disabled={ this.isTabDisabled( tab ) }
+							onClick={ this.onTabClick( tab ) }
+							current={ this.isTabCurrent( tab ) }
 						/>
 					) ) }
 				</div>
@@ -141,22 +132,7 @@ UiTabs.propTypes = {
 	className: PropTypes.string,
 	updateCurrent: PropTypes.func,
 
-	tabs: PropTypes.arrayOf( PropTypes.shape( {
-		id: PropTypes.oneOfType( [
-			PropTypes.number,
-			PropTypes.string,
-		] ).isRequired,
-
-		title: PropTypes.oneOfType( [
-			PropTypes.number,
-			PropTypes.string,
-			PropTypes.node,
-		] ),
-
-		content: PropTypes.node,
-		onClick: PropTypes.func,
-		href: PropTypes.func,
-	} ) ),
+	tabs: PropTypes.arrayOf( PropTypes.shape( TabType ) ),
 
 	current: PropTypes.oneOfType( [
 		PropTypes.number,
