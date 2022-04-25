@@ -1,3 +1,5 @@
+// ToDo: Методы nextTab/prevTab/toTab
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -102,7 +104,9 @@ class UiTabs extends React.Component {
 
 		if ( !this.isTabDisabled( id ) ) {
 			return ( event ) => {
-				this.setCurrent( id );
+				if ( tab.content ) {
+					this.setCurrent( id );
+				}
 
 				if ( isFunction( tab.onClick ) ) {
 					tab.onClick( event, tab );

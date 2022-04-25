@@ -14,6 +14,10 @@ export const TabType = {
 
 	content: PropTypes.node,
 	href: PropTypes.string,
+	target: PropTypes.oneOf( [
+		'_self',
+		'_blank',
+	] ),
 	disabled: PropTypes.bool,
 
 	onClick: PropTypes.func,

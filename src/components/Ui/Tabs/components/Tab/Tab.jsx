@@ -21,13 +21,14 @@ class LocalTab extends React.Component {
 	}
 
 	render() {
-		const { href, title, onClick } = this.props;
+		const { href, title, target, onClick } = this.props;
 
 		if ( href ) {
 			return (
 				<BaseLink
 					className={ this.classNameRoot() }
 					href={ href }
+					target={ target }
 					onClick={ onClick }
 				>
 					{ title }
