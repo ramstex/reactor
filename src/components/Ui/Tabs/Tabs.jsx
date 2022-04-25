@@ -14,14 +14,16 @@ class UiTabs extends React.Component {
 
 		const { current, tabs } = this.props;
 
+		const currentId = current || tabs[ 0 ].id;
+		const currentTab = this.getCurrentTab( currentId ) || tabs[ 0 ];
+
 		this.state = {
-			currentId: current || tabs[ 0 ].id,
-			currentTab: this.getCurrentTab() || tabs[ 0 ],
+			currentId,
+			currentTab,
 		};
 
 		this.getCurrentTab = this.getCurrentTab.bind( this );
-		this.setCurrentTab = this.setCurrentTab.bind( this );
-		this.setCurrentId = this.setCurrentId.bind( this );
+		this.setCurrent = this.setCurrent.bind( this );
 	}
 
 	//	Классы
@@ -38,44 +40,69 @@ class UiTabs extends React.Component {
 		return classnames( 'ui-tabs__body' );
 	}
 
-	getCurrentTab() {
-		const { tabs, current } = this.props;
+	/**
+	 * getCurrentTab - получение текущей вкладки по ID
+	 * @param id { Number | String } - ID вкладки
+	 * @return { Object } - объект с данными вкладки
+	 */
+	getCurrentTab( id ) {
+		const { tabs } = this.props;
 
 		return tabs.find( ( tab ) => {
-			return tab.id === current;
+			return tab.id === id;
 		} );
 	}
 
-	setCurrentTab() {
+	/**
+	 * setCurrent - установка текущей вкладки по ID.
+	 * @param id { Number | String } - ID вкладки
+	 */
+	setCurrent( id ) {
 		this.setState( {
-			currentTab: this.getCurrentTab(),
+			currentId: id,
+			currentTab: this.getCurrentTab( id ),
 		} );
 	}
 
-	setCurrentId( value ) {
-		this.setState( {
-			currentId: value,
-		} );
-	}
-
-	isTabCurrent( tab ) {
+	/**
+	 * isTabCurrent проверяет, является ли вкладка с переданным ID текущей.
+	 * @param id { Number | String } - ID вкладки, которую надо проверить
+	 * @return { boolean } - вкладка текущая или нет
+	 */
+	isTabCurrent( id ) {
 		const { currentId } = this.state;
-		return currentId === tab.id;
+		return currentId === id;
 	}
 
-	isTabDisabled( tab ) {
-		return !!tab.disabled || (
-			!tab.content &&
-			!tab.href &&
-			!tab.onClick
+	/**
+	 * isTabDisabled проверяет, отключена ли вкладка с переданным ID.
+	 * @param id { Number | String } - ID вкладки, которую надо проверить
+	 * @return {boolean}
+	 */
+	isTabDisabled( id ) {
+		const tab = this.getCurrentTab( id );
+
+		return !!tab && (
+			!!tab.disabled || (
+				!tab.content &&
+				!tab.href &&
+				!tab.onClick
+			)
 		);
 	}
 
-	onTabClick( tab ) {
-		if ( !this.isTabDisabled( tab ) ) {
+	/**
+	 * onTabClick - обработчик клика по вкладке с переданным ID.
+	 * Если вкладка не отключена, делает её текущей и выполняет её обработчик клика, если он есть.
+	 * @param id { Number | String } - ID вкладки
+	 * @return { (function(*): void) | undefined }
+	 */
+	onTabClick( id ) {
+		const tab = this.getCurrentTab( id );
+
+		if ( !this.isTabDisabled( id ) ) {
 			return ( event ) => {
-				this.setCurrentTab( tab );
-				this.setCurrentId( tab.id );
+				this.setCurrent( id );
 
 				if ( isFunction( tab.onClick ) ) {
 					tab.onClick( event, tab );
@@ -87,16 +114,51 @@ class UiTabs extends React.Component {
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
-		const { current, updateCurrent } = this.props;
-		const { currentId } = this.state;
+		const { current, onChange } = this.props;
+		const { currentId, currentTab } = this.state;
 
-		if ( prevProps.current !== current ) {
-			this.setCurrentId( current );
-			this.setCurrentTab();
+		// Если изменился props.current, меняем текущую вкладку в state
+		if (
+			prevProps.current !== current &&
+			currentId !== current
+		) {
+			this.setCurrent( current );
 		}
 
-		if ( prevState.currentId !== currentId && !!updateCurrent ) {
-			updateCurrent( currentId );
+		// Если изменился state.currentId
+		if (
+			prevState.currentId !== currentId &&
+			currentId !== current
+		) {
+			// Если для старой вкладки задан props.onLeave - выполняем его
+			if ( isFunction( prevState.currentTab.onLeave ) ) {
+				prevState.currentTab.onLeave( {
+					currentId,
+					currentTab,
+					prevId: prevState.currentId,
+					prevTab: prevState.currentTab,
+				} );
+			}
+
+			// Если для новой вкладки задан props.onEnter - выполняем его
+			if ( isFunction( currentTab.onEnter ) ) {
+				currentTab.onEnter( {
+					currentId,
+					currentTab,
+					prevId: prevState.currentId,
+					prevTab: prevState.currentTab,
+				} );
+			}
+
+			// Если для компонента задан props.onChange - выполняем его
+			if ( isFunction( onChange ) ) {
+				onChange( {
+					currentId,
+					currentTab,
+					prevId: prevState.currentId,
+					prevTab: prevState.currentTab,
+				} );
+			}
 		}
 	}
 
@@ -111,9 +173,9 @@ class UiTabs extends React.Component {
 						<LocalTab
 							key={ tab.id }
 							{ ...tab }
-							disabled={ this.isTabDisabled( tab ) }
-							onClick={ this.onTabClick( tab ) }
-							current={ this.isTabCurrent( tab ) }
+							disabled={ this.isTabDisabled( tab.id ) }
+							current={ this.isTabCurrent( tab.id ) }
+							onClick={ this.onTabClick( tab.id ) }
 						/>
 					) ) }
 				</div>
@@ -130,7 +192,6 @@ class UiTabs extends React.Component {
 
 UiTabs.propTypes = {
 	className: PropTypes.string,
-	updateCurrent: PropTypes.func,
 
 	tabs: PropTypes.arrayOf( PropTypes.shape( TabType ) ),
 
@@ -138,6 +199,8 @@ UiTabs.propTypes = {
 		PropTypes.number,
 		PropTypes.string,
 	] ),
+
+	onChange: PropTypes.func,
 };
 
 export default UiTabs;

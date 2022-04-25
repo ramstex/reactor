@@ -15,9 +15,8 @@ export const TabType = {
 	content: PropTypes.node,
 	href: PropTypes.string,
 	disabled: PropTypes.bool,
+
 	onClick: PropTypes.func,
 	onEnter: PropTypes.func,
 	onLeave: PropTypes.func,
-	onEnable: PropTypes.func,
-	onDisable: PropTypes.func,
 };

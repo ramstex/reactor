@@ -27,12 +27,6 @@ class PageUiKitTabs extends React.Component {
 							начало повседневной работы по формированию позиции способствует подготовки и реализации
 							направлений прогрессивного развития.</p>
 					</div>,
-
-					onClick( event, tab ) {
-						console.log( event );
-						console.log( tab );
-						console.log( this );
-					},
 				},
 
 				{
@@ -50,13 +44,21 @@ class PageUiKitTabs extends React.Component {
 
 				{
 					id: 4,
-					title: 'Tab with callback',
-					content: <div key={ 4 }> Tab 4 </div>,
+					title: 'Tab with callbacks',
+					content: <div key={ 4 }> Watch the console, bro! </div>,
 
-					onClick() {
-						// eslint-disable-next-line no-alert
-						alert( 'Look into the console!' );
-						console.log( 'TAB CALLBACK', this );
+					onClick( event, tab ) {
+						console.log( 'CLICK', this );
+						console.log( event );
+						console.log( tab );
+					},
+
+					onEnter( data ) {
+						console.log( 'ENTER', data );
+					},
+
+					onLeave( data ) {
+						console.log( 'LEAVE', data );
 					},
 				},
 
@@ -83,9 +85,9 @@ class PageUiKitTabs extends React.Component {
 		return classnames( 'page-ui-kit-tabs', className );
 	}
 
-	onUpdateCurrent( value ) {
+	onUpdateCurrent( data ) {
 		this.setState( {
-			current: value,
+			current: data.currentId,
 		} );
 	}
 
@@ -97,10 +99,12 @@ class PageUiKitTabs extends React.Component {
 				<MarkupSection title={ 'Ui Kit - Tabs' }>
 					<LocalNav />
 
+					<p> ID текущей вкладки: { current } </p>
+
 					<UiTabs
 						tabs={ this.state.tabs }
 						current={ current }
-						updateCurrent={ this.onUpdateCurrent }
+						onChange={ this.onUpdateCurrent }
 					/>
 				</MarkupSection>
 			</div>
