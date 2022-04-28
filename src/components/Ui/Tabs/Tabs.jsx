@@ -14,18 +14,17 @@ class UiTabs extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const { current, tabs } = this.props;
-
-		const currentId = current || tabs[0].id;
-		const currentTab = this.getCurrentTab(currentId) || tabs[0];
+		const { tabs } = this.props;
 
 		this.state = {
-			currentId,
-			currentTab,
+			current: tabs[0].id,
 		};
 
-		this.getCurrentTab = this.getCurrentTab.bind(this);
+		this.getTab = this.getTab.bind(this);
 		this.setCurrent = this.setCurrent.bind(this);
+		this.isTabCurrent = this.isTabCurrent.bind(this);
+		this.isTabDisabled = this.isTabDisabled.bind(this);
+		this.onTabClick = this.onTabClick.bind(this);
 	}
 
 	//	Классы
@@ -43,13 +42,12 @@ class UiTabs extends React.Component {
 	}
 
 	/**
-	 * getCurrentTab - получение текущей вкладки по ID
+	 * getTab - получение вкладки по ID
 	 * @param id { Number | String } - ID вкладки
 	 * @return { Object } - объект с данными вкладки
 	 */
-	getCurrentTab(id) {
+	getTab(id) {
 		const { tabs } = this.props;
-
 		return tabs.find((tab) => {
 			return tab.id === id;
 		});
@@ -61,8 +59,7 @@ class UiTabs extends React.Component {
 	 */
 	setCurrent(id) {
 		this.setState({
-			currentId: id,
-			currentTab: this.getCurrentTab(id),
+			current: id,
 		});
 	}
 
@@ -72,8 +69,8 @@ class UiTabs extends React.Component {
 	 * @return { boolean } - вкладка текущая или нет
 	 */
 	isTabCurrent(id) {
-		const { currentId } = this.state;
-		return currentId === id;
+		const { current } = this.state;
+		return current === id;
 	}
 
 	/**
@@ -82,8 +79,7 @@ class UiTabs extends React.Component {
 	 * @return {boolean}
 	 */
 	isTabDisabled(id) {
-		const tab = this.getCurrentTab(id);
-
+		const tab = this.getTab(id);
 		return !!tab && (!!tab.disabled || (!tab.content && !tab.href && !tab.onClick));
 	}
 
@@ -94,11 +90,11 @@ class UiTabs extends React.Component {
 	 * @return { (function(*): void) | undefined }
 	 */
 	onTabClick(id) {
-		const tab = this.getCurrentTab(id);
+		const tab = this.getTab(id);
 
 		if (!this.isTabDisabled(id)) {
 			return (event) => {
-				if (tab.content) {
+				if (!!tab.content) {
 					this.setCurrent(id);
 				}
 
@@ -112,51 +108,35 @@ class UiTabs extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { current, onChange } = this.props;
-		const { currentId, currentTab } = this.state;
+		const { onChange } = this.props;
 
 		// Если изменился props.current, меняем текущую вкладку в state
-		if (prevProps.current !== current && currentId !== current) {
+		if (prevProps.current !== this.props.current && this.props.current !== this.state.current) {
 			this.setCurrent(current);
 		}
 
 		// Если изменился state.currentId
-		if (prevState.currentId !== currentId && currentId !== current) {
-			// Если для старой вкладки задан props.onLeave - выполняем его
-			if (isFunction(prevState.currentTab.onLeave)) {
-				prevState.currentTab.onLeave({
-					currentId,
-					currentTab,
-					prevId: prevState.currentId,
-					prevTab: prevState.currentTab,
-				});
+		if (prevState.current !== this.state.current && this.props.current !== this.state.current) {
+			// Если для старой вкладки задан onLeave - выполняем его
+			if (isFunction(this.getTab(prevState.current).onLeave)) {
+				this.getTab(prevState.current).onLeave();
 			}
 
-			// Если для новой вкладки задан props.onEnter - выполняем его
-			if (isFunction(currentTab.onEnter)) {
-				currentTab.onEnter({
-					currentId,
-					currentTab,
-					prevId: prevState.currentId,
-					prevTab: prevState.currentTab,
-				});
+			// Если для новой вкладки задан onEnter - выполняем его
+			if (isFunction(this.getTab(this.state.current).onEnter)) {
+				this.getTab(this.state.current).onEnter();
 			}
 
 			// Если для компонента задан props.onChange - выполняем его
 			if (isFunction(onChange)) {
-				onChange({
-					currentId,
-					currentTab,
-					prevId: prevState.currentId,
-					prevTab: prevState.currentTab,
-				});
+				onChange(this.state.current);
 			}
 		}
 	}
 
 	render() {
 		const { tabs } = this.props;
-		const { currentId } = this.state;
+		const { current } = this.state;
 
 		return (
 			<div className={this.classNameRoot()}>
@@ -176,7 +156,7 @@ class UiTabs extends React.Component {
 
 				<div className={this.classNameBody()}>
 					{tabs.map((item) => {
-						return item.id === currentId && item.content;
+						return item.id === current && item.content;
 					})}
 				</div>
 			</div>
@@ -186,11 +166,8 @@ class UiTabs extends React.Component {
 
 UiTabs.propTypes = {
 	className: PropTypes.string,
-
 	tabs: PropTypes.arrayOf(PropTypes.shape(TabType)),
-
 	current: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
 	onChange: PropTypes.func,
 };
 

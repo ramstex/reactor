@@ -23,6 +23,18 @@ export const content = {
 					</p>
 				</div>
 			),
+
+			onClick() {
+				console.log('CLICK', this);
+			},
+
+			onEnter() {
+				console.log('ENTER', this);
+			},
+
+			onLeave() {
+				console.log('LEAVE', this);
+			},
 		},
 
 		{
@@ -33,11 +45,24 @@ export const content = {
 					<h2>Yeah! BIG TAB</h2>
 				</div>
 			),
+
+			onClick() {
+				console.log('CLICK', this);
+			},
+
+			onEnter() {
+				console.log('ENTER', this);
+			},
+
+			onLeave() {
+				console.log('LEAVE', this);
+			},
 		},
 
 		{
 			id: 3,
 			title: 'Disabled tab',
+			disabled: true,
 			content: (
 				<React.Fragment>
 					<p>
@@ -51,47 +76,51 @@ export const content = {
 					</p>
 				</React.Fragment>
 			),
+
+			onClick() {
+				console.log('CLICK', this);
+			},
+
+			onEnter() {
+				console.log('ENTER', this);
+			},
+
+			onLeave() {
+				console.log('LEAVE', this);
+			},
 		},
 
-		// {
-		// 	id: 4,
-		// 	title: 'Callbacks',
-		// 	content: <div key={ 4 }> Watch the console, bro! </div>,
-		//
-		// 	onClick( event, tab ) {
-		// 		console.log( 'CLICK', this );
-		// 		console.log( event );
-		// 		console.log( tab );
-		// 	},
-		//
-		// 	onEnter( data ) {
-		// 		console.log( 'ENTER', data );
-		// 	},
-		//
-		// 	onLeave( data ) {
-		// 		console.log( 'LEAVE', data );
-		// 	},
-		// },
-		//
-		// {
-		// 	id: 5,
-		// 	title: 'Internal link',
-		// 	href: '/ui-kit/buttons',
-		//
-		// 	onClick() {
-		// 		console.log( 'CALLBACK LINK', this );
-		// 	},
-		// },
-		//
-		// {
-		// 	id: 6,
-		// 	title: 'External link',
-		// 	href: 'https://google.com',
-		// 	target: '_blank',
-		//
-		// 	onClick() {
-		// 		console.log( 'CALLBACK EXTERNAL LINK', this );
-		// 	},
-		// },
+		{
+			id: 4,
+			title: 'Callback without content',
+
+			onClick(event, tab) {
+				console.log('CLICK', this);
+				console.log(event);
+				console.log(tab);
+				console.log('========================');
+			},
+		},
+
+		{
+			id: 5,
+			title: 'Internal link',
+			href: '/ui-kit/buttons',
+
+			onClick() {
+				console.log('CALLBACK INTERNAL LINK', this);
+			},
+		},
+
+		{
+			id: 6,
+			title: 'External link',
+			href: 'https://google.com',
+			target: '_blank',
+
+			onClick() {
+				console.log('CALLBACK EXTERNAL LINK', this);
+			},
+		},
 	],
 };

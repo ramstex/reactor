@@ -13,7 +13,7 @@ class PageUiKitTabs extends React.Component {
 		super(props);
 
 		this.state = {
-			tabsContent: [...content.tabs],
+			tabs: [...content.tabs],
 			current: 1,
 		};
 
@@ -30,16 +30,17 @@ class PageUiKitTabs extends React.Component {
 		return classnames('page-ui-kit-tabs', className);
 	}
 
-	onUpdateCurrent(data) {
+	onUpdateCurrent(current) {
+		console.log(current);
 		this.setState({
-			current: data.currentId,
+			current: current,
 		});
 	}
 
 	getTabById(id) {
-		const { tabsContent } = this.state;
+		const { tabs } = this.state;
 
-		return tabsContent.find((tab) => {
+		return tabs.find((tab) => {
 			return tab.id === id;
 		});
 	}
@@ -51,21 +52,21 @@ class PageUiKitTabs extends React.Component {
 	}
 
 	increaseCurrent() {
-		const { tabsContent, current } = this.state;
+		const { tabs, current } = this.state;
 		let newCurrent = current;
 
 		const getNextId = () => {
-			let i = tabsContent.findIndex((tab) => {
+			let i = tabs.findIndex((tab) => {
 				return tab.id === newCurrent;
 			});
 
-			if (i >= tabsContent.length - 1) {
+			if (i >= tabs.length - 1) {
 				i = 0;
 			} else {
 				i += 1;
 			}
 
-			return tabsContent[i].id;
+			return tabs[i].id;
 		};
 
 		while (newCurrent === current || this.isTabDisabled(newCurrent)) {
@@ -82,7 +83,7 @@ class PageUiKitTabs extends React.Component {
 	}
 
 	render() {
-		const { current } = this.state;
+		const { current, tabs } = this.state;
 
 		return (
 			<div className={this.classNameRoot()}>
@@ -92,7 +93,7 @@ class PageUiKitTabs extends React.Component {
 					<UiButton onClick={this.onIncreaseClick}> Следующая вкладка </UiButton>
 					<p className={'_mt_2 _mb_4'}> ID текущей вкладки: {current} </p>
 
-					<UiTabs tabs={this.state.tabsContent} current={current} onChange={this.onUpdateCurrent} />
+					<UiTabs tabs={tabs} current={current} onChange={this.onUpdateCurrent} />
 				</MarkupSection>
 			</div>
 		);
