@@ -7,17 +7,13 @@ import LayoutDefault from './Default/Default.jsx';
 class Layout extends React.Component {
 	//	Классы
 	classNameRoot() {
-		return classnames( 'layout' );
+		return classnames('layout');
 	}
 
 	render() {
 		const { children } = this.props;
 
-		return (
-			<LayoutDefault className={ this.classNameRoot() }>
-				{ children }
-			</LayoutDefault>
-		);
+		return <LayoutDefault className={this.classNameRoot()}>{children}</LayoutDefault>;
 	}
 }
 

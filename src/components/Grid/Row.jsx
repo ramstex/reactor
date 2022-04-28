@@ -7,20 +7,14 @@ import './Row.scss';
 class Row extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const {
-			className,
-			col,
-			alignH,
-			alignV,
-			reverse,
-		} = this.props;
+		const { className, col, alignH, alignV, reverse } = this.props;
 		return classnames(
 			'row',
 			className,
 			{ [`_align-h_${alignH}`]: alignH },
 			{ [`_align-v_${alignV}`]: alignV },
 			{ [`_col_${col}`]: col },
-			{ _reverse: reverse },
+			{ _reverse: reverse }
 		);
 	}
 
@@ -29,11 +23,7 @@ class Row extends React.Component {
 
 		const Tag = tag || 'div';
 
-		return (
-			<Tag className={ this.classNameRoot() }>
-				{ children }
-			</Tag>
-		);
+		return <Tag className={this.classNameRoot()}>{children}</Tag>;
 	}
 }
 
@@ -44,24 +34,11 @@ Row.propTypes = {
 
 	tag: PropTypes.string,
 
-	col: PropTypes.oneOf( [
-		'auto',
-		PropTypes.number,
-	] ),
+	col: PropTypes.oneOf(['auto', PropTypes.number]),
 
-	alignH: PropTypes.oneOf( [
-		'start',
-		'end',
-		'center',
-		'stretch',
-	] ),
+	alignH: PropTypes.oneOf(['start', 'end', 'center', 'stretch']),
 
-	alignV: PropTypes.oneOf( [
-		'start',
-		'end',
-		'center',
-		'stretch',
-	] ),
+	alignV: PropTypes.oneOf(['start', 'end', 'center', 'stretch']),
 
 	reverse: PropTypes.bool,
 };

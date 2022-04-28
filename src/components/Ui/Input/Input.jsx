@@ -16,26 +16,26 @@ class UiInput extends React.Component {
 			{ _disabled: disabled },
 			{ _textarea: textarea },
 			{ _error: error },
-			{ _success: success },
+			{ _success: success }
 		);
 	}
 
 	classNameCaption() {
-		return classnames( 'ui-input__caption' );
+		return classnames('ui-input__caption');
 	}
 
 	classNameInput() {
-		return classnames( 'ui-input__input', );
+		return classnames('ui-input__input');
 	}
 
 	classNameMessage() {
-		return classnames( 'ui-input__message', );
+		return classnames('ui-input__message');
 	}
 
 	render() {
 		const { children, required, disabled, textarea, type, message, placeholder } = this.props;
 
-		const attrs = omit( this.props, [
+		const attrs = omit(this.props, [
 			'className',
 			'children',
 			'required',
@@ -46,40 +46,36 @@ class UiInput extends React.Component {
 			'message',
 			'placeholder',
 			'type',
-		] );
+		]);
 
 		return (
-			<div className={ this.classNameRoot() }>
+			<div className={this.classNameRoot()}>
 				<label>
-					{ !!children &&
-						<p className={ this.classNameCaption() }> { children } </p>
-					}
+					{!!children && <p className={this.classNameCaption()}> {children} </p>}
 
-					{ textarea ?
+					{textarea ? (
 						<textarea
-							className={ this.classNameInput() }
-							required={ required }
-							disabled={ disabled }
-							placeholder={ placeholder }
-							{ ...attrs }
+							className={this.classNameInput()}
+							required={required}
+							disabled={disabled}
+							placeholder={placeholder}
+							{...attrs}
 						/>
-						:
+					) : (
 						<input
-							className={ this.classNameInput() }
-							required={ required }
-							disabled={ disabled }
-							type={ type }
-							placeholder={ placeholder }
-							{ ...attrs }
+							className={this.classNameInput()}
+							required={required}
+							disabled={disabled}
+							type={type}
+							placeholder={placeholder}
+							{...attrs}
 						/>
-					}
+					)}
 
-					{ !!message &&
-						<p className={ this.classNameMessage() }> { message } </p>
-					}
+					{!!message && <p className={this.classNameMessage()}> {message} </p>}
 				</label>
 			</div>
-		)
+		);
 	}
 }
 
@@ -94,13 +90,7 @@ UiInput.propTypes = {
 	placeholder: PropTypes.string,
 	message: PropTypes.string,
 
-	type: PropTypes.oneOf( [
-		'text',
-		'password',
-		'email',
-		'number',
-		'tel',
-	] ),
+	type: PropTypes.oneOf(['text', 'password', 'email', 'number', 'tel']),
 };
 
 UiInput.defaultProps = {

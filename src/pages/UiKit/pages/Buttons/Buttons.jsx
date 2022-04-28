@@ -13,76 +13,75 @@ class PageUiKitButtons extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'page-ui-kit-buttons', className );
+		return classnames('page-ui-kit-buttons', className);
 	}
 
 	classNameCol() {
-		return classnames( '_mb_4' );
+		return classnames('_mb_4');
 	}
 
-	onClick( event ) {
+	onClick(event) {
 		event.preventDefault();
-		console.log( 'CLICK', event );
+		console.log('CLICK', event);
 	}
 
 	render() {
-		const themes = [ 'primary', 'secondary', 'success', 'warning', 'danger', 'info' ];
+		const themes = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
 
-		const sizes = [ 'lg', 'md', 'sm' ];
+		const sizes = ['lg', 'md', 'sm'];
 
 		return (
-			<div className={ this.classNameRoot() }>
-				<MarkupSection title={ 'Ui Kit - Buttons' }>
+			<div className={this.classNameRoot()}>
+				<MarkupSection title={'Ui Kit - Buttons'}>
 					<LocalNav />
 				</MarkupSection>
 
-				{ themes.map( ( theme ) => (
-					<MarkupSection key={ theme } title={ theme } titleTag={ 'h4' }>
-						<div>
-							{ sizes.map( ( size ) => (
-								<div key={ size }>
-									<Row>
-										<Col className={ this.classNameCol() }>
-											<UiButton
-												theme={ theme }
-												size={ size }
-												href={ 'https://google.com' }
-												target={ '_blank' }
-											>
-												Обычная кнопка
-											</UiButton>
-										</Col>
+				{themes.map((theme) => {
+					return (
+						<MarkupSection key={theme} title={theme} titleTag={'h4'}>
+							<div>
+								{sizes.map((size) => {
+									return (
+										<div key={size}>
+											<Row>
+												<Col className={this.classNameCol()}>
+													<UiButton
+														theme={theme}
+														size={size}
+														href={'https://google.com'}
+														target={'_blank'}
+													>
+														Обычная кнопка
+													</UiButton>
+												</Col>
 
-										<Col className={this.classNameCol()} col={6}>
-											<UiButton
-												theme={theme }
-												size={size }
-												wide
-												onClick={ this.onClick }
-											>
-												Обычная широкая кнопка с событием
-											</UiButton>
-										</Col>
-									</Row>
+												<Col className={this.classNameCol()} col={6}>
+													<UiButton theme={theme} size={size} wide onClick={this.onClick}>
+														Обычная широкая кнопка с событием
+													</UiButton>
+												</Col>
+											</Row>
 
-									<Row>
-										<Col className={ this.classNameCol() } col={ 6 }>
-											<UiButton theme={ theme } size={ size } wide ghost disabled>
-												Обычная широкая кнопка
-											</UiButton>
-										</Col>
+											<Row>
+												<Col className={this.classNameCol()} col={6}>
+													<UiButton theme={theme} size={size} wide ghost disabled>
+														Обычная широкая кнопка
+													</UiButton>
+												</Col>
 
-										<Col className={ this.classNameCol() }>
-											<UiButton theme={ theme } size={ size } ghost active>
-												Обычная кнопка
-											</UiButton>
-										</Col>
-									</Row>
-								</div>
-							) ) }
-						</div>
-					</MarkupSection>
-				) ) }
+												<Col className={this.classNameCol()}>
+													<UiButton theme={theme} size={size} ghost active>
+														Обычная кнопка
+													</UiButton>
+												</Col>
+											</Row>
+										</div>
+									);
+								})}
+							</div>
+						</MarkupSection>
+					);
+				})}
 			</div>
 		);
 	}

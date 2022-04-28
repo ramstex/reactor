@@ -5,7 +5,4 @@ import App from './components/App/App.jsx';
 
 import './style.scss';
 
-ReactDOMClient.createRoot(
-	// eslint-disable-next-line no-undef
-	document.getElementById('app-root')
-).render(<App />);
+ReactDOMClient.createRoot(document.getElementById('app-root')).render(<App />);

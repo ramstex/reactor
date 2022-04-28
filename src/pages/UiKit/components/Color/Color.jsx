@@ -8,7 +8,7 @@ class UiKitColor extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'ui-kit-color', className );
+		return classnames('ui-kit-color', className);
 	}
 
 	styleSample() {
@@ -23,18 +23,12 @@ class UiKitColor extends React.Component {
 		const { title, description } = this.props;
 
 		return (
-			<div className={ this.classNameRoot() }>
-				<div className={ 'ui-kit-color__sample' } style={ this.styleSample() }/>
+			<div className={this.classNameRoot()}>
+				<div className={'ui-kit-color__sample'} style={this.styleSample()} />
 
-				<p className='ui-kit-color__title'>
-					{ title }
-				</p>
+				<p className="ui-kit-color__title">{title}</p>
 
-				{ !!description &&
-					<p className='ui-kit-color__description _sm'>
-						{ description }
-					</p>
-				}
+				{!!description && <p className="ui-kit-color__description _sm">{description}</p>}
 			</div>
 		);
 	}

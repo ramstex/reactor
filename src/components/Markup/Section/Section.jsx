@@ -11,46 +11,36 @@ class MarkupSection extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'markup-section', className );
+		return classnames('markup-section', className);
 	}
 
 	classNameHeader() {
-		return classnames( 'markup-section__header' );
+		return classnames('markup-section__header');
 	}
 
 	classNameTitle() {
-		return classnames( 'markup-section__title' );
+		return classnames('markup-section__title');
 	}
 
 	classNameBody() {
-		return classnames( 'markup-section__body' );
+		return classnames('markup-section__body');
 	}
 
 	render() {
-		const {
-			children,
-			header,
-			body,
-			title,
-			titleTag,
-		} = this.props;
+		const { children, header, body, title, titleTag } = this.props;
 
 		const TitleTag = titleTag || 'h2';
 
 		return (
-			<section className={ this.classNameRoot() }>
-				<div className={ this.classNameHeader() }>
-					<MarkupContainer { ...header }>
-						<TitleTag className={ this.classNameTitle() }>
-							{ title }
-						</TitleTag>
+			<section className={this.classNameRoot()}>
+				<div className={this.classNameHeader()}>
+					<MarkupContainer {...header}>
+						<TitleTag className={this.classNameTitle()}>{title}</TitleTag>
 					</MarkupContainer>
 				</div>
 
-				<div className={ this.classNameBody() }>
-					<MarkupContainer { ...body }>
-						{ getChildrenByKey( children ) }
-					</MarkupContainer>
+				<div className={this.classNameBody()}>
+					<MarkupContainer {...body}>{getChildrenByKey(children)}</MarkupContainer>
 				</div>
 			</section>
 		);

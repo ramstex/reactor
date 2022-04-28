@@ -12,36 +12,23 @@ class LocalTab extends React.Component {
 	classNameRoot() {
 		const { className, current, disabled } = this.props;
 
-		return classnames( [
-			'ui-tabs-tab',
-			className,
-			{ _current: current },
-			{ _disabled: disabled },
-		] );
+		return classnames(['ui-tabs-tab', className, { _current: current }, { _disabled: disabled }]);
 	}
 
 	render() {
 		const { href, title, target, onClick } = this.props;
 
-		if ( href ) {
+		if (href) {
 			return (
-				<BaseLink
-					className={ this.classNameRoot() }
-					href={ href }
-					target={ target }
-					onClick={ onClick }
-				>
-					{ title }
+				<BaseLink className={this.classNameRoot()} href={href} target={target} onClick={onClick}>
+					{title}
 				</BaseLink>
 			);
 		}
 
 		return (
-			<div
-				className={ this.classNameRoot() }
-				onClick={ onClick }
-			>
-				{ title }
+			<div className={this.classNameRoot()} onClick={onClick}>
+				{title}
 			</div>
 		);
 	}

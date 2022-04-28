@@ -7,8 +7,8 @@
 		"dev": "cross-env webpack --mode=development",
 		"start": "cross-env webpack serve --open --mode=development",
 		"build": "cross-env webpack --mode=production",
-		"lint": "eslint ./src",
-		"lint:fix": "eslint ./src --fix"
+		"lint": "eslint ./config ./src ./src/**/*.jsx",
+		"lint:fix": "eslint ./config ./src ./src/**/*.jsx --fix"
 	},
 	"lint-staged": {
 		"*.{ts,js,jsx}": [

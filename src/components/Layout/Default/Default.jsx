@@ -7,16 +7,16 @@ import Header from '../../Header/Header.jsx';
 class LayoutDefault extends React.Component {
 	//	Классы
 	classNameRoot() {
-		return classnames( 'layout-default' );
+		return classnames('layout-default');
 	}
 
 	render() {
 		const { children } = this.props;
 
 		return (
-			<div className={ this.classNameRoot() }>
+			<div className={this.classNameRoot()}>
 				<Header />
-				{ children }
+				{children}
 			</div>
 		);
 	}

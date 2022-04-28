@@ -9,53 +9,45 @@ import UiButton from '../../../../components/Ui/Button/Button.jsx';
 import LocalNav from '../../components/Nav/Nav.jsx';
 
 class PageUiKitTabs extends React.Component {
-	constructor( props ) {
-		super( props );
+	constructor(props) {
+		super(props);
 
 		this.state = {
-			tabsContent: [
-				...content.tabs,
-			],
+			tabsContent: [...content.tabs],
 			current: 1,
 		};
 
-		this.onUpdateCurrent = this.onUpdateCurrent.bind( this );
-		this.onIncreaseClick = this.onIncreaseClick.bind( this );
-		this.increaseCurrent = this.increaseCurrent.bind( this );
-		this.getTabById = this.getTabById.bind( this );
-		this.isTabDisabled = this.isTabDisabled.bind( this );
+		this.onUpdateCurrent = this.onUpdateCurrent.bind(this);
+		this.onIncreaseClick = this.onIncreaseClick.bind(this);
+		this.increaseCurrent = this.increaseCurrent.bind(this);
+		this.getTabById = this.getTabById.bind(this);
+		this.isTabDisabled = this.isTabDisabled.bind(this);
 	}
 
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'page-ui-kit-tabs', className );
+		return classnames('page-ui-kit-tabs', className);
 	}
 
-	onUpdateCurrent( data ) {
-		this.setState( {
+	onUpdateCurrent(data) {
+		this.setState({
 			current: data.currentId,
-		} );
+		});
 	}
 
-	getTabById( id ) {
+	getTabById(id) {
 		const { tabsContent } = this.state;
 
-		return tabsContent.find( ( tab ) => {
+		return tabsContent.find((tab) => {
 			return tab.id === id;
-		} );
+		});
 	}
 
-	isTabDisabled( id ) {
-		const tab = this.getTabById( id );
+	isTabDisabled(id) {
+		const tab = this.getTabById(id);
 
-		return !!tab && (
-			!!tab.disabled || (
-				!tab.content &&
-				!tab.href &&
-				!tab.onClick
-			)
-		);
+		return !!tab && (!!tab.disabled || (!tab.content && !tab.href && !tab.onClick));
 	}
 
 	increaseCurrent() {
@@ -63,30 +55,26 @@ class PageUiKitTabs extends React.Component {
 		let newCurrent = current;
 
 		const getNextId = () => {
-			let i = tabsContent.findIndex( ( tab ) => {
+			let i = tabsContent.findIndex((tab) => {
 				return tab.id === newCurrent;
-			} );
+			});
 
-			if ( i >= ( tabsContent.length - 1 ) ) {
-				i = 0
-			}
-			else {
+			if (i >= tabsContent.length - 1) {
+				i = 0;
+			} else {
 				i += 1;
 			}
 
 			return tabsContent[i].id;
+		};
+
+		while (newCurrent === current || this.isTabDisabled(newCurrent)) {
+			newCurrent = getNextId(newCurrent);
 		}
 
-		while (
-			newCurrent === current ||
-			this.isTabDisabled( newCurrent )
-		) {
-			newCurrent = getNextId( newCurrent );
-		}
-
-		this.setState( {
+		this.setState({
 			current: newCurrent,
-		} );
+		});
 	}
 
 	onIncreaseClick() {
@@ -97,18 +85,14 @@ class PageUiKitTabs extends React.Component {
 		const { current } = this.state;
 
 		return (
-			<div className={ this.classNameRoot() }>
-				<MarkupSection title={ 'Ui Kit - Tabs' }>
+			<div className={this.classNameRoot()}>
+				<MarkupSection title={'Ui Kit - Tabs'}>
 					<LocalNav />
 
-					<UiButton onClick={ this.onIncreaseClick }> Следующая вкладка </UiButton>
-					<p className={ '_mt_2 _mb_4' }> ID текущей вкладки: { current } </p>
+					<UiButton onClick={this.onIncreaseClick}> Следующая вкладка </UiButton>
+					<p className={'_mt_2 _mb_4'}> ID текущей вкладки: {current} </p>
 
-					<UiTabs
-						tabs={ this.state.tabsContent }
-						current={ current }
-						onChange={ this.onUpdateCurrent }
-					/>
+					<UiTabs tabs={this.state.tabsContent} current={current} onChange={this.onUpdateCurrent} />
 				</MarkupSection>
 			</div>
 		);

@@ -15,24 +15,24 @@ class Header extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'header', className );
+		return classnames('header', className);
 	}
 
 	classNameLogo() {
-		return classnames( 'header__logo' );
+		return classnames('header__logo');
 	}
 
 	render() {
 		return (
-			<header className={ this.classNameRoot() }>
+			<header className={this.classNameRoot()}>
 				<MarkupContainer wide>
-					<Row alignV={ 'center' }>
+					<Row alignV={'center'}>
 						<Col>
 							<BaseLogo
-								className={ this.classNameLogo() }
-								image={ Logo }
-								href={ 'https://google.com' }
-								target={ '_blank' }
+								className={this.classNameLogo()}
+								image={Logo}
+								href={'https://google.com'}
+								target={'_blank'}
 							/>
 						</Col>
 

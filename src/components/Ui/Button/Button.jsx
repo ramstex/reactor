@@ -26,27 +26,19 @@ class UiButton extends React.Component {
 	render() {
 		const { children, href, type } = this.props;
 
-		const attrs = omit( this.props, [
-			'className',
-			'children',
-			'href',
-			'disabled',
-			'active',
-			'ghost',
-			'wide',
-		] );
+		const attrs = omit(this.props, ['className', 'children', 'href', 'disabled', 'active', 'ghost', 'wide']);
 
-		if ( href ) {
+		if (href) {
 			return (
-				<BaseLink className={ this.classNameRoot() } href={ href } { ...attrs }>
-					{ children }
+				<BaseLink className={this.classNameRoot()} href={href} {...attrs}>
+					{children}
 				</BaseLink>
 			);
 		}
 
 		return (
-			<button className={ this.classNameRoot() } type={ type } { ...attrs }>
-				{ children }
+			<button className={this.classNameRoot()} type={type} {...attrs}>
+				{children}
 			</button>
 		);
 	}
@@ -61,11 +53,11 @@ UiButton.propTypes = {
 	ghost: PropTypes.bool,
 	wide: PropTypes.bool,
 
-	theme: PropTypes.oneOf( ['primary', 'secondary', 'success', 'warning', 'danger', 'info'] ),
+	theme: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger', 'info']),
 
-	type: PropTypes.oneOf( ['button', 'submit', 'reset'] ),
+	type: PropTypes.oneOf(['button', 'submit', 'reset']),
 
-	size: PropTypes.oneOf( ['lg', 'md', 'sm'] ),
+	size: PropTypes.oneOf(['lg', 'md', 'sm']),
 };
 
 UiButton.defaultProps = {

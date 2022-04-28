@@ -14,13 +14,13 @@ const tabs = [
 	{
 		id: 'registration',
 		title: 'Registration',
-		content: <FormRegistration key={ 'registration' }/>,
+		content: <FormRegistration key={'registration'} />,
 	},
 
 	{
 		id: 'login',
 		title: 'Login',
-		content: <FormLogin key={ 'login' }/>,
+		content: <FormLogin key={'login'} />,
 	},
 
 	{
@@ -34,18 +34,16 @@ class PageUiKitColors extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'page-ui-kit-colors', className );
+		return classnames('page-ui-kit-colors', className);
 	}
 
 	render() {
 		return (
-			<div className={ this.classNameRoot() }>
-				<MarkupSection title={ 'Ui Kit - Forms' }>
+			<div className={this.classNameRoot()}>
+				<MarkupSection title={'Ui Kit - Forms'}>
 					<LocalNav />
 
-					<UiTabs
-						tabs={ tabs }
-					/>
+					<UiTabs tabs={tabs} />
 				</MarkupSection>
 			</div>
 		);

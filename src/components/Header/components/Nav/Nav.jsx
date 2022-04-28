@@ -11,18 +11,18 @@ class LocalNav extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames( 'header-nav', className );
+		return classnames('header-nav', className);
 	}
 
 	render() {
 		return (
-			<Row className={ this.classNameRoot() } tag={ 'ul' }>
-				<Col tag={ 'li' }>
-					<BaseLink href={ '/' }>Главная</BaseLink>
+			<Row className={this.classNameRoot()} tag={'ul'}>
+				<Col tag={'li'}>
+					<BaseLink href={'/'}>Главная</BaseLink>
 				</Col>
 
-				<Col tag={ 'li' }>
-					<BaseLink href={ '/ui-kit' }>Ui-Kit</BaseLink>
+				<Col tag={'li'}>
+					<BaseLink href={'/ui-kit'}>Ui-Kit</BaseLink>
 				</Col>
 			</Row>
 		);
