@@ -59,11 +59,11 @@ h6,
 p {
 	@include data.p;
 
-	&._lg{
+	&._lg {
 		@include data.p_lg;
 	}
 
-	&._sm{
+	&._sm {
 		@include data.p_sm;
 	}
 

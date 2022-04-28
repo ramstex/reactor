@@ -28,7 +28,7 @@ $themes: (
 	text-decoration: none;
 	text-align: center;
 	cursor: pointer;
-	-webkit-appearance: none;
+	appearance: none;
 	transition: all 0.3s ease;
 
 	&:focus {

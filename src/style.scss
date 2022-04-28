@@ -4,6 +4,12 @@
 @use 'style/media/data' as media;
 @use 'style/typography/data' as typography;
 
+@import './style/colors/index';
+@import './style/fonts/index';
+@import './style/layout/index';
+@import 'style/media/index';
+@import './style/typography/index';
+
 * {
 	margin: 0;
 	padding: 0;
@@ -15,9 +21,3 @@ body {
 	color: colors.getColor('text');
 	background-color: colors.getColor('back');
 }
-
-@import './style/colors/index';
-@import './style/fonts/index';
-@import './style/layout/index';
-@import './style/media/index';
-@import './style/typography/index';

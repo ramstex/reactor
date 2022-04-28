@@ -73,10 +73,11 @@ $sizes: (
 			@for $i from -12 through 12 {
 				&_#{$i} {
 					@each $prop in $props {
-						#{$prop}: math.div( data.$gap, 4 ) * $i;
+						#{$prop}: math.div(data.$gap, 4) * $i;
 					}
 				}
 			}
+
 			&_auto {
 				@each $prop in $props {
 					#{$prop}: auto;

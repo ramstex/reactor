@@ -9,11 +9,7 @@
 	}
 
 	&__title {
-		margin-top: math.div( layout.$gap, 2 );
-		font-weight: bold;
-	}
-
-	&__description {
-
+		margin-top: math.div(layout.$gap, 2);
+		font-weight: 600;
 	}
 }

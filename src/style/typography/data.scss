@@ -8,11 +8,11 @@
 	line-height: 100%;
 	letter-spacing: -0.02em;
 
-	@media ( media.min( tablet, sm ) ) {
+	@media (media.min(tablet, sm)) {
 		font-size: 36px;
 	}
 
-	@media ( media.min( desktop, sm ) ) {
+	@media (media.min(desktop, sm)) {
 		font-size: 56px;
 	}
 }

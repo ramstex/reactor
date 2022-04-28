@@ -5,12 +5,10 @@
 .ui-tabs {
 	&__header {
 		display: flex;
-		background-color: colors.getColor( 'muted-light' );
+		background-color: colors.getColor('muted-light');
 	}
 
 	&__body {
-		margin-top: layout.$gap
+		margin-top: layout.$gap;
 	}
-
-	&__tab {}
 }
