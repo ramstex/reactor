@@ -20,6 +20,12 @@ const messages = {
 				typeMismatch: 'Адрес заполнен некорректно',
 			},
 		},
+
+		remind: {
+			email: {
+				typeMismatch: 'Адрес заполнен некорректно',
+			},
+		},
 	},
 };
 

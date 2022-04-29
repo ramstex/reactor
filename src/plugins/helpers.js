@@ -1,12 +1,12 @@
-export const isAbsoluteUrl = (url = '') => {
+export function isAbsoluteUrl(url = '') {
 	const list = ['http://', 'https://', 'ftp://', 'ssh://'];
 
 	return !!list.find((item) => {
 		return url.indexOf(item) === 0;
 	});
-};
+}
 
-export const getChildrenByKey = (children = [], key = null) => {
+export function getChildrenByKey(children = [], key = null) {
 	if ('length' in children) {
 		return children.reduce((prev, curr) => {
 			if (curr.key === key) {
@@ -18,7 +18,7 @@ export const getChildrenByKey = (children = [], key = null) => {
 	}
 
 	return children.key === key ? children : undefined;
-};
+}
 
 export function isFunction(func) {
 	return typeof func === 'function';
