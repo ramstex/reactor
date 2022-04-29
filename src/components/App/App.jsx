@@ -12,6 +12,7 @@ import PageUiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons.jsx';
 import PageUiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs.jsx';
 import PageUiKitTabs from '../../pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitForms from '../../pages/UiKit/pages/Forms/Forms.jsx';
+import PageUiKitCheckboxes from '../../pages/UiKit/pages/Checkboxes/Checkboxes.jsx';
 
 class App extends React.Component {
 	//	Классы
@@ -31,6 +32,7 @@ class App extends React.Component {
 					<Layout className={this.classNameLayout()}>
 						<Routes>
 							<Route path={'/'} element={<PageHome />} />
+
 							<Route path={'/ui-kit'} element={<PageUiKit />} />
 							<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />
 							<Route path={'/ui-kit/colors'} element={<PageUiKitColors />} />
@@ -38,6 +40,7 @@ class App extends React.Component {
 							<Route path={'/ui-kit/inputs'} element={<PageUiKitInputs />} />
 							<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
 							<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
+							<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
 						</Routes>
 					</Layout>
 				</Router>
