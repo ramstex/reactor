@@ -18,18 +18,18 @@ class LocalTab extends React.Component {
 	render() {
 		const { href, title, target, onClick } = this.props;
 
-		if (href) {
-			return (
-				<BaseLink className={this.classNameRoot()} href={href} target={target} onClick={onClick}>
-					{title}
-				</BaseLink>
-			);
-		}
-
 		return (
-			<div className={this.classNameRoot()} onClick={onClick}>
-				{title}
-			</div>
+			<React.Fragment>
+				{!!href ? (
+					<BaseLink className={this.classNameRoot()} href={href} target={target} onClick={onClick}>
+						{title}
+					</BaseLink>
+				) : (
+					<div className={this.classNameRoot()} onClick={onClick}>
+						{title}
+					</div>
+				)}
+			</React.Fragment>
 		);
 	}
 }
