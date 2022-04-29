@@ -1,5 +1,4 @@
 import React from 'react';
-import forms from '../../config/forms.js';
 import classnames from 'classnames';
 import _FORMS from '../../config/forms.js';
 
@@ -15,10 +14,10 @@ const getValidationMessage = (source, formKey, inputKey) => {
 	});
 
 	return (
-		(forms.messages.forms[formKey] &&
-			forms.messages.forms[formKey][inputKey] &&
-			forms.messages.forms[formKey][inputKey][messageKey]) ||
-		forms.messages.defaults[messageKey]
+		(_FORMS.messages.forms[formKey] &&
+			_FORMS.messages.forms[formKey][inputKey] &&
+			_FORMS.messages.forms[formKey][inputKey][messageKey]) ||
+		_FORMS.messages.defaults[messageKey]
 	);
 };
 
@@ -79,6 +78,37 @@ const authForm = (formKey) => {
 				});
 			};
 		}
+
+		// formTemplate() {
+		// 	const { fields } = this.state;
+		//
+		// 	return (
+		// 		<form className={this.classNameRoot()} onSubmit={this.onSubmit}>
+		// 			<Row>
+		// 				{Object.entries(fields).map(([key, value]) => {
+		// 					return (
+		// 						<Col col={5} key={key}>
+		// 							<UiInput
+		// 								{...value}
+		// 								pattern={key === 'confirmation' ? this.state.fields.password.value : undefined}
+		// 								onInvalid={this.onInvalid(value.name || key)}
+		// 								onChange={this.onChange(value.name || key)}
+		// 							>
+		// 								{value.caption}
+		// 							</UiInput>
+		// 						</Col>
+		// 					);
+		// 				})}
+		// 			</Row>
+		//
+		// 			<Row className={'_mt_4'}>
+		// 				<Col>
+		// 					<UiButton type={'submit'}>Отправить</UiButton>
+		// 				</Col>
+		// 			</Row>
+		// 		</form>
+		// 	);
+		// }
 
 		render() {
 			const { fields } = this.state;

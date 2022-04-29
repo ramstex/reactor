@@ -6,7 +6,7 @@ export const content = {
 			id: 1,
 			title: 'Simple tab',
 			content: (
-				<div key={1}>
+				<div>
 					<p>
 						Задача организации, в особенности же постоянный количественный рост и сфера нашей активности
 						обеспечивает широкому кругу (специалистов) участие в формировании позиций, занимаемых
@@ -41,7 +41,7 @@ export const content = {
 			id: '2',
 			title: <h6> BIG TAB 2</h6>,
 			content: (
-				<div key={2}>
+				<div>
 					<h2>Yeah! BIG TAB</h2>
 				</div>
 			),

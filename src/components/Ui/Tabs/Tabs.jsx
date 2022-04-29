@@ -194,7 +194,7 @@ class UiTabs extends React.Component {
 
 				<div className={this.classNameBody()}>
 					{tabs.map((item) => {
-						return item.id === current && item.content;
+						return item.id === current && <React.Fragment key={item.id}>{item.content}</React.Fragment>;
 					})}
 				</div>
 			</div>
