@@ -11,7 +11,6 @@ class LocalTab extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className, current, disabled } = this.props;
-
 		return classnames(['ui-tabs-tab', className, { _current: current }, { _disabled: disabled }]);
 	}
 
