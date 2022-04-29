@@ -20,10 +20,12 @@ class UiTabs extends React.Component {
 			current: tabs[0].id,
 		};
 
+		this.isTab = this.isTab.bind(this);
 		this.getTab = this.getTab.bind(this);
 		this.setCurrent = this.setCurrent.bind(this);
 		this.isTabCurrent = this.isTabCurrent.bind(this);
 		this.isTabDisabled = this.isTabDisabled.bind(this);
+		this.isTabAvailable = this.isTabAvailable.bind(this);
 		this.onTabClick = this.onTabClick.bind(this);
 	}
 
@@ -42,60 +44,98 @@ class UiTabs extends React.Component {
 	}
 
 	/**
-	 * getTab - получение вкладки по ID
-	 * @param id { Number | String } - ID вкладки
+	 * isTab - проверяет, является ли переданное значение вкладкой, либо ID вкладки.
+	 * Проверка проходит только на тип данных, не на реальное существование такой вкладки.
+	 * Для проверки существования используются другие методы.
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
+	 * @return { Boolean } - true, если значение соответствует вкладке, и false, если соответствует ID.
+	 */
+	isTab(value) {
+		return typeof value === 'object' && value.hasOwnProperty('id');
+	}
+
+	/**
+	 * getTab - если передан ID, то возвращает соответствующую вкладку.
+	 * Если передана вкладка - просто возвращает её как есть.
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
 	 * @return { Object } - объект с данными вкладки
 	 */
-	getTab(id) {
+	getTab(value) {
 		const { tabs } = this.props;
+
+		if (this.isTab(value)) {
+			return value;
+		}
+
 		return tabs.find((tab) => {
-			return tab.id === id;
+			return tab.id === value;
 		});
 	}
 
 	/**
 	 * setCurrent - установка текущей вкладки по ID.
-	 * @param id { Number | String } - ID вкладки
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
 	 */
-	setCurrent(id) {
-		this.setState({
-			current: id,
-		});
+	setCurrent(value) {
+		if (this.isTab(value)) {
+			this.setState({
+				current: value.id,
+			});
+		} else {
+			this.setState({
+				current: value,
+			});
+		}
 	}
 
 	/**
 	 * isTabCurrent проверяет, является ли вкладка с переданным ID текущей.
-	 * @param id { Number | String } - ID вкладки, которую надо проверить
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
 	 * @return { boolean } - вкладка текущая или нет
 	 */
-	isTabCurrent(id) {
+	isTabCurrent(value) {
 		const { current } = this.state;
-		return current === id;
+
+		if (this.isTab(value)) {
+			return current === value.id;
+		}
+
+		return current === value;
 	}
 
 	/**
 	 * isTabDisabled проверяет, отключена ли вкладка с переданным ID.
-	 * @param id { Number | String } - ID вкладки, которую надо проверить
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
+	 * @return { Boolean }
+	 */
+	isTabDisabled(value) {
+		const tab = this.getTab(value);
+		return !!tab && (!!tab.disabled || (!tab.content && !tab.href && !tab.onClick));
+	}
+
+	/**
+	 * isTabAvailable проверяет, можно ли перейти на вкладку с переданным ID.
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
 	 * @return {boolean}
 	 */
-	isTabDisabled(id) {
-		const tab = this.getTab(id);
-		return !!tab && (!!tab.disabled || (!tab.content && !tab.href && !tab.onClick));
+	isTabAvailable(value) {
+		const tab = this.getTab(value);
+		return !this.isTabDisabled(value) && !!tab.content;
 	}
 
 	/**
 	 * onTabClick - обработчик клика по вкладке с переданным ID.
 	 * Если вкладка не отключена, делает её текущей и выполняет её обработчик клика, если он есть.
-	 * @param id { Number | String } - ID вкладки
+	 * @param value { Object[id: Number | String] | Number | String } - объект с данными вкладки либо ID для проверки.
 	 * @return { (function(*): void) | undefined }
 	 */
-	onTabClick(id) {
-		const tab = this.getTab(id);
+	onTabClick(value) {
+		const tab = this.getTab(value);
 
-		if (!this.isTabDisabled(id)) {
+		if (!this.isTabDisabled(tab)) {
 			return (event) => {
 				if (!!tab.content) {
-					this.setCurrent(id);
+					this.setCurrent(tab);
 				}
 
 				if (isFunction(tab.onClick)) {
