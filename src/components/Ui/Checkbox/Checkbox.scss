@@ -38,6 +38,7 @@
 	}
 
 	&__message {
+		margin-top: math.div(layout.$gap, 6);
 		font-size: 12px;
 	}
 

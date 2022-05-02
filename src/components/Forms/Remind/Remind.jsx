@@ -1,9 +1,9 @@
 import React from 'react';
-import Auth from '../../../plugins/auth.js';
+import Auth from '../../../plugins/auth.jsx';
 import { cloneDeep } from 'lodash';
 
 import './Remind.scss';
-import _FORMS from '../../../../config/forms.js';
+import _FORMS from '../../../../config/forms.jsx';
 
 class FormRemind extends Auth.AuthFormComponent {
 	constructor(props) {

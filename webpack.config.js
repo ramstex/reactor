@@ -2,7 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default ( env, argv ) => {
+export default (env, argv) => {
 	return {
 		mode: argv.mode,
 
@@ -10,7 +10,7 @@ export default ( env, argv ) => {
 
 		output: {
 			filename: 'main.js',
-			path: path.join( process.cwd(), 'dist' ),
+			path: path.join(process.cwd(), 'dist'),
 			publicPath: '/',
 		},
 
@@ -20,9 +20,9 @@ export default ( env, argv ) => {
 		},
 
 		plugins: [
-			new HtmlWebpackPlugin( {
+			new HtmlWebpackPlugin({
 				template: './src/index.html',
-			} ),
+			}),
 
 			new MiniCssExtractPlugin(),
 		],
@@ -32,17 +32,22 @@ export default ( env, argv ) => {
 				{
 					test: /\.(js|jsx)$/,
 					exclude: /node_modules/,
-					use: [{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								['@babel/preset-env', {
-									targets: 'defaults',
-								}],
-								'@babel/preset-react',
-							],
+					use: [
+						{
+							loader: 'babel-loader',
+							options: {
+								presets: [
+									[
+										'@babel/preset-env',
+										{
+											targets: 'defaults',
+										},
+									],
+									'@babel/preset-react',
+								],
+							},
 						},
-					}],
+					],
 				},
 
 				{
@@ -56,11 +61,7 @@ export default ( env, argv ) => {
 							loader: 'postcss-loader',
 							options: {
 								postcssOptions: {
-									plugins: [
-										[
-											'postcss-preset-env',
-										],
-									],
+									plugins: [['postcss-preset-env']],
 								},
 							},
 						},
@@ -93,6 +94,15 @@ export default ( env, argv ) => {
 					use: [
 						{
 							loader: 'url-loader',
+						},
+					],
+				},
+
+				{
+					test: /\.pdf$/,
+					use: [
+						{
+							loader: 'file-loader',
 						},
 					],
 				},

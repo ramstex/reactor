@@ -1,3 +1,9 @@
+import React from 'react';
+
+import BaseLink from '../src/components/Base/Link/Link.jsx';
+
+import AgreementPdf from '/src/assets/rules.pdf';
+
 const messages = {
 	defaults: {
 		alreadyExists: 'Такой адрес уже зарегистрирован',
@@ -67,6 +73,23 @@ const contents = {
 			error: false,
 			success: false,
 			value: '',
+		},
+
+		agreement: {
+			name: 'agreement',
+			type: 'checkbox',
+			caption: (
+				<React.Fragment>
+					{'Я соглашаюсь с '}
+					<BaseLink href={AgreementPdf} target="_blank">
+						условиями регистрации
+					</BaseLink>
+				</React.Fragment>
+			),
+			required: true,
+			error: false,
+			success: false,
+			checked: false,
 		},
 	},
 

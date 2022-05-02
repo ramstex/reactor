@@ -55,20 +55,20 @@ class UiInput extends React.Component {
 
 					{textarea ? (
 						<textarea
+							{...attrs}
 							className={this.classNameInput()}
 							required={required}
 							disabled={disabled}
 							placeholder={placeholder}
-							{...attrs}
 						/>
 					) : (
 						<input
+							{...attrs}
 							className={this.classNameInput()}
 							required={required}
 							disabled={disabled}
 							type={type}
 							placeholder={placeholder}
-							{...attrs}
 						/>
 					)}
 

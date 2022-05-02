@@ -6,6 +6,7 @@ import { isFunction } from 'lodash';
 import BaseIcon from '../../Base/Icon/Icon.jsx';
 
 import './Checkbox.scss';
+import omit from 'lodash/omit.js';
 
 class UiCheckbox extends React.Component {
 	constructor(props) {
@@ -43,6 +44,10 @@ class UiCheckbox extends React.Component {
 
 	onCheck(event) {
 		this.setChecked(event.target.checked);
+
+		if (isFunction(this.props.onChange)) {
+			this.props.onChange(event);
+		}
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -50,23 +55,19 @@ class UiCheckbox extends React.Component {
 		if (this.props.checked !== this.state.checked && this.props.checked !== prevProps.checked) {
 			this.setChecked(this.props.checked);
 		}
-
-		// Если изменилось state.value
-		if (this.state.checked !== this.props.checked && this.state.checked !== prevState.checked) {
-			if (isFunction(this.props.onChange)) {
-				this.props.onChange(this.state.checked);
-			}
-		}
 	}
 
 	render() {
 		const { message, children, required } = this.props;
 		const { checked } = this.state;
 
+		const attrs = omit(this.props, ['className', 'children', 'success', 'error', 'message', 'error', 'onChange']);
+
 		return (
 			<label className={this.classNameRoot()}>
 				<div className={'ui-checkbox__header'}>
 					<input
+						{...attrs}
 						className={'ui-checkbox__input'}
 						type={'checkbox'}
 						checked={checked}
@@ -81,7 +82,7 @@ class UiCheckbox extends React.Component {
 				{(!!children || !!message || required) && (
 					<div className={'ui-checkbox__text'}>
 						{(!!children || required) && <p className={'ui-checkbox__caption _sm'}>{children}</p>}
-						{!!message && <p className={'ui-checkbox__message _mt_1'}>{message}</p>}
+						{!!message && <p className={'ui-checkbox__message'}>{message}</p>}
 					</div>
 				)}
 			</label>
@@ -94,11 +95,11 @@ UiCheckbox.propTypes = {
 	className: PropTypes.string,
 	checked: PropTypes.bool,
 	required: PropTypes.bool,
-	onChange: PropTypes.func,
 	disabled: PropTypes.bool,
 	error: PropTypes.bool,
 	success: PropTypes.bool,
 	message: PropTypes.string,
+	onChange: PropTypes.func,
 };
 
 export default UiCheckbox;

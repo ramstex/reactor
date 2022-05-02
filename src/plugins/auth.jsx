@@ -1,9 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
-import _FORMS from '../../config/forms.js';
+import _FORMS from '../../config/forms.jsx';
 
 import { Col, Row } from '../components/Grid/Grid.jsx';
 import UiInput from '../components/Ui/Input/Input.jsx';
+import UiCheckbox from '../components/Ui/Checkbox/Checkbox.jsx';
 import UiButton from '../components/Ui/Button/Button.jsx';
 
 const getValidationMessage = (source, formKey, inputKey) => {
@@ -72,8 +73,15 @@ class AuthFormComponent extends React.Component {
 				error: false,
 				success: false,
 				message: '',
-				value: event.target.value,
 			});
+
+			if (fields[inputKey].hasOwnProperty('value')) {
+				fields[inputKey].value = event.target.value;
+			}
+
+			if (fields[inputKey].hasOwnProperty('checked')) {
+				fields[inputKey].checked = event.target.checked;
+			}
 
 			this.setState({
 				fields,
@@ -87,18 +95,33 @@ class AuthFormComponent extends React.Component {
 		return (
 			<React.Fragment>
 				{Object.entries(fields).map(([key, value]) => {
-					return (
-						<Col col={5} key={key}>
-							<UiInput
-								{...value}
-								pattern={key === 'confirmation' ? this.state.fields.password.value : undefined}
-								onInvalid={this.onInvalid(value.name || key)}
-								onChange={this.onChange(value.name || key)}
-							>
-								{value.caption}
-							</UiInput>
-						</Col>
-					);
+					switch (value.type) {
+						case 'checkbox':
+							return (
+								<Col className={'_mb_2'} col={12} key={key}>
+									<UiCheckbox
+										{...value}
+										onInvalid={this.onInvalid(value.name || key)}
+										onChange={this.onChange(value.name || key)}
+									>
+										{value.caption}
+									</UiCheckbox>
+								</Col>
+							);
+						default:
+							return (
+								<Col className={'_mb_2'} col={5} key={key}>
+									<UiInput
+										{...value}
+										pattern={key === 'confirmation' ? this.state.fields.password.value : undefined}
+										onInvalid={this.onInvalid(value.name || key)}
+										onChange={this.onChange(value.name || key)}
+									>
+										{value.caption}
+									</UiInput>
+								</Col>
+							);
+					}
 				})}
 			</React.Fragment>
 		);
