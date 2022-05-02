@@ -12,7 +12,7 @@
 		"ecmaFeatures": {
 			"jsx": true
 		},
-		"ecmaVersion": 13,
+		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
 	"rules": {
@@ -20,7 +20,7 @@
 		"class-methods-use-this": "off",
 		"import/extensions": "off",
 		"import/prefer-default-export": "off",
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"no-console": "off",
 		"no-param-reassign": "error",
 		"no-tabs": "off"

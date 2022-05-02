@@ -12,7 +12,16 @@ import './Checkboxes.scss';
 class PageUiKitCheckboxes extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			v1: false,
+			v2: false,
+			v3: true,
+			v4: true,
+			v5: false,
+			v6: false,
+			v7: false,
+			v8: false,
+		};
 
 		this.onChange = this.onChange.bind(this);
 	}
@@ -24,9 +33,10 @@ class PageUiKitCheckboxes extends React.Component {
 	}
 
 	onChange(key) {
-		return (event) => {
+		return (value) => {
+			console.log(`${key} = ${value}`);
 			this.setState({
-				[key]: event.target.value,
+				[key]: value,
 			});
 		};
 	}
@@ -36,7 +46,77 @@ class PageUiKitCheckboxes extends React.Component {
 			<div className={this.classNameRoot()}>
 				<MarkupSection title={'Ui Kit - Checkboxes'}>
 					<LocalNav />
-					<UiCheckbox />
+
+					<Row>
+						<Col col={4}>
+							<UiCheckbox className={'_mb_2'} checked={this.state.v1} onChange={this.onChange('v1')}>
+								Чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox className={'_mb_2'} checked={this.state.v3} onChange={this.onChange('v3')}>
+								Отмеченный чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox
+								className={'_mb_2'}
+								checked={this.state.v5}
+								onChange={this.onChange('v5')}
+								required
+							>
+								Обязательный чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox
+								className={'_mb_2'}
+								checked={this.state.v7}
+								onChange={this.onChange('v7')}
+								success
+								message={'Это успех!'}
+							>
+								Успешный чекбокс
+							</UiCheckbox>
+						</Col>
+
+						<Col col={4}>
+							<UiCheckbox
+								className={'_mb_2'}
+								disabled
+								checked={this.state.v2}
+								onChange={this.onChange('v2')}
+							>
+								Выключенный чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox
+								className={'_mb_2'}
+								disabled
+								checked={this.state.v4}
+								onChange={this.onChange('v4')}
+							>
+								Отмеченный выключенный чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox
+								className={'_mb_2'}
+								checked={this.state.v6}
+								onChange={this.onChange('v6')}
+								required
+								disabled
+							>
+								Обязательный выключенный чекбокс
+							</UiCheckbox>
+
+							<UiCheckbox
+								className={'_mb_2'}
+								checked={this.state.v8}
+								onChange={this.onChange('v8')}
+								error
+								message={'Произошла ошибка'}
+							>
+								Ошибочный чекбокс
+							</UiCheckbox>
+						</Col>
+					</Row>
 				</MarkupSection>
 			</div>
 		);
