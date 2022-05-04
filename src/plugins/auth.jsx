@@ -66,8 +66,6 @@ class AuthFormComponent extends React.Component {
 
 	onChange(inputKey) {
 		return (event) => {
-			event.preventDefault();
-
 			const { fields } = this.state;
 			fields[inputKey] = Object.assign(fields[inputKey], {
 				error: false,
@@ -76,6 +74,7 @@ class AuthFormComponent extends React.Component {
 			});
 
 			if (fields[inputKey].hasOwnProperty('value')) {
+				event.preventDefault();
 				fields[inputKey].value = event.target.value;
 			}
 

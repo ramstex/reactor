@@ -33,10 +33,9 @@ class PageUiKitCheckboxes extends React.Component {
 	}
 
 	onChange(key) {
-		return (value) => {
-			console.log(`${key} = ${value}`);
+		return (event) => {
 			this.setState({
-				[key]: value,
+				[key]: event.target.checked,
 			});
 		};
 	}
