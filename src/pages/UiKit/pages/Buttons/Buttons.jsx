@@ -13,7 +13,7 @@ class PageUiKitButtons extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page-ui-kit-buttons', className);
+		return classnames('page page-ui-kit-buttons', className);
 	}
 
 	classNameCol() {

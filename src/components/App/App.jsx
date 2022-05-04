@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Layout from '../Layout/Layout.jsx';
 import PageHome from '../../pages/Home/Home.jsx';
@@ -30,18 +31,22 @@ class App extends React.Component {
 			<div className={this.classNameRoot()}>
 				<Router>
 					<Layout className={this.classNameLayout()}>
-						<Routes>
-							<Route path={'/'} element={<PageHome />} />
+						<TransitionGroup>
+							<CSSTransition timeout={300} classNames={'fade'}>
+								<Routes>
+									<Route path={'/'} element={<PageHome />} />
 
-							<Route path={'/ui-kit'} element={<PageUiKit />} />
-							<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />
-							<Route path={'/ui-kit/colors'} element={<PageUiKitColors />} />
-							<Route path={'/ui-kit/buttons'} element={<PageUiKitButtons />} />
-							<Route path={'/ui-kit/inputs'} element={<PageUiKitInputs />} />
-							<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
-							<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
-							<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
-						</Routes>
+									<Route path={'/ui-kit'} element={<PageUiKit />} />
+									<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />
+									<Route path={'/ui-kit/colors'} element={<PageUiKitColors />} />
+									<Route path={'/ui-kit/buttons'} element={<PageUiKitButtons />} />
+									<Route path={'/ui-kit/inputs'} element={<PageUiKitInputs />} />
+									<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
+									<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
+									<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
+								</Routes>
+							</CSSTransition>
+						</TransitionGroup>
 					</Layout>
 				</Router>
 			</div>

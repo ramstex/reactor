@@ -21,3 +21,9 @@ body {
 	color: colors.getColor('text');
 	background-color: colors.getColor('back');
 }
+
+.page {
+	&._fade {
+		opacity: 0;
+	}
+}

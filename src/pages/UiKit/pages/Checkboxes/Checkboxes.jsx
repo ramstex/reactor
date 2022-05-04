@@ -29,7 +29,7 @@ class PageUiKitCheckboxes extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page-ui-kit-checkboxes', className);
+		return classnames('page page-ui-kit-checkboxes', className);
 	}
 
 	onChange(key) {

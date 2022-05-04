@@ -22,7 +22,7 @@ class PageUiKitTabs extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page-ui-kit-tabs', className);
+		return classnames('page page-ui-kit-tabs', className);
 	}
 
 	onUpdateCurrent(current) {
