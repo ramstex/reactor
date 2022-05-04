@@ -6,6 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Layout from '../Layout/Layout.jsx';
 import PageHome from '../../pages/Home/Home.jsx';
+import PageProfile from '../../pages/Profile/Profile.jsx';
 import PageUiKit from '../../pages/UiKit/UiKit.jsx';
 import PageUiKitTypography from '../../pages/UiKit/pages/Typography/Typography.jsx';
 import PageUiKitColors from '../../pages/UiKit/pages/Colors/Colors.jsx';
@@ -35,6 +36,7 @@ class App extends React.Component {
 							<CSSTransition timeout={300} classNames={'fade'}>
 								<Routes>
 									<Route path={'/'} element={<PageHome />} />
+									<Route path={'/profile'} element={<PageProfile />} />
 
 									<Route path={'/ui-kit'} element={<PageUiKit />} />
 									<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />

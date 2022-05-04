@@ -17,6 +17,7 @@ export const RouterSlice = createSlice({
 		},
 
 		login(state) {
+			console.log('LOGIN 2');
 			state.data = {
 				first_name: 'Roman',
 				last_name: 'Polunin',
@@ -31,6 +32,6 @@ export const RouterSlice = createSlice({
 	},
 });
 
-export const { set } = RouterSlice.actions;
+export const { set, login, logout } = RouterSlice.actions;
 
 export default RouterSlice.reducer;
