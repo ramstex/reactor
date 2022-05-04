@@ -58,11 +58,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		login: () => {
+		login() {
 			return dispatch(login());
 		},
 
-		logout: () => {
+		logout() {
 			return dispatch(logout());
 		},
 	};

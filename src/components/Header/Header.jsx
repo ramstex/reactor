@@ -6,6 +6,7 @@ import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
 import { Row, Col } from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
+import LocalProfile from './components/Profile/Profile.jsx';
 
 import './Header.scss';
 
@@ -38,6 +39,10 @@ class Header extends React.Component {
 
 						<Col>
 							<LocalNav />
+						</Col>
+
+						<Col offset={'auto'}>
+							<LocalProfile />
 						</Col>
 					</Row>
 				</MarkupContainer>

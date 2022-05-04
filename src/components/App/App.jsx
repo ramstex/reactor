@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from '../Layout/Layout.jsx';
 import PageHome from '../../pages/Home/Home.jsx';
@@ -30,27 +29,23 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className={this.classNameRoot()}>
-				<Router>
+				<BrowserRouter>
 					<Layout className={this.classNameLayout()}>
-						<TransitionGroup>
-							<CSSTransition timeout={300} classNames={'fade'}>
-								<Routes>
-									<Route path={'/'} element={<PageHome />} />
-									<Route path={'/profile'} element={<PageProfile />} />
+						<Routes>
+							<Route path={'/'} element={<PageHome />} />
+							<Route path={'/profile'} element={<PageProfile />} />
 
-									<Route path={'/ui-kit'} element={<PageUiKit />} />
-									<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />
-									<Route path={'/ui-kit/colors'} element={<PageUiKitColors />} />
-									<Route path={'/ui-kit/buttons'} element={<PageUiKitButtons />} />
-									<Route path={'/ui-kit/inputs'} element={<PageUiKitInputs />} />
-									<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
-									<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
-									<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
-								</Routes>
-							</CSSTransition>
-						</TransitionGroup>
+							<Route path={'/ui-kit'} element={<PageUiKit />} />
+							<Route path={'/ui-kit/typography'} element={<PageUiKitTypography />} />
+							<Route path={'/ui-kit/colors'} element={<PageUiKitColors />} />
+							<Route path={'/ui-kit/buttons'} element={<PageUiKitButtons />} />
+							<Route path={'/ui-kit/inputs'} element={<PageUiKitInputs />} />
+							<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
+							<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
+							<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
+						</Routes>
 					</Layout>
-				</Router>
+				</BrowserRouter>
 			</div>
 		);
 	}

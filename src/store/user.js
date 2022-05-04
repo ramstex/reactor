@@ -17,7 +17,6 @@ export const RouterSlice = createSlice({
 		},
 
 		login(state) {
-			console.log('LOGIN 2');
 			state.data = {
 				first_name: 'Roman',
 				last_name: 'Polunin',

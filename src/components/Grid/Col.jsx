@@ -8,7 +8,7 @@ class Col extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className, col, offset } = this.props;
-		return classnames('col', className, { [`_col_${col}`]: col }, { [`_offset_${offset}`]: offset });
+		return classnames(['col', className, { [`_col_${col}`]: !!col }, { [`_offset_${offset}`]: !!offset }]);
 	}
 
 	render() {
@@ -22,13 +22,9 @@ class Col extends React.Component {
 
 Col.propTypes = {
 	children: PropTypes.node,
-
 	className: PropTypes.string,
-
 	tag: PropTypes.string,
-
 	col: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number]),
-
 	offset: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number]),
 };
 
