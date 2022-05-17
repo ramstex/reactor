@@ -14,6 +14,7 @@ import PageUiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs.jsx';
 import PageUiKitTabs from '../../pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitForms from '../../pages/UiKit/pages/Forms/Forms.jsx';
 import PageUiKitCheckboxes from '../../pages/UiKit/pages/Checkboxes/Checkboxes.jsx';
+import PageUiKitSelect from '../../pages/UiKit/pages/Select/Select.jsx';
 
 class App extends React.Component {
 	//	Классы
@@ -43,6 +44,7 @@ class App extends React.Component {
 							<Route path={'/ui-kit/tabs'} element={<PageUiKitTabs />} />
 							<Route path={'/ui-kit/forms'} element={<PageUiKitForms />} />
 							<Route path={'/ui-kit/checkboxes'} element={<PageUiKitCheckboxes />} />
+							<Route path={'/ui-kit/select'} element={<PageUiKitSelect />} />
 						</Routes>
 					</Layout>
 				</BrowserRouter>

@@ -45,6 +45,10 @@ class LocalNav extends React.Component {
 					<Col>
 						<BaseLink href={'/ui-kit/checkboxes'}>Checkboxes</BaseLink>
 					</Col>
+
+					<Col>
+						<BaseLink href={'/ui-kit/select'}>Select</BaseLink>
+					</Col>
 				</Row>
 			</div>
 		);

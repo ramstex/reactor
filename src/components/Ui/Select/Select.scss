@@ -1,0 +1,12 @@
+@use 'sass:math';
+@use '../../../style/colors/data.scss' as colors;
+@use '../../../style/fonts/data.scss' as fonts;
+@use '../../../style/layout/data.scss' as layout;
+
+.ui-select {
+	&__caption {
+		margin-bottom: math.div(layout.$gap, 6);
+		font-size: 12px;
+		color: colors.getColor('text');
+	}
+}
