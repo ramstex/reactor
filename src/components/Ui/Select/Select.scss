@@ -4,8 +4,31 @@
 @use '../../../style/layout/data.scss' as layout;
 
 .ui-select {
+	&__body {
+		padding: math.div(layout.$gap, 3);
+		border: 1px solid colors.getColor('text');
+		font-family: fonts.$primary;
+		font-size: 14px;
+		color: colors.getColor('text');
+		background-color: transparent;
+	}
+
+	&__header {
+
+	}
+
+	&__placeholder {
+
+	}
+
 	&__caption {
 		margin-bottom: math.div(layout.$gap, 6);
+		font-size: 12px;
+		color: colors.getColor('text');
+	}
+
+	&__message {
+		margin-top: math.div(layout.$gap, 6);
 		font-size: 12px;
 		color: colors.getColor('text');
 	}

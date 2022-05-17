@@ -22,14 +22,24 @@ class UiSelect extends React.Component {
 		return classnames('ui-select__caption');
 	}
 
+	classNameMessage() {
+		return classnames('ui-select__message');
+	}
+
 	render() {
 		const { children, required, disabled, message, placeholder } = this.props;
 
 		return (
 			<div className={this.classNameRoot()}>
-				<label>
-					{!!children && <p className={this.classNameCaption()}> {children} </p>}
-				</label>
+				<label>{!!children && <p className={'ui-select__caption'}> {children} </p>}</label>
+
+				<div className={'ui-select__body'}>
+					<div className={'ui-select__header'}>
+						<p className={'ui-select__placeholder'}>HEADER</p>
+					</div>
+				</div>
+
+				{!!message && <p className={'ui-select__message'}> {message} </p>}
 			</div>
 		);
 	}
