@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import omit from 'lodash/omit';
 
 import './Input.scss';
-import { withValidation } from '../../../hoc/withValidation.jsx';
+import { withValidation } from '../../../hoc/validation/withValidation.jsx';
 
 class UiInput extends React.Component {
 	constructor( props ) {
@@ -52,6 +52,7 @@ class UiInput extends React.Component {
 		try {
 			onMounted( { target: this.input.current } );
 		} catch {
+			console.warn( 'UiInput Warning: this.prop.onMounted is not a function', this );
 		}
 	}
 

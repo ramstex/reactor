@@ -21,16 +21,12 @@ export function withValidation( WrappedComponent ) {
 				onChange
 					? onChange( event )
 					: this.setValue( event.target.value );
-
-				const totalValidity = Object.assign( event.target.validity, validity );
 			};
 
 			this.onMounted = ( event ) => {
 				onMounted
 					? onMounted( event )
-					: console.log( event.target );
-
-				// const totalValidity = Object.assign( event.target.validity, validity );
+					: console.log( this.checkValidity( event ) );
 			};
 
 			this.checkValidity = ( event ) => {

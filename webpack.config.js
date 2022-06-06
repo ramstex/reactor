@@ -57,14 +57,14 @@ export default (env, argv) => {
 
 						'css-loader',
 
-						{
-							loader: 'postcss-loader',
-							options: {
-								postcssOptions: {
-									plugins: [['postcss-preset-env']],
-								},
-							},
-						},
+						// {
+						// 	loader: 'postcss-loader',
+						// 	options: {
+						// 		postcssOptions: {
+						// 			plugins: [['postcss-preset-env']],
+						// 		},
+						// 	},
+						// },
 
 						'resolve-url-loader',
 

@@ -23,6 +23,8 @@ ij_scss_keep_indents_on_empty_lines = false
 ij_stylus_keep_indents_on_empty_lines = false
 
 ;   JavaScript
+ij_javascript_ternary_operation_signs_on_next_line = true
+ij_javascript_ternary_operation_wrap = split_into_lines
 ij_javascript_enforce_trailing_comma = whenmultiline
 ij_javascript_spaces_within_array_initializer_brackets = true
 ij_javascript_spaces_within_brackets = true
@@ -43,6 +45,8 @@ ij_javascript_keep_indents_on_empty_lines = false
 
 ;   TypeScript
 ij_typescript_keep_indents_on_empty_lines = false
+ij_typescript_ternary_operation_signs_on_next_line = true
+ij_typescript_ternary_operation_wrap = split_into_lines
 
 ;   CoffeeScript
 ij_coffeescript_keep_indents_on_empty_lines = false
