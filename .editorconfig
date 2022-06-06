@@ -49,6 +49,7 @@ ij_coffeescript_keep_indents_on_empty_lines = false
 
 ;   JSON
 ij_json_keep_indents_on_empty_lines = false
+ij_json_keep_blank_lines_in_code = 1
 
 ;   Other
 ij_xml_keep_indents_on_empty_lines = false

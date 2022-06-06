@@ -10,10 +10,10 @@ import LocalNav from '../../components/Nav/Nav.jsx';
 import './Inputs.scss';
 
 class PageUiKitInputs extends React.Component {
-	constructor(props) {
-		super(props);
+	constructor( props ) {
+		super( props );
 		this.state = {
-			val1: '',
+			val1: 'qwe24324dfds',
 			val2: '',
 			val3: '',
 			val4: 'disabled',
@@ -21,20 +21,20 @@ class PageUiKitInputs extends React.Component {
 			val6: 'error',
 		};
 
-		this.onChange = this.onChange.bind(this);
+		this.onChange = this.onChange.bind( this );
 	}
 
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page page-ui-kit-inputs', className);
+
+		return classnames( 'page page-ui-kit-inputs', className );
 	}
 
-	onChange(key) {
-		return (event) => {
-			this.setState({
-				[key]: event.target.value,
-			});
+	onChange( key ) {
+		return ( event ) => {
+			console.log( event );
+			this.setState( { [ key ]: event.target.value } );
 		};
 	}
 
@@ -45,7 +45,8 @@ class PageUiKitInputs extends React.Component {
 
 				props: {
 					value: this.state.val1,
-					onChange: this.onChange('val1'),
+					type: 'email',
+					// onChange: this.onChange( 'val1' ),
 				},
 			},
 
@@ -55,7 +56,7 @@ class PageUiKitInputs extends React.Component {
 				props: {
 					value: this.state.val2,
 					textarea: true,
-					onChange: this.onChange('val2'),
+					onChange: this.onChange( 'val2' ),
 				},
 			},
 
@@ -66,7 +67,7 @@ class PageUiKitInputs extends React.Component {
 					value: this.state.val3,
 					placeholder: 'placeholder',
 					required: true,
-					onChange: this.onChange('val3'),
+					onChange: this.onChange( 'val3' ),
 				},
 			},
 
@@ -76,7 +77,7 @@ class PageUiKitInputs extends React.Component {
 				props: {
 					value: this.state.val4,
 					disabled: true,
-					onChange: this.onChange('val4'),
+					onChange: this.onChange( 'val4' ),
 				},
 			},
 
@@ -87,7 +88,7 @@ class PageUiKitInputs extends React.Component {
 					value: this.state.val5,
 					success: true,
 					message: 'Success message',
-					onChange: this.onChange('val5'),
+					onChange: this.onChange( 'val5' ),
 				},
 			},
 
@@ -98,26 +99,26 @@ class PageUiKitInputs extends React.Component {
 					value: this.state.val6,
 					error: true,
 					message: 'Error message',
-					onChange: this.onChange('val6'),
+					onChange: this.onChange( 'val6' ),
 				},
 			},
 		];
 
 		return (
-			<div className={this.classNameRoot()}>
-				<MarkupSection title={'Ui Kit - Inputs'}>
+			<div className={ this.classNameRoot() }>
+				<MarkupSection title={ 'Ui Kit - Inputs' }>
 					<LocalNav />
 
 					<div>
-						{inputs.map((item, index) => {
+						{ inputs.map( ( item, index ) => {
 							return (
-								<Row className={'_mb_4'} key={index}>
-									<Col col={4}>
-										<UiInput {...item.props}> {item.label} </UiInput>
+								<Row className={ '_mb_4' } key={ index }>
+									<Col col={ 4 }>
+										<UiInput { ...item.props }> { item.label } </UiInput>
 									</Col>
 								</Row>
 							);
-						})}
+						} ) }
 					</div>
 				</MarkupSection>
 			</div>
@@ -125,8 +126,6 @@ class PageUiKitInputs extends React.Component {
 	}
 }
 
-PageUiKitInputs.propTypes = {
-	className: PropTypes.string,
-};
+PageUiKitInputs.propTypes = { className: PropTypes.string };
 
 export default PageUiKitInputs;
