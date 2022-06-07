@@ -25,3 +25,10 @@ export function getChildrenByKey( children = [], key = null ) {
 export function isFunction( func ) {
 	return typeof func === 'function';
 }
+
+export function isComponentUpdated( prev, cur, curToCompare ) {
+	return (
+		cur !== prev &&
+		cur !== curToCompare
+	);
+}

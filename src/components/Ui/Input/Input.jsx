@@ -4,13 +4,30 @@ import classnames from 'classnames';
 import omit from 'lodash/omit';
 
 import './Input.scss';
-import { withValidation } from '../../../hoc/validation/withValidation.jsx';
+import { isComponentUpdated } from '../../../plugins/helpers.js';
 
 class UiInput extends React.Component {
 	constructor( props ) {
 		super( props );
 
+		const {
+			value,
+			onChange,
+		} = this.props;
+
 		this.input = React.createRef();
+
+		// В поле ввода подаётся значение из state, а не из props.
+		this.state = { value };
+
+		// Обработчик ввода текста в поле.
+		this.onChange = ( event ) => {
+			if ( !!onChange ) {
+				onChange( event );
+			}
+
+			this.setState( { value: event.target.value } );
+		};
 	}
 
 	//	Классы
@@ -35,49 +52,43 @@ class UiInput extends React.Component {
 		);
 	}
 
-	classNameCaption() {
-		return classnames( 'ui-input__caption' );
-	}
-
-	classNameInput() {
-		return classnames( 'ui-input__input' );
-	}
-
-	classNameMessage() {
-		return classnames( 'ui-input__message' );
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+		// Если изменился пропс value - пишем его в стейт
+		if ( isComponentUpdated( prevProps.value, this.props.value, this.state.value ) ) {
+			this.setState( { value: this.props.value } );
+		}
 	}
 
 	componentDidMount() {
 		const { onMounted } = this.props;
-		try {
+
+		// При монтировании компонента выполняем пропс onMounted, если он задан
+		if ( !!onMounted ) {
 			onMounted( { target: this.input.current } );
-		} catch {
-			console.warn( 'UiInput Warning: this.prop.onMounted is not a function', this );
 		}
 	}
 
 	render() {
 		const {
 			children,
-			required,
-			disabled,
 			textarea,
 			type,
 			message,
-			placeholder,
-			onChange,
 		} = this.props;
 
-		const attrs = omit( this.props, [
+		const { value } = this.state;
+
+		// Формируем список пропсов, которые нужно указать в поле ввода как есть.
+		// Для этого из общего списка пропсов исключаются те, которые требуют доп. обработки перед указанием.
+		// Пропс type указывается как он есть, но всё равно исключается, так как не является валидным для textarea.
+		const attrsAsIs = omit( this.props, [
 			'className',
 			'children',
-			'required',
+			'value',
 			'textarea',
-			'disabled',
 			'error',
 			'success',
 			'message',
-			'placeholder',
 			'type',
 			'onChange',
 			'onMounted',
@@ -86,34 +97,30 @@ class UiInput extends React.Component {
 		return (
 			<div className={ this.classNameRoot() }>
 				<label>
-					{ !!children && <p className={ this.classNameCaption() }> { children } </p> }
+					{ !!children && <p className={ 'ui-input__caption' }> { children } </p> }
 
 					{ textarea
 						? (
 							<textarea
-								{ ...attrs }
-								className={ this.classNameInput() }
+								{ ...attrsAsIs }
+								className={ 'ui-input__input' }
 								ref={ this.input }
-								required={ required }
-								disabled={ disabled }
-								placeholder={ placeholder }
-								onChange={ onChange }
+								value={ value }
+								onChange={ this.onChange }
 							/>
 						)
 						: (
 							<input
-								{ ...attrs }
-								className={ this.classNameInput() }
+								{ ...attrsAsIs }
+								className={ 'ui-input__input' }
 								ref={ this.input }
-								required={ required }
-								disabled={ disabled }
+								value={ value }
 								type={ type }
-								placeholder={ placeholder }
-								onChange={ onChange }
+								onChange={ this.onChange }
 							/>
 						) }
 
-					{ !!message && <p className={ this.classNameMessage() }> { message } </p> }
+					{ !!message && <p className={ 'ui-input__message' }> { message } </p> }
 				</label>
 			</div>
 		);
@@ -131,6 +138,7 @@ UiInput.propTypes = {
 
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,
+	readOnly: PropTypes.bool,
 	error: PropTypes.bool,
 	success: PropTypes.bool,
 	textarea: PropTypes.bool,
