@@ -26,6 +26,12 @@ export function createDummyState() {
 					onChange( event ) {
 						onChange( context, event, 0 );
 					},
+					onValid( event ) {
+						console.log( 'VALID', event );
+					},
+					onInvalid( event ) {
+						console.log( 'INVALID', event );
+					},
 				},
 			},
 

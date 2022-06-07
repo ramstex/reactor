@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
+import { isComponentUpdated } from '../../../plugins/helpers.js';
+import { withValidation } from '../../../hoc/validation/withValidation.jsx';
 
 import './Input.scss';
-import { isComponentUpdated } from '../../../plugins/helpers.js';
 
 class UiInput extends React.Component {
 	constructor( props ) {
@@ -153,4 +154,4 @@ UiInput.propTypes = {
 
 UiInput.defaultProps = { type: 'text' };
 
-export default UiInput;
+export default withValidation( UiInput );
