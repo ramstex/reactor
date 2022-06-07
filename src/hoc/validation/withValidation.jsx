@@ -18,25 +18,25 @@ export function withValidation( WrappedComponent ) {
 			this.state = { valid: true };
 
 			this.onChange = ( event ) => {
-				onChange
-					? onChange( event )
-					: this.setValue( event.target.value );
+				if ( !!onChange ) {
+					onChange( event );
+				}
+
+				this.setState( { valid: !!this.checkValidity( event ).valid } );
 			};
 
 			this.onMounted = ( event ) => {
-				onMounted
-					? onMounted( event )
-					: console.log( this.checkValidity( event ) );
+				if ( !!onMounted ) {
+					onMounted( event );
+				}
+
+				this.setState( { valid: !!this.checkValidity( event ).valid } );
 			};
 
 			this.checkValidity = ( event ) => {
 				return !!event
 					? Object.assign( event.target.validity, validity )
 					: { ...validity };
-			};
-
-			this.setValue = ( value ) => {
-				this.setState( { value } );
 			};
 		}
 
@@ -50,6 +50,8 @@ export function withValidation( WrappedComponent ) {
 		onChange: PropTypes.func,
 		onMounted: PropTypes.func,
 	};
+
+	Validation.defaultProps = { validity: {} };
 
 	return Validation;
 }

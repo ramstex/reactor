@@ -46,7 +46,7 @@ class PageUiKitInputs extends React.Component {
 				props: {
 					value: this.state.val1,
 					type: 'email',
-					// onChange: this.onChange( 'val1' ),
+					onChange: this.onChange( 'val1' ),
 				},
 			},
 

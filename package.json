@@ -4,8 +4,7 @@
 	"license": "UNLICENSED",
 	"type": "module",
 	"scripts": {
-		"dev": "cross-env webpack --mode=development",
-		"start": "cross-env webpack serve --open --mode=development",
+		"dev": "cross-env webpack serve --open --mode=development",
 		"build": "cross-env webpack --mode=production",
 		"lint": "eslint ./config ./src ./src/**/*.jsx",
 		"lint:fix": "eslint ./config ./src ./src/**/*.jsx --fix",

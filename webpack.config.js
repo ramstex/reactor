@@ -1,8 +1,14 @@
+// ToDo: проверить актуальность пакетов:
+// react-image
+// resolve-url-loader
+// url-loader
+// file-loader
+
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export default (env, argv) => {
+export default ( env, argv ) => {
 	return {
 		mode: argv.mode,
 
@@ -10,19 +16,17 @@ export default (env, argv) => {
 
 		output: {
 			filename: 'main.js',
-			path: path.join(process.cwd(), 'dist'),
+			path: path.join( process.cwd(), 'dist' ),
 			publicPath: '/',
 		},
 
 		devServer: {
-			port: 3000,
+			port: 4000,
 			historyApiFallback: true,
 		},
 
 		plugins: [
-			new HtmlWebpackPlugin({
-				template: './src/index.html',
-			}),
+			new HtmlWebpackPlugin( { template: './src/index.html' } ),
 
 			new MiniCssExtractPlugin(),
 		],
@@ -39,9 +43,7 @@ export default (env, argv) => {
 								presets: [
 									[
 										'@babel/preset-env',
-										{
-											targets: 'defaults',
-										},
+										{ targets: 'defaults' },
 									],
 									'@babel/preset-react',
 								],
@@ -70,9 +72,7 @@ export default (env, argv) => {
 
 						{
 							loader: 'sass-loader',
-							options: {
-								sourceMap: true,
-							},
+							options: { sourceMap: true },
 						},
 					],
 				},
@@ -80,30 +80,22 @@ export default (env, argv) => {
 				{
 					test: /\.svg$/,
 					use: [
-						{
-							loader: 'babel-loader',
-						},
-						{
-							loader: 'react-svg-loader',
-						},
+						{ loader: 'babel-loader' },
+						{ loader: 'react-svg-loader' },
 					],
 				},
 
 				{
 					test: /\.(png|jpg|jpeg)$/,
 					use: [
-						{
-							loader: 'url-loader',
-						},
+						{ loader: 'url-loader' },
 					],
 				},
 
 				{
 					test: /\.pdf$/,
 					use: [
-						{
-							loader: 'file-loader',
-						},
+						{ loader: 'file-loader' },
 					],
 				},
 			],

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { instanceOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 
@@ -89,8 +89,7 @@ class UiInput extends React.Component {
 					{ !!children && <p className={ this.classNameCaption() }> { children } </p> }
 
 					{ textarea
-						?
-						(
+						? (
 							<textarea
 								{ ...attrs }
 								className={ this.classNameInput() }
@@ -101,8 +100,7 @@ class UiInput extends React.Component {
 								onChange={ onChange }
 							/>
 						)
-						:
-						(
+						: (
 							<input
 								{ ...attrs }
 								className={ this.classNameInput() }
@@ -125,6 +123,12 @@ class UiInput extends React.Component {
 UiInput.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
+
+	value: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.number,
+	] ),
+
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,
 	error: PropTypes.bool,
@@ -141,4 +145,4 @@ UiInput.propTypes = {
 
 UiInput.defaultProps = { type: 'text' };
 
-export default withValidation( UiInput );
+export default UiInput;
