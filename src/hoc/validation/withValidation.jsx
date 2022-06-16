@@ -28,7 +28,7 @@ export function withValidation( WrappedComponent ) {
 			};
 
 			this.checkValidity = ( event, handler ) => {
-				// Если задан пропс onMounted - выполняем его
+				// Выполняем метод валидируемого компонента, если он передан.
 				if ( !!handler ) {
 					handler( event );
 				}
@@ -58,26 +58,6 @@ export function withValidation( WrappedComponent ) {
 					? Object.assign( event.target.validity, validity )
 					: { ...validity };
 			};
-		}
-
-		componentDidUpdate( prevProps, prevState, snapshot ) {
-			const {
-				onValid,
-				onInvalid,
-			} = this.props;
-
-			// Если изменился стейт valid
-			if ( isComponentUpdated( prevState.valid, this.state.valid ) ) {
-				if ( this.state.valid ) {
-					if ( !!onValid ) {
-						onValid();
-					}
-				} else {
-					if ( !!onInvalid ) {
-						onInvalid();
-					}
-				}
-			}
 		}
 
 		render() {
