@@ -1,66 +1,53 @@
 @use 'sass:math';
-@use './data.scss' as data;
+@use 'module' as data;
 
 $sizes: (
 	margins: (
 		m: (
 			margin,
 		),
-
 		mv: (
 			margin-top,
 			margin-bottom,
 		),
-
 		mh: (
 			margin-left,
 			margin-right,
 		),
-
 		mt: (
 			margin-top,
 		),
-
 		mb: (
 			margin-bottom,
 		),
-
 		ml: (
 			margin-left,
 		),
-
 		mr: (
 			margin-right,
 		),
 	),
-
 	paddings: (
 		p: (
 			padding,
 		),
-
 		pv: (
 			padding-top,
 			padding-bottom,
 		),
-
 		ph: (
 			padding-left,
 			padding-right,
 		),
-
 		pt: (
 			padding-top,
 		),
-
 		pb: (
 			padding-bottom,
 		),
-
 		pl: (
 			padding-left,
 		),
-
 		pr: (
 			padding-right,
 		),

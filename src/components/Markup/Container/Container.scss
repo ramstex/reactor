@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../../../style/layout/data' as layout;
+@use '../../../style/layout/module' as layout;
 
 .markup-container {
 	max-width: 1000px;

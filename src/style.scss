@@ -1,8 +1,8 @@
-@use './style/colors/data' as colors;
-@use 'style/fonts/data' as fonts;
-@use './style/layout/data' as layout;
-@use 'style/media/data' as media;
-@use 'style/typography/data' as typography;
+@use 'style/colors/module' as colors;
+@use 'style/fonts/module' as fonts;
+@use 'style/layout/module' as layout;
+@use 'style/media/module' as media;
+@use 'style/typography/module' as typography;
 
 @import './style/colors/index';
 @import './style/fonts/index';

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isComponentUpdated } from '../../plugins/helpers.js';
 import omit from 'lodash/omit';
 
 export function withValidation( WrappedComponent ) {
@@ -10,7 +9,6 @@ export function withValidation( WrappedComponent ) {
 
 			const {
 				validity,
-				validityMessages,
 				onChange,
 				onMounted,
 				onValid,

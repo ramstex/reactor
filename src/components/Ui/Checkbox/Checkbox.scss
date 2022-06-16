@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../../../style/layout/data.scss' as layout;
-@use '../../../style/colors/data.scss' as colors;
+@use '../../../style/layout/module' as layout;
+@use '../../../style/colors/module' as colors;
 
 .ui-checkbox {
 	display: flex;
@@ -42,7 +42,7 @@
 		font-size: 12px;
 	}
 
-	&._required &__caption:after {
+	&._required &__caption::after {
 		content: '*';
 		color: colors.getColor('danger');
 	}

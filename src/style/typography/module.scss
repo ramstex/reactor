@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../layout/data' as layout;
-@use '../media/data' as media;
+@use '../layout/module' as layout;
+@use '../media/module' as media;
 
 @mixin h1 {
 	font-weight: 600;

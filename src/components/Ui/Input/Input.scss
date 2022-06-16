@@ -1,7 +1,7 @@
 @use 'sass:math';
-@use '../../../style/colors/data.scss' as colors;
-@use '../../../style/fonts/data.scss' as fonts;
-@use '../../../style/layout/data.scss' as layout;
+@use '../../../style/colors/module' as colors;
+@use '../../../style/fonts/module' as fonts;
+@use '../../../style/layout/module' as layout;
 
 .ui-input {
 	&__input {

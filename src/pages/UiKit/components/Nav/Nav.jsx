@@ -11,43 +11,48 @@ class LocalNav extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('ui-kit-nav', className);
+
+		return classnames( 'ui-kit-nav', className );
 	}
 
 	render() {
 		return (
-			<div className={this.classNameRoot()}>
+			<div className={ this.classNameRoot() }>
 				<Row>
 					<Col>
-						<BaseLink href={'/ui-kit/typography'}>Typography</BaseLink>
+						<BaseLink href={ '/ui-kit/typography' }>Typography</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/colors'}>Colors</BaseLink>
+						<BaseLink href={ '/ui-kit/grid' }>Grid</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/buttons'}>Buttons</BaseLink>
+						<BaseLink href={ '/ui-kit/colors' }>Colors</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/inputs'}>Inputs</BaseLink>
+						<BaseLink href={ '/ui-kit/buttons' }>Buttons</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/tabs'}>Tabs</BaseLink>
+						<BaseLink href={ '/ui-kit/inputs' }>Inputs</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/forms'}>Forms</BaseLink>
+						<BaseLink href={ '/ui-kit/tabs' }>Tabs</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/checkboxes'}>Checkboxes</BaseLink>
+						<BaseLink href={ '/ui-kit/forms' }>Forms</BaseLink>
 					</Col>
 
 					<Col>
-						<BaseLink href={'/ui-kit/select'}>Select</BaseLink>
+						<BaseLink href={ '/ui-kit/checkboxes' }>Checkboxes</BaseLink>
+					</Col>
+
+					<Col>
+						<BaseLink href={ '/ui-kit/select' }>Select</BaseLink>
 					</Col>
 				</Row>
 			</div>
@@ -55,8 +60,6 @@ class LocalNav extends React.Component {
 	}
 }
 
-LocalNav.propTypes = {
-	className: PropTypes.node,
-};
+LocalNav.propTypes = { className: PropTypes.node };
 
 export default LocalNav;

@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use './data.scss' as data;
-@use '../layout/data.scss' as layout;
+@use 'module' as data;
+@use '../layout/module' as layout;
 
 h1,
 .h1 {
@@ -52,7 +52,7 @@ h6,
 	@include data.h6;
 
 	&:not(:last-child) {
-		margin-bottom: layout.$gap;
+		margin-bottom: math.div(layout.$gap, 2);
 	}
 }
 
