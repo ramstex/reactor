@@ -7,16 +7,33 @@ import './Col.scss';
 class Col extends React.Component {
 	//	Классы
 	classNameRoot() {
-		const { className, col, offset } = this.props;
-		return classnames(['col', className, { [`_col_${col}`]: !!col }, { [`_offset_${offset}`]: !!offset }]);
+		const {
+			className,
+			col,
+			offset,
+			alignV,
+			alignH,
+		} = this.props;
+
+		return classnames( [
+			'col',
+			className,
+			{ [ `_col_${ col }` ]: !!col },
+			{ [ `_offset_${ offset }` ]: !!offset },
+			`_align-v_${ alignV }`,
+			`_align-h_${ alignH }`,
+		] );
 	}
 
 	render() {
-		const { children, tag } = this.props;
+		const {
+			children,
+			tag,
+		} = this.props;
 
 		const Tag = tag || 'div';
 
-		return <Tag className={this.classNameRoot()}>{children}</Tag>;
+		return <Tag className={ this.classNameRoot() }>{ children }</Tag>;
 	}
 }
 
@@ -24,8 +41,26 @@ Col.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
 	tag: PropTypes.string,
-	col: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number]),
-	offset: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number]),
+	col: PropTypes.oneOfType( [ PropTypes.oneOf( [ 'auto' ] ), PropTypes.number ] ),
+	offset: PropTypes.oneOfType( [
+		PropTypes.oneOf( [ 'auto' ] ),
+		PropTypes.number,
+	] ),
+	alignV: PropTypes.oneOf( [
+		'start',
+		'end',
+		'center',
+	] ),
+	alignH: PropTypes.oneOf( [
+		'start',
+		'end',
+		'center',
+	] ),
+};
+
+Col.defaultProps = {
+	alignH: 'start',
+	alignV: 'start',
 };
 
 export default Col;

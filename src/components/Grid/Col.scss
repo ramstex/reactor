@@ -35,4 +35,32 @@ $cols: 12;
 			margin-left: auto;
 		}
 	}
+
+	&._align-v {
+		&_start {
+			align-self: flex-start;
+		}
+
+		&_center {
+			align-self: center;
+		}
+
+		&_end {
+			align-self: flex-end;
+		}
+	}
+
+	&._align-h {
+		&_start {
+			justify-self: flex-start;
+		}
+
+		&_center {
+			justify-self: center;
+		}
+
+		&_end {
+			justify-self: flex-end;
+		}
+	}
 }

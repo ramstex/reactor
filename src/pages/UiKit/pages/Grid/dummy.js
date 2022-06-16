@@ -121,12 +121,18 @@ const dummy = {
 
 			cols: [
 				{
-					props: { col: 3 },
-					content: <React.Fragment>1. Ширина: 3<br />Строка</React.Fragment>,
+					props: {
+						col: 3,
+						alignV: 'center',
+					},
+					content: <React.Fragment>1. Ширина: 3<br />Строка<br />Строка<br />Строка</React.Fragment>,
 				},
 
 				{
-					props: { col: 2 },
+					props: {
+						col: 2,
+						alignV: 'center',
+					},
 					content: '2. Ширина: 2',
 				},
 
