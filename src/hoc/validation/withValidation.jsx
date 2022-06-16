@@ -1,6 +1,3 @@
-// ToDo: если передано value, но не передано onChange, надо прокинуть value в инпут в качестве первичного значения.
-// Логика внутри инпута от этого не меняется. Отличие только в том, что новое значение не передаётся родителям.
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isComponentUpdated } from '../../plugins/helpers.js';
@@ -13,6 +10,7 @@ export function withValidation( WrappedComponent ) {
 
 			const {
 				validity,
+				validityMessages,
 				onChange,
 				onMounted,
 				onValid,
@@ -95,6 +93,7 @@ export function withValidation( WrappedComponent ) {
 
 	Validation.propTypes = {
 		validity: PropTypes.object,
+		validityMessages: PropTypes.object,
 		onValid: PropTypes.func,
 		onInvalid: PropTypes.func,
 	};
