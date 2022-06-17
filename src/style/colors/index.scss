@@ -1,1 +1,13 @@
-@use 'module' as data;
+@use 'module' as colors;
+
+._theme_primary {
+	border-color: colors.getColor('primary');
+	color: colors.getColor('back');
+	background: colors.getColor('primary');
+}
+
+._theme_secondary {
+	border-color: colors.getColor('secondary');
+	color: colors.getColor('back');
+	background: colors.getColor('secondary');
+}
