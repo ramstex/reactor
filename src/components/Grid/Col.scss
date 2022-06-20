@@ -48,6 +48,10 @@ $cols: 12;
 		&_end {
 			align-self: flex-end;
 		}
+
+		&_stretch {
+			align-self: stretch;
+		}
 	}
 
 	&._align-h {
@@ -61,6 +65,10 @@ $cols: 12;
 
 		&_end {
 			justify-self: flex-end;
+		}
+
+		&_stretch {
+			justify-self: stretch;
 		}
 	}
 }

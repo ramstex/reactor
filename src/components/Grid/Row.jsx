@@ -42,8 +42,18 @@ Row.propTypes = {
 	className: PropTypes.string,
 	tag: PropTypes.string,
 	col: PropTypes.oneOf( [ 'auto', PropTypes.number ] ),
-	alignH: PropTypes.oneOf( [ 'start', 'end', 'center', 'stretch' ] ),
-	alignV: PropTypes.oneOf( [ 'start', 'end', 'center', 'stretch' ] ),
+	alignH: PropTypes.oneOf( [
+		'start',
+		'end',
+		'center',
+		'stretch',
+	] ),
+	alignV: PropTypes.oneOf( [
+		'start',
+		'end',
+		'center',
+		'stretch',
+	] ),
 	reverse: PropTypes.bool,
 };
 

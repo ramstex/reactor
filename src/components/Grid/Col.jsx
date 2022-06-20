@@ -20,8 +20,8 @@ class Col extends React.Component {
 			className,
 			{ [ `_col_${ col }` ]: !!col },
 			{ [ `_offset_${ offset }` ]: !!offset },
-			`_align-v_${ alignV }`,
-			`_align-h_${ alignH }`,
+			{ [ `_align-v_${ alignV }` ]: alignV },
+			{ [ `_align-h_${ alignH }` ]: alignH },
 		] );
 	}
 
@@ -50,17 +50,14 @@ Col.propTypes = {
 		'start',
 		'end',
 		'center',
+		'stretch',
 	] ),
 	alignH: PropTypes.oneOf( [
 		'start',
 		'end',
 		'center',
+		'stretch',
 	] ),
-};
-
-Col.defaultProps = {
-	alignH: 'start',
-	alignV: 'start',
 };
 
 export default Col;
