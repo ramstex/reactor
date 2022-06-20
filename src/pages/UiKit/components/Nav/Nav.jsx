@@ -28,6 +28,10 @@ class LocalNav extends React.Component {
 					</Col>
 
 					<Col>
+						<BaseLink href={ '/ui-kit/media' }>Media</BaseLink>
+					</Col>
+
+					<Col>
 						<BaseLink href={ '/ui-kit/colors' }>Colors</BaseLink>
 					</Col>
 

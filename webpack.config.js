@@ -7,6 +7,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import jsonImporter from 'node-sass-json-importer';
 
 export default ( env, argv ) => {
 	return {
@@ -72,7 +73,10 @@ export default ( env, argv ) => {
 
 						{
 							loader: 'sass-loader',
-							options: { sourceMap: true },
+							options: {
+								sourceMap: true,
+								sassOptions: { importer: jsonImporter() },
+							},
 						},
 					],
 				},

@@ -1,33 +1,32 @@
 @use 'sass:map';
+@use './config/media.json' as config;
 
-$bp: (
-	mobile: (
-		sm: 360px,
-		md: 520px,
-		lg: 640px,
-	),
+//noinspection SassScssUnresolvedVariable
+$bp: config.$breakpoints;
 
-	tablet: (
-		sm: 768px,
-		md: 920px,
-		lg: 1024px,
-	),
-
-	desktop: (
-		sm: 1280px,
-		md: 1440px,
-		lg: 1680px,
-	),
-);
-
-@function bp( $device: desktop, $segment: md ) {
-	@return map.get( map.get($bp, $device), $segment );
+//noinspection SassScssUnresolvedVariable
+@function bp(
+	$device: map-get( config.$defaults, device ),
+	$segment: map-get( config.$defaults, segment ),
+	$unit: map-get( config.$defaults, unit )
+) {
+	@return map.get(map.get($bp, $device), $segment) + $unit;
 }
 
-@function min( $device: desktop, $segment: md ) {
-	@return #{ 'min-width:' + bp($device, $segment) };
+//noinspection SassScssUnresolvedVariable
+@function min(
+	$device: map-get( config.$defaults, device ),
+	$segment: map-get( config.$defaults, segment ),
+	$unit: map-get( config.$defaults, unit )
+) {
+	@return #{ 'min-width:' + bp($device, $segment, $unit) };
 }
 
-@function max( $device: desktop, $segment: md ) {
-	@return #{ 'max-width:' + bp($device, $segment) - 1 };
+//noinspection SassScssUnresolvedVariable
+@function max(
+	$device: map-get( config.$defaults, device ),
+	$segment: map-get( config.$defaults, segment ),
+	$unit: map-get( config.$defaults, unit )
+) {
+	@return #{ 'max-width:' + bp($device, $segment, $unit) - 1 };
 }

@@ -9,6 +9,7 @@ import PageProfile from '../../pages/Profile/Profile.jsx';
 
 import PageUiKit from '../../pages/UiKit/UiKit.jsx';
 import PageUiKitGrid from '../../pages/UiKit/pages/Grid/Grid.jsx';
+import PageUiKitMedia from '../../pages/UiKit/pages/Media/Media.jsx';
 import PageUiKitTypography from '../../pages/UiKit/pages/Typography/Typography.jsx';
 import PageUiKitColors from '../../pages/UiKit/pages/Colors/Colors.jsx';
 import PageUiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons.jsx';
@@ -42,6 +43,7 @@ class App extends React.Component {
 							<Route path={ '/ui-kit' } element={ <PageUiKit /> } />
 							<Route path={ '/ui-kit/typography' } element={ <PageUiKitTypography /> } />
 							<Route path={ '/ui-kit/grid' } element={ <PageUiKitGrid /> } />
+							<Route path={ '/ui-kit/media' } element={ <PageUiKitMedia /> } />
 							<Route path={ '/ui-kit/colors' } element={ <PageUiKitColors /> } />
 							<Route path={ '/ui-kit/buttons' } element={ <PageUiKitButtons /> } />
 							<Route path={ '/ui-kit/inputs' } element={ <PageUiKitInputs /> } />
