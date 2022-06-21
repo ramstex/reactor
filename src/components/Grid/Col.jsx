@@ -41,17 +41,23 @@ Col.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
 	tag: PropTypes.string,
-	col: PropTypes.oneOfType( [ PropTypes.oneOf( [ 'auto' ] ), PropTypes.number ] ),
+	col: PropTypes.oneOfType( [
+		PropTypes.oneOf( [ 'auto' ] ),
+		PropTypes.number,
+	] ),
+
 	offset: PropTypes.oneOfType( [
 		PropTypes.oneOf( [ 'auto' ] ),
 		PropTypes.number,
 	] ),
+
 	alignV: PropTypes.oneOf( [
 		'start',
 		'end',
 		'center',
 		'stretch',
 	] ),
+
 	alignH: PropTypes.oneOf( [
 		'start',
 		'end',
