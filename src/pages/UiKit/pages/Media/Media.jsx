@@ -6,8 +6,6 @@ import LocalNav from '../../components/Nav/Nav.jsx';
 import './Media.scss';
 
 class PageUiKitMedia extends React.Component {
-	// static contextType = MediaConsumer;
-
 	render() {
 		return (
 			<div className={ 'page-ui-kit-media' }>
