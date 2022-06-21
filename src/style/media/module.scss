@@ -2,31 +2,63 @@
 @use './config/media.json' as config;
 
 //noinspection SassScssUnresolvedVariable
-$bp: config.$breakpoints;
+$breakpoints: config.$breakpoints;
 
 //noinspection SassScssUnresolvedVariable
+$defaults: config.$defaults;
+
 @function bp(
-	$device: map-get( config.$defaults, device ),
-	$segment: map-get( config.$defaults, segment ),
-	$unit: map-get( config.$defaults, unit )
+	$device: map-get( $defaults, device ),
+	$segment: map-get( $defaults, segment ),
+	$unit: map-get( $defaults, unit )
 ) {
-	@return map.get(map.get($bp, $device), $segment) + $unit;
+	@return map.get(map.get($breakpoints, $device), $segment) + $unit;
 }
 
-//noinspection SassScssUnresolvedVariable
 @function min(
-	$device: map-get( config.$defaults, device ),
-	$segment: map-get( config.$defaults, segment ),
-	$unit: map-get( config.$defaults, unit )
+	$device: map-get( $defaults, device ),
+	$segment: map-get( $defaults, segment ),
+	$unit: map-get( $defaults, unit )
 ) {
-	@return #{ 'min-width:' + bp($device, $segment, $unit) };
+	@return #{ '(min-width:' + bp($device, $segment, $unit) + ')' };
 }
 
-//noinspection SassScssUnresolvedVariable
 @function max(
-	$device: map-get( config.$defaults, device ),
-	$segment: map-get( config.$defaults, segment ),
-	$unit: map-get( config.$defaults, unit )
+	$device: map-get( $defaults, device ),
+	$segment: map-get( $defaults, segment ),
+	$unit: map-get( $defaults, unit )
 ) {
-	@return #{ 'max-width:' + bp($device, $segment, $unit) - 1 };
+	@return #{ '(max-width:' + ( bp($device, $segment, $unit) - 1 ) + ')' };
+}
+
+@function mobile() {
+	@return max(tablet, sm);
+}
+
+@function notMobile() {
+	@return min(tablet, sm);
+}
+
+@function tablet() {
+	@return min(tablet, sm) + ' and ' + max(desktop, sm);
+}
+
+@function notTablet() {
+	@return max(tablet, sm) + ' and ' + min(desktop, sm);
+}
+
+@function desktop() {
+	@return min(desktop, sm);
+}
+
+@function notDesktop() {
+	@return max(desktop, sm);
+}
+
+@function landscape() {
+	@return #{ '(orientation: landscape)' };
+}
+
+@function portrait() {
+	@return #{ '(orientation: portrait)' };
 }
