@@ -12,6 +12,8 @@ const breakpoint = ( device = Config.defaults.device, segment = Config.defaults.
  * @return {boolean} - true, если медиа-запрос выполняется, и false, если не выполняется.
  */
 const isMedia = ( settings ) => {
+	console.log( settings );
+
 	return useMediaQuery( settings );
 };
 
