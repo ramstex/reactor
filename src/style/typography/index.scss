@@ -1,10 +1,10 @@
 @use 'sass:math';
-@use 'module' as data;
+@use 'module' as typography;
 @use '../layout/module' as layout;
 
 h1,
 .h1 {
-	@include data.h1;
+	@include typography.h1;
 
 	&:not(:last-child) {
 		margin-bottom: layout.$gap;
@@ -13,7 +13,7 @@ h1,
 
 h2,
 .h2 {
-	@include data.h2;
+	@include typography.h2;
 
 	&:not(:last-child) {
 		margin-bottom: layout.$gap;
@@ -22,7 +22,7 @@ h2,
 
 h3,
 .h3 {
-	@include data.h3;
+	@include typography.h3;
 
 	&:not(:last-child) {
 		margin-bottom: layout.$gap;
@@ -31,7 +31,7 @@ h3,
 
 h4,
 .h4 {
-	@include data.h4;
+	@include typography.h4;
 
 	&:not(:last-child) {
 		margin-bottom: layout.$gap;
@@ -40,7 +40,7 @@ h4,
 
 h5,
 .h5 {
-	@include data.h5;
+	@include typography.h5;
 
 	&:not(:last-child) {
 		margin-bottom: layout.$gap;
@@ -49,7 +49,7 @@ h5,
 
 h6,
 .h6 {
-	@include data.h6;
+	@include typography.h6;
 
 	&:not(:last-child) {
 		margin-bottom: math.div(layout.$gap, 2);
@@ -57,21 +57,25 @@ h6,
 }
 
 p {
-	@include data.p;
+	@include typography.p;
 
 	&._lg {
-		@include data.p_lg;
+		@include typography.p_lg;
 	}
 
 	&._sm {
-		@include data.p_sm;
+		@include typography.p_sm;
 	}
 
 	& + & {
 		margin-top: math.div(layout.$gap, 2);
 	}
+
+	a {
+		@include typography.a;
+	}
 }
 
 ._footnote {
-	@include data.footnote;
+	@include typography.footnote;
 }

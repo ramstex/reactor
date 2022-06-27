@@ -1,6 +1,7 @@
 @use 'sass:math';
 @use '../layout/module' as layout;
 @use '../media/module' as media;
+@use '../colors/module' as colors;
 
 @mixin h1 {
 	font-weight: 600;
@@ -66,4 +67,8 @@
 
 @mixin footnote {
 	font-size: 12px;
+}
+
+@mixin a {
+	color: colors.getColor( 'primary' );
 }
