@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:math';
 @use './config/media.json' as config;
 
 //noinspection SassScssUnresolvedVariable
@@ -20,7 +21,7 @@ $defaults: config.$defaults;
 	$segment: map.get( $defaults, segment ),
 	$unit: map.get( $defaults, unit )
 ) {
-	@return #{ '(min-width:' + bp($device, $segment, $unit) + ')' };
+	@return #{ 'min-width:' + bp($device, $segment, $unit) };
 }
 
 @function max(
@@ -28,7 +29,7 @@ $defaults: config.$defaults;
 	$segment: map.get( $defaults, segment ),
 	$unit: map.get( $defaults, unit )
 ) {
-	@return #{ '(max-width:' + ( bp($device, $segment, $unit) - 1 ) + ')' };
+	@return #{ 'max-width:' + ( bp($device, $segment, $unit) - 1 ) };
 }
 
 @function mobile() {
@@ -62,3 +63,4 @@ $defaults: config.$defaults;
 @function portrait() {
 	@return #{ '(orientation: portrait)' };
 }
+
