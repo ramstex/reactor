@@ -8,25 +8,25 @@ $breakpoints: config.$breakpoints;
 $defaults: config.$defaults;
 
 @function bp(
-	$device: map-get( $defaults, device ),
-	$segment: map-get( $defaults, segment ),
-	$unit: map-get( $defaults, unit )
+	$device: map.get($defaults, device ),
+	$segment: map.get( $defaults, segment ),
+	$unit: map.get( $defaults, unit )
 ) {
 	@return map.get(map.get($breakpoints, $device), $segment) + $unit;
 }
 
 @function min(
-	$device: map-get( $defaults, device ),
-	$segment: map-get( $defaults, segment ),
-	$unit: map-get( $defaults, unit )
+	$device: map.get( $defaults, device ),
+	$segment: map.get( $defaults, segment ),
+	$unit: map.get( $defaults, unit )
 ) {
 	@return #{ '(min-width:' + bp($device, $segment, $unit) + ')' };
 }
 
 @function max(
-	$device: map-get( $defaults, device ),
-	$segment: map-get( $defaults, segment ),
-	$unit: map-get( $defaults, unit )
+	$device: map.get( $defaults, device ),
+	$segment: map.get( $defaults, segment ),
+	$unit: map.get( $defaults, unit )
 ) {
 	@return #{ '(max-width:' + ( bp($device, $segment, $unit) - 1 ) + ')' };
 }
