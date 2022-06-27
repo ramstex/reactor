@@ -17,6 +17,10 @@
 		"sourceType": "module"
 	},
 
+	"plugins": [
+		"newline-destructuring"
+	],
+
 	"rules": {
 		"arrow-body-style": [
 			"error",
@@ -45,6 +49,13 @@
 			"always"
 		],
 		"newline-before-return": "error",
+		"newline-destructuring/newline": [
+			"error",
+			{
+				"items": 1,
+				"itemsWithRest ": 1
+			}
+		],
 		"no-console": "off",
 		"no-multiple-empty-lines": [
 			"error",
@@ -66,13 +77,17 @@
 					"multiline": true,
 					"minProperties": 2
 				},
-				"ImportDeclaration": "never",
+				"ImportDeclaration": {
+					"multiline": true,
+					"minProperties": 2
+				},
 				"ExportDeclaration": {
 					"multiline": true,
-					"minProperties": 3
+					"minProperties": 2
 				}
 			}
 		],
+		"object-property-newline": "error",
 		"quotes": [
 			"error",
 			"single"

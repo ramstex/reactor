@@ -1,32 +1,25 @@
 import React from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
-class BaseImage extends React.Component {
-	//	Классы
-	classNameRoot() {
-		const { className } = this.props;
-		return classnames('base-image', className);
+const BaseImage = ( props ) => {
+	const {
+		className,
+		src,
+		alt,
+		title,
+	} = props;
+
+	const classNameRoot = () => {
+		return classnames( 'base-logo', className );
 	}
 
-	render() {
-		const { image, alt, title } = this.props;
-
-		if (typeof image === 'string') {
-			return <img className={this.classNameRoot()} src={image} alt={alt} title={title} />;
-		}
-
-		const Image = image;
-
-		return <Image className={this.classNameRoot()} />;
+	if ( typeof src === 'string' ) {
+		return <img className={ classNameRoot() } src={ src } alt={ alt } title={ title } />;
 	}
-}
 
-BaseImage.propTypes = {
-	className: PropTypes.string,
-	image: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-	alt: PropTypes.string,
-	title: PropTypes.string,
+	const Image = src;
+
+	return <Image className={ classNameRoot() } />;
 };
 
 export default BaseImage;

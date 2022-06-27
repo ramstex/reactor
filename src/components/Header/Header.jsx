@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
-import { Row, Col } from '../Grid/Grid.jsx';
+import {
+	Row, Col
+} from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
 import LocalProfile from './components/Profile/Profile.jsx';
 
@@ -16,24 +18,25 @@ class Header extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('header', className);
+
+		return classnames( 'header', className );
 	}
 
 	classNameLogo() {
-		return classnames('header__logo');
+		return classnames( 'header__logo' );
 	}
 
 	render() {
 		return (
-			<header className={this.classNameRoot()}>
+			<header className={ this.classNameRoot() }>
 				<MarkupContainer wide>
-					<Row alignV={'center'}>
+					<Row alignV={ 'center' }>
 						<Col>
 							<BaseLogo
-								className={this.classNameLogo()}
-								image={Logo}
-								href={'https://google.com'}
-								target={'_blank'}
+								className={ this.classNameLogo() }
+								src={ Logo }
+								href={ 'https://google.com' }
+								target={ '_blank' }
 							/>
 						</Col>
 
@@ -41,7 +44,7 @@ class Header extends React.Component {
 							<LocalNav />
 						</Col>
 
-						<Col offset={'auto'}>
+						<Col offset={ 'auto' }>
 							<LocalProfile />
 						</Col>
 					</Row>
@@ -51,8 +54,6 @@ class Header extends React.Component {
 	}
 }
 
-Header.propTypes = {
-	className: PropTypes.string,
-};
+Header.propTypes = { className: PropTypes.string };
 
 export default Header;

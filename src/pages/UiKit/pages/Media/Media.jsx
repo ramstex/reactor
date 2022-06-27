@@ -2,7 +2,10 @@ import React from 'react';
 import Media from '../../../../plugins/media.jsx';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
-import { Row, Col } from '../../../../components/Grid/Grid.jsx';
+import {
+	Row,
+	Col
+} from '../../../../components/Grid/Grid.jsx';
 import LocalNav from '../../components/Nav/Nav.jsx';
 
 import './Media.scss';
