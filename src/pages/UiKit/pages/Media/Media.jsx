@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Media from '../../../../plugins/media.jsx';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
@@ -7,20 +7,34 @@ import LocalNav from '../../components/Nav/Nav.jsx';
 
 import './Media.scss';
 
-const PageUiKitMedia = ( props ) => {
-	if ( Media.isMobile() ) {
-		console.log( 'MOBILE' );
-	} else {
-		console.log( 'DESKTOP' );
-	}
-
+const PageUiKitMedia = () => {
 	return (
 		<div className={ 'page-ui-kit-media' }>
 			<MarkupSection title={ 'Ui Kit - Media' }>
 				<LocalNav />
 
 				<Row>
-					<Col col={ 4 }>DESKTOP</Col>
+					<Col col={ 3 }>
+						<p>Device:</p>
+					</Col>
+
+					<Col col={ 9 }> {
+						Media.getValueForDevice( {
+							mobile: 'MOBILE',
+							tablet: 'TABLET',
+							desktop: 'DESKTOP',
+						} )
+					}
+					</Col>
+
+					<Col col={ 3 }>
+						<p>Orientation:</p>
+					</Col>
+
+					<Col col={ 9 }> {
+						Media.getValueForOrientation( { portrait: 'PORTRAIT' }, 'LANDSCAPE' )
+					}
+					</Col>
 				</Row>
 			</MarkupSection>
 		</div>
