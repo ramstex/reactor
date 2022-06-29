@@ -1,17 +1,3 @@
-// import React, { useState } from 'react';
-
-// const onChange = ( input, event, props ) => {
-// 	// const { inputs } = state;
-// 	input = {
-// 		...input,
-// 		props: {
-// 			...input.props,
-// 			...props,
-// 			value: event.target.value,
-// 		},
-// 	};
-// };
-
 export function createDummyState() {
 	return {
 		inputs: [
@@ -21,14 +7,40 @@ export function createDummyState() {
 				props: {
 					value: '',
 					type: 'email',
-					onValid( event ) {
-						console.log( 'VALID', event );
-					},
-					onInvalid( event ) {
-						console.log( 'INVALID', event );
+					onChange( event, input, index, inputs, setInputs ) {
+						setInputs( [ ...inputs.map( ( mapInput, mapIndex ) => {
+							if ( index === mapIndex ) {
+								return {
+									...mapInput,
+									props: { ...mapInput.props },
+								};
+							}
+
+							return { ...mapInput };
+						} ) ] );
 					},
 				},
 			},
+
+			{
+				label: 'Инпут с авто-сбросом валидации при вводе',
+
+				props: {
+					value: '',
+					type: 'email',
+					// onChange( event, input ) {
+					// 	return {
+					// 		...input,
+					// 		props: {
+					// 			...input.props,
+					// 			error: false,
+					// 			success: false,
+					// 		},
+					// 	};
+					// },
+				},
+			},
+
 			//
 			// {
 			// 	label: 'Текстовое поле',

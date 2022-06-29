@@ -15,7 +15,7 @@ class PageUiKitGrid extends React.Component {
 				<MarkupSection title={ 'Ui Kit - Grid' }>
 					<LocalNav />
 
-					<React.Fragment>
+					<div>
 						{ dummy.rows.map( ( row, indexRow ) => {
 
 							return (
@@ -42,28 +42,7 @@ class PageUiKitGrid extends React.Component {
 								</React.Fragment>
 							);
 						} ) }
-					</React.Fragment>
-
-					{/* <h6>Сетка с реверсом:</h6> */ }
-					{/* <Row className={ 'page-ui-kit-grid__row' } reverse> */ }
-					{/* 	<Col className={ 'page-ui-kit-grid__col' } col={ 3 }> */ }
-					{/* 		<div className="page-ui-kit-grid__col-content"> */ }
-					{/* 			<p>Первая колонка - 3 части</p> */ }
-					{/* 		</div> */ }
-					{/* 	</Col> */ }
-
-					{/* 	<Col className={ 'page-ui-kit-grid__col' } col={ 5 }> */ }
-					{/* 		<div className="page-ui-kit-grid__col-content"> */ }
-					{/* 			<p>Вторая колонка - 5 частей</p> */ }
-					{/* 		</div> */ }
-					{/* 	</Col> */ }
-
-					{/* 	<Col className={ 'page-ui-kit-grid__col' } col={ 4 }> */ }
-					{/* 		<div className="page-ui-kit-grid__col-content"> */ }
-					{/* 			<p>Третья колонка - 7 частей</p> */ }
-					{/* 		</div> */ }
-					{/* 	</Col> */ }
-					{/* </Row> */ }
+					</div>
 				</MarkupSection>
 			</div>
 		);

@@ -9,13 +9,14 @@ class PageUiKit extends React.Component {
 	//	Классы
 	classNameRoot() {
 		const { className } = this.props;
-		return classnames('page page-ui-kit', className);
+
+		return classnames( 'page page-ui-kit', className );
 	}
 
 	render() {
 		return (
-			<div className={this.classNameRoot()}>
-				<MarkupSection title={'Ui Kit'}>
+			<div className={ this.classNameRoot() }>
+				<MarkupSection title={ 'Ui Kit' }>
 					<LocalNav />
 
 					<p>Ui Kit Page</p>
@@ -25,8 +26,6 @@ class PageUiKit extends React.Component {
 	}
 }
 
-PageUiKit.propTypes = {
-	className: PropTypes.string,
-};
+PageUiKit.propTypes = { className: PropTypes.string };
 
 export default PageUiKit;
