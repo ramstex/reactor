@@ -34,8 +34,8 @@
 		"comma-dangle": [
 			"error",
 			{
-				"arrays": "only-multiline",
-				"objects": "only-multiline",
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
 				"imports": "never",
 				"exports": "never",
 				"functions": "never"
@@ -131,12 +131,20 @@
 			"error",
 			"never"
 		],
+		"template-curly-spacing": [
+			"error",
+			"always"
+		],
 
 		// React
 		"react/jsx-curly-spacing": [
 			"error",
-			"always"
+			{
+				"when": "always",
+				"children": true
+			}
 		],
-		"react/self-closing-comp": "error"
+		"react/self-closing-comp": "error",
+		"react/jsx-max-props-per-line": 1
 	}
 }

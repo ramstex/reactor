@@ -1,69 +1,61 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
-import omit from 'lodash/omit';
+import omit from 'lodash/omit.js';
 
 import BaseLink from '../../Base/Link/Link.jsx';
 
 import './Button.scss';
 
-class UiButton extends React.Component {
-	//	Классы
-	classNameRoot() {
-		const { className, theme, size, active, disabled, wide, ghost } = this.props;
-		return classnames(
-			'ui-button',
-			className,
-			`_theme_${theme}`,
-			`_size_${size}`,
-			{ _active: active },
-			{ _disabled: disabled },
-			{ _wide: wide },
-			{ _ghost: ghost }
-		);
-	}
+const UiButton = ( props ) => {
+	const {
+		type = 'button',
+		template = 'default',
+		theme = 'primary',
+		size = 'md',
+		wide,
+		disabled,
+		hover,
+		href,
+	} = props;
 
-	render() {
-		const { children, href, type } = this.props;
+	const [ isHref, setIsHref ] = useState( !!href );
+	useEffect( () => {
+		setIsHref( !!href );
+	}, [ href ] );
 
-		const attrs = omit(this.props, ['className', 'children', 'href', 'disabled', 'active', 'ghost', 'wide']);
+	const classNameRoot = classnames(
+		'ui-button',
+		`_template_${ template }`,
+		`_theme_${ theme }`,
+		`_size_${ size }`,
+		{ '_wide': wide },
+		{ '_disabled': disabled },
+		{ '_hover': hover }
+	);
 
-		if (href) {
-			return (
-				<BaseLink className={this.classNameRoot()} href={href} {...attrs}>
-					{children}
-				</BaseLink>
-			);
-		}
+	const omittedProps =
+		isHref
+			? omit( props, [
+				'type',
+			] )
+			: omit( props, [
+				'href',
+				'target',
+			] );
 
-		return (
-			<button className={this.classNameRoot()} type={type} {...attrs}>
-				{children}
-			</button>
-		);
-	}
+	return (
+		<React.Fragment>
+			{
+				isHref
+					? <BaseLink className={ classNameRoot }
+						{ ...omittedProps }
+						href={ href } />
+					: <button className={ classNameRoot }
+						{ ...omittedProps }
+						type={ type } />
+			}
+		</React.Fragment>
+	);
 }
-
-UiButton.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.node,
-	href: PropTypes.string,
-	disabled: PropTypes.bool,
-	active: PropTypes.bool,
-	ghost: PropTypes.bool,
-	wide: PropTypes.bool,
-
-	theme: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger', 'info']),
-
-	type: PropTypes.oneOf(['button', 'submit', 'reset']),
-
-	size: PropTypes.oneOf(['lg', 'md', 'sm']),
-};
-
-UiButton.defaultProps = {
-	type: 'button',
-	size: 'md',
-	theme: 'primary',
-};
 
 export default UiButton;

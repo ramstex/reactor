@@ -46,17 +46,30 @@ $themes: (
 				color: colors.getColor($text);
 				background-color: colors.getColor($theme);
 
-				&._ghost {
+				&._template_ghost {
+					color: colors.getColor($theme);
+					background-color: transparent;
+				}
+
+				&._template_text {
+					border-color: transparent;
 					color: colors.getColor($theme);
 					background-color: transparent;
 				}
 
 				&:hover,
-				&._active {
+				&._hover {
 					border-color: colors.getColor($theme + '-light');
 					color: colors.getColor($text);
 					background-color: colors.getColor($theme + '-light');
 					outline: none;
+
+					&._template_text {
+						border-color: transparent;
+						color: colors.getColor($theme + '-light');
+						text-decoration: underline;
+						background-color: transparent;
+					}
 				}
 			}
 		}
@@ -68,7 +81,7 @@ $themes: (
 		}
 
 		&_md {
-			padding: math.div(layout.$gap, 2) layout.$gap;
+			padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5);
 		}
 
 		&_sm {
@@ -84,8 +97,14 @@ $themes: (
 		pointer-events: none;
 		cursor: default;
 
-		&._ghost {
+		&._template_ghost {
 			border-color: colors.getColor('muted');
+			color: colors.getColor('muted');
+			background-color: transparent;
+		}
+
+		&._template_text {
+			border-color: transparent;
 			color: colors.getColor('muted');
 			background-color: transparent;
 		}
