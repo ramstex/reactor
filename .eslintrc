@@ -145,6 +145,6 @@
 			}
 		],
 		"react/self-closing-comp": "error",
-		"react/jsx-max-props-per-line": 1
+		"react/jsx-max-props-per-line": [1, { "maximum": 1 }]
 	}
 }

@@ -33,12 +33,22 @@ const UiButton = ( props ) => {
 		{ '_hover': hover }
 	);
 
+	const generalOmittedProps = [
+		'className',
+		'template',
+		'theme',
+		'size',
+		'wide',
+		'hover',
+	];
 	const omittedProps =
 		isHref
 			? omit( props, [
+				...generalOmittedProps,
 				'type',
 			] )
 			: omit( props, [
+				...generalOmittedProps,
 				'href',
 				'target',
 			] );
