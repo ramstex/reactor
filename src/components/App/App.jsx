@@ -13,6 +13,7 @@ import PageUiKitMedia from '../../pages/UiKit/pages/Media/Media.jsx';
 import PageUiKitTypography from '../../pages/UiKit/pages/Typography/Typography.jsx';
 import PageUiKitColors from '../../pages/UiKit/pages/Colors/Colors.jsx';
 import PageUiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons.jsx';
+import PageUiKitDropdown from '../../pages/UiKit/pages/Dropdown/Dropdown.jsx';
 import PageUiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs.jsx';
 import PageUiKitTabs from '../../pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitForms from '../../pages/UiKit/pages/Forms/Forms.jsx';
@@ -37,20 +38,35 @@ class App extends React.Component {
 				<BrowserRouter>
 					<Layout className={ this.classNameLayout() }>
 						<Routes>
-							<Route path={ '/' } element={ <PageHome /> } />
-							<Route path={ '/profile' } element={ <PageProfile /> } />
+							<Route path={ '/' }
+								element={ <PageHome /> } />
+							<Route path={ '/profile' }
+								element={ <PageProfile /> } />
 
-							<Route path={ '/ui-kit' } element={ <PageUiKit /> } />
-							<Route path={ '/ui-kit/typography' } element={ <PageUiKitTypography /> } />
-							<Route path={ '/ui-kit/grid' } element={ <PageUiKitGrid /> } />
-							<Route path={ '/ui-kit/media' } element={ <PageUiKitMedia /> } />
-							<Route path={ '/ui-kit/colors' } element={ <PageUiKitColors /> } />
-							<Route path={ '/ui-kit/buttons' } element={ <PageUiKitButtons /> } />
-							<Route path={ '/ui-kit/inputs' } element={ <PageUiKitInputs /> } />
-							<Route path={ '/ui-kit/tabs' } element={ <PageUiKitTabs /> } />
-							<Route path={ '/ui-kit/forms' } element={ <PageUiKitForms /> } />
-							<Route path={ '/ui-kit/checkboxes' } element={ <PageUiKitCheckboxes /> } />
-							<Route path={ '/ui-kit/select' } element={ <PageUiKitSelect /> } />
+							<Route path={ '/ui-kit' }
+								element={ <PageUiKit /> } />
+							<Route path={ '/ui-kit/typography' }
+								element={ <PageUiKitTypography /> } />
+							<Route path={ '/ui-kit/grid' }
+								element={ <PageUiKitGrid /> } />
+							<Route path={ '/ui-kit/media' }
+								element={ <PageUiKitMedia /> } />
+							<Route path={ '/ui-kit/colors' }
+								element={ <PageUiKitColors /> } />
+							<Route path={ '/ui-kit/buttons' }
+								element={ <PageUiKitButtons /> } />
+							<Route path={ '/ui-kit/dropdown' }
+								element={ <PageUiKitDropdown /> } />
+							<Route path={ '/ui-kit/inputs' }
+								element={ <PageUiKitInputs /> } />
+							<Route path={ '/ui-kit/tabs' }
+								element={ <PageUiKitTabs /> } />
+							<Route path={ '/ui-kit/forms' }
+								element={ <PageUiKitForms /> } />
+							<Route path={ '/ui-kit/checkboxes' }
+								element={ <PageUiKitCheckboxes /> } />
+							<Route path={ '/ui-kit/select' }
+								element={ <PageUiKitSelect /> } />
 						</Routes>
 					</Layout>
 				</BrowserRouter>

@@ -40,6 +40,10 @@ class LocalNav extends React.Component {
 					</Col>
 
 					<Col>
+						<BaseLink href={ '/ui-kit/dropdown' }>Dropdown</BaseLink>
+					</Col>
+
+					<Col>
 						<BaseLink href={ '/ui-kit/inputs' }>Inputs</BaseLink>
 					</Col>
 
