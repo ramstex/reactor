@@ -21,11 +21,6 @@
 		resize: none;
 		transition: border-color layout.$dur ease;
 
-		&:focus {
-			border-color: colors.getColor('primary');
-			outline: none;
-		}
-
 		&::placeholder {
 			color: colors.getColor('muted-dark');
 		}

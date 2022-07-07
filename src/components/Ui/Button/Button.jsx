@@ -47,6 +47,8 @@ const UiButton = ( props ) => {
 		'theme',
 		'size',
 		'wide',
+		'square',
+		'captionPosition',
 		'hover',
 		'icon',
 	];

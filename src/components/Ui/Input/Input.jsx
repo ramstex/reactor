@@ -17,12 +17,19 @@ const UiInput = ( props ) => {
 		message,
 		onChange,
 		onMount,
+		onFocus,
+		onBlur,
 	} = props;
 
 	const [
 		valueLocal,
 		setValueLocal,
 	] = useState( value );
+
+	const [
+		isFocused,
+		setFocused,
+	] = useState( false );
 
 	useEffect( () => {
 		!!onMount && onMount();
@@ -37,6 +44,14 @@ const UiInput = ( props ) => {
 	const onChangeLocal = ( event ) => {
 		!!onChange && onChange( event );
 		setValueLocal( event.target.value );
+	};
+
+	const onFocusLocal = ( event ) => {
+		!!onFocus && onFocus( event );
+	};
+
+	const onBlurLocal = ( event ) => {
+		!!onBlur && onBlur( event );
 	};
 
 	const classNameRoot = () => {
@@ -66,30 +81,31 @@ const UiInput = ( props ) => {
 		'onMounted',
 	] );
 
+	const inputAttrs = {
+		...attrsAsIs,
+		value: valueLocal,
+		onChange: onChangeLocal,
+		onFocus: onFocusLocal,
+		onBlur: onBlurLocal,
+		type: textarea
+			? undefined
+			: type,
+	};
+
+	const InputComponent = textarea
+		? 'textarea'
+		: 'input';
+
 	return (
 		<div className={ classNameRoot() }>
 			<label className={ 'ui-input__label' }>
 				{ !!children && <p className={ 'ui-input__caption' }> { children } </p> }
 
 				<div className="ui-input__body">
-					{ textarea
-						? (
-							<textarea
-								{ ...attrsAsIs }
-								className={ 'ui-input__input' }
-								value={ valueLocal }
-								onChange={ onChangeLocal }
-							/>
-						)
-						: (
-							<input
-								{ ...attrsAsIs }
-								className={ 'ui-input__input' }
-								value={ valueLocal }
-								type={ type }
-								onChange={ onChangeLocal }
-							/>
-						) }
+					<InputComponent
+						{ ...inputAttrs }
+						className={ 'ui-input__input' }
+					/>
 				</div>
 
 				{ !!message && <p className={ 'ui-input__message' }> { message } </p> }
