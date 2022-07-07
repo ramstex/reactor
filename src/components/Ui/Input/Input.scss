@@ -4,16 +4,22 @@
 @use '../../../style/layout/module' as layout;
 
 .ui-input {
+	&__body {
+		display: flex;
+		border: 1px solid colors.getColor('text');
+	}
+
 	&__input {
 		display: block;
 		width: 100%;
 		padding: math.div(layout.$gap, 3);
-		border: 1px solid colors.getColor('text');
+		border: none;
 		font-family: fonts.$primary;
 		font-size: 14px;
 		color: colors.getColor('text');
 		background-color: transparent;
-		transition: border-color 0.3s ease;
+		resize: none;
+		transition: border-color layout.$dur ease;
 
 		&:focus {
 			border-color: colors.getColor('primary');
@@ -41,26 +47,30 @@
 		height: 150px;
 	}
 
+	&._textarea._resize &__input {
+		resize: vertical;
+	}
+
 	&._required &__caption::after {
 		content: '*';
 		color: colors.getColor('danger');
 	}
 
-	&._success &__input {
+	&._state_success &__input {
 		border-color: colors.getColor('success');
 		color: colors.getColor('success');
 	}
 
-	&._success &__message {
+	&._state_success &__message {
 		color: colors.getColor('success');
 	}
 
-	&._error &__input {
+	&._state_error &__input {
 		border-color: colors.getColor('danger');
 		color: colors.getColor('danger');
 	}
 
-	&._error &__message {
+	&._state_error &__message {
 		color: colors.getColor('danger');
 	}
 

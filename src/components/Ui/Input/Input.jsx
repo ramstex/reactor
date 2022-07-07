@@ -1,157 +1,101 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
-import { isComponentUpdated } from '../../../plugins/helpers.js';
-import { withValidation } from '../../../hoc/validation/withValidation.jsx';
 
 import './Input.scss';
 
-class UiInput extends React.Component {
-	constructor( props ) {
-		super( props );
+const UiInput = ( props ) => {
+	const {
+		type = 'text',
+		value = '',
+		state = 'default',
+		children,
+		textarea,
+		resize,
+		disabled,
+		required,
+		message,
+		onChange,
+		onMount,
+	} = props;
 
-		const {
-			value,
-			onChange,
-		} = this.props;
+	const [
+		valueLocal,
+		setValueLocal,
+	] = useState( value );
 
-		this.input = React.createRef();
+	useEffect( () => {
+		!!onMount && onMount();
+	}, [] );
 
-		// В поле ввода подаётся значение из state, а не из props.
-		this.state = { value };
+	useEffect( () => {
+		if ( value !== valueLocal ) {
+			setValueLocal( value );
+		}
+	}, [ value ] );
 
-		// Обработчик ввода текста в поле.
-		this.onChange = ( event ) => {
-			if ( !!onChange ) {
-				onChange( event );
-			}
+	const onChangeLocal = ( event ) => {
+		!!onChange && onChange( event );
+		setValueLocal( event.target.value );
+	};
 
-			this.setState( { value: event.target.value } );
-		};
-	}
-
-	//	Классы
-	classNameRoot() {
-		const {
-			className,
-			error,
-			success,
-			required,
-			disabled,
-			textarea,
-		} = this.props;
-
+	const classNameRoot = () => {
 		return classnames(
 			'ui-input',
-			className,
-			{ _required: required },
-			{ _disabled: disabled },
-			{ _textarea: textarea },
-			{ _error: error },
-			{ _success: success }
+			{ '_textarea': textarea },
+			{ '_disabled': disabled },
+			{ '_required': required },
+			{ '_resize': textarea && resize },
+			`_state_${ state }`
 		);
-	}
+	};
 
-	componentDidUpdate( prevProps, prevState, snapshot ) {
-		// Если изменился пропс value - пишем его в стейт
-		if ( isComponentUpdated( prevProps.value, this.props.value, this.state.value ) ) {
-			this.setState( { value: this.props.value } );
-		}
-	}
+	// Формируем список пропсов, которые нужно указать в поле ввода как есть.
+	// Для этого из общего списка пропсов исключаются те, которые требуют доп. обработки перед указанием.
+	// Пропс type указывается как он есть, но всё равно исключается, так как не является валидным для textarea.
+	const attrsAsIs = omit( props, [
+		'className',
+		'children',
+		'value',
+		'textarea',
+		'resize',
+		'state',
+		'message',
+		'type',
+		'onChange',
+		'onMounted',
+	] );
 
-	componentDidMount() {
-		const { onMounted } = this.props;
+	return (
+		<div className={ classNameRoot() }>
+			<label className={ 'ui-input__label' }>
+				{ !!children && <p className={ 'ui-input__caption' }> { children } </p> }
 
-		// При монтировании компонента выполняем пропс onMounted, если он задан
-		if ( !!onMounted ) {
-			onMounted( { target: this.input.current } );
-		}
-	}
-
-	render() {
-		const {
-			children,
-			textarea,
-			type,
-			message,
-		} = this.props;
-
-		const { value } = this.state;
-
-		// Формируем список пропсов, которые нужно указать в поле ввода как есть.
-		// Для этого из общего списка пропсов исключаются те, которые требуют доп. обработки перед указанием.
-		// Пропс type указывается как он есть, но всё равно исключается, так как не является валидным для textarea.
-		const attrsAsIs = omit( this.props, [
-			'className',
-			'children',
-			'value',
-			'textarea',
-			'error',
-			'success',
-			'message',
-			'type',
-			'onChange',
-			'onMounted',
-		] );
-
-		return (
-			<div className={ this.classNameRoot() }>
-				<label>
-					{ !!children && <p className={ 'ui-input__caption' }> { children } </p> }
-
+				<div className="ui-input__body">
 					{ textarea
 						? (
 							<textarea
 								{ ...attrsAsIs }
 								className={ 'ui-input__input' }
-								ref={ this.input }
-								value={ value }
-								onChange={ this.onChange }
+								value={ valueLocal }
+								onChange={ onChangeLocal }
 							/>
 						)
 						: (
 							<input
 								{ ...attrsAsIs }
 								className={ 'ui-input__input' }
-								ref={ this.input }
-								value={ value }
+								value={ valueLocal }
 								type={ type }
-								onChange={ this.onChange }
+								onChange={ onChangeLocal }
 							/>
 						) }
+				</div>
 
-					{ !!message && <p className={ 'ui-input__message' }> { message } </p> }
-				</label>
-			</div>
-		);
-	}
-}
-
-UiInput.propTypes = {
-	children: PropTypes.node,
-	className: PropTypes.string,
-
-	value: PropTypes.oneOfType( [
-		PropTypes.string,
-		PropTypes.number,
-	] ),
-
-	required: PropTypes.bool,
-	disabled: PropTypes.bool,
-	readOnly: PropTypes.bool,
-	error: PropTypes.bool,
-	success: PropTypes.bool,
-	textarea: PropTypes.bool,
-	placeholder: PropTypes.string,
-	message: PropTypes.string,
-
-	type: PropTypes.oneOf( [ 'text', 'password', 'email', 'number', 'tel' ] ),
-
-	onChange: PropTypes.func,
-	onMounted: PropTypes.func,
+				{ !!message && <p className={ 'ui-input__message' }> { message } </p> }
+			</label>
+		</div>
+	);
 };
 
-UiInput.defaultProps = { type: 'text' };
-
-export default withValidation( UiInput );
+export default UiInput;
