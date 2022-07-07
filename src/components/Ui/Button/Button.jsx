@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit.js';
 
+import BaseIcon from '../../Base/Icon/Icon.jsx';
 import BaseLink from '../../Base/Link/Link.jsx';
 
 import './Button.scss';
 
 const UiButton = ( props ) => {
 	const {
+		children,
 		type = 'button',
 		template = 'default',
 		theme = 'primary',
@@ -16,6 +18,7 @@ const UiButton = ( props ) => {
 		disabled,
 		hover,
 		href,
+		icon,
 	} = props;
 
 	const [ isHref, setIsHref ] = useState( !!href );
@@ -34,12 +37,14 @@ const UiButton = ( props ) => {
 	);
 
 	const generalOmittedProps = [
+		'children',
 		'className',
 		'template',
 		'theme',
 		'size',
 		'wide',
 		'hover',
+		'icon',
 	];
 	const omittedProps =
 		isHref
@@ -57,15 +62,51 @@ const UiButton = ( props ) => {
 		<React.Fragment>
 			{
 				isHref
-					? <BaseLink className={ classNameRoot }
+					? <BaseLink
+						className={ classNameRoot }
 						{ ...omittedProps }
-						href={ href } />
-					: <button className={ classNameRoot }
+						href={ href }
+					>
+						{
+							!!children &&
+							<span
+								className="ui-button__caption">
+								{ children }
+							</span>
+						}
+
+						{
+							!!icon &&
+							<BaseIcon
+								className={ 'ui-button__icon' }
+								icon={ icon }
+							/>
+						}
+					</BaseLink>
+					: <button
+						className={ classNameRoot }
 						{ ...omittedProps }
-						type={ type } />
+						type={ type }
+					>
+						{
+							!!children &&
+							<span
+								className="ui-button__caption">
+								{ children }
+							</span>
+						}
+
+						{
+							!!icon &&
+							<BaseIcon
+								className={ 'ui-button__icon' }
+								icon={ icon }
+							/>
+						}
+					</button>
 			}
 		</React.Fragment>
 	);
-}
+};
 
 export default UiButton;

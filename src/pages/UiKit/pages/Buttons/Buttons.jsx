@@ -18,57 +18,89 @@ const PageUiKitButtons = () => {
 			<MarkupSection>
 				<Row>
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton> Default button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton template={ 'ghost' }> Ghost button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton template={ 'text' }> Text button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
-						<UiButton href={ 'https://google.com' }
+						 col={ 4 }>
+						<UiButton
+							href={ 'https://google.com' }
 							target={ '_blank' }
-							onClick={ onClick }> Default Link </UiButton>
+							onClick={ onClick }
+						> Default Link </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
-						<UiButton href={ 'https://google.com' }
+						 col={ 4 }>
+						<UiButton
+							href={ 'https://google.com' }
 							target={ '_blank' }
 							template={ 'ghost' }
-							onClick={ onClick }> Ghost Link </UiButton>
+							onClick={ onClick }
+						> Ghost Link </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
-						<UiButton href={ 'https://google.com' }
+						 col={ 4 }>
+						<UiButton
+							href={ 'https://google.com' }
 							target={ '_blank' }
 							template={ 'text' }
-							onClick={ onClick }> Text Link </UiButton>
+							onClick={ onClick }
+						> Text Link </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							onClick={ onClick }
+						> Button with icon </UiButton>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							template={ 'ghost' }
+							onClick={ onClick }
+						> Ghost button with icon </UiButton>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							template={ 'text' }
+							onClick={ onClick }
+						> Text button with icon </UiButton>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
 						<UiButton disabled> Disabled button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton template={ 'ghost' }
-							disabled
+								  disabled
 						> Disabled ghost button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton
 							template={ 'text' }
 							disabled
@@ -76,7 +108,7 @@ const PageUiKitButtons = () => {
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton hover> Hover button </UiButton>
 					</Col>
 
@@ -90,7 +122,7 @@ const PageUiKitButtons = () => {
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 4 }>
+						 col={ 4 }>
 						<UiButton
 							template={ 'text' }
 							hover
@@ -98,13 +130,23 @@ const PageUiKitButtons = () => {
 					</Col>
 
 					<Col className={ '_mb_3' }
-						col={ 12 }>
+						 col={ 12 }>
 						<UiButton wide> Wide button </UiButton>
+					</Col>
+
+					<Col
+						className={ '_mb_3' }
+						col={ 12 }
+					>
+						<UiButton
+							icon={ 'search' }
+							wide
+						> Wide button with icon </UiButton>
 					</Col>
 				</Row>
 			</MarkupSection>
 		</LocalLayout>
 	);
-}
+};
 
 export default PageUiKitButtons;

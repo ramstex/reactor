@@ -29,7 +29,15 @@ $themes: (
 	text-align: center;
 	cursor: pointer;
 	appearance: none;
-	transition: all 0.3s ease;
+	transition: all layout.$dur ease;
+
+	&__icon {
+		transition: all layout.$dur ease;
+	}
+
+	&__caption + &__icon {
+		margin-left: math.div(layout.$gap, 2);
+	}
 
 	&:focus {
 		outline: none;
@@ -39,39 +47,60 @@ $themes: (
 		width: 100%;
 	}
 
-	&._theme {
-		@each $theme, $text in $themes {
-			&_#{$theme} {
-				border-color: colors.getColor($theme);
-				color: colors.getColor($text);
-				background-color: colors.getColor($theme);
+	@each $theme, $text in $themes {
+		&._theme_#{$theme} {
+			border-color: colors.getColor($theme);
+			color: colors.getColor($text);
+			background-color: colors.getColor($theme);
+		}
 
-				&._template_ghost {
-					color: colors.getColor($theme);
-					background-color: transparent;
-				}
+		&._theme_#{$theme} &__icon {
+			fill: colors.getColor($text);
+		}
 
-				&._template_text {
-					border-color: transparent;
-					color: colors.getColor($theme);
-					background-color: transparent;
-				}
+		&._theme_#{$theme}._template_ghost {
+			color: colors.getColor($theme);
+			background-color: transparent;
+		}
 
-				&:hover,
-				&._hover {
-					border-color: colors.getColor($theme + '-light');
-					color: colors.getColor($text);
-					background-color: colors.getColor($theme + '-light');
-					outline: none;
+		&._theme_#{$theme}._template_ghost &__icon {
+			fill: colors.getColor($theme);
+		}
 
-					&._template_text {
-						border-color: transparent;
-						color: colors.getColor($theme + '-light');
-						text-decoration: underline;
-						background-color: transparent;
-					}
-				}
-			}
+		&._theme_#{$theme}._template_text {
+			border-color: transparent;
+			color: colors.getColor($theme);
+			background-color: transparent;
+		}
+
+		&._theme_#{$theme}._template_text &__icon {
+			fill: colors.getColor($theme);
+		}
+
+		&._theme_#{$theme}:hover,
+		&._theme_#{$theme}._hover {
+			border-color: colors.getColor($theme + '-light');
+			color: colors.getColor($text);
+			background-color: colors.getColor($theme + '-light');
+			outline: none;
+		}
+
+		&._theme_#{$theme}:hover &__icon,
+		&._theme_#{$theme}._hover &__icon {
+			fill: colors.getColor($text);
+		}
+
+		&._theme_#{$theme}:hover._template_text,
+		&._theme_#{$theme}._hover._template_text {
+			border-color: transparent;
+			color: colors.getColor($theme + '-light');
+			text-decoration: underline;
+			background-color: transparent;
+		}
+
+		&._theme_#{$theme}:hover._template_text &__icon,
+		&._theme_#{$theme}._hover._template_text &__icon {
+			fill: colors.getColor($theme + '-light');
 		}
 	}
 
