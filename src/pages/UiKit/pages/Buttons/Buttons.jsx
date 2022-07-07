@@ -93,7 +93,7 @@ const PageUiKitButtons = () => {
 							icon={ 'search' }
 							square
 							onClick={ onClick }
-						/>
+						>Square button</UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
@@ -101,9 +101,10 @@ const PageUiKitButtons = () => {
 						<UiButton
 							icon={ 'search' }
 							template={ 'ghost' }
+							captionPosition={ 'bottom' }
 							square
 							onClick={ onClick }
-						/>
+						>Square button</UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
@@ -113,7 +114,7 @@ const PageUiKitButtons = () => {
 							template={ 'text' }
 							square
 							onClick={ onClick }
-						/>
+						>Square button</UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
@@ -171,6 +172,7 @@ const PageUiKitButtons = () => {
 						<UiButton
 							icon={ 'search' }
 							wide
+							square
 						> Wide button with icon </UiButton>
 					</Col>
 				</Row>

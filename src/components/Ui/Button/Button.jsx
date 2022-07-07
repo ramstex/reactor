@@ -16,6 +16,7 @@ const UiButton = ( props ) => {
 		size = 'md',
 		wide,
 		square,
+		captionPosition = 'left',
 		disabled,
 		hover,
 		href,
@@ -35,7 +36,8 @@ const UiButton = ( props ) => {
 		{ '_wide': wide },
 		{ '_square': square },
 		{ '_disabled': disabled },
-		{ '_hover': hover }
+		{ '_hover': hover },
+		{ [ `_caption-position_${ captionPosition }` ]: square }
 	);
 
 	const generalOmittedProps = [
@@ -78,7 +80,7 @@ const UiButton = ( props ) => {
 			: propsForButton;
 
 	const ComponentName = isHref
-		? 'BaseLink'
+		? BaseLink
 		: 'button';
 
 	return (

@@ -16,6 +16,7 @@ $themes: (
 
 .ui-button {
 	display: flex;
+	align-items: center;
 	width: fit-content;
 	border: none;
 	font-size: 14px;
@@ -53,13 +54,56 @@ $themes: (
 		outline: none;
 	}
 
-	&._template_text:hover &__caption,
-	&._template_text._hover &__caption {
-		text-decoration: underline;
+	&._square &__body {
+		width: auto;
 	}
 
-	&._wide {
+	&._square._caption-position_left {
+		flex-direction: row-reverse;
+	}
+
+	&._square._caption-position_left &__caption {
+		margin-right: math.div(layout.$gap, 2);
+	}
+
+	&._square._caption-position_right {
+		flex-direction: row;
+	}
+
+	&._square._caption-position_right &__caption {
+		margin-left: math.div(layout.$gap, 2);
+	}
+
+	&._square._caption-position_top {
+		flex-direction: column-reverse;
+	}
+
+	&._square._caption-position_top &__caption {
+		margin-bottom: math.div(layout.$gap, 2);
+	}
+
+	&._square._caption-position_bottom {
+		flex-direction: column;
+	}
+
+	&._square._caption-position_bottom &__caption {
+		margin-top: math.div(layout.$gap, 2);
+	}
+
+	&._template_text._square &__caption {
+		margin: 0;
+	}
+
+	&._wide,
+	&._wide &__body {
 		width: 100%;
+	}
+
+	&._template_text:hover &__caption,
+	&._template_text._hover &__caption,
+	&._square:hover &__caption,
+	&._square._hover &__caption {
+		text-decoration: underline;
 	}
 
 	@each $theme, $text in $themes {
