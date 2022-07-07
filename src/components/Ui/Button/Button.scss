@@ -16,11 +16,8 @@ $themes: (
 
 .ui-button {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: fit-content;
-	border-width: 1px;
-	border-style: solid;
+	border: none;
 	font-size: 14px;
 	line-height: 1;
 	font-family: fonts.$primary;
@@ -28,10 +25,23 @@ $themes: (
 	text-decoration: none;
 	text-align: center;
 	cursor: pointer;
-	appearance: none;
 	transition: all layout.$dur ease;
+	appearance: none;
+
+	&__body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		border: 1px solid;
+		transition: all layout.$dur ease;
+	}
 
 	&__icon {
+		transition: all layout.$dur ease;
+	}
+
+	&__caption {
 		transition: all layout.$dur ease;
 	}
 
@@ -43,14 +53,26 @@ $themes: (
 		outline: none;
 	}
 
+	&._template_text:hover &__caption,
+	&._template_text._hover &__caption {
+		text-decoration: underline;
+	}
+
 	&._wide {
 		width: 100%;
 	}
 
 	@each $theme, $text in $themes {
 		&._theme_#{$theme} {
-			border-color: colors.getColor($theme);
+			background-color: transparent;
+		}
+
+		&._theme_#{$theme} &__caption {
 			color: colors.getColor($text);
+		}
+
+		&._theme_#{$theme} &__body {
+			border-color: colors.getColor($theme);
 			background-color: colors.getColor($theme);
 		}
 
@@ -58,31 +80,41 @@ $themes: (
 			fill: colors.getColor($text);
 		}
 
-		&._theme_#{$theme}._template_ghost {
-			color: colors.getColor($theme);
+		&._theme_#{$theme}._template_ghost &__body {
 			background-color: transparent;
+		}
+
+		&._theme_#{$theme}._template_ghost &__caption {
+			color: colors.getColor($theme);
 		}
 
 		&._theme_#{$theme}._template_ghost &__icon {
 			fill: colors.getColor($theme);
 		}
 
-		&._theme_#{$theme}._template_text {
+		&._theme_#{$theme}._template_text &__body {
 			border-color: transparent;
-			color: colors.getColor($theme);
 			background-color: transparent;
+		}
+
+		&._theme_#{$theme}._template_text &__caption {
+			color: colors.getColor($theme);
 		}
 
 		&._theme_#{$theme}._template_text &__icon {
 			fill: colors.getColor($theme);
 		}
 
-		&._theme_#{$theme}:hover,
-		&._theme_#{$theme}._hover {
+		&._theme_#{$theme}:hover &__body,
+		&._theme_#{$theme}._hover &__body {
 			border-color: colors.getColor($theme + '-light');
-			color: colors.getColor($text);
 			background-color: colors.getColor($theme + '-light');
 			outline: none;
+		}
+
+		&._theme_#{$theme}:hover &__caption,
+		&._theme_#{$theme}._hover &__caption {
+			color: colors.getColor($text);
 		}
 
 		&._theme_#{$theme}:hover &__icon,
@@ -90,12 +122,16 @@ $themes: (
 			fill: colors.getColor($text);
 		}
 
-		&._theme_#{$theme}:hover._template_text,
-		&._theme_#{$theme}._hover._template_text {
+		&._theme_#{$theme}:hover._template_text &__body,
+		&._theme_#{$theme}._hover._template_text &__body {
 			border-color: transparent;
-			color: colors.getColor($theme + '-light');
 			text-decoration: underline;
 			background-color: transparent;
+		}
+
+		&._theme_#{$theme}:hover._template_text &__caption,
+		&._theme_#{$theme}._hover._template_text &__caption {
+			color: colors.getColor($theme + '-light');
 		}
 
 		&._theme_#{$theme}:hover._template_text &__icon,
@@ -104,38 +140,51 @@ $themes: (
 		}
 	}
 
-	&._size {
-		&_lg {
-			padding: layout.$gap * 0.75 layout.$gap * 1.5;
-		}
+	&._size_lg &__body {
+		padding: layout.$gap * 0.75 layout.$gap * 1.5;
+	}
 
-		&_md {
-			padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5);
-		}
+	&._size_md &__body {
+		padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5);
+	}
 
-		&_sm {
-			font-size: 12px;
-			padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
-		}
+	&._size_sm {
+		font-size: 12px;
+	}
+
+	&._size_sm &__body {
+		padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
 	}
 
 	&._disabled {
-		border-color: colors.getColor('muted');
-		color: colors.getColor('back');
-		background-color: colors.getColor('muted');
 		pointer-events: none;
 		cursor: default;
+	}
 
-		&._template_ghost {
-			border-color: colors.getColor('muted');
-			color: colors.getColor('muted');
-			background-color: transparent;
-		}
+	&._disabled &__body {
+		border-color: colors.getColor('muted');
+		background-color: colors.getColor('muted');
+	}
 
-		&._template_text {
-			border-color: transparent;
-			color: colors.getColor('muted');
-			background-color: transparent;
-		}
+	&._disabled &__caption {
+		color: colors.getColor('back');
+	}
+
+	&._disabled._template_ghost &__body {
+		border-color: colors.getColor('muted');
+		background-color: transparent;
+	}
+
+	&._disabled._template_ghost &__caption {
+		color: colors.getColor('muted');
+	}
+
+	&._disabled._template_text &__body {
+		border-color: transparent;
+		background-color: transparent;
+	}
+
+	&._disabled._template_text &__caption {
+		color: colors.getColor('muted');
 	}
 }

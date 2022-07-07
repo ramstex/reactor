@@ -15,6 +15,7 @@ const UiButton = ( props ) => {
 		theme = 'primary',
 		size = 'md',
 		wide,
+		square,
 		disabled,
 		hover,
 		href,
@@ -32,6 +33,7 @@ const UiButton = ( props ) => {
 		`_theme_${ theme }`,
 		`_size_${ size }`,
 		{ '_wide': wide },
+		{ '_square': square },
 		{ '_disabled': disabled },
 		{ '_hover': hover }
 	);
@@ -58,54 +60,55 @@ const UiButton = ( props ) => {
 				'target',
 			] );
 
+	const propsForLink = {
+		className: classNameRoot,
+		...omittedProps,
+		href,
+	};
+
+	const propsForButton = {
+		className: classNameRoot,
+		...omittedProps,
+		type,
+	};
+
+	const propsForRoot =
+		isHref
+			? propsForLink
+			: propsForButton;
+
+	const ComponentName = isHref
+		? 'BaseLink'
+		: 'button';
+
 	return (
-		<React.Fragment>
+		<ComponentName { ...propsForRoot }>
+			<div className="ui-button__body">
+				{
+					!!children && !square &&
+					<span
+						className="ui-button__caption">
+						{ children }
+					</span>
+				}
+
+				{
+					!!icon &&
+					<BaseIcon
+						className={ 'ui-button__icon' }
+						icon={ icon }
+					/>
+				}
+			</div>
+
 			{
-				isHref
-					? <BaseLink
-						className={ classNameRoot }
-						{ ...omittedProps }
-						href={ href }
-					>
-						{
-							!!children &&
-							<span
-								className="ui-button__caption">
-								{ children }
-							</span>
-						}
-
-						{
-							!!icon &&
-							<BaseIcon
-								className={ 'ui-button__icon' }
-								icon={ icon }
-							/>
-						}
-					</BaseLink>
-					: <button
-						className={ classNameRoot }
-						{ ...omittedProps }
-						type={ type }
-					>
-						{
-							!!children &&
-							<span
-								className="ui-button__caption">
-								{ children }
-							</span>
-						}
-
-						{
-							!!icon &&
-							<BaseIcon
-								className={ 'ui-button__icon' }
-								icon={ icon }
-							/>
-						}
-					</button>
+				!!children && !!square &&
+				<span
+					className="ui-button__caption">
+					{ children }
+				</span>
 			}
-		</React.Fragment>
+		</ComponentName>
 	);
 };
 

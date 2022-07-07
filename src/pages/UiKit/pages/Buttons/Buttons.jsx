@@ -89,13 +89,43 @@ const PageUiKitButtons = () => {
 
 					<Col className={ '_mb_3' }
 						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							square
+							onClick={ onClick }
+						/>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							template={ 'ghost' }
+							square
+							onClick={ onClick }
+						/>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
+						<UiButton
+							icon={ 'search' }
+							template={ 'text' }
+							square
+							onClick={ onClick }
+						/>
+					</Col>
+
+					<Col className={ '_mb_3' }
+						 col={ 4 }>
 						<UiButton disabled> Disabled button </UiButton>
 					</Col>
 
 					<Col className={ '_mb_3' }
 						 col={ 4 }>
-						<UiButton template={ 'ghost' }
-								  disabled
+						<UiButton
+							template={ 'ghost' }
+							disabled
 						> Disabled ghost button </UiButton>
 					</Col>
 
