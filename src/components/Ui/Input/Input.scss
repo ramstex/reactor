@@ -1,12 +1,14 @@
 @use 'sass:math';
-@use '../../../style/colors/module' as colors;
-@use '../../../style/fonts/module' as fonts;
-@use '../../../style/layout/module' as layout;
+@use '/src/style/colors/module' as colors;
+@use '/src/style/fonts/module' as fonts;
+@use '/src/style/layout/module' as layout;
 
 .ui-input {
 	&__body {
 		display: flex;
-		border: 1px solid colors.getColor('text');
+		border-style: solid;
+		border-color: colors.getColor(text);
+		transition: border-color layout.$dur ease;
 	}
 
 	&__input {
@@ -15,11 +17,13 @@
 		padding: math.div(layout.$gap, 3);
 		border: none;
 		font-family: fonts.$primary;
-		font-size: 14px;
-		color: colors.getColor('text');
+		color: colors.getColor(text);
 		background-color: transparent;
 		resize: none;
-		transition: border-color layout.$dur ease;
+
+		&:focus {
+			outline: none;
+		}
 
 		&::placeholder {
 			color: colors.getColor('muted-dark');
@@ -81,4 +85,10 @@
 	&._disabled &__caption {
 		color: colors.getColor('muted');
 	}
+
+	&._focus &__body {
+		border-color: colors.getColor(primary);
+	}
+
+	@import './style/sizes';
 }

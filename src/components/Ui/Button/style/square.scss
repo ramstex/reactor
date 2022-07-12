@@ -2,8 +2,6 @@
 @use './src/style/layout/module' as layout;
 
 &._square &__body {
-	width: layout.$gap * 2;
-	height: layout.$gap * 2;
 	padding: 0;
 }
 
@@ -46,21 +44,6 @@
 &._square:hover &__caption,
 &._square._hover &__caption {
 	text-decoration: underline;
-}
-
-&._square._size_sm &__body {
-	width: layout.$gap;
-	height: layout.$gap;
-}
-
-&._square._size_md &__body {
-	width: layout.$gap * 1.5;
-	height: layout.$gap * 1.5;
-}
-
-&._square._size_lg &__body {
-	width: layout.$gap * 2;
-	height: layout.$gap * 2;
 }
 
 &._square._wide &__body {

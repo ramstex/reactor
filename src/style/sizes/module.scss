@@ -1,0 +1,26 @@
+@use 'sass:math';
+@use './src/style/layout/module' as layout;
+
+$ui: (
+	sm: (
+		size: layout.$gap,
+		border: 1px,
+		padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5),
+		font-size: math.div(layout.$gap, 2),
+		line-height: 1,
+	),
+	md: (
+		size: layout.$gap * 1.5,
+		border: 1px,
+		padding: math.div(layout.$gap, 1.5) layout.$gap,
+		font-size: math.div(layout.$gap, 1.5),
+		line-height: 1,
+	),
+	lg: (
+		size: layout.$gap * 3,
+		border: 1px,
+		padding: layout.$gap layout.$gap * 1.5,
+		font-size: layout.$gap,
+		line-height: 1,
+	),
+);

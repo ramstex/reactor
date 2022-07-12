@@ -9,7 +9,6 @@
 	align-items: center;
 	width: fit-content;
 	border: none;
-	font-size: 14px;
 	line-height: 1;
 	font-family: fonts.$primary;
 	white-space: nowrap;
@@ -34,6 +33,7 @@
 	}
 
 	&__icon {
+		height: math.div(layout.$gap, 2);
 		transition: inherit;
 	}
 

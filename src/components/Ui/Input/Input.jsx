@@ -9,12 +9,14 @@ const UiInput = ( props ) => {
 		type = 'text',
 		value = '',
 		state = 'default',
+		size = 'md',
 		children,
 		textarea,
 		resize,
 		disabled,
 		required,
 		message,
+		autoFocus,
 		onChange,
 		onMount,
 		onFocus,
@@ -29,7 +31,7 @@ const UiInput = ( props ) => {
 	const [
 		isFocused,
 		setFocused,
-	] = useState( false );
+	] = useState( autoFocus );
 
 	useEffect( () => {
 		!!onMount && onMount();
@@ -48,10 +50,12 @@ const UiInput = ( props ) => {
 
 	const onFocusLocal = ( event ) => {
 		!!onFocus && onFocus( event );
+		setFocused( true );
 	};
 
 	const onBlurLocal = ( event ) => {
 		!!onBlur && onBlur( event );
+		setFocused( false );
 	};
 
 	const classNameRoot = () => {
@@ -61,7 +65,9 @@ const UiInput = ( props ) => {
 			{ '_disabled': disabled },
 			{ '_required': required },
 			{ '_resize': textarea && resize },
-			`_state_${ state }`
+			{ '_focus': isFocused },
+			`_state_${ state }`,
+			`_size_${ size }`
 		);
 	};
 
@@ -75,6 +81,7 @@ const UiInput = ( props ) => {
 		'textarea',
 		'resize',
 		'state',
+		'size',
 		'message',
 		'type',
 		'onChange',
@@ -105,6 +112,8 @@ const UiInput = ( props ) => {
 					<InputComponent
 						{ ...inputAttrs }
 						className={ 'ui-input__input' }
+						onFocus={ onFocusLocal }
+						onBlur={ onBlurLocal }
 					/>
 				</div>
 
