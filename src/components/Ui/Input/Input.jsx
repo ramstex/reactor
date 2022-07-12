@@ -10,6 +10,7 @@ const UiInput = ( props ) => {
 		value = '',
 		state = 'default',
 		size = 'md',
+		theme = 'primary',
 		children,
 		textarea,
 		resize,
@@ -67,7 +68,8 @@ const UiInput = ( props ) => {
 			{ '_resize': textarea && resize },
 			{ '_focus': isFocused },
 			`_state_${ state }`,
-			`_size_${ size }`
+			`_size_${ size }`,
+			`_theme_${ theme }`
 		);
 	};
 
@@ -82,6 +84,7 @@ const UiInput = ( props ) => {
 		'resize',
 		'state',
 		'size',
+		'theme',
 		'message',
 		'type',
 		'onChange',
