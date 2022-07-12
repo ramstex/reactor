@@ -3,8 +3,8 @@ import classnames from 'classnames';
 
 import UiKitConfig from '/config/ui-kit.jsx';
 
-import BaseLink from '../../../../components/Base/Link/Link.jsx';
-import { Row, Col } from '../../../../components/Grid/Grid.jsx';
+import BaseLink from '/src/components/Base/Link/Link.jsx';
+import { Row, Col } from '/src/components/Grid/Grid.jsx';
 
 import './Nav.scss';
 
