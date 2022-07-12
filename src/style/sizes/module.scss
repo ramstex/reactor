@@ -3,24 +3,24 @@
 
 $ui: (
 	sm: (
-		size: layout.$gap,
+		size: math.div(layout.$gap, 2.5) + (math.div(layout.$gap, 3) * 2),
 		border: 1px,
-		padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5),
-		font-size: math.div(layout.$gap, 2),
+		padding: math.div(layout.$gap, 3) math.div(layout.$gap, 2),
+		font-size: math.div(layout.$gap, 2.5),
 		line-height: 1,
 	),
 	md: (
-		size: layout.$gap * 1.5,
+		size: math.div(layout.$gap, 2) + (math.div(layout.$gap, 2.5) * 2),
 		border: 1px,
-		padding: math.div(layout.$gap, 1.5) layout.$gap,
-		font-size: math.div(layout.$gap, 1.5),
+		padding: math.div(layout.$gap, 2.5) math.div(layout.$gap, 1.5),
+		font-size: math.div(layout.$gap, 2),
 		line-height: 1,
 	),
 	lg: (
-		size: layout.$gap * 3,
+		size: math.div(layout.$gap, 1.5) + (math.div(layout.$gap, 2) * 2),
 		border: 1px,
-		padding: layout.$gap layout.$gap * 1.5,
-		font-size: layout.$gap,
+		padding: math.div(layout.$gap, 2) layout.$gap,
+		font-size: math.div(layout.$gap, 1.5),
 		line-height: 1,
 	),
 );

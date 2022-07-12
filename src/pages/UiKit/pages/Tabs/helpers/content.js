@@ -25,15 +25,15 @@ export const content = {
 			),
 
 			onClick() {
-				console.log('CLICK', this);
+				console.log( 'CLICK', this );
 			},
 
 			onEnter() {
-				console.log('ENTER', this);
+				console.log( 'ENTER', this );
 			},
 
 			onLeave() {
-				console.log('LEAVE', this);
+				console.log( 'LEAVE', this );
 			},
 		},
 
@@ -47,15 +47,15 @@ export const content = {
 			),
 
 			onClick() {
-				console.log('CLICK', this);
+				console.log( 'CLICK', this );
 			},
 
 			onEnter() {
-				console.log('ENTER', this);
+				console.log( 'ENTER', this );
 			},
 
 			onLeave() {
-				console.log('LEAVE', this);
+				console.log( 'LEAVE', this );
 			},
 		},
 
@@ -78,15 +78,15 @@ export const content = {
 			),
 
 			onClick() {
-				console.log('CLICK', this);
+				console.log( 'CLICK', this );
 			},
 
 			onEnter() {
-				console.log('ENTER', this);
+				console.log( 'ENTER', this );
 			},
 
 			onLeave() {
-				console.log('LEAVE', this);
+				console.log( 'LEAVE', this );
 			},
 		},
 
@@ -94,11 +94,11 @@ export const content = {
 			id: 4,
 			title: 'Callback without content',
 
-			onClick(event, tab) {
-				console.log('CLICK', this);
-				console.log(event);
-				console.log(tab);
-				console.log('========================');
+			onClick( event, tab ) {
+				console.log( 'CLICK', this );
+				console.log( event );
+				console.log( tab );
+				console.log( '========================' );
 			},
 		},
 
@@ -108,7 +108,7 @@ export const content = {
 			href: '/ui-kit/buttons',
 
 			onClick() {
-				console.log('CALLBACK INTERNAL LINK', this);
+				console.log( 'CALLBACK INTERNAL LINK', this );
 			},
 		},
 
@@ -119,7 +119,7 @@ export const content = {
 			target: '_blank',
 
 			onClick() {
-				console.log('CALLBACK EXTERNAL LINK', this);
+				console.log( 'CALLBACK EXTERNAL LINK', this );
 			},
 		},
 	],

@@ -34,7 +34,9 @@ class AuthFormComponent extends React.Component {
 					switch ( value.type ) {
 						case 'checkbox':
 							return (
-								<Col className={ '_mb_2' } col={ 12 } key={ key }>
+								<Col className={ '_mb_2' }
+									col={ 12 }
+									key={ key }>
 									<UiCheckbox
 										{ ...value }
 										onInvalid={ this.onInvalid( value.name || key ) }
@@ -46,7 +48,9 @@ class AuthFormComponent extends React.Component {
 							);
 						default:
 							return (
-								<Col className={ '_mb_2' } col={ 5 } key={ key }>
+								<Col className={ '_mb_2' }
+									col={ 5 }
+									key={ key }>
 									<UiInput
 										{ ...value }
 										pattern={ key === 'confirmation'
@@ -69,7 +73,8 @@ class AuthFormComponent extends React.Component {
 
 	FormTemplate() {
 		return (
-			<form className={ this.classNameRoot() } onSubmit={ this.onSubmit }>
+			<form className={ this.classNameRoot() }
+				onSubmit={ this.onSubmit }>
 				<Row>{ this.FormFields() }</Row>
 
 				<Row className={ '_mt_4' }>

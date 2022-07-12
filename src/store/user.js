@@ -1,22 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const RouterSlice = createSlice({
+export const RouterSlice = createSlice( {
 	name: 'user',
 
-	initialState: {
-		data: null,
-	},
+	initialState: { data: null },
 
 	reducers: {
-		set(state, action) {
-			if (action && action.payload) {
+		set( state, action ) {
+			if ( action && action.payload ) {
 				state.data = action.payload;
 			} else {
 				state.data = null;
 			}
 		},
 
-		login(state) {
+		login( state ) {
 			state.data = {
 				first_name: 'Roman',
 				last_name: 'Polunin',
@@ -25,12 +23,16 @@ export const RouterSlice = createSlice({
 			};
 		},
 
-		logout(state) {
+		logout( state ) {
 			state.data = null;
 		},
 	},
-});
+} );
 
-export const { set, login, logout } = RouterSlice.actions;
+export const {
+	set,
+	login,
+	logout,
+} = RouterSlice.actions;
 
 export default RouterSlice.reducer;

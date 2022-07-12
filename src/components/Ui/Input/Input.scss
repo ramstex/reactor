@@ -42,6 +42,11 @@
 		color: colors.getColor('text');
 	}
 
+	&._required &__caption::after {
+		content: '*';
+		color: colors.getColor('danger');
+	}
+
 	&._textarea &__input {
 		height: 150px;
 	}
@@ -50,45 +55,8 @@
 		resize: vertical;
 	}
 
-	&._required &__caption::after {
-		content: '*';
-		color: colors.getColor('danger');
-	}
-
-	&._state_success &__input {
-		border-color: colors.getColor('success');
-		color: colors.getColor('success');
-	}
-
-	&._state_success &__message {
-		color: colors.getColor('success');
-	}
-
-	&._state_error &__input {
-		border-color: colors.getColor('danger');
-		color: colors.getColor('danger');
-	}
-
-	&._state_error &__message {
-		color: colors.getColor('danger');
-	}
-
-	&._disabled &__input {
-		border-color: colors.getColor('muted');
-		color: colors.getColor('muted');
-
-		&::placeholder {
-			color: colors.getColor('muted');
-		}
-	}
-
-	&._disabled &__caption {
-		color: colors.getColor('muted');
-	}
-
-	&._focus &__body {
-		border-color: colors.getColor(primary);
-	}
-
 	@import './style/sizes';
+	@import './style/themes';
+	@import './style/states';
+	@import './style/disabled';
 }

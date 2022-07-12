@@ -12,26 +12,14 @@ const messages = {
 
 	forms: {
 		registration: {
-			email: {
-				typeMismatch: 'Адрес заполнен некорректно',
-			},
+			email: { typeMismatch: 'Адрес заполнен некорректно' },
 
-			confirmation: {
-				patternMismatch: 'Введённые пароли не совпадают',
-			},
+			confirmation: { patternMismatch: 'Введённые пароли не совпадают' },
 		},
 
-		login: {
-			email: {
-				typeMismatch: 'Адрес заполнен некорректно',
-			},
-		},
+		login: { email: { typeMismatch: 'Адрес заполнен некорректно' } },
 
-		remind: {
-			email: {
-				typeMismatch: 'Адрес заполнен некорректно',
-			},
-		},
+		remind: { email: { typeMismatch: 'Адрес заполнен некорректно' } },
 	},
 };
 
@@ -80,8 +68,9 @@ const contents = {
 			type: 'checkbox',
 			caption: (
 				<React.Fragment>
-					{'Я соглашаюсь с '}
-					<BaseLink href={AgreementPdf} target="_blank">
+					{ 'Я соглашаюсь с ' }
+					<BaseLink href={ AgreementPdf }
+						target="_blank">
 						условиями регистрации
 					</BaseLink>
 				</React.Fragment>

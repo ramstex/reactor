@@ -63,4 +63,3 @@ $defaults: config.$defaults;
 @function portrait() {
 	@return #{ '(orientation: portrait)' };
 }
-
