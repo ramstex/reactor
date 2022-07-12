@@ -1,5 +1,5 @@
 // ToDo: проверить актуальность пакетов:
-// resolve-url-loader
+// react-svg-loader
 
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';

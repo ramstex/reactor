@@ -1,59 +1,40 @@
 import React from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
 import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
-import {
-	Row, Col
-} from '../Grid/Grid.jsx';
+import { Row, Col } from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
-import LocalProfile from './components/Profile/Profile.jsx';
 
 import './Header.scss';
 
 import Logo from '../../assets/images/logo-racoon.svg';
 
-class Header extends React.Component {
-	//	Классы
-	classNameRoot() {
-		const { className } = this.props;
+const Header = ( props ) => {
+	const { className } = props;
 
-		return classnames( 'header', className );
-	}
+	const classNameRoot = classnames( 'header', className );
 
-	classNameLogo() {
-		return classnames( 'header__logo' );
-	}
+	return (
+		<header className={ classNameRoot }>
+			<MarkupContainer wide>
+				<Row alignV={ 'center' }>
+					<Col>
+						<BaseLogo
+							className={ 'header__logo' }
+							src={ Logo }
+							href={ 'https://google.com' }
+							target={ '_blank' }
+						/>
+					</Col>
 
-	render() {
-		return (
-			<header className={ this.classNameRoot() }>
-				<MarkupContainer wide>
-					<Row alignV={ 'center' }>
-						<Col>
-							<BaseLogo
-								className={ this.classNameLogo() }
-								src={ Logo }
-								href={ 'https://google.com' }
-								target={ '_blank' }
-							/>
-						</Col>
-
-						<Col>
-							<LocalNav />
-						</Col>
-
-						<Col offset={ 'auto' }>
-							<LocalProfile />
-						</Col>
-					</Row>
-				</MarkupContainer>
-			</header>
-		);
-	}
+					<Col>
+						<LocalNav />
+					</Col>
+				</Row>
+			</MarkupContainer>
+		</header>
+	);
 }
-
-Header.propTypes = { className: PropTypes.string };
 
 export default Header;
