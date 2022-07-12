@@ -1,8 +1,5 @@
 // ToDo: проверить актуальность пакетов:
-// react-image
 // resolve-url-loader
-// url-loader
-// file-loader
 
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -16,9 +13,9 @@ export default ( env, argv ) => {
 		entry: './src/index.jsx',
 
 		output: {
-			filename: 'main.js',
+			filename: 'main.js?v=[hash]',
 			path: path.join( process.cwd(), 'dist' ),
-			publicPath: '/',
+			publicPath: '',
 		},
 
 		devServer: {
@@ -29,7 +26,7 @@ export default ( env, argv ) => {
 		plugins: [
 			new HtmlWebpackPlugin( { template: './src/index.html' } ),
 
-			new MiniCssExtractPlugin(),
+			new MiniCssExtractPlugin( { filename: '[name].css?v=[hash]' } ),
 		],
 
 		module: {
@@ -57,19 +54,7 @@ export default ( env, argv ) => {
 					test: /\.(sa|sc|c)ss$/,
 					use: [
 						MiniCssExtractPlugin.loader,
-
 						'css-loader',
-
-						// {
-						// 	loader: 'postcss-loader',
-						// 	options: {
-						// 		postcssOptions: {
-						// 			plugins: [['postcss-preset-env']],
-						// 		},
-						// 	},
-						// },
-
-						'resolve-url-loader',
 
 						{
 							loader: 'sass-loader',
@@ -90,17 +75,27 @@ export default ( env, argv ) => {
 				},
 
 				{
-					test: /\.(png|jpg|jpeg)$/,
-					use: [
-						{ loader: 'url-loader' },
-					],
+					test: /\.(pdf|doc?x|xls?x)$/i,
+					type: 'asset/resource',
+					generator: { filename: 'assets/docs/[name].[ext]?v=[hash]' },
 				},
 
 				{
-					test: /\.pdf$/,
-					use: [
-						{ loader: 'file-loader' },
-					],
+					test: /\.(png|jpe?g|gif)$/i,
+					type: 'asset/resource',
+					generator: { filename: 'assets/images/[name].[ext]?v=[hash]' },
+				},
+
+				{
+					test: /\.(mp4|mpg|mov|avi|webm)$/i,
+					type: 'asset/resource',
+					generator: { filename: 'assets/video/[name].[ext]?v=[hash]' },
+				},
+
+				{
+					test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+					type: 'asset/resource',
+					generator: { filename: 'assets/fonts/[name].[ext]?v=[hash]' },
 				},
 			],
 		},
