@@ -1,0 +1,22 @@
+@use 'sass:math';
+@use './src/style/layout/module' as layout;
+
+&._size_lg &__body {
+	padding: layout.$gap * 0.75 layout.$gap * 1.5;
+}
+
+&._size_md &__body {
+	padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5);
+}
+
+&._size_sm &__body {
+	padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
+}
+
+&._size_sm &__caption {
+	font-size: math.div(layout.$gap, 3.5);
+}
+
+&._size_sm &__icon {
+	width: math.div(layout.$gap, 2.5);
+}

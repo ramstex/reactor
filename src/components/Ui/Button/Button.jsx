@@ -16,6 +16,7 @@ const UiButton = ( props ) => {
 		size = 'md',
 		wide,
 		square,
+		circle,
 		captionPosition = 'left',
 		disabled,
 		hover,
@@ -35,6 +36,7 @@ const UiButton = ( props ) => {
 		`_size_${ size }`,
 		{ '_wide': wide },
 		{ '_square': square },
+		{ '_circle': circle },
 		{ '_disabled': disabled },
 		{ '_hover': hover },
 		{ [ `_caption-position_${ captionPosition }` ]: square }
@@ -48,6 +50,7 @@ const UiButton = ( props ) => {
 		'size',
 		'wide',
 		'square',
+		'circle',
 		'captionPosition',
 		'hover',
 		'icon',

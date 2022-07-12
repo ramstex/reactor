@@ -4,15 +4,6 @@
 @use '../../../style/layout/module' as layout;
 @use '../../../style/typography/module' as typography;
 
-$themes: (
-	primary: text,
-	secondary: back,
-	success: back,
-	warning: text,
-	danger: back,
-	info: text,
-);
-
 .ui-button {
 	display: flex;
 	align-items: center;
@@ -24,6 +15,7 @@ $themes: (
 	white-space: nowrap;
 	text-decoration: none;
 	text-align: center;
+	background: transparent;
 	cursor: pointer;
 	transition: all layout.$dur ease;
 	appearance: none;
@@ -34,15 +26,15 @@ $themes: (
 		align-items: center;
 		width: 100%;
 		border: 1px solid;
-		transition: all layout.$dur ease;
-	}
-
-	&__icon {
-		transition: all layout.$dur ease;
+		transition: inherit;
 	}
 
 	&__caption {
-		transition: all layout.$dur ease;
+		transition: inherit;
+	}
+
+	&__icon {
+		transition: inherit;
 	}
 
 	&__caption + &__icon {
@@ -53,181 +45,14 @@ $themes: (
 		outline: none;
 	}
 
-	&._square &__body {
-		width: auto;
-	}
-
-	&._square._caption-position_left {
-		flex-direction: row-reverse;
-	}
-
-	&._square._caption-position_left &__caption {
-		margin-right: math.div(layout.$gap, 2);
-	}
-
-	&._square._caption-position_right {
-		flex-direction: row;
-	}
-
-	&._square._caption-position_right &__caption {
-		margin-left: math.div(layout.$gap, 2);
-	}
-
-	&._square._caption-position_top {
-		flex-direction: column-reverse;
-	}
-
-	&._square._caption-position_top &__caption {
-		margin-bottom: math.div(layout.$gap, 2);
-	}
-
-	&._square._caption-position_bottom {
-		flex-direction: column;
-	}
-
-	&._square._caption-position_bottom &__caption {
-		margin-top: math.div(layout.$gap, 2);
-	}
-
-	&._template_text._square &__caption {
-		margin: 0;
-	}
-
 	&._wide,
 	&._wide &__body {
 		width: 100%;
 	}
 
-	&._template_text:hover &__caption,
-	&._template_text._hover &__caption,
-	&._square:hover &__caption,
-	&._square._hover &__caption {
-		text-decoration: underline;
-	}
-
-	@each $theme, $text in $themes {
-		&._theme_#{$theme} {
-			background-color: transparent;
-		}
-
-		&._theme_#{$theme} &__caption {
-			color: colors.getColor($text);
-		}
-
-		&._theme_#{$theme} &__body {
-			border-color: colors.getColor($theme);
-			background-color: colors.getColor($theme);
-		}
-
-		&._theme_#{$theme} &__icon {
-			fill: colors.getColor($text);
-		}
-
-		&._theme_#{$theme}._template_ghost &__body {
-			background-color: transparent;
-		}
-
-		&._theme_#{$theme}._template_ghost &__caption {
-			color: colors.getColor($theme);
-		}
-
-		&._theme_#{$theme}._template_ghost &__icon {
-			fill: colors.getColor($theme);
-		}
-
-		&._theme_#{$theme}._template_text &__body {
-			border-color: transparent;
-			background-color: transparent;
-		}
-
-		&._theme_#{$theme}._template_text &__caption {
-			color: colors.getColor($theme);
-		}
-
-		&._theme_#{$theme}._template_text &__icon {
-			fill: colors.getColor($theme);
-		}
-
-		&._theme_#{$theme}:hover &__body,
-		&._theme_#{$theme}._hover &__body {
-			border-color: colors.getColor($theme + '-light');
-			background-color: colors.getColor($theme + '-light');
-			outline: none;
-		}
-
-		&._theme_#{$theme}:hover &__caption,
-		&._theme_#{$theme}._hover &__caption {
-			color: colors.getColor($text);
-		}
-
-		&._theme_#{$theme}:hover &__icon,
-		&._theme_#{$theme}._hover &__icon {
-			fill: colors.getColor($text);
-		}
-
-		&._theme_#{$theme}:hover._template_text &__body,
-		&._theme_#{$theme}._hover._template_text &__body {
-			border-color: transparent;
-			text-decoration: underline;
-			background-color: transparent;
-		}
-
-		&._theme_#{$theme}:hover._template_text &__caption,
-		&._theme_#{$theme}._hover._template_text &__caption {
-			color: colors.getColor($theme + '-light');
-		}
-
-		&._theme_#{$theme}:hover._template_text &__icon,
-		&._theme_#{$theme}._hover._template_text &__icon {
-			fill: colors.getColor($theme + '-light');
-		}
-	}
-
-	&._size_lg &__body {
-		padding: layout.$gap * 0.75 layout.$gap * 1.5;
-	}
-
-	&._size_md &__body {
-		padding: math.div(layout.$gap, 2) math.div(layout.$gap, 1.5);
-	}
-
-	&._size_sm {
-		font-size: 12px;
-	}
-
-	&._size_sm &__body {
-		padding: math.div(layout.$gap, 3.5) math.div(layout.$gap, 2);
-	}
-
-	&._disabled {
-		pointer-events: none;
-		cursor: default;
-	}
-
-	&._disabled &__body {
-		border-color: colors.getColor('muted');
-		background-color: colors.getColor('muted');
-	}
-
-	&._disabled &__caption {
-		color: colors.getColor('back');
-	}
-
-	&._disabled._template_ghost &__body {
-		border-color: colors.getColor('muted');
-		background-color: transparent;
-	}
-
-	&._disabled._template_ghost &__caption {
-		color: colors.getColor('muted');
-	}
-
-	&._disabled._template_text &__body {
-		border-color: transparent;
-		background-color: transparent;
-	}
-
-	&._disabled._template_text &__caption {
-		color: colors.getColor('muted');
-	}
+	@import './style/templates';
+	@import './style/sizes';
+	@import './style/themes';
+	@import './style/square';
+	@import './style/disabled';
 }

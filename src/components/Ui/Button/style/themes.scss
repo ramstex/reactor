@@ -1,0 +1,105 @@
+@use 'sass:map';
+@use './src/style/colors/module' as colors;
+
+$themes: (
+	primary: (
+		default: (
+			background: colors.getColor(primary),
+			text: colors.getColor(text),
+			border: colors.getColor(primary),
+		),
+		hover: (
+			background: colors.getColor(primary-light),
+			text: colors.getColor(text),
+			border: colors.getColor(primary-light),
+		),
+	),
+	secondary: (
+		default: (
+			background: colors.getColor(secondary),
+			text: colors.getColor(text),
+			border: colors.getColor(secondary),
+		),
+		hover: (
+			background: colors.getColor(secondary-light),
+			text: colors.getColor(text),
+			border: colors.getColor(secondary-light),
+		),
+	),
+);
+
+@each $theme, $value in $themes {
+	$default: map.get($value, default);
+	$hover: map.get($value, hover);
+
+	//	Default template
+	&._theme_#{$theme} &__body {
+		border-color: transparent;
+		background-color: map.get($default, background);
+	}
+
+	&._theme_#{$theme} &__caption {
+		color: map.get($default, text);
+	}
+
+	&._theme_#{$theme} &__icon {
+		fill: map.get($default, text);
+	}
+
+	//	Ghost template
+	&._template_ghost._theme_#{$theme} &__body {
+		border-color: map.get($default, background);
+		background-color: transparent;
+	}
+
+	&._template_ghost._theme_#{$theme} &__caption {
+		color: map.get($default, background);
+	}
+
+	&._template_ghost._theme_#{$theme} &__icon {
+		fill: map.get($default, background);
+	}
+
+	//	Text template
+	&._template_text._theme_#{$theme} &__body {
+		border-color: transparent;
+		background-color: transparent;
+	}
+
+	&._template_text._theme_#{$theme} &__caption {
+		color: map.get($default, background);
+	}
+
+	&._template_text._theme_#{$theme} &__icon {
+		fill: map.get($default, background);
+	}
+
+	//	Hovers
+	// Default and ghost templates
+	&._theme_#{$theme}:hover &__body {
+		background-color: map.get($hover, background);
+		outline: none;
+	}
+
+	&._theme_#{$theme}:hover &__caption {
+		color: map.get($hover, text);
+	}
+
+	&._theme_#{$theme}:hover &__icon {
+		fill: map.get($hover, text);
+	}
+
+	//	Text template
+	&._template_text._theme_#{$theme}:hover &__body {
+		border-color: transparent;
+		background-color: transparent;
+	}
+
+	&._template_text._theme_#{$theme}:hover &__caption {
+		color: map.get($hover, background);
+	}
+
+	&._template_text._theme_#{$theme}:hover &__icon {
+		fill: map.get($hover, background);
+	}
+}

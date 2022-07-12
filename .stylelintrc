@@ -126,6 +126,7 @@
 			}
 		],
 		"declaration-no-important": null,
+		"no-invalid-position-at-import-rule": null,
 		"font-family-name-quotes": "always-unless-keyword",
 		"font-family-no-duplicate-names": true,
 		"font-weight-notation": "numeric",

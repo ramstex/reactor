@@ -1,0 +1,68 @@
+@use 'sass:math';
+@use './src/style/layout/module' as layout;
+
+&._square &__body {
+	width: layout.$gap * 2;
+	height: layout.$gap * 2;
+	padding: 0;
+}
+
+&._square._circle &__body {
+	border-radius: 100%;
+}
+
+&._square._caption-position_left {
+	flex-direction: row-reverse;
+}
+
+&._square._caption-position_left &__caption {
+	margin-right: math.div(layout.$gap, 2);
+}
+
+&._square._caption-position_right {
+	flex-direction: row;
+}
+
+&._square._caption-position_right &__caption {
+	margin-left: math.div(layout.$gap, 2);
+}
+
+&._square._caption-position_top {
+	flex-direction: column-reverse;
+}
+
+&._square._caption-position_top &__caption {
+	margin-bottom: math.div(layout.$gap, 2);
+}
+
+&._square._caption-position_bottom {
+	flex-direction: column;
+}
+
+&._square._caption-position_bottom &__caption {
+	margin-top: math.div(layout.$gap, 2);
+}
+
+&._square:hover &__caption,
+&._square._hover &__caption {
+	text-decoration: underline;
+}
+
+&._square._size_sm &__body {
+	width: layout.$gap;
+	height: layout.$gap;
+}
+
+&._square._size_md &__body {
+	width: layout.$gap * 1.5;
+	height: layout.$gap * 1.5;
+}
+
+&._square._size_lg &__body {
+	width: layout.$gap * 2;
+	height: layout.$gap * 2;
+}
+
+&._square._wide &__body {
+	width: 100%;
+}
