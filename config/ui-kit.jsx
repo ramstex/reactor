@@ -5,6 +5,7 @@ import PageUiKitGrid from '/src/pages/UiKit/pages/Grid/Grid.jsx';
 import PageUiKitMedia from '/src/pages/UiKit/pages/Media/Media.jsx';
 import PageUiKitTypography from '/src/pages/UiKit/pages/Typography/Typography.jsx';
 import PageUiKitColors from '/src/pages/UiKit/pages/Colors/Colors.jsx';
+import PageUiKitIcons from '/src/pages/UiKit/pages/Icons/Icons.jsx';
 import PageUiKitButtons from '/src/pages/UiKit/pages/Buttons/Buttons.jsx';
 import PageUiKitDropdown from '/src/pages/UiKit/pages/Dropdown/Dropdown.jsx';
 import PageUiKitInputs from '/src/pages/UiKit/pages/Inputs/Inputs.jsx';
@@ -47,6 +48,12 @@ const UiKitConfig = {
 			name: 'colors',
 			href: `${ RootPath }/colors`,
 			component: <PageUiKitColors />,
+		},
+
+		{
+			name: 'icons',
+			href: `${ RootPath }/icons`,
+			component: <PageUiKitIcons />,
 		},
 	],
 };

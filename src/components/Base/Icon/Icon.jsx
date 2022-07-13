@@ -9,10 +9,15 @@ const BaseIcon = ( props ) => {
 	const {
 		className,
 		icon,
+		size = 'md',
 		onClick,
 	} = props;
 
-	const classNameRoot = classnames( 'base-icon', className );
+	const classNameRoot = classnames(
+		'base-icon',
+		className,
+		{ [`_size_${ size }`]: size !== 'md' }
+	);
 
 	const getIcon = () => {
 		return Helper.getIconByName( icon );

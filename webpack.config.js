@@ -15,7 +15,7 @@ export default ( env, argv ) => {
 		output: {
 			filename: 'main.js?v=[hash]',
 			path: path.join( process.cwd(), 'dist' ),
-			publicPath: '',
+			publicPath: '/',
 		},
 
 		devServer: {
