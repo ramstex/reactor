@@ -9,13 +9,13 @@ import Minus from '/src/assets/icons/minus.svg';
 import EyeClosed from '/src/assets/icons/eye-closed.svg';
 import EyeOpened from '/src/assets/icons/eye-opened.svg';
 import Play from '/src/assets/icons/play.svg';
-import ProfileLogIn from '/src/assets/icons/profile-log-in.svg';
-import ProfileLogOut from '/src/assets/icons/profile-log-out.svg';
+import ProfileLogIn from '/src/assets/icons/profile-login.svg';
+import ProfileLogOut from '/src/assets/icons/profile-logout.svg';
 import Search from '/src/assets/icons/search.svg';
 import Refresh from '/src/assets/icons/refresh.svg';
-import Vkontakte from '/src/assets/icons/vk.svg';
-import Telegram from '/src/assets/icons/tg.svg';
-import Odnoklassniki from '/src/assets/icons/ok.svg';
+import Vkontakte from '/src/assets/icons/vkontakte.svg';
+import Telegram from '/src/assets/icons/telegram.svg';
+import Odnoklassniki from '/src/assets/icons/odnoklassniki.svg';
 
 const getIconByName = ( name ) => {
 	switch ( name ) {

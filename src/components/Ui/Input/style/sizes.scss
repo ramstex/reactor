@@ -2,12 +2,12 @@
 @use './src/style/sizes/module' as sizes;
 
 @each $size, $value in sizes.$ui {
-	&._size_#{$size} &__body {
+	&._size_#{$size} &__field {
 		border-width: map.get($value, border);
 	}
 
 	&._size_#{$size} &__input {
-		padding: map.get($value, padding);
+		padding: ( map.get($value, padding-v) - map.get($value, border) * 2 ) map.get($value, padding-h);
 		font-size: map.get($value, font-size);
 		line-height: 1;
 	}

@@ -15,7 +15,7 @@ $states: (
 );
 
 @each $state, $value in $states {
-	&._state_#{$state} &__body {
+	&._state_#{$state} &__field {
 		border-color: map.get($value, border);
 	}
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 
+import UiButton from '../Button/Button.jsx';
+
 import './Input.scss';
 
 const UiInput = ( props ) => {
@@ -18,6 +20,8 @@ const UiInput = ( props ) => {
 		required,
 		message,
 		autoFocus,
+		aside,
+		passwordSwitch,
 		onChange,
 		onMount,
 		onFocus,
@@ -30,9 +34,24 @@ const UiInput = ( props ) => {
 	] = useState( value );
 
 	const [
+		typeLocal,
+		setTypeLocal,
+	] = useState( type );
+
+	const [
 		isFocused,
 		setFocused,
 	] = useState( autoFocus );
+
+	const [
+		isPasswordVisible,
+		setPasswordVisibility,
+	] = useState( false );
+
+	const [
+		passwordSwitchIcon,
+		setPasswordSwitchIcon,
+	] = useState( 'eye-opened' );
 
 	useEffect( () => {
 		!!onMount && onMount();
@@ -43,6 +62,22 @@ const UiInput = ( props ) => {
 			setValueLocal( value );
 		}
 	}, [ value ] );
+
+	useEffect( () => {
+		setTypeLocal( type );
+	}, [ type ] );
+
+	useEffect( () => {
+		if ( type === 'password' ) {
+			setTypeLocal( isPasswordVisible
+				? 'text'
+				: 'password' );
+
+			setPasswordSwitchIcon( isPasswordVisible
+				? 'eye-closed'
+				: 'eye-opened' );
+		}
+	}, [ isPasswordVisible ] );
 
 	const onChangeLocal = ( event ) => {
 		!!onChange && onChange( event );
@@ -58,6 +93,10 @@ const UiInput = ( props ) => {
 		!!onBlur && onBlur( event );
 		setFocused( false );
 	};
+
+	const onPasswordSwitchClick = () => {
+		setPasswordVisibility( !isPasswordVisible );
+	}
 
 	const classNameRoot = () => {
 		return classnames(
@@ -80,6 +119,7 @@ const UiInput = ( props ) => {
 		'className',
 		'children',
 		'value',
+		'typeLocal',
 		'textarea',
 		'resize',
 		'state',
@@ -87,6 +127,8 @@ const UiInput = ( props ) => {
 		'theme',
 		'message',
 		'type',
+		'aside',
+		'passwordSwitch',
 		'onChange',
 		'onMounted',
 	] );
@@ -99,7 +141,7 @@ const UiInput = ( props ) => {
 		onBlur: onBlurLocal,
 		type: textarea
 			? undefined
-			: type,
+			: typeLocal,
 	};
 
 	const InputComponent = textarea
@@ -112,12 +154,27 @@ const UiInput = ( props ) => {
 				{ !!children && <p className={ 'ui-input__caption' }> { children } </p> }
 
 				<div className="ui-input__body">
-					<InputComponent
-						{ ...inputAttrs }
-						className={ 'ui-input__input' }
-						onFocus={ onFocusLocal }
-						onBlur={ onBlurLocal }
-					/>
+					<div className="ui-input__field">
+						<InputComponent
+							{ ...inputAttrs }
+							className={ 'ui-input__input' }
+							onFocus={ onFocusLocal }
+							onBlur={ onBlurLocal }
+						/>
+
+						{
+							passwordSwitch &&
+							<UiButton
+								className={ 'ui-input__password-switch' }
+								template={ 'text' }
+								icon={ passwordSwitchIcon }
+								tight
+								onClick={ onPasswordSwitchClick }
+							/>
+						}
+					</div>
+
+					{ aside }
 				</div>
 
 				{ !!message && <p className={ 'ui-input__message' }> { message } </p> }

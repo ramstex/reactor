@@ -13,8 +13,17 @@ const PageUiKitInputs = () => {
 		setValue,
 	] = useState( 'value' );
 
+	const [
+		password,
+		setPassword,
+	] = useState( '' );
+
 	const onChange = ( event ) => {
 		setValue( event.target.value );
+	};
+
+	const onChangePassword = ( event ) => {
+		setPassword( event.target.value );
 	};
 
 	return (
@@ -39,6 +48,17 @@ const PageUiKitInputs = () => {
 							placeholder={ 'Введите что-нибудь' }
 							onChange={ onChange }
 						>Текстовое поле</UiInput>
+					</GridCol>
+				</GridRow>
+
+				<GridRow className="_mb_3">
+					<GridCol col={ 6 }>
+						<UiInput
+							value={ password }
+							type={ 'password' }
+							passwordSwitch
+							onChange={ onChangePassword }
+						>Пароль</UiInput>
 					</GridCol>
 				</GridRow>
 			</MarkupSection>

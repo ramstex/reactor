@@ -1,6 +1,6 @@
 @use '/src/style/colors/module' as colors;
 
-&._disabled &__body {
+&._disabled &__field {
 	border-color: colors.getColor(muted);
 }
 

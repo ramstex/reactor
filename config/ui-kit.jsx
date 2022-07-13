@@ -55,6 +55,18 @@ const UiKitConfig = {
 			href: `${ RootPath }/icons`,
 			component: <PageUiKitIcons />,
 		},
+
+		{
+			name: 'buttons',
+			href: `${ RootPath }/buttons`,
+			component: <PageUiKitButtons />,
+		},
+
+		{
+			name: 'inputs',
+			href: `${ RootPath }/inputs`,
+			component: <PageUiKitInputs />,
+		},
 	],
 };
 

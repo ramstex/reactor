@@ -9,14 +9,16 @@ import './Button.scss';
 
 const UiButton = ( props ) => {
 	const {
+		className,
 		children,
 		type = 'button',
 		template = 'default',
-		theme = 'primary',
+		theme = 'default',
 		size = 'md',
 		wide,
 		square,
 		circle,
+		tight,
 		captionPosition = 'left',
 		disabled,
 		hover,
@@ -30,12 +32,14 @@ const UiButton = ( props ) => {
 	}, [ href ] );
 
 	const classNameRoot = classnames(
+		className,
 		'ui-button',
 		`_template_${ template }`,
 		`_theme_${ theme }`,
 		`_size_${ size }`,
 		{ '_wide': wide },
 		{ '_square': square },
+		{ '_tight': tight },
 		{ '_circle': circle },
 		{ '_disabled': disabled },
 		{ '_hover': hover },
@@ -49,6 +53,7 @@ const UiButton = ( props ) => {
 		'theme',
 		'size',
 		'wide',
+		'tight',
 		'square',
 		'circle',
 		'captionPosition',

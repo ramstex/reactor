@@ -13,7 +13,7 @@ $themes: (
 );
 
 @each $theme, $value in $themes {
-	&._theme_#{$theme}._focus &__body {
+	&._theme_#{$theme}._focus &__field {
 		border-color: map.get($value, border);
 	}
 

@@ -6,6 +6,12 @@
 .ui-input {
 	&__body {
 		display: flex;
+		width: 100%;
+	}
+
+	&__field {
+		display: flex;
+		width: 100%;
 		border-style: solid;
 		border-color: colors.getColor(text);
 		transition: border-color layout.$dur ease;
@@ -14,7 +20,6 @@
 	&__input {
 		display: block;
 		width: 100%;
-		padding: math.div(layout.$gap, 3);
 		border: none;
 		font-family: fonts.$primary;
 		color: colors.getColor(text);
@@ -40,6 +45,12 @@
 		margin-top: math.div(layout.$gap, 6);
 		font-size: 12px;
 		color: colors.getColor('text');
+	}
+
+	&__password-switch {
+		.ui-button__body {
+			width: layout.$gap * 1.5;
+		}
 	}
 
 	&._required &__caption::after {

@@ -4,7 +4,11 @@
 @each $size, $value in sizes.$ui {
 	&._size_#{$size} &__body {
 		border-width: map.get($value, border);
-		padding: map.get($value, padding);
+		padding: map.get($value, padding-v) map.get($value, padding-h);
+	}
+
+	&._size_#{$size}._tight &__body {
+		padding: 0;
 	}
 
 	&._size_#{$size}._square &__body {

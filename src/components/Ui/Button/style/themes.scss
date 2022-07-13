@@ -2,6 +2,20 @@
 @use './src/style/colors/module' as colors;
 
 $themes: (
+	default: (
+		default: (
+			background: colors.getColor(text),
+			text: colors.getColor(back),
+			textOutside: colors.getColor(text),
+			border: colors.getColor(text),
+		),
+		hover: (
+			background: colors.getColor(muted),
+			text: colors.getColor(back),
+			textOutside: colors.getColor(muted),
+			border: colors.getColor(muted-dark),
+		),
+	),
 	primary: (
 		default: (
 			background: colors.getColor(primary),
@@ -42,6 +56,10 @@ $themes: (
 		color: map.get($default, text);
 	}
 
+	&._theme_#{$theme}._square &__caption {
+		color: map.get($default, textOutside);
+	}
+
 	&._theme_#{$theme} &__icon {
 		fill: map.get($default, text);
 	}
@@ -76,30 +94,47 @@ $themes: (
 
 	//	Hovers
 	// Default and ghost templates
-	&._theme_#{$theme}:hover &__body {
+	&._theme_#{$theme}:hover &__body,
+	&._theme_#{$theme}._hover &__body {
 		background-color: map.get($hover, background);
 		outline: none;
 	}
 
-	&._theme_#{$theme}:hover &__caption {
+	&._theme_#{$theme}:hover &__caption,
+	&._theme_#{$theme}._hover &__caption {
 		color: map.get($hover, text);
 	}
 
-	&._theme_#{$theme}:hover &__icon {
+	&._theme_#{$theme}._square:hover &__caption,
+	&._theme_#{$theme}._square._hover &__caption {
+		color: map.get($hover, background);
+	}
+
+	&._theme_#{$theme}:hover &__icon,
+	&._theme_#{$theme}._hover &__icon {
 		fill: map.get($hover, text);
 	}
 
+	//	Ghost template
+	&._theme_#{$theme}:hover &__body,
+	&._theme_#{$theme}._hover &__body {
+		border-color: map.get($hover, background);
+	}
+
 	//	Text template
-	&._template_text._theme_#{$theme}:hover &__body {
+	&._template_text._theme_#{$theme}:hover &__body,
+	&._template_text._theme_#{$theme}._hover &__body {
 		border-color: transparent;
 		background-color: transparent;
 	}
 
-	&._template_text._theme_#{$theme}:hover &__caption {
+	&._template_text._theme_#{$theme}:hover &__caption,
+	&._template_text._theme_#{$theme}._hover &__caption {
 		color: map.get($hover, background);
 	}
 
-	&._template_text._theme_#{$theme}:hover &__icon {
+	&._template_text._theme_#{$theme}:hover &__icon,
+	&._template_text._theme_#{$theme}._hover &__icon {
 		fill: map.get($hover, background);
 	}
 }
