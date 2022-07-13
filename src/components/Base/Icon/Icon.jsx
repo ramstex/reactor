@@ -3,40 +3,27 @@ import classnames from 'classnames';
 
 import './Icon.scss';
 
-import Check from '../../../assets/icons/check.svg';
-import Search from '../../../assets/icons/search.svg';
-import ProfileLoggedOut from '../../../assets/icons/profile-logged-out.svg';
-import ProfileLoggedIn from '../../../assets/icons/profile-logged-in.svg';
+import Helper from './helper.jsx';
 
-class BaseIcon extends React.Component {
-	//	Классы
-	classNameRoot() {
-		const { className } = this.props;
+const BaseIcon = ( props ) => {
+	const {
+		className,
+		icon,
+		onClick,
+	} = props;
 
-		return classnames( 'base-icon', className );
+	const classNameRoot = classnames( 'base-icon', className );
+
+	const getIcon = () => {
+		return Helper.getIconByName( icon );
 	}
 
-	getIcon() {
-		switch ( this.props.icon ) {
-			case 'check':
-				return Check;
-			case 'search':
-				return Search;
-			case 'profile-logged-in':
-				return ProfileLoggedIn;
-			case 'profile-logged-out':
-				return ProfileLoggedOut;
-		}
-	}
+	const Svg = getIcon();
 
-	render() {
-		const { onClick } = this.props;
-
-		const Svg = this.getIcon();
-
-		return <Svg className={ this.classNameRoot() }
-			onClick={ onClick } />;
-	}
+	return <Svg
+		className={ classNameRoot }
+		onClick={ onClick }
+	/>;
 }
 
 export default BaseIcon;
