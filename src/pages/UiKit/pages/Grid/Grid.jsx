@@ -3,7 +3,7 @@ import React from 'react';
 import './Grid.scss';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
-import { Row, Col } from '../../../../components/Grid/Grid.jsx';
+import { GridRow, GridCol } from '../../../../components/Grid/Grid.jsx';
 import LocalNav from '../../components/Nav/Nav.jsx';
 
 import dummy from './dummy.js';
@@ -24,10 +24,11 @@ class PageUiKitGrid extends React.Component {
 
 									{ ( !!row.description && <p>{ row.description }</p> ) }
 
-									<Row className={ 'page-ui-kit-grid__row' } { ...row.props }>
+									<GridRow className={ 'page-ui-kit-grid__row' }
+										{ ...row.props }>
 										{ row.cols.map( ( col, indexCol ) => {
 											return (
-												<Col
+												<GridCol
 													className={ 'page-ui-kit-grid__col' }
 													key={ indexCol }
 													{ ...col.props }
@@ -35,10 +36,10 @@ class PageUiKitGrid extends React.Component {
 													<div className="page-ui-kit-grid__col-content">
 														{ col.content }
 													</div>
-												</Col>
+												</GridCol>
 											);
 										} ) }
-									</Row>
+									</GridRow>
 								</React.Fragment>
 							);
 						} ) }

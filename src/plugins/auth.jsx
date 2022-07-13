@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Form from './form.jsx';
 
-import { Col, Row } from '../components/Grid/Grid.jsx';
+import { GridCol } from '../components/Grid/Grid.jsx';
 import UiInput from '../components/Ui/Input/Input.jsx';
 import UiCheckbox from '../components/Ui/Checkbox/Checkbox.jsx';
 import UiButton from '../components/Ui/Button/Button.jsx';
@@ -34,7 +34,7 @@ class AuthFormComponent extends React.Component {
 					switch ( value.type ) {
 						case 'checkbox':
 							return (
-								<Col className={ '_mb_2' }
+								<GridCol className={ '_mb_2' }
 									col={ 12 }
 									key={ key }>
 									<UiCheckbox
@@ -44,11 +44,11 @@ class AuthFormComponent extends React.Component {
 									>
 										{ value.caption }
 									</UiCheckbox>
-								</Col>
+								</GridCol>
 							);
 						default:
 							return (
-								<Col className={ '_mb_2' }
+								<GridCol className={ '_mb_2' }
 									col={ 5 }
 									key={ key }>
 									<UiInput
@@ -63,7 +63,7 @@ class AuthFormComponent extends React.Component {
 									>
 										{ value.caption }
 									</UiInput>
-								</Col>
+								</GridCol>
 							);
 					}
 				} ) }

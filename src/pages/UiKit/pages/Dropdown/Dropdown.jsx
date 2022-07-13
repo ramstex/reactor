@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import BaseDropdown from '../../../../components/Base/Dropdown/Dropdown.jsx';
 import UiButton from '../../../../components/Ui/Button/Button.jsx';
 import MarkupContainer from '../../../../components/Markup/Container/Container.jsx';
-import { Row, Col } from '../../../../components/Grid/Grid.jsx';
+import { GridRow, GridCol } from '../../../../components/Grid/Grid.jsx';
 import LocalLayout from '../../components/Layout/Layout.jsx';
 import BaseLink from '../../../../components/Base/Link/Link.jsx';
 
@@ -25,22 +25,22 @@ const PageUiKitDropdown = () => {
 	return (
 		<LocalLayout title={ 'Dropdown' }>
 			<MarkupContainer>
-				<Row className={ '_mb_3' }>
-					<Col>
+				<GridRow className={ '_mb_3' }>
+					<GridCol>
 						<UiButton onClick={ onOpenClick }>Открыть</UiButton>
-					</Col>
+					</GridCol>
 
-					<Col>
+					<GridCol>
 						<UiButton onClick={ onCloseClick }>Закрыть</UiButton>
-					</Col>
+					</GridCol>
 
-					<Col>
+					<GridCol>
 						<UiButton onClick={ onToggleClick }>Переключить</UiButton>
-					</Col>
-				</Row>
+					</GridCol>
+				</GridRow>
 
-				<Row>
-					<Col>
+				<GridRow>
+					<GridCol>
 						<BaseDropdown opened={ opened }>
 							<p>
 								Задача
@@ -72,8 +72,8 @@ const PageUiKitDropdown = () => {
 								играет важную роль в формировании соответствующий условий активизации.
 							</p>
 						</BaseDropdown>
-					</Col>
-				</Row>
+					</GridCol>
+				</GridRow>
 			</MarkupContainer>
 		</LocalLayout>
 	);

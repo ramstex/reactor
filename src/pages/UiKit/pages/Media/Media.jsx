@@ -1,10 +1,8 @@
 import React from 'react';
-// import Media from '../../../../plugins/media.jsx';
 import useMedia from '../../../../hooks/useMedia.jsx';
-// import { useMediaQuery } from 'react-responsive';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
-import { Row, Col } from '../../../../components/Grid/Grid.jsx';
+import { GridRow, GridCol } from '../../../../components/Grid/Grid.jsx';
 import LocalNav from '../../components/Nav/Nav.jsx';
 
 import './Media.scss';
@@ -25,29 +23,29 @@ const PageUiKitMedia = () => {
 			<MarkupSection title={ 'Ui Kit - Media' }>
 				<LocalNav />
 
-				<Row>
-					<Col col={ 3 }>
+				<GridRow>
+					<GridCol col={ 3 }>
 						<p>Device:</p>
-					</Col>
+					</GridCol>
 
-					<Col col={ 9 }> {
+					<GridCol col={ 9 }> {
 						getValueForDevice( {
 							mobile: 'MOBILE',
 							tablet: 'TABLET',
 							desktop: 'DESKTOP',
 						} )
 					}
-					</Col>
+					</GridCol>
 
-					<Col col={ 3 }>
+					<GridCol col={ 3 }>
 						<p>Orientation:</p>
-					</Col>
+					</GridCol>
 
-					<Col col={ 9 }> {
+					<GridCol col={ 9 }> {
 						getValueForOrientation( { portrait: 'PORTRAIT' }, 'LANDSCAPE' )
 					}
-					</Col>
-				</Row>
+					</GridCol>
+				</GridRow>
 
 				<br />
 				<hr />

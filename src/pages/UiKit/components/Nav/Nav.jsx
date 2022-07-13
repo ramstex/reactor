@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import UiKitConfig from '/config/ui-kit.jsx';
 
 import BaseLink from '/src/components/Base/Link/Link.jsx';
-import { Row, Col } from '/src/components/Grid/Grid.jsx';
+import { GridRow, GridCol } from '/src/components/Grid/Grid.jsx';
 
 import './Nav.scss';
 
@@ -14,17 +14,17 @@ const LocalNav = ( props ) => {
 
 	return (
 		<div className={ classNameRoot }>
-			<Row>
+			<GridRow>
 				{
 					UiKitConfig.pages.map( ( page ) => {
 						return (
-							<Col key={ page.name }>
+							<GridCol key={ page.name }>
 								<BaseLink href={ page.href }>{ page.title || page.name }</BaseLink>
-							</Col>
+							</GridCol>
 						);
 					} )
 				}
-			</Row>
+			</GridRow>
 		</div>
 	);
 };

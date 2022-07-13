@@ -1,5 +1,5 @@
-import GridRow from './Row.jsx';
-import GridCol from './Col.jsx';
+import Row from './Row.jsx';
+import Col from './Col.jsx';
 
-export const Row = GridRow;
-export const Col = GridCol;
+export const GridRow = Row;
+export const GridCol = Col;

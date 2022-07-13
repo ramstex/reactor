@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
-import { Row, Col } from '../Grid/Grid.jsx';
+import { GridRow, GridCol } from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
 
 import './Header.scss';
@@ -18,20 +18,20 @@ const Header = ( props ) => {
 	return (
 		<header className={ classNameRoot }>
 			<MarkupContainer wide>
-				<Row alignV={ 'center' }>
-					<Col>
+				<GridRow alignV={ 'center' }>
+					<GridCol>
 						<BaseLogo
 							className={ 'header__logo' }
 							src={ Logo }
 							href={ 'https://google.com' }
 							target={ '_blank' }
 						/>
-					</Col>
+					</GridCol>
 
-					<Col>
+					<GridCol>
 						<LocalNav />
-					</Col>
-				</Row>
+					</GridCol>
+				</GridRow>
 			</MarkupContainer>
 		</header>
 	);
