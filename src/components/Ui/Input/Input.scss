@@ -47,7 +47,7 @@
 		color: colors.getColor('text');
 	}
 
-	&__password-switch {
+	&__button {
 		.ui-button__body {
 			width: layout.$gap * 1.5;
 		}

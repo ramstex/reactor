@@ -11,10 +11,15 @@ const BaseImage = ( props ) => {
 
 	const classNameRoot = () => {
 		return classnames( 'base-logo', className );
-	}
+	};
 
 	if ( typeof src === 'string' ) {
-		return <img className={ classNameRoot() } src={ src } alt={ alt } title={ title } />;
+		return <img
+			className={ classNameRoot() }
+			src={ src }
+			alt={ alt }
+			title={ title }
+		/>;
 	}
 
 	const Image = src;

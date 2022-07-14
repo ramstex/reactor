@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
-import { GridRow, GridCol } from '../../../../components/Grid/Grid.jsx';
-import UiInput from '../../../../components/Ui/Input/Input.jsx';
-import LocalLayout from '../../components/Layout/Layout.jsx';
+import MarkupSection from '/src/components/Markup/Section/Section.jsx';
+import { GridRow, GridCol } from '/src/components/Grid/Grid.jsx';
+import UiButton from '/src/components/Ui/Button/Button.jsx';
+import UiInput from '/src/components/Ui/Input/Input.jsx';
+import LocalLayout from '/src/components/Layout/Layout.jsx';
 
 import './Inputs.scss';
 
@@ -14,16 +15,33 @@ const PageUiKitInputs = () => {
 	] = useState( 'value' );
 
 	const [
+		text,
+		setText,
+	] = useState( 'text' );
+
+	const [
 		password,
 		setPassword,
 	] = useState( '' );
 
-	const onChange = ( event ) => {
+	const onChangeValue = ( event ) => {
 		setValue( event.target.value );
+	};
+
+	const onChangeText = ( event ) => {
+		setText( event.target.value );
 	};
 
 	const onChangePassword = ( event ) => {
 		setPassword( event.target.value );
+	};
+
+	const onClickValue = () => {
+		setValue( 'value' );
+	};
+
+	const onClickClear = () => {
+		setValue( '' );
 	};
 
 	return (
@@ -34,7 +52,20 @@ const PageUiKitInputs = () => {
 						<UiInput
 							value={ value }
 							placeholder={ 'Введите что-нибудь' }
-							onChange={ onChange }
+							clearable
+							aside={
+								<React.Fragment>
+									<UiButton
+										icon={ 'refresh' }
+										onClick={ onClickValue }
+									/>
+									<UiButton
+										icon={ 'close' }
+										onClick={ onClickClear }
+									/>
+								</React.Fragment>
+							}
+							onChange={ onChangeValue }
 						>Обычный инпут</UiInput>
 					</GridCol>
 				</GridRow>
@@ -42,11 +73,11 @@ const PageUiKitInputs = () => {
 				<GridRow className="_mb_3">
 					<GridCol col={ 6 }>
 						<UiInput
-							value={ value }
+							value={ text }
 							textarea
 							resize
 							placeholder={ 'Введите что-нибудь' }
-							onChange={ onChange }
+							onChange={ onChangeText }
 						>Текстовое поле</UiInput>
 					</GridCol>
 				</GridRow>
@@ -56,7 +87,7 @@ const PageUiKitInputs = () => {
 						<UiInput
 							value={ password }
 							type={ 'password' }
-							passwordSwitch
+							switchable
 							onChange={ onChangePassword }
 						>Пароль</UiInput>
 					</GridCol>
