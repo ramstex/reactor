@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import classnames from 'classnames';
 import useInputProps from './hooks/useInputProps.jsx';
 
@@ -6,7 +6,7 @@ import UiButton from '../Button/Button.jsx';
 
 import './Input.scss';
 
-const UiInput = ( props ) => {
+const UiInput = forwardRef( ( props, ref ) => {
 	const {
 		className,
 		type = 'text',
@@ -33,8 +33,6 @@ const UiInput = ( props ) => {
 	useEffect( () => {
 		!!onMount && onMount();
 	}, [] );
-
-	const inputRef = useRef();
 
 	const [
 		valueLocal,
@@ -94,7 +92,9 @@ const UiInput = ( props ) => {
 	}, autoFocus );
 
 	const onChangeLocal = ( event ) => {
-		!!onChange && onChange( event );
+		if ( !!onChange ) {
+			onChange( event );
+		}
 		setValueLocal( event.target.value );
 	};
 
@@ -155,7 +155,7 @@ const UiInput = ( props ) => {
 					<div className="ui-input__field">
 						<InputComponent
 							className={ 'ui-input__input' }
-							ref={ inputRef }
+							ref={ ref }
 							{ ...inputProps }
 						/>
 
@@ -192,6 +192,6 @@ const UiInput = ( props ) => {
 			</label>
 		</div>
 	);
-};
+} );
 
 export default UiInput;

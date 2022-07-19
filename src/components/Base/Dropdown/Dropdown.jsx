@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import './Dropdown.scss';
 
@@ -44,27 +43,27 @@ const BaseDropdown = ( props = { opened: false } ) => {
 
 	return (
 		<React.Fragment>
-			<Transition
-				in={ props.opened }
-				timeout={ 500 }
-				onEntering={ onEntering }
-				onEntered={ onEntered }
-				onExiting={ onExiting }
-				onExited={ onExited }
-			>
-				{ ( state ) => {
-					return (
-						<div className="base-dropdown"
-							 style={ { ...transitions[ state ] } }
-						>
-							<div className="base-dropdown__content"
-								 ref={ content }>
-								{ props.children }
-							</div>
-						</div>
-					);
-				} }
-			</Transition>
+			{ /* <Transition */ }
+			{ /* 	in={ props.opened } */ }
+			{ /* 	timeout={ 500 } */ }
+			{ /* 	onEntering={ onEntering } */ }
+			{ /* 	onEntered={ onEntered } */ }
+			{ /* 	onExiting={ onExiting } */ }
+			{ /* 	onExited={ onExited } */ }
+			{ /* > */ }
+			{ /* 	{ ( state ) => { */ }
+			{ /* 		return ( */ }
+			{ /* 			<div className="base-dropdown" */ }
+			{ /* 				 style={ { ...transitions[ state ] } } */ }
+			{ /* 			> */ }
+			{ /* 				<div className="base-dropdown__content" */ }
+			{ /* 					 ref={ content }> */ }
+			{ /* 					{ props.children } */ }
+			{ /* 				</div> */ }
+			{ /* 			</div> */ }
+			{ /* 		); */ }
+			{ /* 	} } */ }
+			{ /* </Transition> */ }
 		</React.Fragment>
 	);
 };

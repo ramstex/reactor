@@ -1,35 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './Form.scss';
 
-class UiForm extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+const UiForm = ( props ) => {
+	const {
+		className,
+		children,
+		onSubmit,
+		onInvalid,
+	} = props;
 
-	//	Классы
-	classNameRoot() {
-		const { className } = this.props;
-		return classnames(className);
-	}
+	const classNameRoot = classnames( className );
 
-	render() {
-		const { action } = this.props;
+	const onSubmitLocal = ( event ) => {
+		if ( !!onSubmit ) {
+			onSubmit( event );
+		}
+	};
 
-		return (
-			<form className={this.classNameRoot()} action={action}>
-				{this.children}
-			</form>
-		);
-	}
-}
+	const onInvalidLocal = ( event ) => {
+		if ( !!onInvalid ) {
+			onInvalid( event );
+		}
+	};
 
-UiForm.propTypes = {
-	children: PropTypes.node,
-	className: PropTypes.string,
-	action: PropTypes.string,
+	return (
+		<form
+			className={ classNameRoot }
+			{ ...props }
+			onSubmit={ onSubmitLocal }
+			onInvalid={ onInvalidLocal }
+		>
+			{ children }
+		</form>
+	);
 };
 
 export default UiForm;

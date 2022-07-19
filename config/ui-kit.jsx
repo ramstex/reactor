@@ -7,10 +7,10 @@ import PageUiKitTypography from '/src/pages/UiKit/pages/Typography/Typography.js
 import PageUiKitColors from '/src/pages/UiKit/pages/Colors/Colors.jsx';
 import PageUiKitIcons from '/src/pages/UiKit/pages/Icons/Icons.jsx';
 import PageUiKitButtons from '/src/pages/UiKit/pages/Buttons/Buttons.jsx';
-import PageUiKitDropdown from '/src/pages/UiKit/pages/Dropdown/Dropdown.jsx';
 import PageUiKitInputs from '/src/pages/UiKit/pages/Inputs/Inputs.jsx';
-import PageUiKitTabs from '/src/pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitForms from '/src/pages/UiKit/pages/Forms/Forms.jsx';
+import PageUiKitDropdown from '/src/pages/UiKit/pages/Dropdown/Dropdown.jsx';
+import PageUiKitTabs from '/src/pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitCheckboxes from '/src/pages/UiKit/pages/Checkboxes/Checkboxes.jsx';
 import PageUiKitSelect from '/src/pages/UiKit/pages/Select/Select.jsx';
 
@@ -66,6 +66,12 @@ const UiKitConfig = {
 			name: 'inputs',
 			href: `${ RootPath }/inputs`,
 			component: <PageUiKitInputs />,
+		},
+
+		{
+			name: 'forms',
+			href: `${ RootPath }/forms`,
+			component: <PageUiKitForms />,
 		},
 	],
 };
