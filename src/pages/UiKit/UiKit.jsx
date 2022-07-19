@@ -18,6 +18,6 @@ const PageUiKit = ( props ) => {
 			</MarkupSection>
 		</div>
 	);
-}
+};
 
 export default PageUiKit;

@@ -1,17 +1,17 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import Config from '/config/media.json';
+import MediaConfig from '/config/media.json';
 
-const breakpoint = ( device = Config.defaults.device, segment = Config.defaults.segment ) => {
-	return Config.breakpoints[ device ][ segment ];
+const breakpoint = ( device = MediaConfig.defaults.device, segment = MediaConfig.defaults.segment ) => {
+	return MediaConfig.breakpoints[ device ][ segment ];
 };
 
 //	Размеры вьюпорта
-const minBreakpoint = ( device = Config.defaults.device, segment = Config.defaults.segment ) => {
+const minBreakpoint = ( device = MediaConfig.defaults.device, segment = MediaConfig.defaults.segment ) => {
 	return { minWidth: breakpoint( device, segment ) };
 };
 
-const maxBreakpoint = ( device = Config.defaults.device, segment = Config.defaults.segment ) => {
+const maxBreakpoint = ( device = MediaConfig.defaults.device, segment = MediaConfig.defaults.segment ) => {
 	return { maxWidth: breakpoint( device, segment ) - 1 };
 };
 
