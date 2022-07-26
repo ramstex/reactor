@@ -17,7 +17,7 @@ const messages = {
 			confirmation: { patternMismatch: 'Введённые пароли не совпадают' },
 		},
 
-		login: { email: { typeMismatch: 'Адрес заполнен некорректно' } },
+		login: { email: { pattern: 'Email заполнен некорректно.' } },
 
 		remind: { email: { typeMismatch: 'Адрес заполнен некорректно' } },
 	},
@@ -70,7 +70,7 @@ const contents = {
 				<React.Fragment>
 					{ 'Я соглашаюсь с ' }
 					<BaseLink href={ AgreementPdf }
-						target="_blank">
+							  target="_blank">
 						условиями регистрации
 					</BaseLink>
 				</React.Fragment>
@@ -117,9 +117,9 @@ const contents = {
 	},
 };
 
-const _FORMS = {
+const FormsConfig = {
 	messages,
 	contents,
 };
 
-export default _FORMS;
+export default FormsConfig;

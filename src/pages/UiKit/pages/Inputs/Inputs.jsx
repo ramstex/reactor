@@ -4,7 +4,7 @@ import MarkupSection from '/src/components/Markup/Section/Section.jsx';
 import { GridRow, GridCol } from '/src/components/Grid/Grid.jsx';
 import UiButton from '/src/components/Ui/Button/Button.jsx';
 import UiInput from '/src/components/Ui/Input/Input.jsx';
-import LocalLayout from '/src/components/Layout/Layout.jsx';
+import LocalLayout from '../../components/Layout/Layout.jsx';
 
 import './Inputs.scss';
 
@@ -46,7 +46,7 @@ const PageUiKitInputs = () => {
 
 	return (
 		<LocalLayout title={ 'Inputs' }>
-			<MarkupSection title={ 'Ui Kit - Inputs' }>
+			<MarkupSection>
 				<GridRow className="_mb_3">
 					<GridCol col={ 6 }>
 						<UiInput

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { REGEXP_EMAIL } from '/src/constants/regexp.jsx';
 
 import UiInput from '/src/components/Ui/Input/Input.jsx';
+import UiForm from '/src/components/Ui/Form/Form.jsx';
 import UiButton from '/src/components/Ui/Button/Button.jsx';
 
 import './Login.scss';
@@ -19,9 +20,14 @@ const FormLogin = ( props ) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: {
+			errors,
+			isValid,
+			isSubmitSuccessful,
+		},
 		reset,
 		trigger,
+		setError,
 	} = useForm( {
 		reValidateMode: 'onChange',
 		mode: 'onChange',
@@ -43,8 +49,51 @@ const FormLogin = ( props ) => {
 		};
 	};
 
-	const onSuccess = ( data ) => {
-		console.log( 'success', data );
+	const onSuccessSubmit = () => {
+	};
+
+	const onErrorSubmit = ( error ) => {
+		setError( error.name, error.error );
+	};
+
+	const onSuccess = () => {
+		return new Promise( ( onResolve, onReject ) => {
+			setTimeout( () => {
+				if ( form.email !== 'qwe@qwe.qwe' ) {
+					onReject(
+						{
+							name: 'email',
+							error: {
+								type: 'notFound',
+								message: 'Not found!',
+							},
+						} );
+
+					return;
+				}
+
+				if ( form.password !== '1234' ) {
+					onReject(
+						{
+							name: 'password',
+							error: {
+								type: 'wrong',
+								message: 'Wrong password',
+							},
+						} );
+
+					return;
+				}
+
+				onResolve();
+			}, 2000 );
+		} )
+			.then( () => {
+				onSuccessSubmit();
+			} )
+			.catch( ( error ) => {
+				onErrorSubmit( error );
+			} );
 	};
 
 	const onError = ( data ) => {
@@ -57,7 +106,7 @@ const FormLogin = ( props ) => {
 	};
 
 	return (
-		<form
+		<UiForm
 			className={ classNameRoot }
 			onSubmit={ handleSubmit( onSuccess, onError ) }
 			onInvalid={ onInvalid }
@@ -80,7 +129,9 @@ const FormLogin = ( props ) => {
 				value={ form.email }
 				state={ errors.email
 					? 'error'
-					: 'default' }
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
 				message={ errors.email?.message }
 				onChange={ onChange( 'email' ) }
 			>E-Mail</UiInput>
@@ -99,7 +150,9 @@ const FormLogin = ( props ) => {
 				value={ form.password }
 				state={ errors.password
 					? 'error'
-					: 'default' }
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
 				message={ errors.password?.message }
 				onChange={ onChange( 'password' ) }
 			>Password</UiInput>
@@ -107,7 +160,7 @@ const FormLogin = ( props ) => {
 			<UiButton
 				type={ 'submit' }
 			>Submit</UiButton>
-		</form>
+		</UiForm>
 	);
 };
 
