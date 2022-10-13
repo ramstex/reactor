@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { REGEXP_EMAIL } from '/src/constants/regexp.jsx';
 
+import useApi from '../../../plugins/api.jsx';
+
 import UiInput from '/src/components/Ui/Input/Input.jsx';
 import UiForm from '/src/components/Ui/Form/Form.jsx';
 import UiButton from '/src/components/Ui/Button/Button.jsx';
@@ -17,6 +19,8 @@ const FormLogin = ( props ) => {
 		'form-login'
 	);
 
+	const { sendQuery } = useApi();
+
 	const {
 		register,
 		handleSubmit,
@@ -25,12 +29,11 @@ const FormLogin = ( props ) => {
 			isValid,
 			isSubmitSuccessful,
 		},
-		reset,
 		trigger,
 		setError,
 	} = useForm( {
-		reValidateMode: 'onChange',
 		mode: 'onChange',
+		reValidateMode: 'onSubmit',
 	} );
 
 	const [ form, setForm ] = useState( {
@@ -38,69 +41,50 @@ const FormLogin = ( props ) => {
 		password: '',
 	} );
 
+	const [ inProcess, setInProcess ] = useState( false );
+
+	//Обработчик ввода
 	const onChange = ( name ) => {
 		return ( event ) => {
 			setForm( {
 				...form,
 				[ name ]: event.target.value,
 			} );
-
-			reset();
 		};
 	};
 
-	const onSuccessSubmit = () => {
-	};
+	// Обработчик сабмита при успешной валидации на фронте
+	const onSuccess = async () => {
+		setInProcess( true );
 
-	const onErrorSubmit = ( error ) => {
-		setError( error.name, error.error );
-	};
-
-	const onSuccess = () => {
-		return new Promise( ( onResolve, onReject ) => {
-			setTimeout( () => {
-				if ( form.email !== 'qwe@qwe.qwe' ) {
-					onReject(
-						{
-							name: 'email',
-							error: {
-								type: 'notFound',
-								message: 'Not found!',
-							},
-						} );
-
-					return;
-				}
-
-				if ( form.password !== '1234' ) {
-					onReject(
-						{
-							name: 'password',
-							error: {
-								type: 'wrong',
-								message: 'Wrong password',
-							},
-						} );
-
-					return;
-				}
-
-				onResolve();
-			}, 2000 );
-		} )
+		return await sendQuery( 'post', '/login', {}, form )
 			.then( () => {
 				onSuccessSubmit();
 			} )
 			.catch( ( error ) => {
 				onErrorSubmit( error );
+			} )
+			.finally( () => {
+				setInProcess( false );
 			} );
 	};
 
+	// Обработчик сабмита при ошибке валидации на фронте
 	const onError = ( data ) => {
 		console.log( 'error', data );
 	};
 
-	const onInvalid = async( event ) => {
+	// Обработчик успешного ответа с бека
+	const onSuccessSubmit = () => {
+		console.log( 'SUCCESS SUBMIT' );
+	};
+
+	// Обработчик ошибки в ответе с бека
+	const onErrorSubmit = ( error ) => {
+		setError( error.name, error.error );
+	};
+
+	const onInvalid = async ( event ) => {
 		event.preventDefault();
 		await trigger();
 	};
@@ -159,6 +143,7 @@ const FormLogin = ( props ) => {
 
 			<UiButton
 				type={ 'submit' }
+				disabled={ inProcess }
 			>Submit</UiButton>
 		</UiForm>
 	);
