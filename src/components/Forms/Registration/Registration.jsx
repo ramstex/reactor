@@ -1,19 +1,204 @@
-import React from 'react';
-import Auth from '../../../plugins/auth.jsx';
-import { cloneDeep } from 'lodash';
+import React, { useState } from 'react';
+import classnames from 'classnames';
+import { useForm } from 'react-hook-form';
+import { REGEXP_EMAIL } from '/src/constants/regexp.jsx';
+
+import useApi from '../../../plugins/api.jsx';
+
+import UiInput from '/src/components/Ui/Input/Input.jsx';
+import UiForm from '/src/components/Ui/Form/Form.jsx';
+import UiButton from '/src/components/Ui/Button/Button.jsx';
 
 import './Registration.scss';
-import _FORMS from '../../../../config/forms.jsx';
 
-class FormRegistration extends Auth.AuthFormComponent {
-	constructor(props) {
-		super(props);
+const FormLogin = ( props ) => {
+	const { className } = props;
 
-		this.state = {
-			formKey: 'registration',
-			fields: cloneDeep(_FORMS.contents['registration']),
+	const classNameRoot = classnames(
+		className,
+		'form-registration'
+	);
+
+	const { sendQuery } = useApi();
+
+	const {
+		register,
+		handleSubmit,
+		formState: {
+			errors,
+			isValid,
+			isSubmitSuccessful,
+		},
+		trigger,
+		setError,
+	} = useForm( {
+		mode: 'onChange',
+		reValidateMode: 'onSubmit',
+	} );
+
+	const [ form, setForm ] = useState( {
+		name: '',
+		email: '',
+		password: '',
+		confirm: '',
+	} );
+
+	const [ inProcess, setInProcess ] = useState( false );
+
+	//Обработчик ввода
+	const onChange = ( name ) => {
+		return ( event ) => {
+			setForm( {
+				...form,
+				[ name ]: event.target.value,
+			} );
 		};
-	}
-}
+	};
 
-export default FormRegistration;
+	// Обработчик сабмита при успешной валидации на фронте
+	const onSuccess = async () => {
+		setInProcess( true );
+
+		return await sendQuery( 'post', '/registration', {}, form )
+			.then( () => {
+				onSuccessSubmit();
+			} )
+			.catch( ( error ) => {
+				onErrorSubmit( error );
+			} )
+			.finally( () => {
+				setInProcess( false );
+			} );
+	};
+
+	// Обработчик сабмита при ошибке валидации на фронте
+	const onError = ( data ) => {
+		console.log( 'error', data );
+	};
+
+	// Обработчик успешного ответа с бека
+	const onSuccessSubmit = () => {
+		console.log( 'SUCCESS SUBMIT' );
+	};
+
+	// Обработчик ошибки в ответе с бека
+	const onErrorSubmit = ( error ) => {
+		setError( error.name, error.error );
+	};
+
+	const onInvalid = async ( event ) => {
+		event.preventDefault();
+		await trigger();
+	};
+
+	return (
+		<UiForm
+			className={ classNameRoot }
+			onSubmit={ handleSubmit( onSuccess, onError ) }
+			onInvalid={ onInvalid }
+		>
+			<UiInput
+				{ ...register(
+					'name',
+					{
+						required: {
+							value: true,
+							message: 'Required',
+						},
+					}
+				) }
+				value={ form.name }
+				state={ errors.name
+					? 'error'
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
+				message={ errors.name?.message }
+				onChange={ onChange( 'name' ) }
+			>Name</UiInput>
+
+			<UiInput
+				{ ...register(
+					'email',
+					{
+						required: {
+							value: true,
+							message: 'Required',
+						},
+						pattern: {
+							value: REGEXP_EMAIL,
+							message: 'Email',
+						},
+					}
+				) }
+				type={ 'email' }
+				value={ form.email }
+				state={ errors.email
+					? 'error'
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
+				message={ errors.email?.message }
+				onChange={ onChange( 'email' ) }
+			>E-Mail</UiInput>
+
+			<UiInput
+				{ ...register(
+					'password',
+					{
+						required: {
+							value: true,
+							message: 'Required',
+						},
+					}
+				) }
+				type={ 'password' }
+				value={ form.password }
+				state={ errors.password
+					? 'error'
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
+				message={ errors.password?.message }
+				switchable
+				onChange={ onChange( 'password' ) }
+			>Password</UiInput>
+
+			<UiInput
+				{ ...register(
+					'confirm',
+					{
+						required: {
+							value: true,
+							message: 'Required',
+						},
+						pattern: {
+							value: form.password,
+							message: 'Confirm',
+						},
+						validate: ( value ) => {
+							return value === form.password || 'The passwords do not match';
+						},
+					}
+				) }
+				type={ 'password' }
+				value={ form.confirm }
+				state={ errors.confirm
+					? 'error'
+					: isValid && isSubmitSuccessful
+						? 'success'
+						: 'default' }
+				message={ errors.confirm?.message }
+				switchable
+				onChange={ onChange( 'confirm' ) }
+			>Confirm</UiInput>
+
+			<UiButton
+				type={ 'submit' }
+				disabled={ inProcess }
+			>Submit</UiButton>
+		</UiForm>
+	);
+};
+
+export default FormLogin;
