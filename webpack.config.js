@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import jsonImporter from 'node-sass-json-importer';
 
-import _BUILD from './config/build.jsx';
+import _BUILD from './config/build.js';
 
 export default ( env, argv ) => {
 	const isProduction = argv.mode === 'production';
@@ -15,9 +15,9 @@ export default ( env, argv ) => {
 		entry: './src/index.jsx',
 
 		output: {
-			filename: _BUILD[argv.mode].output.filename,
-			path: path.join( process.cwd(), _BUILD[argv.mode].output.path ),
-			publicPath: _BUILD[argv.mode].output.publicPath,
+			filename: _BUILD[ argv.mode ].output.filename,
+			path: path.join( process.cwd(), _BUILD[ argv.mode ].output.path ),
+			publicPath: _BUILD[ argv.mode ].output.publicPath,
 		},
 
 		devServer: {
