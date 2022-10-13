@@ -1,21 +1,23 @@
-// ToDo: проверить актуальность пакетов:
-// react-svg-loader
-
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import jsonImporter from 'node-sass-json-importer';
 
+import _BUILD from './config/build.jsx';
+
 export default ( env, argv ) => {
+	const isProduction = argv.mode === 'production';
+	const isDevelopment = argv.mode === 'development';
+
 	return {
 		mode: argv.mode,
 
 		entry: './src/index.jsx',
 
 		output: {
-			filename: 'main.js?v=[hash]',
-			path: path.join( process.cwd(), 'dist' ),
-			publicPath: '/',
+			filename: _BUILD[argv.mode].output.filename,
+			path: path.join( process.cwd(), _BUILD[argv.mode].output.path ),
+			publicPath: _BUILD[argv.mode].output.publicPath,
 		},
 
 		devServer: {
@@ -24,9 +26,15 @@ export default ( env, argv ) => {
 		},
 
 		plugins: [
-			new HtmlWebpackPlugin( { template: './src/index.html' } ),
+			isProduction && new HtmlWebpackPlugin( {
+				template: './src/main.html',
+				filename: 'main.tpl',
+				inject: false,
+			} ),
 
-			new MiniCssExtractPlugin( { filename: '[name].css?v=[hash]' } ),
+			isDevelopment && new HtmlWebpackPlugin( { template: './src/index.html' } ),
+
+			new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[hash]' } ),
 		],
 
 		module: {

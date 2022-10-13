@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "cross-env webpack serve --open --mode=development",
-		"build": "cross-env webpack --mode=production",
+		"build:dev": "cross-env webpack --mode=development",
+		"build:prod": "cross-env webpack --mode=production",
 		"lint": "eslint ./config/**/*.jsx  ./src ./src/**/*.jsx",
 		"lint:fix": "eslint ./config/**/*.jsx  ./src ./src/**/*.jsx --fix",
 		"stylelint": "stylelint ./src/**/*.scss",
@@ -44,6 +45,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.29.4",
 		"file-loader": "^6.2.0",
+		"html-loader": "^4.2.0",
 		"html-webpack-plugin": "^5.5.0",
 		"mini-css-extract-plugin": "^2.6.0",
 		"node-sass-json-importer": "^4.3.0",
