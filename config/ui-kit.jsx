@@ -14,6 +14,8 @@ import PageUiKitTabs from '/src/pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitCheckboxes from '/src/pages/UiKit/pages/Checkboxes/Checkboxes.jsx';
 import PageUiKitSelect from '/src/pages/UiKit/pages/Select/Select.jsx';
 
+import _ROUTES from './routes.js';
+
 const RootPath = '/ui-kit';
 
 const UiKitConfig = {
@@ -22,55 +24,55 @@ const UiKitConfig = {
 	pages: [
 		{
 			name: 'home',
-			href: `${ RootPath }`,
+			href: _ROUTES.uiKit.root,
 			component: <PageUiKit />,
 		},
 
 		{
 			name: 'grid',
-			href: `${ RootPath }/grid`,
+			href: _ROUTES.uiKit.grid,
 			component: <PageUiKitGrid />,
 		},
 
 		{
 			name: 'media',
-			href: `${ RootPath }/media`,
+			href: _ROUTES.uiKit.media,
 			component: <PageUiKitMedia />,
 		},
 
 		{
 			name: 'typography',
-			href: `${ RootPath }/typography`,
+			href: _ROUTES.uiKit.typography,
 			component: <PageUiKitTypography />,
 		},
 
 		{
 			name: 'colors',
-			href: `${ RootPath }/colors`,
+			href: _ROUTES.uiKit.colors,
 			component: <PageUiKitColors />,
 		},
 
 		{
 			name: 'icons',
-			href: `${ RootPath }/icons`,
+			href: _ROUTES.uiKit.icons,
 			component: <PageUiKitIcons />,
 		},
 
 		{
 			name: 'buttons',
-			href: `${ RootPath }/buttons`,
+			href: _ROUTES.uiKit.buttons,
 			component: <PageUiKitButtons />,
 		},
 
 		{
 			name: 'inputs',
-			href: `${ RootPath }/inputs`,
+			href: _ROUTES.uiKit.inputs,
 			component: <PageUiKitInputs />,
 		},
 
 		{
 			name: 'forms',
-			href: `${ RootPath }/forms`,
+			href: _ROUTES.uiKit.forms,
 			component: <PageUiKitForms />,
 		},
 	],

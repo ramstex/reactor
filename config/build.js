@@ -11,7 +11,7 @@ const _BUILD = {
 		output: {
 			filename: 'js/main.js?v=[hash]',
 			path: 'dist',
-			publicPath: '/',
+			publicPath: '/visual/',
 		},
 	},
 };

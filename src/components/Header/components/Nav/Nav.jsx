@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import BaseLink from '../../../Base/Link/Link.jsx';
 import { GridRow, GridCol } from '../../../Grid/Grid.jsx';
 
+import _ROUTES from '../../../../../config/routes.js';
+
 import './Nav.scss';
 
 class LocalNav extends React.Component {
@@ -18,13 +20,13 @@ class LocalNav extends React.Component {
 	render() {
 		return (
 			<GridRow className={ this.classNameRoot() }
-				tag={ 'ul' }>
+					 tag={ 'ul' }>
 				<GridCol tag={ 'li' }>
 					<BaseLink href={ '/' }>Главная</BaseLink>
 				</GridCol>
 
 				<GridCol tag={ 'li' }>
-					<BaseLink href={ '/ui-kit' }>Ui-Kit</BaseLink>
+					<BaseLink href={ _ROUTES.uiKit.root }>Ui-Kit</BaseLink>
 				</GridCol>
 			</GridRow>
 		);

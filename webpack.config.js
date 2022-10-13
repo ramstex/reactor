@@ -9,6 +9,33 @@ export default ( env, argv ) => {
 	const isProduction = argv.mode === 'production';
 	const isDevelopment = argv.mode === 'development';
 
+	const plugins = [
+		new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[hash]' } ),
+	];
+
+	if ( isProduction ) {
+		plugins.push(
+			new HtmlWebpackPlugin( {
+				template: './src/index.prod.html',
+				filename: 'index.tpl',
+				minify: false,
+			} )
+		);
+
+		plugins.push(
+			new HtmlWebpackPlugin( {
+				template: './src/main.html',
+				filename: 'main.tpl',
+				inject: false,
+				minify: false,
+			} )
+		);
+	}
+
+	if ( isDevelopment ) {
+		plugins.push( new HtmlWebpackPlugin( { template: './src/index.html' } ) );
+	}
+
 	return {
 		mode: argv.mode,
 
@@ -25,17 +52,7 @@ export default ( env, argv ) => {
 			historyApiFallback: true,
 		},
 
-		plugins: [
-			isProduction && new HtmlWebpackPlugin( {
-				template: './src/main.html',
-				filename: 'main.tpl',
-				inject: false,
-			} ),
-
-			isDevelopment && new HtmlWebpackPlugin( { template: './src/index.html' } ),
-
-			new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[hash]' } ),
-		],
+		plugins,
 
 		module: {
 			rules: [
