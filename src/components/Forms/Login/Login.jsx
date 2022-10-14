@@ -57,10 +57,14 @@ const FormLogin = ( props ) => {
 	const onSuccess = async () => {
 		setInProcess( true );
 
+		const data = new FormData();
+		data.append( 'login', form.email );
+		data.append( 'password', form.password );
+
 		return await query( 'post', '/', {
 			do: 'login',
 			json: undefined,
-		}, form )
+		}, data )
 			.then( () => {
 				onSuccessSubmit();
 			} )

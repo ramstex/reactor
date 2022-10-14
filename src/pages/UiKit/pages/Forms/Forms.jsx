@@ -11,9 +11,9 @@ const PageUiKitForms = () => {
 	return (
 		<LocalLayout title={ 'Forms' }>
 			<MarkupSection>
-				{ /*<FormLogin />*/ }
+				<FormLogin />
 
-				<FormRegistration />
+				{ /*<FormRegistration />*/ }
 			</MarkupSection>
 		</LocalLayout>
 	);
