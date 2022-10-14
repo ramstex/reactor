@@ -11,7 +11,7 @@ export default ( env, argv ) => {
 	const isDevelopment = argv.mode === 'development';
 
 	const plugins = [
-		new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[hash]' } ),
+		new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[fullhash]' } ),
 
 		new webpack.DefinePlugin( { process: { env: { MODE: JSON.stringify( argv.mode ) } } } ),
 	];
@@ -105,25 +105,25 @@ export default ( env, argv ) => {
 				{
 					test: /\.(pdf|doc?x|xls?x)$/i,
 					type: 'asset/resource',
-					generator: { filename: 'assets/docs/[name].[ext]?v=[hash]' },
+					generator: { filename: 'assets/docs/[name][ext]?v=[contenthash]' },
 				},
 
 				{
 					test: /\.(png|jpe?g|gif)$/i,
 					type: 'asset/resource',
-					generator: { filename: 'assets/images/[name].[ext]?v=[hash]' },
+					generator: { filename: 'assets/images/[name][ext]?v=[contenthash]' },
 				},
 
 				{
 					test: /\.(mp4|mpg|mov|avi|webm)$/i,
 					type: 'asset/resource',
-					generator: { filename: 'assets/video/[name].[ext]?v=[hash]' },
+					generator: { filename: 'assets/video/[name][ext]?v=[contenthash]' },
 				},
 
 				{
 					test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
 					type: 'asset/resource',
-					generator: { filename: 'assets/fonts/[name].[ext]?v=[hash]' },
+					generator: { filename: 'assets/fonts/[name][ext]?v=[contenthash]' },
 				},
 			],
 		},

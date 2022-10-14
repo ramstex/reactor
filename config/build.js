@@ -1,7 +1,7 @@
 const _BUILD = {
 	development: {
 		output: {
-			filename: 'js/main.js?v=[hash]',
+			filename: 'js/main.js?v=[fullhash]',
 			path: 'dist',
 			publicPath: '/',
 		},
@@ -9,7 +9,7 @@ const _BUILD = {
 
 	production: {
 		output: {
-			filename: 'js/main.js?v=[hash]',
+			filename: 'js/main.js?v=[fullhash]',
 			path: 'dist',
 			publicPath: '/visual/',
 		},

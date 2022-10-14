@@ -18,6 +18,10 @@ const urlWithParams = ( url, params = {} ) => {
 			: `=${ value }`
 		}`;
 
+		if ( divider === '?' ) {
+			divider = '&';
+		}
+
 		result = `${ result }${ param }`
 	} );
 
