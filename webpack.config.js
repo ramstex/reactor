@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -11,6 +12,8 @@ export default ( env, argv ) => {
 
 	const plugins = [
 		new MiniCssExtractPlugin( { filename: 'css/[name].css?v=[hash]' } ),
+
+		new webpack.DefinePlugin( { process: { env: { MODE: JSON.stringify( argv.mode ) } } } ),
 	];
 
 	if ( isProduction ) {

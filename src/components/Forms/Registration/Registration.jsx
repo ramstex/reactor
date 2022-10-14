@@ -19,7 +19,7 @@ const FormLogin = ( props ) => {
 		'form-registration'
 	);
 
-	const { sendQuery } = useApi();
+	const { query } = useApi();
 
 	const {
 		register,
@@ -37,7 +37,7 @@ const FormLogin = ( props ) => {
 	} );
 
 	const [ form, setForm ] = useState( {
-		name: '',
+		fio: '',
 		email: '',
 		password: '',
 		confirm: '',
@@ -59,7 +59,10 @@ const FormLogin = ( props ) => {
 	const onSuccess = async () => {
 		setInProcess( true );
 
-		return await sendQuery( 'post', '/registration', {}, form )
+		return await query( 'post', '/', {
+			do: 'registration',
+			json: undefined,
+		}, form )
 			.then( () => {
 				onSuccessSubmit();
 			} )
@@ -99,7 +102,7 @@ const FormLogin = ( props ) => {
 		>
 			<UiInput
 				{ ...register(
-					'name',
+					'fio',
 					{
 						required: {
 							value: true,
@@ -107,15 +110,15 @@ const FormLogin = ( props ) => {
 						},
 					}
 				) }
-				value={ form.name }
-				state={ errors.name
+				value={ form.fio }
+				state={ errors.fio
 					? 'error'
 					: isValid && isSubmitSuccessful
 						? 'success'
 						: 'default' }
-				message={ errors.name?.message }
-				onChange={ onChange( 'name' ) }
-			>Name</UiInput>
+				message={ errors.fio?.message }
+				onChange={ onChange( 'fio' ) }
+			>Fio</UiInput>
 
 			<UiInput
 				{ ...register(

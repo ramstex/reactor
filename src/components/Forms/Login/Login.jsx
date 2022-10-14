@@ -19,7 +19,7 @@ const FormLogin = ( props ) => {
 		'form-login'
 	);
 
-	const { sendQuery } = useApi();
+	const { query } = useApi();
 
 	const {
 		register,
@@ -57,7 +57,10 @@ const FormLogin = ( props ) => {
 	const onSuccess = async () => {
 		setInProcess( true );
 
-		return await sendQuery( 'post', '/login', {}, form )
+		return await query( 'post', '/', {
+			do: 'login',
+			json: undefined,
+		}, form )
 			.then( () => {
 				onSuccessSubmit();
 			} )

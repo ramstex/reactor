@@ -14,11 +14,9 @@ import PageUiKitTabs from '/src/pages/UiKit/pages/Tabs/Tabs.jsx';
 import PageUiKitCheckboxes from '/src/pages/UiKit/pages/Checkboxes/Checkboxes.jsx';
 import PageUiKitSelect from '/src/pages/UiKit/pages/Select/Select.jsx';
 
-import _ROUTES from './routes.js';
+import _ROUTES from '../../../config/routes.js';
 
-const RootPath = '/ui-kit';
-
-const UiKitConfig = {
+const _UI_KIT_CONFIG = {
 	enabled: true,
 
 	pages: [
@@ -78,4 +76,4 @@ const UiKitConfig = {
 	],
 };
 
-export default UiKitConfig;
+export default _UI_KIT_CONFIG;

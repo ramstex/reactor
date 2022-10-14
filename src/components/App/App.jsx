@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import UiKitConfig from '/config/ui-kit.jsx';
+import _UI_KIT_CONFIG from '/src/pages/UiKit/config.jsx';
 
 import Layout from '/src/components/Layout/Layout.jsx';
 import PageHome from '/src/pages/Home/Home.jsx';
@@ -21,7 +21,7 @@ const App = ( props ) => {
 							   element={ <PageHome /> } />
 
 						{
-							UiKitConfig.enabled && UiKitConfig.pages.map( ( page ) => {
+							_UI_KIT_CONFIG.enabled && _UI_KIT_CONFIG.pages.map( ( page ) => {
 								return (
 									<Route
 										key={ page.name }
