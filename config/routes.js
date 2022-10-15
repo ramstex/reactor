@@ -2,6 +2,12 @@ const rootRoute = '/index.php';
 const uiKitRoute = `${ rootRoute }/ui-kit`;
 
 const _ROUTES = {
+	home: '/',
+	registration: '/registration',
+	login: '/login',
+	logout: '/?logout',
+	profile: '/profile',
+
 	uiKit: {
 		root: uiKitRoute,
 		grid: `${ uiKitRoute }/grid`,

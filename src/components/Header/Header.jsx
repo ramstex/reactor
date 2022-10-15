@@ -5,6 +5,7 @@ import BaseLogo from '../Base/Logo/Logo.jsx';
 import MarkupContainer from '../Markup/Container/Container.jsx';
 import { GridRow, GridCol } from '../Grid/Grid.jsx';
 import LocalNav from './components/Nav/Nav.jsx';
+import LocalProfile from './components/Profile/Profile.jsx';
 
 import './Header.scss';
 
@@ -30,6 +31,10 @@ const Header = ( props ) => {
 
 					<GridCol>
 						<LocalNav />
+					</GridCol>
+
+					<GridCol offset={ 'auto' }>
+						<LocalProfile />
 					</GridCol>
 				</GridRow>
 			</MarkupContainer>

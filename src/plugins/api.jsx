@@ -1,5 +1,6 @@
 import axios from 'axios';
 import useEnv from './env.js';
+import dummyApi from './api.dummy.js';
 
 const urlWithParams = ( url, params = {} ) => {
 	let result = url;
@@ -40,37 +41,7 @@ const query = async ( method = 'get', url, params, data, options = {} ) => {
 		} );
 	}
 
-	return new Promise( ( onResolve, onReject ) => {
-		setTimeout( () => {
-			if ( data.email !== 'qwe@qwe.qwe' ) {
-				onReject(
-					{
-						name: 'email',
-						error: {
-							type: 'notFound',
-							message: 'Not found!',
-						},
-					} );
-
-				return;
-			}
-
-			if ( data.password !== 'qwe' ) {
-				onReject(
-					{
-						name: 'password',
-						error: {
-							type: 'wrong',
-							message: 'Wrong password',
-						},
-					} );
-
-				return;
-			}
-
-			onResolve();
-		}, 2000 );
-	} );
+	return await dummyApi( method, urlWithParams( url, params ), params, data, options );
 };
 
 const useApi = () => {

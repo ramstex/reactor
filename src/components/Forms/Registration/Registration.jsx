@@ -68,8 +68,8 @@ const FormLogin = ( props ) => {
 			do: 'registration',
 			json: undefined,
 		}, data )
-			.then( () => {
-				onSuccessSubmit();
+			.then( ( response ) => {
+				onSuccessSubmit( response );
 			} )
 			.catch( ( error ) => {
 				onErrorSubmit( error );
@@ -85,8 +85,14 @@ const FormLogin = ( props ) => {
 	};
 
 	// Обработчик успешного ответа с бека
-	const onSuccessSubmit = () => {
-		console.log( 'SUCCESS SUBMIT' );
+	const onSuccessSubmit = ( response ) => {
+		console.log( 'SUCCESS SUBMIT REGISTRATION' );
+
+		if ( response.success ) {
+			console.log( 'SUCCESS REGISTRATION' );
+		} else {
+			console.log( 'ERROR REGISTRATION', response.error );
+		}
 	};
 
 	// Обработчик ошибки в ответе с бека

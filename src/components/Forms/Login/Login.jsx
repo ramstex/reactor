@@ -9,10 +9,14 @@ import UiInput from '/src/components/Ui/Input/Input.jsx';
 import UiForm from '/src/components/Ui/Form/Form.jsx';
 import UiButton from '/src/components/Ui/Button/Button.jsx';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../../store/user.js';
+
 import './Login.scss';
 
 const FormLogin = ( props ) => {
 	const { className } = props;
+	const dispatch = useDispatch();
 
 	const classNameRoot = classnames(
 		className,
@@ -61,29 +65,44 @@ const FormLogin = ( props ) => {
 		data.append( 'login', form.email );
 		data.append( 'password', form.password );
 
-		return await query( 'post', '/', {
+		await query( 'post', '/', {
 			do: 'login',
 			json: undefined,
 		}, data )
-			.then( () => {
-				onSuccessSubmit();
+			.then( ( response ) => {
+				onSuccessSubmit( response );
 			} )
 			.catch( ( error ) => {
 				onErrorSubmit( error );
-			} )
-			.finally( () => {
 				setInProcess( false );
-			} );
+			} )
 	};
 
 	// Обработчик сабмита при ошибке валидации на фронте
 	const onError = ( data ) => {
-		console.log( 'error', data );
+		console.log( 'error validation front', data );
 	};
 
 	// Обработчик успешного ответа с бека
-	const onSuccessSubmit = () => {
-		console.log( 'SUCCESS SUBMIT' );
+	const onSuccessSubmit = async ( data ) => {
+		console.log( 'SUCCESS SUBMIT LOGIN', data );
+
+		if ( data.success ) {
+			await query( 'get', '/', {
+				do: 'user',
+				json: undefined,
+			} )
+				.then( ( response ) => {
+					console.log( 'USER RESPONSE', response );
+					dispatch( setUser( response ) );
+				} )
+				.finally( () => {
+					setInProcess( false );
+				} );
+		} else {
+			console.log( 'ERROR LOGIN', data.error );
+			setInProcess( false );
+		}
 	};
 
 	// Обработчик ошибки в ответе с бека
