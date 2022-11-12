@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { REGEXP_EMAIL } from '/src/constants/regexp.jsx';
+import { useNavigate } from 'react-router-dom';
 
 import useApi from '../../../plugins/api.jsx';
+import _ROUTES from '../../../../config/routes.js';
 
 import UiInput from '/src/components/Ui/Input/Input.jsx';
 import UiForm from '/src/components/Ui/Form/Form.jsx';
@@ -23,6 +25,8 @@ const FormLogin = ( props ) => {
 		'form-login'
 	);
 
+	const navigate = useNavigate();
+
 	const { query } = useApi();
 
 	const {
@@ -37,12 +41,16 @@ const FormLogin = ( props ) => {
 		setError,
 	} = useForm( {
 		mode: 'onChange',
-		reValidateMode: 'onSubmit',
+		reValidateMode: 'onChange',
 	} );
 
 	const [ form, setForm ] = useState( {
-		email: '',
+		login: '',
 		password: '',
+	} );
+
+	const isUser = useSelector( ( state ) => {
+		return state.user.isUser;
 	} );
 
 	const [ inProcess, setInProcess ] = useState( false );
@@ -62,7 +70,7 @@ const FormLogin = ( props ) => {
 		setInProcess( true );
 
 		const data = new FormData();
-		data.append( 'login', form.email );
+		data.append( 'login', form.login );
 		data.append( 'password', form.password );
 
 		await query( 'post', '/', {
@@ -70,37 +78,43 @@ const FormLogin = ( props ) => {
 			json: undefined,
 		}, data )
 			.then( ( response ) => {
-				onSuccessSubmit( response );
+				onSuccessSubmit( response.data );
 			} )
+
 			.catch( ( error ) => {
 				onErrorSubmit( error );
+
 				setInProcess( false );
-			} )
+			} );
 	};
 
 	// Обработчик сабмита при ошибке валидации на фронте
-	const onError = ( data ) => {
-		console.log( 'error validation front', data );
+	const onError = () => {
 	};
 
 	// Обработчик успешного ответа с бека
 	const onSuccessSubmit = async ( data ) => {
-		console.log( 'SUCCESS SUBMIT LOGIN', data );
-
 		if ( data.success ) {
 			await query( 'get', '/', {
 				do: 'user',
 				json: undefined,
 			} )
 				.then( ( response ) => {
-					console.log( 'USER RESPONSE', response );
-					dispatch( setUser( response ) );
+					dispatch( setUser( response.data ) );
+
+					toProfile();
 				} )
+
 				.finally( () => {
 					setInProcess( false );
 				} );
 		} else {
-			console.log( 'ERROR LOGIN', data.error );
+			setError( 'login', { type: 'login' } );
+			setError( 'password', {
+				type: 'login',
+				message: 'Email или пароль не верные',
+			} );
+
 			setInProcess( false );
 		}
 	};
@@ -112,8 +126,17 @@ const FormLogin = ( props ) => {
 
 	const onInvalid = async ( event ) => {
 		event.preventDefault();
+
 		await trigger();
 	};
+
+	const toProfile = () => {
+		navigate( _ROUTES.profile );
+	};
+
+	if ( isUser ) {
+		toProfile();
+	}
 
 	return (
 		<UiForm
@@ -123,27 +146,27 @@ const FormLogin = ( props ) => {
 		>
 			<UiInput
 				{ ...register(
-					'email',
+					'login',
 					{
 						required: {
 							value: true,
-							message: 'Required',
+							message: 'Обязательное поле',
 						},
 						pattern: {
 							value: REGEXP_EMAIL,
-							message: 'Email',
+							message: 'Email введён некорректно',
 						},
 					}
 				) }
 				type={ 'email' }
-				value={ form.email }
-				state={ errors.email
+				value={ form.login }
+				state={ errors.login
 					? 'error'
 					: isValid && isSubmitSuccessful
 						? 'success'
 						: 'default' }
-				message={ errors.email?.message }
-				onChange={ onChange( 'email' ) }
+				message={ errors.login?.message }
+				onChange={ onChange( 'login' ) }
 			>E-Mail</UiInput>
 
 			<UiInput
@@ -152,7 +175,7 @@ const FormLogin = ( props ) => {
 					{
 						required: {
 							value: true,
-							message: 'Required',
+							message: 'Обязательное поле',
 						},
 					}
 				) }
@@ -164,6 +187,7 @@ const FormLogin = ( props ) => {
 						? 'success'
 						: 'default' }
 				message={ errors.password?.message }
+				switchable
 				onChange={ onChange( 'password' ) }
 			>Password</UiInput>
 

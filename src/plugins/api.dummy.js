@@ -14,14 +14,16 @@ const apiLogin = async ( data ) => {
 			if ( data.login !== 'qwe@qwe.qwe' || data.password !== 'qwe' ) {
 				onResolve(
 					{
-						success: false,
-						error: 'Ошибка! Email или пароль не верные!',
+						data: {
+							success: false,
+							error: 'Ошибка! Email или пароль не верные!',
+						},
 					} );
 
 				return;
 			}
 
-			onResolve( { success: true } );
+			onResolve( { data: { success: true } } );
 		}, delay );
 	} );
 }
@@ -30,9 +32,11 @@ const apiUser = async () => {
 	return new Promise( ( onResolve ) => {
 		setTimeout( () => {
 			onResolve( {
-				email: 'qwe@qwe.qwe',
-				fio: 'qwe',
-				login: 'qwe',
+				data: {
+					email: 'qwe@qwe.qwe',
+					fio: 'qwe',
+					login: 'qwe',
+				},
 			} );
 		}, delay );
 	} );

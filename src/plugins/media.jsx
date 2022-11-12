@@ -15,7 +15,7 @@ const maxBreakpoint = ( device = MediaConfig.defaults.device, segment = MediaCon
 	return { maxWidth: breakpoint( device, segment ) - 1 };
 };
 
-export default function useMedia() {
+export default function media() {
 	/**
 	 * isMedia с помощью метода useMediaQuery определяет, выполняется ли медиа-запрос с переданными параметрами.
 	 * @param { Object } settings  - параметры медиа-запроса для проверки.

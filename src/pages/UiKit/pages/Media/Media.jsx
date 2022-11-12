@@ -1,5 +1,5 @@
 import React from 'react';
-import useMedia from '../../../../hooks/useMedia.jsx';
+import media from '../../../../plugins/media.jsx';
 
 import MarkupSection from '../../../../components/Markup/Section/Section.jsx';
 import { GridRow, GridCol } from '../../../../components/Grid/Grid.jsx';
@@ -16,7 +16,7 @@ const PageUiKitMedia = () => {
 		isLandscape,
 		isPortrait,
 		getValueForOrientation,
-	} = useMedia();
+	} = media();
 
 	return (
 		<div className={ 'page-ui-kit-media' }>

@@ -46,7 +46,7 @@ const LocalProfile = ( props ) => {
 						</GridCol>
 
 						<GridCol>
-							<BaseLink href={ _ROUTES.profile }>{ user.fio }</BaseLink>
+							<BaseLink href={ _ROUTES.profile }>{ user?.fio }</BaseLink>
 							<span> / </span>
 							<BaseLink href={ _ROUTES.logout }
 									  onClick={ onClickLogout }>Выход</BaseLink>

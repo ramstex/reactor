@@ -7,7 +7,7 @@ export function isAbsoluteUrl( url = '' ) {
 }
 
 export function getChildrenByKey( children = [], key = null ) {
-	if ( 'length' in children ) {
+	if ( !!children && 'length' in children ) {
 		return children.reduce( ( prev, curr ) => {
 			if ( curr.key === key ) {
 				prev.push( curr );

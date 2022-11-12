@@ -3,10 +3,10 @@ const uiKitRoute = `${ rootRoute }/ui-kit`;
 
 const _ROUTES = {
 	home: '/',
-	registration: '/registration',
-	login: '/login',
+	registration: `${ rootRoute }/page/registration`,
+	login: `${ rootRoute }/page/login`,
 	logout: '/?logout',
-	profile: '/profile',
+	profile: `${ rootRoute }/page/profile`,
 
 	uiKit: {
 		root: uiKitRoute,
