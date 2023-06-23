@@ -28,3 +28,6 @@ $tabletOnlyL: #{$tabletL + ' and (max-width: ' + ($desktopBp - 1) + ')'};
 $desktop: #{'(min-width: ' + $desktopBp + ')'};
 $desktopP: #{'(min-width: ' + $desktopBp + ') and (orientation: portrait)'};
 $desktopL: #{'(min-width: ' + $desktopBp + ') and (orientation: landscape)'};
+
+$portrait: #{'(orientation: portrait)'};
+$landscape: #{'(orientation: landscape)'};

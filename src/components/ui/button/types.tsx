@@ -1,16 +1,26 @@
-import {
-	IComponentProps, TButtonRef, TButtonTemplate, TOnClick, TUiTheme
-} from '../../../modules/helper';
+import { EButtonType, EButtonTheme, EButtonTemplate } from './helpers';
 
-import { TIconName } from '../../base/Icon/types';
+import type { IComponentProps, TComponent } from '../../../types/types';
+import type { TIconName } from '../../Base/Icon/types';
 
-export type TButtonOnClick = TOnClick<TButtonRef>;
+export type TButtonType = keyof typeof EButtonType;
+export type TButtonTheme = keyof typeof EButtonTheme;
+export type TButtonTemplate = keyof typeof EButtonTemplate;
 
 export interface IButtonProps extends IComponentProps {
-	template?: TButtonTemplate,
-	theme?: TUiTheme,
-	wide?: boolean,
-	disabled?: boolean,
-	icon?: TIconName,
-	onClick?: TButtonOnClick,
+	type?: TButtonType;
+	theme?: TButtonTheme;
+	template?: TButtonTemplate;
+	inverse?: boolean;
+	href?: string;
+	wide?: boolean;
+	disabled?: boolean;
+	icon?: TIconName;
+	iconPosition?: 'start' | 'end';
+	square?: boolean;
+	onClick?: () => void;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
 }
+
+export type TButtonComponent = TComponent<IButtonProps>;

@@ -1,0 +1,19 @@
+@use 'sass:math';
+@use '../../../style/modules/layout/module' as layout;
+
+.container {
+	max-width: 1000px;
+	padding-left: math.div(layout.$gap, 2);
+	padding-right: math.div(layout.$gap, 2);
+	margin-left: auto;
+	margin-right: auto;
+
+	&._tight {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	&._wide {
+		max-width: none;
+	}
+}

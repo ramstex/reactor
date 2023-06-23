@@ -1,0 +1,6 @@
+@use '../../../../style/modules/layout/module' as layout;
+
+.ui-kit-nav {
+	margin-top: layout.$gap;
+	margin-bottom: layout.$gap;
+}

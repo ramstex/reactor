@@ -1,87 +1,117 @@
-// ToDo: textarea
-// ToDo: icons
-
 import { forwardRef } from 'react';
-import classnames from 'classnames';
+import classBuilder from '../../../plugins/classBuilder';
+import { EIconName } from '../../Base/Icon/helper';
+import { EButtonTemplate } from '../Button/helpers';
 
-import type { ForwardRefExoticComponent, RefAttributes } from 'react';
-import type {
-	TInputRef, TInputType, TUiState, IComponentProps
-} from '../../../modules/helper';
+import type { TInputComponent } from './types';
+import { EInputType } from './helpers';
+import Button from '../Button/Button';
 
-import './Input.scss'
+import './style.scss';
+import { useState } from 'react';
 
-interface IInputProps extends IComponentProps {
-	textarea?: boolean,
-	type?: TInputType,
-	placeholder?: string,
-	label?: string | boolean,
-	name?: string,
-	value?: string,
-	message?: string,
-	state?: TUiState,
-	disabled?: boolean,
-	resize?: boolean,
-}
-
-const Input: ForwardRefExoticComponent<IInputProps & RefAttributes<TInputRef>> = forwardRef((props, ref) => {
+const Input: TInputComponent = forwardRef( ( props, ref ) => {
 	const {
-		className,
 		children,
-		textarea,
-		type = 'text',
-		placeholder,
+		className,
+		type,
 		name,
-		value,
+		placeholder,
 		message,
-		state,
+		textarea,
 		disabled,
+		required,
+		clearable,
+		readOnly,
+		value,
+		onChange,
+		onClear,
 	} = props;
 
-	const rootClass: string = classnames('input', className, {
-		'_textarea': textarea,
-		'_disabled': disabled,
-		[`_state_${ state }`]: state,
-	});
+	const classNameRoot = classBuilder( 'input', {
+		_required: required,
+		_textarea: textarea,
+	}, className );
+
+	const [ typeLocal, setTypeLocal ] = useState( type );
+
+	const onClearClick = () => {
+		onClear && onClear();
+	};
+
+	const onEyeClick = () => {
+		const newType = typeLocal === EInputType.password
+			? EInputType.text
+			: EInputType.password;
+
+		setTypeLocal( newType );
+	};
 
 	return (
-		<label className={ rootClass }>
+		<div className={ classNameRoot }>
 			{
 				!!children &&
-				<p className={ 'input__label' }>
-					{ children }
-				</p>
+				<p className={ 'input__caption' }>{ children }</p>
 			}
 
-			{
-				textarea
-					? <textarea
-						className={ 'input__input' }
-						ref={ ref }
-						name={ name }
-						value={ value }
-						placeholder={ placeholder }
-						disabled={ disabled }
+			<div className={ 'input__body' }>
+				{
+					textarea
+						? <textarea
+							className={ 'input__field' }
+							ref={ ref }
+							name={ name }
+							placeholder={ placeholder }
+							disabled={ disabled }
+							readOnly={ readOnly }
+							onChange={ onChange }
+						/>
+						: <input
+							className={ 'input__field' }
+							ref={ ref }
+							type={ typeLocal }
+							name={ name }
+							placeholder={ placeholder }
+							disabled={ disabled }
+							readOnly={ readOnly }
+							value={ value }
+							onChange={ onChange }
+						/>
+				}
+
+				{
+					clearable && value &&
+					<Button
+						className={ 'input__button input__clear' }
+						template={ EButtonTemplate.link }
+						icon={ EIconName.close }
+						square
+						onClick={ onClearClick }
 					/>
-					: <input
-						className={ 'input__input' }
-						ref={ ref }
-						type={ type }
-						name={ name }
-						value={ value }
-						placeholder={ placeholder }
-						disabled={ disabled }
-					/>
-			}
+				}
+
+				{
+					type === EInputType.password &&
+					<Button
+						className={ 'input__button input__eye' }
+						template={ EButtonTemplate.link }
+						icon={
+							typeLocal === EInputType.password
+								? EIconName.eyeClosed
+								: EIconName.eyeOpened
+						}
+						square
+						onClick={ onEyeClick }
+					 />
+				}
+			</div>
 
 			{
 				!!message &&
-				<p className={ 'input__message' }>
-					{ message }
-				</p>
+				<p className={ 'input__message' }>{ message }</p>
 			}
-		</label>
-	);
-});
+		</div>
+	)
+} );
 
 export default Input;

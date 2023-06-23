@@ -12,10 +12,10 @@ $transition: all $dur ease;
 	@return $value;
 }
 
-@function toVh($size, $layout: 1920) {
-	@return math.div(strip-unit($size), $layout) * 100 + 'vh';
+@function toVh($size, $layout: 1080) {
+	@return #{ math.div(strip-unit($size), $layout) * 100 + 'vh' };
 }
 
 @function toVw($size, $layout: 375) {
-	@return math.div(strip-unit($size), $layout) * 100 + 'vw';
+	@return #{ math.div(strip-unit($size), $layout) * 100 + 'vw' };
 }

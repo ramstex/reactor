@@ -1,33 +1,28 @@
-import classnames from 'classnames';
-import Helper from './helper';
-import { isFunction } from '../../../modules/checkers';
+import classBuilder from '../../../plugins/classBuilder';
+import { getIconByName } from './helper';
+import { isFunction } from '../../../helpers/checkers';
 
-import type { FC } from 'react';
-import type { TIconOnClick, IIconProps } from './types';
+import type { TIconComponent } from './types';
 
-import './Icon.scss';
+import './style.scss';
 
-const Icon: FC<IIconProps> = ( props ) => {
+const Icon: TIconComponent = ( props ) => {
 	const {
 		className,
 		name,
-		onClick: onClickProp,
+		onClick,
 	} = props;
 
-	const rootClass = classnames('icon', className, { '_clickable': isFunction(onClickProp) });
+	const classNameRoot = classBuilder( 'icon', className, { '_clickable': isFunction( onClick ) } );
 
-	const Svg = Helper.getIconByName( name );
-
-	const onClick: TIconOnClick = (event) => {
-		!!onClickProp && isFunction(onClickProp) && onClickProp(event);
-	};
+	const Svg = getIconByName( name );
 
 	return (
 		<>
 			{
 				!!Svg &&
 				<Svg
-					className={ rootClass }
+					className={ classNameRoot }
 					onClick={ onClick }
 				/>
 			}

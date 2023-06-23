@@ -1,0 +1,30 @@
+@use 'modules/color/module' as color;
+@use 'modules/fonts/module' as fonts;
+@use 'modules/layout/module' as layout;
+@use 'modules/media/module' as media;
+@use 'modules/typography/module' as typography;
+
+@import 'modules/color/index';
+@import 'modules/fonts/index';
+@import 'modules/layout/index';
+@import 'modules/media/index';
+@import 'modules/typography/index';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: fonts.$primary;
+	color: color.get( text );
+	fill: color.get( text );
+	background-color: color.get( back );
+}
+
+.page {
+	&._fade {
+		opacity: 0;
+	}
+}

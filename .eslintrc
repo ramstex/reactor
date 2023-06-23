@@ -2,14 +2,14 @@
 	"env": {
 		"browser": true,
 		"es6": true,
-		"node": true,
-		"jest/globals": true
+		"node": true
 	},
+
 	"extends": [
 		"plugin:react/jsx-runtime",
-		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended"
 	],
+
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
@@ -17,10 +17,11 @@
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
+
 	"plugins": [
-		"jest",
 		"newline-destructuring"
 	],
+
 	"rules": {
 		"arrow-body-style": [
 			"error",
@@ -97,6 +98,7 @@
 			"error",
 			"single"
 		],
+
 		// Indentation
 		"indent": [
 			"error",
@@ -106,6 +108,7 @@
 			}
 		],
 		"no-tabs": "off",
+
 		// Spacings
 		"array-bracket-spacing": [
 			"error",
@@ -121,10 +124,15 @@
 			"error",
 			"always"
 		],
+		"space-in-parens": [
+			"error",
+			"always"
+		],
 		"template-curly-spacing": [
 			"error",
 			"always"
 		],
+
 		// React
 		"react/jsx-curly-spacing": [
 			"error",
@@ -140,6 +148,8 @@
 				"maximum": 1
 			}
 		],
+
+		// Typescript
 		"@typescript-eslint/ban-ts-comment": "off"
 	}
 }

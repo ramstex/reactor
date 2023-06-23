@@ -1,31 +1,29 @@
-import classnames from 'classnames';
-import type { FC } from 'react';
-import type { IComponentProps, TCols } from '../../../modules/helper';
+import buildClass from '../../../plugins/classBuilder';
 
-import './Col.scss';
+import './style.scss';
 
-interface IColProps extends IComponentProps {
-	cols?: TCols,
-	offset?: TCols,
-}
+import type { TColComponent } from './types';
 
-const Col: FC<IColProps> = (props) => {
+const Col: TColComponent = ( props ) => {
 	const {
-		children,
 		className,
+		children,
 		cols,
 		offset,
+		tag = 'div',
 	} = props;
 
-	const rootClass: string = classnames('col', className, {
-		[`_cols_${ cols }`]: !!cols,
-		[`_offset_${ offset }`]: !!offset,
-	});
+	const rootClass: string = buildClass( 'col', {
+		[ `_cols_${ cols }` ]: !!cols,
+		[ `_offset_${ offset }` ]: !!offset,
+	}, className );
+
+	const TagName = tag;
 
 	return (
-		<div className={ rootClass }>
+		<TagName className={ rootClass }>
 			{ children }
-		</div>
+		</TagName>
 	);
 }
 

@@ -1,34 +1,32 @@
-import classnames from 'classnames';
-import type { FC } from 'react';
-import type { IComponentProps, TFlexAlignment } from '../../../modules/helper';
+import buildClass from '../../../plugins/classBuilder';
+import { ERowAlignH, ERowAlignV } from './helpers';
 
-import './Row.scss';
+import './style.scss';
 
-interface IRowProps extends IComponentProps {
-	alignH?: TFlexAlignment,
-	alignV?: TFlexAlignment,
-	reverse?: boolean,
-}
+import type { TRowComponent } from './types';
 
-const Row: FC<IRowProps> = (props) => {
+const Row: TRowComponent = ( props ) => {
 	const {
-		children,
 		className,
+		children,
 		reverse,
-		alignH,
-		alignV,
+		alignH = ERowAlignH.start,
+		alignV = ERowAlignV.start,
+		tag = 'div',
 	} = props;
 
-	const rootClass = classnames('row', className, {
+	const rootClass = buildClass( 'row', className, {
 		'_reverse': reverse,
-		'_align-h': alignH,
-		'_align-v': alignV,
-	});
+		[ `_align-h_${ alignH }` ]: !!alignH && alignH !== ERowAlignH.start,
+		[ `_align-v_${ alignV }` ]: !!alignV && alignV !== ERowAlignV.start,
+	} );
+
+	const TagName = tag;
 
 	return (
-		<div className={ rootClass }>
+		<TagName className={ rootClass }>
 			{ children }
-		</div>
+		</TagName>
 	);
 };
 

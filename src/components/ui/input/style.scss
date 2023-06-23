@@ -1,0 +1,69 @@
+@use 'sass:math';
+@use '../../../style/modules/color/module' as color;
+@use '../../../style/modules/fonts/module' as fonts;
+@use '../../../style/modules/layout/module' as layout;
+
+.input {
+	&__body {
+		display: flex;
+		width: 100%;
+		border: 1px solid color.get( text );
+		transition: border-color layout.$dur ease;
+	}
+
+	&__field {
+		display: flex;
+		width: 100%;
+		padding: layout.toVh( 20 ) layout.toVh( 24 );
+		border: none;
+		font-family: fonts.$primary;
+		font-size: layout.toVh( 20 );
+		line-height: layout.toVh( 22 );
+		background: color.get( back );
+		resize: none;
+		box-sizing: border-box;
+
+		&::placeholder {
+			color: color.get( muted );
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		&:focus::placeholder {
+			color: transparent;
+		}
+	}
+
+	&__caption {
+		margin-bottom: layout.toVh( math.div( layout.$gap, 6 ) );
+		font-size: 12px;
+		color: color.get( text );
+	}
+
+	&__message {
+		margin-top: math.div(layout.$gap, 6);
+		font-size: 12px;
+		color: color.get( text );
+	}
+
+	&__button {
+		.ui-button__body {
+			width: layout.$gap * 1.5;
+		}
+	}
+
+	&._required &__caption::after {
+		content: ' *';
+		color: color.get( danger );
+	}
+
+	&._textarea &__input {
+		height: 150px;
+	}
+
+	&._textarea._resize &__input {
+		resize: vertical;
+	}
+}

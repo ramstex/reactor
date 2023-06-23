@@ -1,50 +1,85 @@
-@use '../font/module.scss' as fonts;
+@use 'sass:math';
+@use 'module' as typography;
+@use '../layout/module' as layout;
 
-h1 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 40px;
-	font-weight: bold;
+h1,
+.h1 {
+	@include typography.h1;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
 }
 
-h2 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 36px;
-	font-weight: bold;
+h2,
+.h2 {
+	@include typography.h2;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
 }
 
-h3 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 32px;
-	font-weight: bold;
+h3,
+.h3 {
+	@include typography.h3;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
 }
 
-h4 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 28px;
-	font-weight: bold;
+h4,
+.h4 {
+	@include typography.h4;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
 }
 
-h5 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 24px;
-	font-weight: bold;
+h5,
+.h5 {
+	@include typography.h5;
+
+	&:not(:last-child) {
+		margin-bottom: layout.$gap;
+	}
 }
 
-h6 {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 20px;
-	font-weight: bold;
+h6,
+.h6 {
+	@include typography.h6;
+
+	&:not(:last-child) {
+		margin-bottom: math.div(layout.$gap, 2);
+	}
 }
 
 p {
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 16px;
-	font-weight: bold;
+	@include typography.p;
+
+	&._lg {
+		@include typography.p_lg;
+	}
+
+	&._sm {
+		@include typography.p_sm;
+	}
+
+	&._b {
+		font-weight: bold;
+	}
+
+	& + & {
+		margin-top: math.div(layout.$gap, 2);
+	}
+
+	a {
+		@include typography.a;
+	}
+}
+
+._footnote {
+	@include typography.footnote;
 }

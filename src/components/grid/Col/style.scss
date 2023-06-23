@@ -1,0 +1,51 @@
+@use 'sass:math';
+@use '../../../style/modules/layout/module' as layout;
+
+$colsMax: 12;
+
+@function getColSize($col: 1, $max: $colsMax) {
+	@return #{math.div($col, $max) * 100 + '%'};
+}
+
+.col {
+	box-sizing: border-box;
+	padding-left: layout.toVh( math.div( layout.$gap, 2 ) );
+	padding-right: layout.toVh( math.div( layout.$gap, 2 ) );
+
+	&._cols {
+		@for $col from 1 through $colsMax {
+			&_#{$col} {
+				flex-shrink: 0;
+				width: getColSize($col);
+			}
+		}
+
+		&_auto {
+			width: auto;
+		}
+
+		&_full {
+			width: 100%;
+		}
+	}
+
+	&._offset {
+		@for $col from 1 through $colsMax {
+			&_#{$col} {
+				margin-left: getColSize($col);
+			}
+
+			.row._reverse ~ &_#{$col} {
+				margin-right: getColSize($col);
+			}
+		}
+
+		&_auto {
+			margin-left: auto;
+		}
+
+		.row._reverse &_auto {
+			margin-right: auto;
+		}
+	}
+}

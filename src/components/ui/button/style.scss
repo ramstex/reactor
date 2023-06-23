@@ -1,0 +1,237 @@
+@use 'sass:math';
+
+@use '../../../style/modules/color/module' as color;
+@use '../../../style/modules/fonts/module' as fonts;
+@use '../../../style/modules/layout/module' as layout;
+@use '../../../style/modules/typography/module' as typography;
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	border: 1px solid color.get( text );
+	padding: layout.toVh( 20 ) layout.toVh( 34 );
+	font-family: fonts.$primary;
+	font-size: layout.toVh( 20 );
+	line-height: layout.toVh( 22 );
+	white-space: nowrap;
+	text-decoration: none;
+	text-align: center;
+	color: color.get( back );
+	fill: color.get( back );
+	background-color: color.get( text );
+	appearance: none;
+	cursor: pointer;
+	transition: all layout.$dur ease;
+
+	&._wide {
+		width: 100%;
+	}
+
+	&._square {
+		flex-shrink: 0;
+		width: layout.toVh( 62 );
+		height: layout.toVh( 62 );
+		padding: 0;
+	}
+
+	&__icon {
+		width: auto;
+		height: layout.toVh( 22 );
+	}
+
+	&._icon-position_start &__icon:not(:last-child) {
+		margin-right: layout.toVh( 22);
+	}
+
+	&._icon-position_end &__icon:not(:first-child) {
+		margin-left: layout.toVh( 22);
+	}
+
+	&._template_ghost {
+		color: color.get( text );
+		fill: color.get( text );
+		background-color: transparent;
+	}
+
+	&._template_link {
+		border-color: transparent;
+		color: color.get( text );
+		fill: color.get( text );
+		background-color: transparent;
+	}
+
+	&:hover {
+		border-color: color.get( text-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( text-light );
+	}
+
+	&._inverse {
+		border-color: color.get( back );
+		color: color.get( text );
+		fill: color.get( text );
+		background-color: color.get( back );
+	}
+
+	&._inverse._template_ghost {
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse._template_link {
+		border-color: transparent;
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse:hover {
+		border-color: color.get( text-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( text-light );
+	}
+
+	// Theme: primary
+	&._theme_primary {
+		border-color: color.get( primary );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( primary );
+	}
+
+	&._theme_primary._template_ghost {
+		color: color.get( primary );
+		fill: color.get( primary );
+		background-color: transparent;
+	}
+
+	&._theme_primary._template_link {
+		border-color: transparent;
+		color: color.get( primary );
+		fill: color.get( primary );
+		background-color: transparent;
+	}
+
+	&._theme_primary:hover {
+		border-color: color.get( primary-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( primary-light );
+	}
+
+	&._inverse._theme_primary {
+		border-color: color.get( back );
+		color: color.get( primary );
+		fill: color.get( primary );
+		background-color: color.get( back );
+	}
+
+	&._inverse._theme_primary._template_ghost {
+		border-color: color.get( back );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse._theme_primary._template_link {
+		border-color: transparent;
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse._theme_primary:hover {
+		border-color: color.get( primary-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( primary-light );
+	}
+
+	// Theme: secondary
+	&._theme_secondary {
+		border-color: color.get( secondary );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( secondary );
+	}
+
+	&._theme_secondary._template_ghost {
+		color: color.get( secondary );
+		fill: color.get( secondary );
+		background-color: transparent;
+	}
+
+	&._theme_secondary._template_link {
+		border-color: transparent;
+		color: color.get( secondary );
+		fill: color.get( secondary );
+		background-color: transparent;
+	}
+
+	&._theme_secondary:hover {
+		border-color: color.get( secondary-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( secondary-light );
+	}
+
+	&._inverse._theme_secondary {
+		border-color: color.get( back );
+		color: color.get( secondary );
+		fill: color.get( secondary );
+		background-color: color.get( back );
+	}
+
+	&._inverse._theme_secondary._template_ghost {
+		border-color: color.get( back );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse._theme_secondary._template_link {
+		border-color: transparent;
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: transparent;
+	}
+
+	&._inverse._theme_secondary:hover {
+		border-color: color.get( secondary-light );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( secondary-light );
+	}
+
+	// Disabled
+	&._disabled,
+	&._disabled._inverse {
+		border-color: color.get( muted );
+		color: color.get( back );
+		fill: color.get( back );
+		background-color: color.get( muted );
+		cursor: default;
+		pointer-events: none;
+	}
+
+	&._template_ghost._disabled,
+	&._template_ghost._disabled._inverse {
+		border-color: color.get( muted );
+		color: color.get( muted );
+		fill: color.get( muted );
+		background-color: color.get( muted-light );
+	}
+
+	&._template_link._disabled,
+	&._template_link._disabled._inverse {
+		border-color: transparent;
+		color: color.get( muted );
+		fill: color.get( muted );
+		background-color: transparent;
+	}
+}

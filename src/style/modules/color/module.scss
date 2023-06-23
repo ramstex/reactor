@@ -1,7 +1,7 @@
 @use 'sass:map';
 
 $colors: (
-	primary: #8f6ae7,
+	primary: #a680ff,
 	primary-light: #c0a9f8,
 	primary-dark: #593c9b,
 
@@ -13,9 +13,13 @@ $colors: (
 	success-light: #b4ffb4,
 	success-dark: #127012,
 
-	error: #eb0d0d,
-	error-light: #ee9e9e,
-	error-dark: #9a0d0d,
+	warning: #ffd231,
+	warning-light: #ffe28e,
+	warning-dark: #af8b14,
+
+	danger: #eb0d0d,
+	danger-light: #ee9e9e,
+	danger-dark: #9a0d0d,
 
 	info: #00afe3,
 	info-light: #a8eaff,
@@ -25,8 +29,16 @@ $colors: (
 	muted-light: #eaeaea,
 	muted-dark: #a1a1a1,
 
-	text: #000000,
-	back: #ffffff,
+	text: #232323,
+	text-light: #606060,
+	text-dark: #343434,
+
+	back: #f6f6f6,
+	back-light: #d5d5d5,
+	back-dark: #b0b0b0,
+
+	black: #000000,
+	white: #ffffff,
 );
 
 @function get($key: primary) {

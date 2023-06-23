@@ -1,15 +1,10 @@
-import classnames from 'classnames';
-import type { FC } from 'react';
-import type { IComponentProps } from '../../../modules/helper';
+import classBuilder from '../../../plugins/classBuilder';
 
-import './Container.scss';
+import './style.scss';
 
-interface IContainerProps extends IComponentProps {
-	wide?: boolean,
-	tight?: boolean,
-}
+import type { TContainerComponent } from './types';
 
-const Container: FC<IContainerProps> = (props) => {
+const Container: TContainerComponent = ( props ) => {
 	const {
 		children,
 		className,
@@ -17,16 +12,12 @@ const Container: FC<IContainerProps> = (props) => {
 		tight,
 	} = props;
 
-	const rootClass = classnames('container', className, {
-		'_wide': wide,
-		'_tight': tight,
-	});
+	const classNameRoot = classBuilder( 'container', {
+		_wide: wide,
+		_tight: tight,
+	}, className );
 
-	return (
-		<div className={ rootClass }>
-			{ children }
-		</div>
-	);
-};
+	return <div className={ classNameRoot }>{ children }</div>;
+}
 
 export default Container;

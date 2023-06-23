@@ -1,27 +1,13 @@
-import { IComponentProps, TOnClick } from '../../../modules/helper';
-
-export type TIconName = 'arrow-up'
-	| 'arrow-down'
-	| 'arrow-left'
-	| 'arrow-right'
-	| 'eye-closed'
-	| 'eye-opened'
-	| 'profile-login'
-	| 'profile-logout'
-	| 'vkontakte'
-	| 'telegram'
-	| 'odnoklassniki'
-	| 'check'
-	| 'close'
-	| 'plus'
-	| 'minus'
-	| 'search'
-	| 'refresh'
-	| 'play';
-
-export type TIconOnClick = TOnClick<SVGSVGElement>;
+import type { TComponent, IComponentProps } from '../../../types/types';
+import type { TOnClick } from '../../../types/handlers';
+import type { TSvgElement } from '../../../types/svg';
+import type { EIconName } from './helper';
 
 export interface IIconProps extends IComponentProps {
 	name: TIconName,
 	onClick?: TIconOnClick,
 }
+
+export type TIconName = `${ EIconName }`;
+export type TIconOnClick = TOnClick<TSvgElement>;
+export type TIconComponent = TComponent<IIconProps>;

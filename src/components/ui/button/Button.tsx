@@ -1,62 +1,76 @@
-import { forwardRef } from 'react';
-import classnames from 'classnames';
-import { isFunction } from '../../../modules/checkers';
-import Icon from '../../base/Icon/Icon';
+import classBuilder from '../../../plugins/classBuilder';
 
-import type { RefAttributes, ForwardRefExoticComponent } from 'react';
-import type { TButtonRef } from '../../../modules/helper';
-import type { TButtonOnClick, IButtonProps } from './types';
+import Icon from '../../Base/Icon/Icon';
 
-import './Button.scss';
+import './style.scss';
 
-const Button: ForwardRefExoticComponent<IButtonProps & RefAttributes<TButtonRef>> = forwardRef((props, ref) => {
+import { EButtonTemplate, EButtonTheme, EButtonType } from './helpers';
+
+import type { TButtonComponent } from './types';
+
+const Button: TButtonComponent = ( props ) => {
 	const {
-		children,
 		className,
-		template,
+		children,
+		type = EButtonType.button,
 		theme,
+		template,
+		inverse,
 		wide,
 		disabled,
 		icon,
-		onClick: onClickProp,
+		iconPosition = 'start',
+		square,
+		onClick,
+		onMouseEnter,
+		onMouseLeave,
 	} = props;
 
-	const rootClass: string = classnames('button', className, {
-		[`_template_${ template }`]: template,
-		[`_theme_${ theme }`]: theme,
-		'_wide': wide,
-		'_disabled': disabled,
-	});
+	const isIconPositionStart = !!icon && iconPosition === 'start';
+	const isIconPositionEnd = !!icon && iconPosition === 'end';
 
-	const onClick: TButtonOnClick = (event) => {
-		!!onClickProp && isFunction(onClickProp) && onClickProp(event);
-	};
+	const classNameRoot = classBuilder( 'button', {
+		[ `_theme_${ theme }` ]: !!theme && theme != EButtonTheme.default,
+		[ `_template_${ template }` ]: !!template && template != EButtonTemplate.default,
+		[ '_icon-position_start' ]: isIconPositionStart,
+		[ '_icon-position_end' ]: isIconPositionEnd,
+		_inverse: inverse,
+		_wide: wide,
+		_disabled: disabled,
+		_square: square,
+	}, className );
 
 	return (
-		<>
-			<button
-				className={ rootClass }
-				ref={ ref }
-				disabled={ disabled }
-				onClick={ onClick }
-			>
-				{
-					!!icon &&
-					<Icon
-						className={ 'button__icon' }
-						name={ icon }
-					/>
-				}
+		<button
+			className={ classNameRoot }
+			type={ type }
+			disabled={ disabled }
+			onClick={ onClick }
+			onMouseEnter={ onMouseEnter }
+			onMouseLeave={ onMouseLeave }
+		>
+			{
+				isIconPositionStart &&
+				<Icon
+					className={ 'button__icon' }
+					name={ icon }
+				/>
+			}
 
-				{
-					!!children &&
-					<span className={ 'button__caption' }>
-						{ children }
-					</span>
-				}
-			</button>
-		</>
+			{
+				!!children &&
+				<span className={ 'button__caption' }>{ children }</span>
+			}
+
+			{
+				isIconPositionEnd &&
+				<Icon
+					className={ 'button__icon' }
+					name={ icon }
+				/>
+			}
+		</button>
 	);
-});
+};
 
 export default Button;

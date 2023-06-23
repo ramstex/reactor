@@ -1,46 +1,25 @@
-import { Link, Outlet } from 'react-router-dom';
-import useNav from '../../hooks/useNav';
-import Container from '../../components/markup/container/Container';
-import Row from '../../components/grid/Row/Row';
-import Col from '../../components/grid/Col/Col';
-import Page from '../../components/markup/page/Page';
+import classBuilder from '../../plugins/classBuilder';
+import { Outlet } from '../../plugins/router';
 
-import type { FC } from 'react';
+import Section from '../../components/Markup/Section/Section';
+import LocalNav from './components/Nav/Nav.jsx';
 
-import './UiKit.scss';
+import type { TUiKitComponent } from './types';
 
-const UiKit: FC = () => {
-	const { routes } = useNav();
+const PageUiKit: TUiKitComponent = ( props ) => {
+	const { className } = props;
+
+	const classNameRoot = classBuilder( 'page page-ui-kit', className );
 
 	return (
-		<Page className={ 'page-ui-kit' }>
-			<header className={ 'page-ui-kit__header' }>
-				<Container>
-					<h1 className={ 'page-ui-kit__title' }>UI KIT</h1>
+		<div className={ classNameRoot }>
+			<Section title={ 'Ui Kit' }>
+				<LocalNav />
+			</Section>
 
-					<nav className={ 'page-ui-kit__nav' }>
-						<Row>
-							<Col>
-								<Link to={ routes.uiKitIcon }>Icon</Link>
-							</Col>
-
-							<Col>
-								<Link to={ routes.uiKitInput }>Input</Link>
-							</Col>
-
-							<Col>
-								<Link to={ routes.uiKitButton }>Button</Link>
-							</Col>
-						</Row>
-					</nav>
-				</Container>
-			</header>
-
-			<main className={ 'page-ui-kit__main' }>
-				<Outlet />
-			</main>
-		</Page>
+			<Outlet />
+		</div>
 	);
 };
 
-export default UiKit;
+export default PageUiKit;

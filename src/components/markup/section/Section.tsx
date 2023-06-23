@@ -1,37 +1,38 @@
-import classnames from 'classnames';
+import classBuilder from '../../../plugins/classBuilder';
 
-import type { FC, ReactNode } from 'react';
-import { IComponentProps } from '../../../modules/helper';
+import Container from '../Container/Container';
 
-import './Section.scss';
+import './style.scss';
 
-interface ISectionProps extends IComponentProps {
-	title?: ReactNode,
-}
+import type { TSectionComponent } from './types';
 
-const Section: FC<ISectionProps> = (props) => {
+const Section: TSectionComponent = ( props ) => {
 	const {
 		className,
 		children,
+		header,
+		body,
 		title,
+		titleTag = 'h2',
 	} = props;
 
-	const rootClass = classnames('section', className);
+	const classNameRoot = classBuilder( 'section', className );
+
+	const TitleTag = titleTag;
 
 	return (
-		<section className={ rootClass }>
-			{
-				!!title &&
-				<header className={ 'section__header' }>
-					{ title }
-				</header>
-			}
+		<section className={ classNameRoot }>
+			<div className={ 'markup-section__header' }>
+				<Container { ...header }>
+					<TitleTag className={ 'markup-section__title' }>{ title }</TitleTag>
+				</Container>
+			</div>
 
-			<div className={ 'section__body' }>
-				{ children }
+			<div className={ 'markup-section__body' }>
+				<Container { ...body }>{ children }</Container>
 			</div>
 		</section>
 	);
-};
+}
 
 export default Section;

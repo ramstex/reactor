@@ -1,16 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Router } from './plugins/router';
 
-import App from './app/App';
+import { Provider } from 'react-redux';
+import store from './store/index.js';
 
-import './style/index.scss';
+import App from './components/App/App';
 
-ReactDOM.createRoot(document.getElementById('root') as Element)
+import './style/style.scss';
+
+const appRootElement: HTMLElement | null = document.getElementById( 'app-root' );
+
+if ( !appRootElement ) throw new Error( 'Failed to find the root element' );
+
+createRoot( appRootElement )
 	.render(
-		<React.StrictMode>
-			<BrowserRouter>
-				<App/>
-			</BrowserRouter>
-		</React.StrictMode>
+		<StrictMode>
+			<Router>
+				<Provider store={ store }>
+					<App />
+				</Provider>
+			</Router>
+		</StrictMode>
 	);
