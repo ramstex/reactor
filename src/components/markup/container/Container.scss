@@ -1,0 +1,30 @@
+@use 'sass:math';
+@use '../../../style/modules/layout/module' as layout;
+@use '../../../style/modules/media/module' as media;
+
+.container {
+	width: 100%;
+	padding-left: layout.toVw(math.div(layout.$gap, 2));
+	padding-right: layout.toVw(math.div(layout.$gap, 2));
+	margin-left: auto;
+	margin-right: auto;
+
+	@media (media.$tablet) {
+		max-width: 800px;
+		padding-left: math.div(layout.$gap, 2);
+		padding-right: math.div(layout.$gap, 2);
+	}
+
+	@media (media.$desktop) {
+		max-width: 1280px;
+	}
+
+	&._wide {
+		max-width: none;
+	}
+
+	&._tight {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

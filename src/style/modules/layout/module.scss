@@ -1,0 +1,21 @@
+@use 'sass:math';
+
+$gap: 32px;
+$dur: 0.3s;
+$transition: all $dur ease;
+
+@function strip-unit($value) {
+	@if type-of($value) == 'number' and not unitless($value) {
+		@return math.div($value, ($value * 0 + 1));
+	}
+
+	@return $value;
+}
+
+@function toVh($size, $layout: 1920) {
+	@return math.div(strip-unit($size), $layout) * 100 + 'vh';
+}
+
+@function toVw($size, $layout: 375) {
+	@return math.div(strip-unit($size), $layout) * 100 + 'vw';
+}

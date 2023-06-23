@@ -1,0 +1,30 @@
+@use 'sass:map';
+
+$bp: (
+	xxs: 320px,
+	xs: 375px,
+	sm: 768px,
+	md: 992px,
+	lg: 1280px,
+	xl: 1680px,
+	xxl: 1920px,
+);
+
+$tabletBp: map.get($bp, md);
+$desktopBp: map.get($bp, lg);
+
+$mobile: #{'(max-width: ' + ($tabletBp - 1) + ')'};
+$mobileP: #{'(max-width: ' + ($tabletBp - 1) + ') and (orientation: portrait)'};
+$mobileL: #{'(max-width: ' + ($tabletBp - 1) + ') and (orientation: landscape)'};
+
+$tablet: #{'(min-width: ' + $tabletBp + ')'};
+$tabletP: #{'(min-width: ' + $tabletBp + ') and (orientation: portrait)'};
+$tabletL: #{'(min-width: ' + $tabletBp + ') and (orientation: landscape)'};
+
+$tabletOnly: #{$tablet + ' and (max-width: ' + ($desktopBp - 1) + ')'};
+$tabletOnlyP: #{$tabletP + ' and (max-width: ' + ($desktopBp - 1) + ')'};
+$tabletOnlyL: #{$tabletL + ' and (max-width: ' + ($desktopBp - 1) + ')'};
+
+$desktop: #{'(min-width: ' + $desktopBp + ')'};
+$desktopP: #{'(min-width: ' + $desktopBp + ') and (orientation: portrait)'};
+$desktopL: #{'(min-width: ' + $desktopBp + ') and (orientation: landscape)'};

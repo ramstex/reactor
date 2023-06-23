@@ -1,9 +1,0 @@
-@use 'sass:map';
-@use './config/colors.json' as config;
-
-//noinspection SassScssUnresolvedVariable
-$colors: config.$colors;
-
-@function getColor($key: 'primary') {
-	@return map.get($colors, $key);
-}

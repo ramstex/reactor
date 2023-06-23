@@ -1,0 +1,75 @@
+@use 'sass:math';
+@use 'module' as data;
+
+$sizes: (
+	margins: (
+		m: (
+			margin,
+		),
+		mv: (
+			margin-top,
+			margin-bottom,
+		),
+		mh: (
+			margin-left,
+			margin-right,
+		),
+		mt: (
+			margin-top,
+		),
+		mb: (
+			margin-bottom,
+		),
+		ml: (
+			margin-left,
+		),
+		mr: (
+			margin-right,
+		),
+	),
+	paddings: (
+		p: (
+			padding,
+		),
+		pv: (
+			padding-top,
+			padding-bottom,
+		),
+		ph: (
+			padding-left,
+			padding-right,
+		),
+		pt: (
+			padding-top,
+		),
+		pb: (
+			padding-bottom,
+		),
+		pl: (
+			padding-left,
+		),
+		pr: (
+			padding-right,
+		),
+	),
+);
+
+@each $name, $size in $sizes {
+	@each $margin, $props in $size {
+		._#{$margin} {
+			@for $i from -12 through 12 {
+				&_#{$i} {
+					@each $prop in $props {
+						#{$prop}: math.div(data.$gap, 4) * $i;
+					}
+				}
+			}
+
+			&_auto {
+				@each $prop in $props {
+					#{$prop}: auto;
+				}
+			}
+		}
+	}
+}

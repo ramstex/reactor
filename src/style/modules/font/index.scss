@@ -1,0 +1,37 @@
+@use 'module' as fonts;
+
+$relPath: '../../../';
+
+@font-face {
+	font-family: fonts.$primaryFamily;
+	src: url($relPath + 'assets/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+	font-family: fonts.$primaryFamily;
+	src: url($relPath + 'assets/fonts/Roboto-Light.ttf');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: fonts.$primaryFamily;
+	src: url($relPath + 'assets/fonts/Roboto-Medium.ttf');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: fonts.$secondaryFamily;
+	src: url($relPath + 'assets/fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+	font-family: fonts.$secondaryFamily;
+	src: url($relPath + 'assets/fonts/RobotoSlab-Light.ttf');
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: fonts.$secondaryFamily;
+	src: url($relPath + 'assets/fonts/RobotoSlab-Medium.ttf');
+	font-weight: bold;
+}

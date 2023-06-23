@@ -1,7 +1,0 @@
-@use './config/layout.json' as config;
-
-//noinspection SassScssUnresolvedVariable
-$gap: config.$gap;
-
-//noinspection SassScssUnresolvedVariable
-$dur: config.$dur;

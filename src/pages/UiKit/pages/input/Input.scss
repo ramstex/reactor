@@ -1,0 +1,7 @@
+@use '../../../../style/modules/layout/module' as layout;
+
+.page-ui-kit-input {
+	.col {
+		margin-bottom: layout.$gap;
+	}
+}

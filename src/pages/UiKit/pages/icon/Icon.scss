@@ -1,0 +1,12 @@
+@use 'sass:math';
+@use '../../../../style/modules/layout/module' as layout;
+
+.page-ui-kit-icon {
+	.row {
+		margin-bottom: layout.$gap;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

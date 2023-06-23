@@ -1,0 +1,97 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../../../style/modules/layout/module' as layout;
+@use '../../../style/modules/font/module' as font;
+@use '../../../style/modules/media/module' as media;
+@use '../../../style/modules/color/module' as color;
+
+.input {
+	display: block;
+	width: 100%;
+
+	&__input {
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+		padding: math.div(layout.$gap, 3) math.div(layout.$gap, 2);
+		border: 1px solid color.get(text);
+		font-family: font.$primary;
+		font-size: 14px;
+		color: color.get(text);
+		background: color.get(back);
+		transition: layout.$transition;
+		will-change: box-shadow;
+
+		&::placeholder {
+			color: color.get(muted);
+			transition: layout.$transition;
+		}
+
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 2px color.get(muted-dark);
+
+			&::placeholder {
+				color: color.get(muted-light);
+			}
+		}
+	}
+
+	&__label {
+		margin-top: 0;
+		margin-bottom: 4px;
+		font-size: 12px;
+		color: color.get(text);
+	}
+
+	&__message {
+		margin-top: 4px;
+		margin-bottom: 0;
+		font-size: 12px;
+		color: color.get(text);
+	}
+
+	/* Textarea */
+	&._textarea &__input {
+		height: 300px;
+		resize: none;
+	}
+
+	/* Disabled */
+	&._disabled &__input {
+		border-color: color.get(muted);
+		color: color.get(muted-dark);
+		background: color.get(muted-light);
+	}
+
+	&._disabled &__label,
+	&._disabled &__message {
+		color: color.get(muted);
+	}
+
+	/* Success state */
+	&._state_success &__input {
+		border-color: color.get(success);
+		color: color.get(success);
+
+		&:focus {
+			box-shadow: 0 0 2px color.get(success);
+		}
+	}
+
+	&._state_success &__label,
+	&._state_success &__message {
+		color: color.get(success);
+	}
+
+	/* Error state */
+	&._state_error &__input {
+		border-color: color.get(error);
+		color: color.get(error);
+	}
+
+	&._state_error &__label,
+	&._state_error &__message {
+		color: color.get(error);
+	}
+}
