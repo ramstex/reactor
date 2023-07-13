@@ -131,7 +131,11 @@ export default ( env, argv ) => {
 				{
 					test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
 					type: 'asset/resource',
-					generator: { filename: 'assets/fonts/[name][ext]?v=[contenthash]' },
+					generator: {
+						filename: 'assets/fonts/[name][ext]?v=[contenthash]',
+						publicPath: '',
+						outputPath: '',
+					},
 				},
 			],
 		},
