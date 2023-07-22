@@ -1,5 +1,5 @@
 /**
- * Interface for a User property in response of the user endpoint
+ * Interface and type for a User property contained in a response of the user endpoint
  */
 interface IUserResponseUser {
 	login: string | null;
