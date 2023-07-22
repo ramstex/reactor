@@ -3,6 +3,7 @@ import ApiRoutes from '../../../../config/api-routes';
 //	Dummies
 import RegistrationDummy from './registration';
 import UserDummy from './user';
+import LoginDummy from './login';
 import LogoutDummy from './logout';
 
 import type { AxiosResponse } from 'axios';
@@ -23,6 +24,17 @@ const dummy: TDummy = ( method, url, data ) => {
 
 			// @ts-ignore
 			result = RegistrationDummy.default;
+			break;
+
+		case ApiRoutes.login:
+			if ( data?.get( 'email' ) === 'qwe@qwe.qwe' ) {
+				// @ts-ignore
+				result = LoginDummy.success;
+				break;
+			}
+
+			// @ts-ignore
+			result = LoginDummy.fail;
 			break;
 
 		case ApiRoutes.user:

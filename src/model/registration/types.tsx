@@ -10,8 +10,8 @@ interface IRegisterResponse {
 }
 type TRegisterResponse = IRegisterResponse;
 
-type TRegister = ( data: FormData, headers?: Headers ) => Promise<TRegisterResponse>;
+type TRegisterQueryModel = ( data: FormData, headers?: Headers ) => Promise<TRegisterResponse>;
 
-export type TUseRegistration = () => {
-	register: TRegister;
+export type TRegistrationModel = () => {
+	register: TRegisterQueryModel;
 };

@@ -1,8 +1,8 @@
 import Api from '../../modules/api/index';
 
-import type { TUseRegistration } from './types';
+import type { TRegistrationModel } from './types';
 
-const useRegistration: TUseRegistration = () => {
+const useRegistration: TRegistrationModel = () => {
 	return {
 		/**
 		 * Sends a query to the registration endpoint to register new user.

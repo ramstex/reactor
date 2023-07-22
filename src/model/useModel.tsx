@@ -1,16 +1,19 @@
-import useRegistration from './registration/useRegistration';
-import useLogout from './logout/useLogout';
 import useUser from './user/useUser';
+import useRegistration from './registration/useRegistration';
+import useLogin from './login/useLogin';
+import useLogout from './logout/useLogout';
 
 const useModel = () =>{
-	const { register } = useRegistration();
-	const { logout } = useLogout();
 	const { update } = useUser();
+	const { register } = useRegistration();
+	const { login } = useLogin();
+	const { logout } = useLogout();
 
 	return {
-		registration: { register },
-		logout: { logout },
 		user: { update },
+		registration: { register },
+		login: { login },
+		logout: { logout },
 	};
 };
 

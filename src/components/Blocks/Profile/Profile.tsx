@@ -10,7 +10,7 @@ import Button from '../../Ui/Button/Button';
 // Types
 import { IProfileComponent } from './types';
 
-const rootClass = 'registration';
+const rootClass = 'profile';
 
 const Profile: IProfileComponent = ( props ) => {
 	const { className } = props;
@@ -21,26 +21,29 @@ const Profile: IProfileComponent = ( props ) => {
 		user,
 		logout,
 	} = useUser();
+	const isUser = !!user;
 
 	const onLogout = async () => {
 		await logout();
 	}
 
-	console.log( 'USER', user );
-
 	return (
 		<Form
 			className={ classNames.root }
 		>
-			<Row>
-				<Col cols={ 2 }>
-					<p>Email</p>
-				</Col>
+			<h3>Profile</h3>
 
-				<Col>
-					<p>{ user.email }</p>
-				</Col>
-			</Row>
+			{
+				isUser && <Row>
+					<Col cols={ 2 }>
+						<p>Email</p>
+					</Col>
+
+					<Col>
+						<p>{ user.email }</p>
+					</Col>
+				</Row>
+			}
 
 			<Button onClick={ onLogout }>Logout</Button>
 		</Form>

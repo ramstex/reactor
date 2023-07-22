@@ -5,18 +5,18 @@ interface IUser {
 	email: string | null;
 	fio: string | null;
 }
-export type TUser = IUser;
+export type TUser = IUser | null;
 
-type TUpdateUser = ( data?: FormData ) => Promise<IUser>;
-
-interface IRegisterUserData {
+interface IUserLoginData {
 	success: boolean;
 	error: string | null;
-	user: IUser;
+	user: TUser;
 }
-type TRegisterUserData = IRegisterUserData;
+type TUserLoginData = IUserLoginData;
 
-type TRegisterUser = ( data: FormData ) => Promise<TRegisterUserData>;
+type TUpdateUser = ( data?: FormData ) => Promise<TUser>;
+type TRegisterUser = ( data: FormData ) => Promise<TUserLoginData>;
+type TLoginUser = ( data: FormData ) => Promise<TUserLoginData>;
 type TLogoutUser = () => Promise<void>;
 
 interface IUserStore {
@@ -33,5 +33,6 @@ export type TUserController = () => {
 	user: TUser;
 	update: TUpdateUser;
 	register: TRegisterUser;
+	login: TLoginUser;
 	logout: TLogoutUser;
 };

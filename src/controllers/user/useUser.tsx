@@ -10,6 +10,7 @@ const useUser: TUserController = () => {
 	const {
 		user: userModel,
 		registration: registrationModel,
+		login: loginModel,
 		logout: logoutModel,
 	} = useModel();
 
@@ -68,20 +69,66 @@ const useUser: TUserController = () => {
 		 * Register new user.
 		 *
 		 * @param { FormData } data - Registration form data
-		 * @returns { Promise<TRegisterUserData> } - Object containing a registration and new user data
+		 * @returns { Promise<TUserLoginData> } - Object containing a registration status and new user data
 		 */
 		register: async ( data ) => {
 			const regResponse = await registrationModel.register( data );
-			const userResponse = await userModel.update();
+			const {
+				success,
+				error,
+			} = regResponse;
 
-			const userData = formatUserData( userResponse );
-			updateUserStore( userData );
+			if ( success ) {
+				const userResponse = await userModel.update();
 
-			return {
-				success: regResponse.success,
-				error: regResponse.error || null,
-				user: userData,
-			};
+				const userData = formatUserData( userResponse );
+				updateUserStore( userData );
+
+				return {
+					success: success,
+					error: error,
+					user: userData,
+				};
+			} else {
+				return {
+					success: success,
+					error: error,
+					user: null,
+				};
+			}
+		},
+
+		/**
+		 * Logging user in.
+		 *
+		 * @param { FormData } data - Login form data
+		 * @returns { Promise<TUserLoginData> } - Object containing a login status and new user data
+		 */
+		login: async ( data ) => {
+			const loginResponse = await loginModel.login( data );
+			const {
+				success,
+				error,
+			} = loginResponse;
+
+			if ( success ) {
+				const userResponse = await userModel.update();
+
+				const userData = formatUserData( userResponse );
+				updateUserStore( userData );
+
+				return {
+					success: success,
+					error: error,
+					user: userData,
+				};
+			} else {
+				return {
+					success: success,
+					error: error,
+					user: null,
+				};
+			}
 		},
 
 		/**

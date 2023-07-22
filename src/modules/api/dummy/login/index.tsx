@@ -1,0 +1,43 @@
+const LoginDummy = {
+	success: {
+		'Pagetitle': 'DZ Staging',
+		'CMD': '/?do=',
+		'CMD_THIS': '/?do=login',
+		'STATIC': '/?page=',
+		'INDEX': '/index.php',
+		'MAIN': '/',
+		'JSON': '/?do=login&json',
+		'ROOT': '',
+		'ROOTQ': '/?',
+		'VISUAL': '/visual/',
+		'module': 'login',
+		'user': null,
+		'tpl': 'login',
+		'resultingLogin': 'qwe',
+		'resultingPassword': 'qwe',
+		'success': true,
+		'error': '',
+	},
+
+	fail: {
+		'Pagetitle': 'DZ Staging',
+		'CMD': '/?do=',
+		'CMD_THIS': '/?do=login',
+		'STATIC': '/?page=',
+		'INDEX': '/index.php',
+		'MAIN': '/',
+		'JSON': '/?do=login&json',
+		'ROOT': '',
+		'ROOTQ': '/?',
+		'VISUAL': '/visual/',
+		'module': 'login',
+		'user': null,
+		'tpl': 'login',
+		'resultingLogin': '',
+		'resultingPassword': '',
+		'success': false,
+		'error': '',
+	},
+};
+
+export default LoginDummy;

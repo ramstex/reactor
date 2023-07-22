@@ -2,36 +2,36 @@ import { useState } from 'react';
 import classBuilder from '../../../plugins/classBuilder';
 import useUser from '../../../controllers/user/useUser';
 import { EButtonType } from '../../Ui/Button/helpers';
-import { ERegistrationForm } from './helpers';
+import { ELoginForm } from './helpers';
 
 import Form from '../../Ui/Form/Form';
 import Button from '../../Ui/Button/Button';
 import Input from '../../Ui/Input/Input';
 
-import type { TRegistrationComponent, TRegistrationData } from './types';
+import type { TLoginComponent, TLoginData } from './types';
 import type { TOnInvalid, TOnSubmit } from '../../../types/handlers';
-import type { TRegistrationName } from './types';
+import type { TLoginName } from './types';
 import type { TEventChange } from '../../../types/types';
 
-const Registration: TRegistrationComponent = ( props ) => {
+const Login: TLoginComponent = ( props ) => {
 	const {
 		className,
 		onSuccess,
 		onError,
 	} = props;
 
-	const { register } = useUser();
+	const { login } = useUser();
 
-	const [ form, setForm ] = useState<TRegistrationData>( {
-		email: '',
+	const [ form, setForm ] = useState<TLoginData>( {
+		login: '',
 		password: '',
 	} );
 
 	const [ error, setError ] = useState<string | null>( null );
 
-	const classNameRoot = classBuilder( 'registration', className );
+	const classNameRoot = classBuilder( 'login', className );
 
-	const onChange = ( key: TRegistrationName ) => {
+	const onChange = ( key: TLoginName ) => {
 		return ( event?: TEventChange ) => {
 			setForm( {
 				...form,
@@ -46,10 +46,10 @@ const Registration: TRegistrationComponent = ( props ) => {
 		event?.preventDefault();
 
 		const fData = new FormData();
-		fData.append( ERegistrationForm.email, form.email );
-		fData.append( ERegistrationForm.password, form.password );
+		fData.append( ELoginForm.login, form.login );
+		fData.append( ELoginForm.password, form.password );
 
-		const response = await register( fData );
+		const response = await login( fData );
 
 		if ( response.error ) {
 			setError( response.error );
@@ -69,15 +69,15 @@ const Registration: TRegistrationComponent = ( props ) => {
 			onSubmit={ onSubmit }
 			onInvalid={ onInvalid }
 		>
-			<h3>Registration</h3>
+			<h3>Login</h3>
 
 			<div className={ 'form__item' }>
 				<Input
 					type={ 'email' }
 					placeholder={ 'email' }
-					name={ ERegistrationForm.email }
-					value={ form.email }
-					onChange={ onChange( ERegistrationForm.email ) }
+					name={ ELoginForm.login }
+					value={ form.login }
+					onChange={ onChange( ELoginForm.login ) }
 				/>
 			</div>
 
@@ -85,22 +85,22 @@ const Registration: TRegistrationComponent = ( props ) => {
 				<Input
 					type={ 'password' }
 					placeholder={ 'password' }
-					name={ ERegistrationForm.password }
+					name={ ELoginForm.password }
 					value={ form.password }
 					clearable
-					onChange={ onChange( ERegistrationForm.password ) }
-					onClear={ onChange( ERegistrationForm.password ) }
+					onChange={ onChange( ELoginForm.password ) }
+					onClear={ onChange( ELoginForm.password ) }
 				/>
 			</div>
 
 			<Button
 				className={ 'form__item' }
 				type={ EButtonType.submit }
-			>Register</Button>
+			>Login</Button>
 
 			{ !!error && <p>{ error }</p> }
 		</Form>
 	);
 }
 
-export default Registration;
+export default Login;

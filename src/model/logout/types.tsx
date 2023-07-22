@@ -1,5 +1,5 @@
-export type TLogout = () => object;
+export type TLogoutQueryModel = () => object;
 
 export type TLogoutModel = () => {
-	logout: TLogout;
+	logout: TLogoutQueryModel;
 };
