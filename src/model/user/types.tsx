@@ -6,7 +6,7 @@ interface IUserResponseUser {
 	email: string | null;
 	fio: string | null;
 }
-export type TUserResponseUser = IUserResponseUser;
+type TUserResponseUser = IUserResponseUser;
 
 /**
  * Interface and type for a response of the user endpoint

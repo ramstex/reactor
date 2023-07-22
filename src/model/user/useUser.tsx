@@ -4,11 +4,14 @@ import type { TUserModel } from './types';
 
 const useUser: TUserModel = () => {
 	return {
+		/**
+		 * If there is some data passed, uploading it to the server.
+		 * Otherwise, getting user data from the server.
+		 *
+		 * @param { FormData= } data - user data to upload.
+		 * @return { TUpdateUserResponse } - server response
+		 */
 		update: async ( data ) => {
-			/**
-			 * If there is some data passed, uploading it to the server.
-			 * Otherwise, getting user data from the server.
-			 */
 			return !!data
 				? await Api.post(
 					Api.routes.user,

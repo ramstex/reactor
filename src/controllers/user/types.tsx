@@ -1,3 +1,5 @@
+import type { TUpdateUserResponse } from '../../model/user/types';
+
 interface IUser {
 	login: string | null;
 	email: string | null;
@@ -23,6 +25,9 @@ interface IUserStore {
 	};
 }
 export type TUserStore = IUserStore;
+
+export type TUpdateUserStore = ( data?: TUser ) => void;
+export type TFormatUserData = ( data: TUpdateUserResponse ) => TUser;
 
 export type TUserController = () => {
 	user: TUser;
