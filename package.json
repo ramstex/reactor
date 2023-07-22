@@ -7,7 +7,7 @@
 	"repository": "git@github.com:ramstex/reactor.git",
 	"scripts": {
 		"dev": "cross-env webpack serve --open --mode=development",
-		"build": "build.sh",
+		"build": "node build.js && cross-env webpack --mode=production",
 		"lint": "eslint ./config/**/*.jsx  ./src ./src/**/*.jsx",
 		"lint:fix": "eslint ./config/**/*.jsx  ./src ./src/**/*.jsx --fix",
 		"stylelint": "stylelint ./src/**/*.scss",

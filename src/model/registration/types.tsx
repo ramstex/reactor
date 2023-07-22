@@ -1,10 +1,11 @@
 /**
  * Interface for a response of the registration endpoint
  */
-export interface IRegisterApiResponse {
+interface IRegisterResponse {
 	success: boolean;
 	error: string;
 }
+export type TRegisterResponse = IRegisterResponse;
 
 /**
  * Interface for a result of register function:
@@ -17,7 +18,7 @@ export interface IRegisterResult {
 }
 export type TRegisterResult = IRegisterResult;
 
-export type TRegister = ( data: FormData, headers?: Headers ) => Promise<IRegisterResult>;
+export type TRegister = ( data: FormData, headers?: Headers ) => Promise<TRegisterResponse>;
 
 export type TUseRegistration = () => {
 	register: TRegister;

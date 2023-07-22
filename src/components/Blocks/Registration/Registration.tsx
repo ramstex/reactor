@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classBuilder from '../../../plugins/classBuilder';
-import useRegistration from '../../../controllers/registration/useRegistration';
+import useUser from '../../../controllers/user/useUser';
 import { EButtonType } from '../../Ui/Button/helpers';
 import { ERegistrationForm } from './helpers';
 
@@ -8,7 +8,7 @@ import Form from '../../Ui/Form/Form';
 import Button from '../../Ui/Button/Button';
 import Input from '../../Ui/Input/Input';
 
-import type { TRegistrationComponent, IRegistrationData } from './types';
+import type { TRegistrationComponent, TRegistrationData } from './types';
 import type { TOnInvalid, TOnSubmit } from '../../../types/handlers';
 import type { TRegistrationName } from './types';
 import type { TEventChange } from '../../../types/types';
@@ -20,9 +20,9 @@ const Registration: TRegistrationComponent = ( props ) => {
 		onError,
 	} = props;
 
-	const { register } = useRegistration();
+	const { register } = useUser();
 
-	const [ form, setForm ] = useState<IRegistrationData>( {
+	const [ form, setForm ] = useState<TRegistrationData>( {
 		email: '',
 		password: '',
 	} );

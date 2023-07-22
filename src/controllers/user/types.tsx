@@ -1,12 +1,32 @@
-import type {
-	TGetUser as $TGetUser,
-	TUpdateUser as $TUpdateUser
-} from '../../model/user/types';
+interface IUser {
+	login: string | null;
+	email: string | null;
+	fio: string | null;
+}
+export type TUser = IUser;
 
-export type TGetUser = $TGetUser;
-export type TUpdateUser = $TUpdateUser;
+type TUpdateUser = ( data?: FormData ) => Promise<IUser>;
 
-export type TUseUser = () => {
-	getUser: TGetUser;
-	updateUser: TUpdateUser;
+interface IRegisterUserData {
+	success: boolean;
+	error: string | null;
+	user: IUser;
+}
+type TRegisterUserData = IRegisterUserData;
+
+type TRegisterUser = ( data: FormData ) => Promise<TRegisterUserData>;
+type TLogoutUser = () => Promise<void>;
+
+interface IUserStore {
+	user: {
+		user: TUser
+	};
+}
+export type TUserStore = IUserStore;
+
+export type TUserController = () => {
+	user: TUser;
+	update: TUpdateUser;
+	register: TRegisterUser;
+	logout: TLogoutUser;
 };

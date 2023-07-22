@@ -1,11 +1,12 @@
-import Routes from '../config/routes';
+import ApiRoutes from '../../../../config/api-routes';
 
 //	Dummies
-import registrationDummy from '../registration/dummy';
-import userDummy from '../dummies/user';
+import RegistrationDummy from './registration';
+import UserDummy from './user';
+import LogoutDummy from './logout';
 
 import type { AxiosResponse } from 'axios';
-import type { TApiMethods } from '../../constants/api';
+import type { TApiMethods } from '../../../constants/api';
 
 type TDummy = ( method: TApiMethods, url: string, data?: FormData, headers?: object ) => Promise<AxiosResponse>;
 
@@ -13,20 +14,25 @@ const dummy: TDummy = ( method, url, data ) => {
 	let result: AxiosResponse;
 
 	switch ( url ) {
-		case Routes.registration:
+		case ApiRoutes.registration:
 			if ( data?.get( 'email' ) === 'exists@qwe.qwe' ) {
 				// @ts-ignore
-				result = registrationDummy.alreadyExists;
+				result = RegistrationDummy.alreadyExists;
 				break;
 			}
 
 			// @ts-ignore
-			result = registrationDummy.default;
+			result = RegistrationDummy.default;
 			break;
 
-		case Routes.user:
+		case ApiRoutes.user:
 			// @ts-ignore
-			result = userDummy.default;
+			result = UserDummy.default;
+			break;
+
+		case ApiRoutes.logout:
+			// @ts-ignore
+			result = LogoutDummy.default;
 			break;
 	}
 
@@ -36,7 +42,7 @@ const dummy: TDummy = ( method, url, data ) => {
 	return new Promise( ( resolve ) => {
 		setTimeout( () => {
 			resolve( result );
-		}, 2000 );
+		}, 1000 );
 	} );
 };
 

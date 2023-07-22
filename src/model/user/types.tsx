@@ -1,33 +1,23 @@
 /**
- * Interface for a response of the user endpoint
- */
-export interface IUserApiResponse {
-	User: IUserApiResponseUser
-}
-
-/**
  * Interface for a User property in response of the user endpoint
  */
-interface IUserApiResponseUser {
-	login: string;
-	email: string;
-	fio: string;
+interface IUserResponseUser {
+	login: string | null;
+	email: string | null;
+	fio: string | null;
 }
+export type TUserResponseUser = IUserResponseUser;
 
 /**
- * Interface and type for a result of all functions returning user data.
+ * Interface and type for a response of the user endpoint
  */
-export interface IUserResult {
-	login?: string;
-	email?: string;
-	fio?: string;
+interface IUpdateUserResponse {
+	User: TUserResponseUser;
 }
-export type TUserResult = IUserResult | null;
+export type TUpdateUserResponse = IUpdateUserResponse;
 
-export type TGetUser = () => Promise<IUserResult | null>;
-export type TUpdateUser = ( data: FormData ) => Promise<IUserResult | null>;
+type TUpdateUserModel = ( data?: FormData ) => Promise<TUpdateUserResponse>;
 
-export type TUseUser = () => {
-	getUser: TGetUser;
-	updateUser: TUpdateUser;
+export type TUserModel = () => {
+	update: TUpdateUserModel,
 };

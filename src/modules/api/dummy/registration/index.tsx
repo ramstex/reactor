@@ -1,4 +1,4 @@
-const registrationDummy = {
+const RegistrationDummy = {
 	default: {
 		'email': 'qwe@qwe.qwe',
 		'login': 'qwe',
@@ -41,4 +41,4 @@ const registrationDummy = {
 	},
 };
 
-export default registrationDummy;
+export default RegistrationDummy;

@@ -2,29 +2,22 @@
 
 // Modules, packages, plugins
 import axios, { AxiosResponse } from 'axios';
-import useEnv from './useEnv';
-import dummy from '../model/helpers/dummy';
+import { Routes } from './helper';
+import useEnv from '../../plugins/useEnv';
+import dummy from './dummy';
 
 // Enums
-import { EApiMethods } from '../constants/api';
+import { EApiMethods } from './helper';
 
 // Types
-import type { TApiMethods } from '../constants/api';
-
-type TQuery = <T>( method: TApiMethods, url: string, data?: FormData, headers?: object ) => Promise<T>;
-
-type TGet = <T>( url: string, data?: FormData, headers?: object ) => Promise<T>;
-type TPost = <T>( url: string, data?: FormData, headers?: object ) => Promise<T>;
-type TDelete = <T>( url: string, data?: FormData, headers?: object ) => Promise<T>;
-type TPatch = <T>( url: string, data?: FormData, headers?: object ) => Promise<T>;
-
-interface IApi {
-	query: TQuery;
-	get: TGet;
-	post: TPost;
-	delete: TDelete;
-	patch: TPatch;
-}
+import type {
+	TQuery,
+	TGet,
+	TPost,
+	TDelete,
+	TPatch,
+	IApi
+} from './types';
 
 const query: TQuery = async ( method, url, data, headers ) => {
 	const { isProduction } = useEnv();
@@ -59,12 +52,6 @@ const getQuery: TGet = async ( url, data, headers ) => {
 };
 
 const postQuery: TPost = async ( url, data, headers ) => {
-	console.log( 'plugin: API, method: TPost', {
-		url,
-		data,
-		headers,
-	} );
-
 	return query(
 		EApiMethods.post,
 		url,
@@ -97,6 +84,7 @@ const Api: IApi = {
 	post: postQuery,
 	delete: deleteQuery,
 	patch: patchQuery,
+	routes: Routes,
 };
 
 export default Api;

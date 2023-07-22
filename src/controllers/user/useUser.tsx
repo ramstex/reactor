@@ -1,29 +1,70 @@
 import useModel from '../../model/useModel';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from './store';
 
-import type { TGetUser, TUpdateUser, TUseUser } from './types';
+import type { TUserController, TUserStore, TUser } from './types';
+import type { TUpdateUserResponse, TUserResponseUser } from '../../model/user/types';
 
 const {
-	getUser: $GetUser,
-	updateUser: $UpdateUser,
+	user: userModel,
+	registration: registrationModel,
+	logout: logoutModel,
 } = useModel();
 
-const getUser: TGetUser = () => {
-	console.log( 'controller: User, method: getUser, point 1' );
+const useUser: TUserController = () => {
+	const dispatch = useDispatch();
 
-	return $GetUser();
-};
+	const user = useSelector( ( state: TUserStore ) => {
+		return state.user.user;
+	} );
 
-const updateUser: TUpdateUser = ( data ) => {
-	console.log( 'controller: User, method: updateUser, point 1' );
+	const updateUserStore: ( data: TUser | null ) => void = ( data ) => {
+		console.log( 'updateUserStore', data );
+		dispatch( setUser( data ) );
+	}
 
-	return $UpdateUser( data );
-};
-
-const useUser: TUseUser = () => {
-	return {
-		getUser: getUser,
-		updateUser: updateUser,
+	const getUserResponseData: ( data: TUpdateUserResponse ) => TUserResponseUser = ( data ) => {
+		return {
+			login: data.User.login,
+			email: data.User.email,
+			fio: data.User.fio,
+		};
 	};
-};
+
+	console.log( 'useUser', user );
+
+	return {
+		user,
+
+		update: async ( data ) => {
+			const userResponse = await userModel.update( data );
+
+			const userData = getUserResponseData( userResponse );
+			updateUserStore( userData );
+
+			return userData;
+		},
+
+		register: async ( data ) => {
+			const regResponse = await registrationModel.register( data );
+			const userResponse = await userModel.update();
+
+			const userData = getUserResponseData( userResponse );
+			updateUserStore( userData );
+
+			return {
+				success: regResponse.success,
+				error: regResponse.error || null,
+				user: userData,
+			};
+		},
+
+		logout: async () => {
+			await logoutModel.logout();
+
+			updateUserStore( null );
+		},
+	};
+}
 
 export default useUser;

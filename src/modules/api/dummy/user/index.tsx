@@ -1,4 +1,4 @@
-const userDummy = {
+const UserDummy = {
 	default: {
 		'Pagetitle': 'Личный кабинет пользователя',
 		'CMD': '/?do=',
@@ -65,4 +65,4 @@ const userDummy = {
 	},
 };
 
-export default userDummy;
+export default UserDummy;

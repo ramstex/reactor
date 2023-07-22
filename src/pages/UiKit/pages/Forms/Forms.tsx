@@ -1,18 +1,22 @@
+import useUser from '../../../../controllers/user/useUser';
+
 import Section from '../../../../components/Markup/Section/Section';
-import Registration from '../../../../components/Forms/Registration/Registration';
+import Registration from '../../../../components/Blocks/Registration/Registration';
+import Profile from '../../../../components/Blocks/Profile/Profile';
 
 import './style.scss';
 
 const PageUiKitForms = () => {
-	const onRegSuccess = () => {
-		alert( 'REG SUCCESS!!!!!!!!!' );
-	}
+	const { user } = useUser();
+	const isUser = !!user ;
 
 	return (
 		<Section>
-			<Registration
-				onSuccess={ onRegSuccess }
-			/>
+			{
+				isUser
+					? <Profile />
+					: <Registration />
+			}
 		</Section>
 	);
 };
