@@ -12,7 +12,6 @@ const rootClassName = 'auth';
 
 const Auth = () => {
 	const { user } = useUser();
-	console.log( 'user',user );
 	const isUser = !!user;
 
 	const [ state, setState ] = useState( isUser
@@ -71,39 +70,40 @@ const Auth = () => {
 	return (
 		<div className={ classNames.root }>
 			{
-				state === EAuthStates.registration &&
-				<Registration
-					className={ classNames.registration }
-					onSuccess={ onRegistrationSuccess }
-					onError={ onRegistrationError }
-					onLogin={ onRegistrationLogin }
-				/>
-			}
+				isUser
+					? <Profile className={ classNames.profile } />
+					: <>
+						{
+							state === EAuthStates.registration &&
+							<Registration
+								className={ classNames.registration }
+								onSuccess={ onRegistrationSuccess }
+								onError={ onRegistrationError }
+								onLogin={ onRegistrationLogin }
+							/>
+						}
 
-			{
-				state === EAuthStates.login &&
-				<Login
-					className={ classNames.login }
-					onSuccess={ onLoginSuccess }
-					onError={ onLoginError }
-					onRemind={ onLoginRemind }
-					onRegistration={ onLoginRegistration }
-				/>
-			}
+						{
+							state === EAuthStates.login &&
+							<Login
+								className={ classNames.login }
+								onSuccess={ onLoginSuccess }
+								onError={ onLoginError }
+								onRemind={ onLoginRemind }
+								onRegistration={ onLoginRegistration }
+							/>
+						}
 
-			{
-				state === EAuthStates.remind &&
-				<Remind
-					className={ classNames.login }
-					onSuccess={ onRemindSuccess }
-					onError={ onRemindError }
-					onLogin={ onRemindLogin }
-				/>
-			}
-
-			{
-				state === EAuthStates.profile &&
-				<Profile className={ classNames.profile } />
+						{
+							state === EAuthStates.remind &&
+							<Remind
+								className={ classNames.login }
+								onSuccess={ onRemindSuccess }
+								onError={ onRemindError }
+								onLogin={ onRemindLogin }
+							/>
+						}
+					</>
 			}
 		</div>
 	);

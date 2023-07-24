@@ -63,7 +63,6 @@ const useUser: TUserController = () => {
 		 */
 		update: async ( data ) => {
 			const userResponse = await userModel.update( data );
-			console.log( 'userResponse', userResponse );
 
 			const userData = formatUserData( userResponse );
 			updateUserStore( userData );
