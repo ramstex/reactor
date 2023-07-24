@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import buildClass from '../../plugins/classBuilder';
 import { Routes, Route } from '../../plugins/router';
-
+import useUser from '../../controllers/user/useUser';
 import _ROUTES from '../../../config/routes';
 
 import Header from '../Header/Header';
@@ -23,7 +24,18 @@ import type { TAppComponent } from './types';
 const App: TAppComponent = ( props ) => {
 	const { className } = props;
 
+	const { update } = useUser();
+
 	const classNameRoot = buildClass( 'app', className );
+
+	useEffect( () => {
+		const fetchData = async () => {
+			await update();
+		}
+
+		fetchData()
+			.catch( console.error );
+	}, [] );
 
 	return (
 		<div className={ classNameRoot }>

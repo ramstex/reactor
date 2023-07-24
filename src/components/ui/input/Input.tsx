@@ -22,6 +22,7 @@ const Input: TInputComponent = forwardRef( ( props, ref ) => {
 		disabled,
 		required,
 		clearable,
+		autocomplete,
 		readOnly,
 		value,
 		onChange,
@@ -63,6 +64,7 @@ const Input: TInputComponent = forwardRef( ( props, ref ) => {
 							name={ name }
 							placeholder={ placeholder }
 							disabled={ disabled }
+							autoComplete={ autocomplete }
 							readOnly={ readOnly }
 							onChange={ onChange }
 						/>
@@ -73,6 +75,7 @@ const Input: TInputComponent = forwardRef( ( props, ref ) => {
 							name={ name }
 							placeholder={ placeholder }
 							disabled={ disabled }
+							autoComplete={ autocomplete }
 							readOnly={ readOnly }
 							value={ value }
 							onChange={ onChange }

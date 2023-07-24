@@ -17,6 +17,7 @@ export interface IInputProps extends IComponentProps {
 	disabled?: boolean;
 	required?: boolean;
 	clearable?: boolean;
+	autocomplete?: 'on' | 'off';
 	readOnly?: boolean;
 	onChange?: ( event: TEventChange ) => void;
 	onClear?: () => void;

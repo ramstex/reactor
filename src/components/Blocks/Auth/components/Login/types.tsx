@@ -1,4 +1,4 @@
-import type { IComponentProps, TComponent } from '../../../types/types';
+import type { IComponentProps, TComponent } from '../../../../../types/types';
 import { ELoginForm } from './helpers';
 
 export type TLoginName = `${ ELoginForm }`
@@ -12,6 +12,8 @@ export type TLoginData = ILoginData;
 export interface ILoginProps extends IComponentProps {
 	onSuccess?: () => void;
 	onError?: () => void;
+	onRemind?: () => void;
+	onRegistration?: () => void;
 }
 type TLoginProps = ILoginProps;
 

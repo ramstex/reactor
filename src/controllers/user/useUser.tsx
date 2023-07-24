@@ -37,11 +37,15 @@ const useUser: TUserController = () => {
 	 * @return { TUser } - user data
 	 */
 	const formatUserData: TFormatUserData = ( data ) => {
-		return {
-			login: data.User.login,
-			email: data.User.email,
-			fio: data.User.fio,
-		};
+		if ( !!data?.User ){
+			return {
+				login: data.User.login,
+				email: data.User.email,
+				fio: data.User.fio,
+			};
+		} else {
+			return null;
+		}
 	};
 
 	return {
@@ -59,6 +63,7 @@ const useUser: TUserController = () => {
 		 */
 		update: async ( data ) => {
 			const userResponse = await userModel.update( data );
+			console.log( 'userResponse', userResponse );
 
 			const userData = formatUserData( userResponse );
 			updateUserStore( userData );

@@ -1,4 +1,4 @@
-import type { IComponentProps, TComponent } from '../../../types/types';
+import type { IComponentProps, TComponent } from '../../../../../types/types';
 import { ERemindForm } from './helpers';
 
 export type TRemindName = `${ ERemindForm }`
@@ -11,6 +11,7 @@ export type TRemindData = IRemindData;
 export interface IRemindProps extends IComponentProps {
 	onSuccess?: () => void;
 	onError?: () => void;
+	onLogin?: () => void;
 }
 type TRemindProps = IRemindProps;
 
