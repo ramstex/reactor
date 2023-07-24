@@ -14,9 +14,16 @@ interface IUserLoginData {
 }
 type TUserLoginData = IUserLoginData;
 
+interface IUserRemindData {
+	success: boolean;
+	error: string | null;
+}
+type TUserRemindData = IUserRemindData;
+
 type TUpdateUser = ( data?: FormData ) => Promise<TUser>;
 type TRegisterUser = ( data: FormData ) => Promise<TUserLoginData>;
 type TLoginUser = ( data: FormData ) => Promise<TUserLoginData>;
+type TRemindUser = ( data: FormData ) => Promise<TUserRemindData>;
 type TLogoutUser = () => Promise<void>;
 
 interface IUserStore {
@@ -34,5 +41,6 @@ export type TUserController = () => {
 	update: TUpdateUser;
 	register: TRegisterUser;
 	login: TLoginUser;
+	remind: TRemindUser;
 	logout: TLogoutUser;
 };

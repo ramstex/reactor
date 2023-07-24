@@ -11,6 +11,7 @@ const useUser: TUserController = () => {
 		user: userModel,
 		registration: registrationModel,
 		login: loginModel,
+		remind: remindModel,
 		logout: logoutModel,
 	} = useModel();
 
@@ -129,6 +130,25 @@ const useUser: TUserController = () => {
 					user: null,
 				};
 			}
+		},
+
+		/**
+		 * Restores forgotten password.
+		 *
+		 * @param { FormData } data - Reminding form data
+		 * @returns { Promise<TUserRemindData> } - Object containing a reminding status
+		 */
+		remind: async ( data ) => {
+			const remindResponse = await remindModel.remind( data );
+			const {
+				success,
+				error,
+			} = remindResponse;
+
+			return {
+				success,
+				error: error || null,
+			};
 		},
 
 		/**
