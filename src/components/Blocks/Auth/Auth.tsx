@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import classBuilder from '../../../plugins/classBuilder';
 import useUser from '../../../controllers/user/useUser';
 import { EAuthStates } from './helper';
@@ -11,13 +10,12 @@ import Profile from './components/Profile/Profile';
 const rootClassName = 'auth';
 
 const Auth = () => {
-	const { user } = useUser();
+	const {
+		user,
+		state,
+		setState,
+	} = useUser();
 	const isUser = !!user;
-
-	const [ state, setState ] = useState( isUser
-		? EAuthStates.profile
-		: EAuthStates.registration
-	);
 
 	const classNames = {
 		root: classBuilder( rootClassName ),
