@@ -21,6 +21,10 @@ const useUser: TUserController = () => {
 		return state.user.user;
 	} );
 
+	const state = useSelector( ( state: TUserStore ) => {
+		return state.user.state;
+	} );
+
 	/**
 	 * Updating user store.
 	 *
@@ -162,6 +166,17 @@ const useUser: TUserController = () => {
 			await logoutModel.logout();
 
 			updateUserStore();
+		},
+
+		/**
+		 * State of auth process
+		 */
+		state,
+
+		setState: ( state ) => {
+			dispatch( setUser( state ) );
+
+			return state;
 		},
 	};
 }

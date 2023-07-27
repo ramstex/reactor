@@ -1,4 +1,8 @@
+import { EUserAuthStates } from './helper';
+
 import type { TUpdateUserResponse } from '../../model/user/types';
+
+export type TUserAuthStates = `${ EUserAuthStates }`;
 
 interface IUser {
 	login: string | null;
@@ -25,10 +29,12 @@ type TRegisterUser = ( data: FormData ) => Promise<TUserLoginData>;
 type TLoginUser = ( data: FormData ) => Promise<TUserLoginData>;
 type TRemindUser = ( data: FormData ) => Promise<TUserRemindData>;
 type TLogoutUser = () => Promise<void>;
+type TSetStateUser = ( state: TUserAuthStates ) => TUserAuthStates;
 
 interface IUserStore {
 	user: {
-		user: TUser
+		user: TUser;
+		state: TUserAuthStates;
 	};
 }
 export type TUserStore = IUserStore;
@@ -43,4 +49,6 @@ export type TUserController = () => {
 	login: TLoginUser;
 	remind: TRemindUser;
 	logout: TLogoutUser;
+	state: TUserAuthStates;
+	setState: TSetStateUser,
 };
