@@ -39,7 +39,7 @@ const dummy: TDummy = ( method, url, data ) => {
 
 		case ApiRoutes.user:
 			// @ts-ignore
-			result = UserDummy.default;
+			result = UserDummy.empty;
 			break;
 
 		case ApiRoutes.logout:

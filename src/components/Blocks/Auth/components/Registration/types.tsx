@@ -1,11 +1,11 @@
 import type { IComponentProps, TComponent } from '../../../../../types/types';
 import { ERegistrationForm } from './helpers';
 
-interface IRegistrationData {
-	email: string;
-	password: string;
-}
-export type TRegistrationData = IRegistrationData;
+// interface IRegistrationForm {
+// 	email: string;
+// 	password: string;
+// }
+// export type TRegistrationForm = IRegistrationForm;
 
 export interface IRegistrationProps extends IComponentProps {
 	onSuccess?: () => void;

@@ -1,5 +1,5 @@
 import type {
-	TFormApplyItemValidation, TFormApplyRequired, TFormApplyEmail, TFormApplyEquals
+	TFormValidateResultItem, TFormApplyItemValidation, TFormApplyRequired, TFormApplyEmail, TFormApplyEquals
 } from './types';
 
 export enum EFormRules {
@@ -8,48 +8,92 @@ export enum EFormRules {
 	equals = 'equals',
 }
 
+const validationDefault = {
+	success: true,
+	message: null,
+};
+
 export const applyItemValidation: TFormApplyItemValidation = ( form, item, rules = {} ) => {
-	let success = true;
+	console.log( 'applyItemValidation 1', form, item, rules );
+	let result: TFormValidateResultItem = { ...validationDefault };
 
 	for ( const rule in rules ) {
+		console.log( 'applyItemValidation 2', rule );
 		switch ( rule ) {
 			case EFormRules.required:
-				success = applyRequired( item );
+				console.log( 'applyItemValidation case required' );
+				result = applyRequired( item );
 				break;
 			case EFormRules.email:
-				success = applyEmail( item );
+				console.log( 'applyItemValidation case email', applyEmail( item ) );
+				result = applyEmail( item );
+				console.log( 'applyItemValidation case email 2', result );
 				break;
 			case EFormRules.equals:
-				success = applyEquals( form, item, rule );
+				console.log( 'applyItemValidation case equals' );
+				//@ts-ignore
+				result = applyEquals( form, item, rules, rule );
 				break;
 		}
 
-		if ( !success ) {
+		console.log( 'applyItemValidation 3', result );
+		if ( !result.success ) {
+			console.log( 'applyItemValidation 4', result );
 			break;
 		}
 	}
+	console.log( 'applyItemValidation 5', result );
 
 	// ToDo: error messages
-	return {
-		success,
-		message: null,
-	};
+	return result;
 }
 
 const applyRequired: TFormApplyRequired = ( item ) => {
-	return !!item;
+	console.log( 'applyRequired 1', item );
+	const success = !!item;
+
+	return {
+		success,
+		message: success
+			? null
+			: 'Required field',
+	};
 }
 
 const applyEmail: TFormApplyEmail = ( item ) => {
-	if ( typeof item === 'string' ) {
-		const regexExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+	const result: TFormValidateResultItem = { ...validationDefault };
 
-		return regexExp.test( item );
+	console.log( 'applyEmail 1', item );
+	if ( typeof item === 'string' ) {
+		const condition = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
+		result.success = condition.test( item );
+		console.log( 'applyEmail 2', result );
 	} else {
-		return false;
+		console.log( 'applyEmail 3', item, typeof item );
+
+		result.success = false;
 	}
+
+	if ( !result.success ) {
+		console.log( 'applyEmail 4', result );
+		result.message = 'Email is invalid'
+	}
+
+	return result;
 }
 
-const applyEquals: TFormApplyEquals = ( form, item, key ) => {
-	return item === form[ key ];
+// @ts-ignore
+const applyEquals: TFormApplyEquals = ( form, item, rules, rule ) => {
+	console.log( 'applyEquals 1', form, item, rules, rule );
+
+	const valueToCompare = form[ rules[ rule ] ];
+	console.log( 'applyEquals 2', valueToCompare );
+	const success = item === valueToCompare;
+
+	return {
+		success,
+		message: success
+			? null
+			: 'Values are unequal',
+	}
 }

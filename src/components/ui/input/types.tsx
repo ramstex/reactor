@@ -13,7 +13,7 @@ export interface IInputProps extends IComponentProps {
 	theme?: TInputTheme;
 	textarea?: boolean;
 	placeholder?: string;
-	message?: string;
+	message?: string | null;
 	disabled?: boolean;
 	required?: boolean;
 	clearable?: boolean;

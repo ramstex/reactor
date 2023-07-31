@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { applyItemValidation } from './helper';
 
 import type {
-	TForm, TFormSetData, TFormReset, TFormCreateKeysList
+	TForm, TFormSetValue, TFormReset, TFormCreateKeysList, TFormValidateResult
 } from './types';
 import { TFormValidate } from './types';
 
@@ -13,16 +13,19 @@ const useForm: TForm = ( {
 	const [ form, setForm ] = useState( formArg );
 	const [ initialForm ] = useState( formArg );
 
-	const [ rules ] = useState( rulesArg );
-
-	const setFormValue: TFormSetData = ( key, value ) => {
+	const setFormValue: TFormSetValue = ( data ) => {
 		setForm( {
 			...form,
-			[key]: value,
+			...data,
 		} );
 	};
 
-	// ToDo: Reusable function to create keys list
+	const [ rules ] = useState( rulesArg );
+	const [ validation, setValidation ] = useState( {
+		success: true,
+		items: {},
+	} );
+
 	const createKeysList: TFormCreateKeysList = ( keys ) => {
 		let keysList: string[];
 
@@ -39,22 +42,55 @@ const useForm: TForm = ( {
 
 	const reset: TFormReset = ( keys ) => {
 		const keysList = createKeysList( keys );
+		const values = keysList.reduce( ( acc, curr ) => {
+			return {
+				...acc,
+				[ curr ]: initialForm[ curr ],
+			};
+		}, {} );
 
-		keysList.forEach( ( key ) => {
-			setFormValue( key, initialForm[ key ] );
-		} );
+		setFormValue( values );
 	};
 
-	const validate: TFormValidate = ( keys ) => {
+	const validate: TFormValidate = async ( keys ) => {
+		console.log( 'validate 1, keys:', keys );
 		const keysList = createKeysList( keys );
+		const validationResult: TFormValidateResult = {
+			success: true,
+			items: {},
+		};
+		console.log( 'validate 2, keysList:', keysList );
 
 		keysList.forEach( ( key ) => {
 			const itemByKey = form[ key ];
 			const rulesByKey = rules[ key ];
+			console.log( 'validate 3, itemByKey:', itemByKey );
+			console.log( 'validate 4, rulesByKey:', rulesByKey );
 
-			applyItemValidation( form, itemByKey, rulesByKey );
+			validationResult.items[ key ] = applyItemValidation( form, itemByKey, rulesByKey );
+			console.log( 'validate 5, validationResult:', validationResult );
 		} );
+
+		for ( const key in validationResult.items ) {
+			console.log( 'validate 6, key:', key );
+			console.log( 'validate 7, item:', validationResult.items[ key ] );
+			if ( !validationResult.items[ key ].success ) {
+				console.log( 'validate 8, item:', validationResult.items[ key ].success );
+				validationResult.success = false;
+				break;
+			}
+		}
+		console.log( 'validate 9, key:', validationResult );
+
+		await setValidation( { ...validationResult } );
+		console.log( 'validate 10, validation:', validation );
+
+		return validationResult;
 	};
+
+	useEffect( () => {
+		console.log( 'validate 11, validation:', validation );
+	}, [ validation ] );
 
 	return {
 		form,
@@ -62,6 +98,7 @@ const useForm: TForm = ( {
 		setFormValue,
 		reset,
 		validate,
+		validation,
 	};
 }
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EUserAuthStates } from './helper';
 
-const defaultAuthState = EUserAuthStates.login;
+const defaultAuthState = EUserAuthStates.registration;
 
 export const userSlice = createSlice( {
 	name: 'user',
