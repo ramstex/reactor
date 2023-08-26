@@ -1,30 +1,57 @@
 import { useState, useEffect } from 'react';
 import { applyItemValidation } from './helper';
+import usePrevious from '../previous';
 
 import type {
-	TForm, TFormSetValue, TFormReset, TFormCreateKeysList, TFormValidateResult
+	TUseForm,
+	TSetForm,
+	TFormReset,
+	TFormCreateKeysList,
+	TFormValidation,
+	TFormItems,
+	TFormValidationRuleResult,
+	TSetFormErrors
 } from './types';
-import { TFormValidate } from './types';
+import { TFormValidate, TFormValidateWithErrors, TValidationErrors } from './types';
 
-const useForm: TForm = ( {
-	form: formArg,
-	rules: rulesArg = {},
+const getValidationDefault: ( form: TFormItems ) => TFormValidation = ( form ) => {
+	return {
+		success: true,
+		items: Object.keys( form ).reduce( ( result, current ) => {
+			return {
+				...result,
+				[ current ]: {
+					message: null,
+					checked: true,
+					success: true,
+				},
+			};
+		}, {} ),
+	}
+}
+
+const useForm: TUseForm = ( {
+	form: formProp,
+	rules: rulesProp = {},
 } ) => {
-	const [ form, setForm ] = useState( formArg );
-	const [ initialForm ] = useState( formArg );
+	const [ initialized, setInitialized ] = useState( false );
+	const [ formState, setFormState ] = useState( formProp );
+	const formPrev = usePrevious( formState );
+	const [ initialForm ] = useState( formProp );
 
-	const setFormValue: TFormSetValue = ( data ) => {
-		setForm( {
-			...form,
+	const setForm: TSetForm = ( data = {} ) => {
+		const result = {
+			...formState,
 			...data,
-		} );
+		};
+
+		setFormState( result );
+
+		return result;
 	};
 
-	const [ rules ] = useState( rulesArg );
-	const [ validation, setValidation ] = useState( {
-		success: true,
-		items: {},
-	} );
+	const [ rulesState ] = useState( rulesProp );
+	const [ validation, setValidation ] = useState( getValidationDefault( formProp ) );
 
 	const createKeysList: TFormCreateKeysList = ( keys ) => {
 		let keysList: string[];
@@ -34,13 +61,25 @@ const useForm: TForm = ( {
 		} else if ( Array.isArray( keys ) ) {
 			keysList = [ ...keys ];
 		} else {
-			keysList = [ ...Object.keys( form ) ];
+			keysList = [ ...Object.keys( formState ) ];
 		}
 
 		return keysList;
 	}
 
-	const reset: TFormReset = ( keys ) => {
+	const getChangedKeys: () => string[] = () => {
+		return formPrev
+			? Object.entries( formPrev ).reduce( ( result: string[], [ key, value ] ) => {
+				if ( formState.hasOwnProperty( key ) && formState[ key ] !== value ) {
+					result.push( key );
+				}
+
+				return result;
+			}, [] )
+			: [];
+	}
+
+	const resetForm: TFormReset = ( keys ) => {
 		const keysList = createKeysList( keys );
 		const values = keysList.reduce( ( acc, curr ) => {
 			return {
@@ -49,56 +88,94 @@ const useForm: TForm = ( {
 			};
 		}, {} );
 
-		setFormValue( values );
+		setForm( values );
 	};
 
-	const validate: TFormValidate = async ( keys ) => {
-		console.log( 'validate 1, keys:', keys );
+	// @ts-ignore
+	const validate: TFormValidate = ( keys = Object.keys( formState ), handler ) => {
 		const keysList = createKeysList( keys );
-		const validationResult: TFormValidateResult = {
-			success: true,
-			items: {},
-		};
-		console.log( 'validate 2, keysList:', keysList );
+		const result: TFormValidation = getValidationDefault( formState );
 
-		keysList.forEach( ( key ) => {
-			const itemByKey = form[ key ];
-			const rulesByKey = rules[ key ];
-			console.log( 'validate 3, itemByKey:', itemByKey );
-			console.log( 'validate 4, rulesByKey:', rulesByKey );
+		Object.entries( formState ).forEach( ( [ key, value ] ) => {
+			const rulesByKey = rulesState[ key ];
 
-			validationResult.items[ key ] = applyItemValidation( form, itemByKey, rulesByKey );
-			console.log( 'validate 5, validationResult:', validationResult );
+			const itemValidationResult = applyItemValidation( formState, value, rulesByKey );
+
+			if ( typeof handler === 'function' ) {
+				result.items[ key ] = handler( itemValidationResult, key );
+			} else {
+				const itemChecked = keysList.indexOf( key ) >= 0
+					? false
+					: validation.items[ key ].checked;
+
+				result.items[ key ] = {
+					...itemValidationResult,
+					checked: itemChecked,
+					message: itemChecked
+						? validation.items[ key ].message
+						: null,
+					success: itemChecked
+						? validation.items[ key ].success
+						: true,
+				};
+			}
 		} );
 
-		for ( const key in validationResult.items ) {
-			console.log( 'validate 6, key:', key );
-			console.log( 'validate 7, item:', validationResult.items[ key ] );
-			if ( !validationResult.items[ key ].success ) {
-				console.log( 'validate 8, item:', validationResult.items[ key ].success );
-				validationResult.success = false;
+		for ( const key in result.items ) {
+			if ( !result.items[ key ].success ) {
+				result.success = false;
 				break;
 			}
 		}
-		console.log( 'validate 9, key:', validationResult );
+		setValidation( { ...result } );
 
-		await setValidation( { ...validationResult } );
-		console.log( 'validate 10, validation:', validation );
+		return result;
+	}
 
-		return validationResult;
+	const validateAllAndCheck: TFormValidate = () => {
+		return validate( undefined, ( result: TFormValidationRuleResult ) => {
+			return {
+				...result,
+				checked: true,
+				message: result.message,
+				success: result.success,
+			};
+		} );
 	};
 
+	const validateAllWithErrors: TFormValidateWithErrors = ( errors: TValidationErrors ) => {
+		return validate( Object.keys( errors ), ( result: TFormValidationRuleResult, key: string ) => {
+			return {
+				...result,
+				checked: true,
+				message: errors[ key ],
+				success: false,
+			};
+		} );
+	};
+
+	const setFormErrors: TSetFormErrors = ( errors ) => {
+		validateAllWithErrors( errors );
+	}
+
 	useEffect( () => {
-		console.log( 'validate 11, validation:', validation );
-	}, [ validation ] );
+		if ( initialized ) {
+			validate( getChangedKeys() );
+		}
+	}, [ formState ] );
+
+	useEffect( () => {
+		setInitialized( true );
+	}, [] );
 
 	return {
-		form,
-		initialForm,
-		setFormValue,
-		reset,
-		validate,
+		form: formState,
+		// initialForm,
+		setForm,
+		resetForm,
+		validateForm: validateAllAndCheck,
 		validation,
+		setFormErrors,
 	};
 }
 

@@ -15,11 +15,11 @@ if ( !appRootElement ) throw new Error( 'Failed to find the root element' );
 
 createRoot( appRootElement )
 	.render(
-		<StrictMode>
-			<Router>
-				<Provider store={ store }>
-					<App />
-				</Provider>
-			</Router>
-		</StrictMode>
+		// <StrictMode>
+		<Router>
+			<Provider store={ store }>
+				<App />
+			</Provider>
+		</Router>
+		// </StrictMode>
 	);

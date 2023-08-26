@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
 import useForm from '../../../../../modules/form/index';
@@ -29,10 +29,11 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 	const {
 		form,
-		setFormValue,
-		reset,
-		validate,
+		setForm,
+		resetForm,
+		validateForm,
 		validation,
+		setFormErrors,
 	} = useForm( {
 		form: {
 			email: '',
@@ -72,9 +73,13 @@ const Registration: TRegistrationComponent = ( props ) => {
 		login: classBuilder( `${ rootClassName }__login` ),
 	};
 
+	const onSetErrorsClick = () => {
+		setFormErrors( { email: 'This email has already registered' } );
+	};
+
 	const onChange = ( key: TRegistrationName ) => {
 		return ( event?: TEventChange ) => {
-			setFormValue( {
+			setForm( {
 				[ key ]: event
 					? event.target.value
 					: '',
@@ -83,40 +88,40 @@ const Registration: TRegistrationComponent = ( props ) => {
 	};
 
 	const onSubmit: TOnSubmit = async ( event ) => {
-		event?.preventDefault();
-
-		const validateSuccess = await validate();
-		console.log( 'onSubmit', validateSuccess );
-
-		if ( validateSuccess ) {
-			const fData = new FormData();
-			Object.entries( form ).forEach( ( [ key, value ] ) => {
-				fData.append( key, String( value ) );
-			} );
-
-			const response = await register( fData );
-
-			if ( response.error ) {
-				setError( response.error );
-				!!onError && onError();
-			} else {
-				!!onSuccess && onSuccess();
-			}
-		}
+		// event?.preventDefault();
+		//
+		// const validateSuccess = await validateForm();
+		// console.log( 'onSubmit', validateSuccess );
+		//
+		// if ( validateSuccess ) {
+		// 	const fData = new FormData();
+		// 	Object.entries( form ).forEach( ( [ key, value ] ) => {
+		// 		fData.append( key, String( value ) );
+		// 	} );
+		//
+		// 	const response = await register( fData );
+		//
+		// 	if ( response.error ) {
+		// 		setError( response.error );
+		// 		!!onError && onError();
+		// 	} else {
+		// 		!!onSuccess && onSuccess();
+		// 	}
+		// }
 	};
 
 	const onInvalid: TOnInvalid = ( event ) => {
-		event?.preventDefault();
+		// event?.preventDefault();
 	};
 
 	const onResetClick = () => {
-		reset();
+		resetForm();
 	}
 
 	const onValidateClick: TOnSubmit = async ( event ) => {
 		event?.preventDefault();
 
-		const validateSuccess = await validate();
+		const validateSuccess = await validateForm();
 		console.log( 'onValidateClick', validateSuccess );
 	}
 
@@ -175,6 +180,11 @@ const Registration: TRegistrationComponent = ( props ) => {
 				className={ classNames.submit }
 				onClick={ onValidateClick }
 			>Validate</Button>
+
+			<Button
+				className={ classNames.submit }
+				onClick={ onSetErrorsClick }
+			>Set Errors</Button>
 
 			{ !!error && <p className={ classNames.error }>{ error }</p> }
 
