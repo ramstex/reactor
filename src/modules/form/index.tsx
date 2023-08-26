@@ -170,7 +170,7 @@ const useForm: TUseForm = ( {
 
 	return {
 		form: formState,
-		// initialForm,
+		initialForm,
 		setForm,
 		resetForm,
 		validateForm: validateAllAndCheck,
