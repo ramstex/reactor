@@ -94,7 +94,7 @@ const Login: TLoginComponent = ( props ) => {
 			if ( response.error ) {
 				if ( response.error.indexOf( 'или пароль неверные' ) >= 0 ) {
 					setFormErrors( {
-						email: 'Login or password are wrong',
+						login: 'Login or password are wrong',
 						password: 'Login or password are wrong',
 					} );
 				}
