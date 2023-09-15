@@ -89,6 +89,12 @@ const Registration: TRegistrationComponent = ( props ) => {
 		};
 	};
 
+	const onInputClear = ( key: TRegistrationName ) => {
+		return () => {
+			setForm( { [ key ]: '' } );
+		};
+	};
+
 	const onSubmit: TOnSubmit = async ( event ) => {
 		event?.preventDefault();
 
@@ -159,6 +165,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 						autocomplete={ 'off' }
 						clearable
 						onChange={ onChange( ERegistrationForm.password ) }
+						onClear={ onInputClear( ERegistrationForm.password ) }
 					/>
 				</Col>
 			</Row>
@@ -175,6 +182,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 						autocomplete={ 'off' }
 						clearable
 						onChange={ onChange( ERegistrationForm.confirm ) }
+						onClear={ onInputClear( ERegistrationForm.confirm ) }
 					/>
 				</Col>
 			</Row>
@@ -218,7 +226,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 			}
 
 			<Row>
-				<Col cols={ 12 }>
+				<Col>
 					<p
 						className={ classNames.login }
 						onClick={ onLogin }

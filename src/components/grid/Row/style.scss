@@ -45,4 +45,8 @@
 	&._reverse {
 		flex-direction: row-reverse;
 	}
+
+	& + & {
+		margin-top: layout.$gap;
+	}
 }
