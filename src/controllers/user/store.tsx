@@ -15,15 +15,19 @@ export const userSlice = createSlice( {
 		setUser: ( state, action ) => {
 			if ( action.payload ) {
 				state.user = action.payload;
-				state.state = EUserAuthStates.profile;
 			} else {
 				state.user = null;
-				state.state = defaultAuthState;
+			}
+
+			if ( state.user ) {
+				state.state = EUserAuthStates.profile;
 			}
 		},
 
 		setState: ( state, action ) => {
-			state.state = action.payload;
+			state.state = !!state.user
+				? EUserAuthStates.profile
+				: action.payload || defaultAuthState;
 		},
 	},
 } );

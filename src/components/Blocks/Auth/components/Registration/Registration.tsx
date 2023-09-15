@@ -4,6 +4,7 @@ import useUser from '../../../../../controllers/user/useUser';
 import useForm from '../../../../../modules/form/index';
 import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ERegistrationForm } from './helpers';
+import { EAuthStates } from '../../helper';
 
 import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
 import Button from '../../../../Ui/Button/Button';
@@ -22,10 +23,12 @@ const Registration: TRegistrationComponent = ( props ) => {
 		className,
 		onSuccess,
 		onError,
-		onLogin,
 	} = props;
 
-	const { register } = useUser();
+	const {
+		register,
+		setState,
+	} = useUser();
 
 	const {
 		form,
@@ -115,12 +118,18 @@ const Registration: TRegistrationComponent = ( props ) => {
 		event?.preventDefault();
 	};
 
+	const onLogin = () => {
+		setState( EAuthStates.login );
+	}
+
 	return (
 		<Form
 			className={ classNames.root }
 			onSubmit={ onSubmit }
 			onInvalid={ onInvalid }
 		>
+			<h3>Registration</h3>
+
 			<FormTextField>
 				<Input
 					className={ classNames.input.email }

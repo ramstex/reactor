@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
-import { EButtonType } from '../../../../Ui/Button/helpers';
+import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ERemindForm } from './helpers';
 
-import Form from '../../../../Ui/Form/Form';
+import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
 import Button from '../../../../Ui/Button/Button';
 import Input from '../../../../Ui/Input/Input';
 
@@ -14,6 +14,7 @@ import type { TRemindComponent, TRemindData } from './types';
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TRemindName } from './types';
 import type { TEventChange } from '../../../../../types/types';
+import { EAuthStates } from '../../helper';
 
 const rootClassName = 'remind';
 
@@ -22,10 +23,12 @@ const Remind: TRemindComponent = ( props ) => {
 		className,
 		onSuccess,
 		onError,
-		onLogin,
 	} = props;
 
-	const { remind } = useUser();
+	const {
+		remind,
+		setState,
+	} = useUser();
 
 	const [ form, setForm ] = useState<TRemindData>( { email: '' } );
 	const [ isSuccess, setSuccess ] = useState<boolean>( false );
@@ -74,8 +77,14 @@ const Remind: TRemindComponent = ( props ) => {
 		event?.preventDefault();
 	};
 
+	const onLogin = () => {
+		setState( EAuthStates.login );
+	}
+
 	return (
 		<div className={ classNames.root }>
+			<h3>Remind</h3>
+
 			{
 				isSuccess
 					? <div className={ classNames.success }>
@@ -91,26 +100,33 @@ const Remind: TRemindComponent = ( props ) => {
 						onSubmit={ onSubmit }
 						onInvalid={ onInvalid }
 					>
-						<Input
-							className={ classNames.input.email }
-							type={ 'email' }
-							placeholder={ 'email' }
-							name={ ERemindForm.email }
-							value={ form.email }
-							onChange={ onChange( ERemindForm.email ) }
-						/>
+						<FormTextField>
+							<Input
+								className={ classNames.input.email }
+								type={ 'email' }
+								placeholder={ 'email' }
+								name={ ERemindForm.email }
+								value={ form.email }
+								onChange={ onChange( ERemindForm.email ) }
+							/>
+						</FormTextField>
 
-						<Button
-							className={ classNames.submit }
-							type={ EButtonType.submit }
-						>Remind</Button>
+						<FormSubmit>
+							<Button
+								className={ classNames.submit }
+								type={ EButtonType.submit }
+							>Remind</Button>
 
-						{ !!error && <p className={ classNames.error }>{ error }</p> }
+							<Button
+								className={ classNames.login }
+								template={ EButtonTemplate.link }
+								onClick={ onLogin }
+							>Back to login</Button>
+						</FormSubmit>
 
-						<p
-							className={ classNames.login }
-							onClick={ onLogin }
-						>Back to login</p>
+						<FormTextField>
+							{ !!error && <p className={ classNames.error }>{ error }</p> }
+						</FormTextField>
 					</Form>
 			}
 		</div>

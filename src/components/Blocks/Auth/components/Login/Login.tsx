@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
-import { EButtonType } from '../../../../Ui/Button/helpers';
+import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ELoginForm } from './helpers';
 
-import Form from '../../../../Ui/Form/Form';
+import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
 import Button from '../../../../Ui/Button/Button';
 import Input from '../../../../Ui/Input/Input';
 
@@ -13,6 +13,7 @@ import './style.scss';
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TEventChange } from '../../../../../types/types';
 import type { TLoginComponent, TLoginData, TLoginName } from './types';
+import { EAuthStates } from '../../helper';
 
 const rootClassName = 'login';
 
@@ -21,11 +22,12 @@ const Login: TLoginComponent = ( props ) => {
 		className,
 		onSuccess,
 		onError,
-		onRemind,
-		onRegistration,
 	} = props;
 
-	const { login } = useUser();
+	const {
+		login,
+		setState,
+	} = useUser();
 
 	const [ form, setForm ] = useState<TLoginData>( {
 		login: '',
@@ -78,50 +80,71 @@ const Login: TLoginComponent = ( props ) => {
 		event?.preventDefault();
 	};
 
+	const onRegistration = () => {
+		setState( EAuthStates.registration );
+	}
+
+	const onRemind = () => {
+		setState( EAuthStates.remind );
+	}
+
 	return (
 		<Form
 			className={ classNames.root }
 			onSubmit={ onSubmit }
 			onInvalid={ onInvalid }
 		>
-			<Input
-				className={ classNames.input.login }
-				type={ 'email' }
-				placeholder={ 'email' }
-				name={ ELoginForm.login }
-				value={ form.login }
-				autocomplete={ 'off' }
-				onChange={ onChange( ELoginForm.login ) }
-			/>
+			<h3>Login</h3>
 
-			<Input
-				className={ classNames.input.password }
-				type={ 'password' }
-				placeholder={ 'password' }
-				name={ ELoginForm.password }
-				value={ form.password }
-				autocomplete={ 'off' }
-				clearable
-				onChange={ onChange( ELoginForm.password ) }
-				onClear={ onChange( ELoginForm.password ) }
-			/>
+			<FormTextField>
+				<Input
+					className={ classNames.input.login }
+					type={ 'email' }
+					placeholder={ 'email' }
+					name={ ELoginForm.login }
+					value={ form.login }
+					autocomplete={ 'off' }
+					onChange={ onChange( ELoginForm.login ) }
+				/>
+			</FormTextField>
 
-			<Button
-				className={ classNames.submit }
-				type={ EButtonType.submit }
-			>Login</Button>
+			<FormTextField>
+				<Input
+					className={ classNames.input.password }
+					type={ 'password' }
+					placeholder={ 'password' }
+					name={ ELoginForm.password }
+					value={ form.password }
+					autocomplete={ 'off' }
+					clearable
+					onChange={ onChange( ELoginForm.password ) }
+					onClear={ onChange( ELoginForm.password ) }
+				/>
+			</FormTextField>
 
-			{ !!error && <p className={ classNames.error }>{ error }</p> }
+			<FormSubmit>
+				<Button
+					className={ classNames.submit }
+					type={ EButtonType.submit }
+				>Login</Button>
 
-			<p
-				className={ classNames.registration }
-				onClick={ onRegistration }
-			>Don't have an account yet?</p>
+				<Button
+					className={ classNames.registration }
+					template={ EButtonTemplate.link }
+					onClick={ onRegistration }
+				>Don't have an account yet?</Button>
+			</FormSubmit>
 
-			<p
-				className={ classNames.remind }
-				onClick={ onRemind }
-			>Forgot the password?</p>
+			<FormTextField>
+				{ !!error && <p className={ classNames.error }>{ error }</p> }
+			</FormTextField>
+
+			<FormSubmit>
+				<p
+					className={ classNames.remind }
+					onClick={ onRemind }
+				>Forgot the password?</p>
+			</FormSubmit>
 		</Form>
 	);
 }

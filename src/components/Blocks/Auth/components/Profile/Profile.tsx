@@ -47,7 +47,11 @@ const Profile: IProfileComponent = ( props ) => {
 					: <p>No user</p>
 			}
 
-			<Button onClick={ onLogout }>Logout</Button>
+			<Row>
+				<Col>
+					<Button onClick={ onLogout }>Logout</Button>
+				</Col>
+			</Row>
 		</Form>
 	);
 }

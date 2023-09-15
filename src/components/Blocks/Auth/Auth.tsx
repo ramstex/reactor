@@ -16,6 +16,7 @@ const Auth = () => {
 		setState,
 	} = useUser();
 	const isUser = !!user;
+	console.log( 'user', user );
 
 	const classNames = {
 		root: classBuilder( rootClassName ),
@@ -33,10 +34,6 @@ const Auth = () => {
 		console.log( 'Registration error' );
 	}
 
-	const onRegistrationLogin = () => {
-		setState( EAuthStates.login );
-	}
-
 	const onLoginSuccess = () => {
 		console.log( 'Login success' );
 	}
@@ -45,24 +42,12 @@ const Auth = () => {
 		console.log( 'Login error' );
 	}
 
-	const onLoginRemind = () => {
-		setState( EAuthStates.remind );
-	}
-
-	const onLoginRegistration = () => {
-		setState( EAuthStates.registration );
-	}
-
 	const onRemindSuccess = () => {
 		console.log( 'Remind success' );
 	}
 
 	const onRemindError = () => {
 		console.log( 'Remind error' );
-	}
-
-	const onRemindLogin = () => {
-		setState( EAuthStates.login );
 	}
 
 	return (
@@ -77,7 +62,6 @@ const Auth = () => {
 								className={ classNames.registration }
 								onSuccess={ onRegistrationSuccess }
 								onError={ onRegistrationError }
-								onLogin={ onRegistrationLogin }
 							/>
 						}
 
@@ -87,8 +71,6 @@ const Auth = () => {
 								className={ classNames.login }
 								onSuccess={ onLoginSuccess }
 								onError={ onLoginError }
-								onRemind={ onLoginRemind }
-								onRegistration={ onLoginRegistration }
 							/>
 						}
 
@@ -98,7 +80,6 @@ const Auth = () => {
 								className={ classNames.login }
 								onSuccess={ onRemindSuccess }
 								onError={ onRemindError }
-								onLogin={ onRemindLogin }
 							/>
 						}
 					</>

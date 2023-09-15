@@ -1,6 +1,6 @@
 import useModel from '../../model/useModel';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from './store';
+import { setUser, setState } from './store';
 
 import type {
 	TUserController, TUserStore, TFormatUserData, TUpdateUserStore
@@ -175,7 +175,7 @@ const useUser: TUserController = () => {
 		state,
 
 		setState: ( state ) => {
-			dispatch( setUser( state ) );
+			dispatch( setState( state ) );
 
 			return state;
 		},
