@@ -2,11 +2,12 @@
  * Interface and type for a User property contained in a response of the user endpoint
  */
 interface IUserResponseUser {
-	login: string | null;
-	email: string | null;
-	fio: string | null;
+	login?: string | null;
+	email?: string | null;
+	fio?: string | null;
+	phone?: string | null;
 }
-type TUserResponseUser = IUserResponseUser;
+export type TUserResponseUser = IUserResponseUser;
 
 /**
  * Interface and type for a response of the user endpoint

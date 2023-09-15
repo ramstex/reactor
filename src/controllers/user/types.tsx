@@ -1,15 +1,10 @@
 import { EUserAuthStates } from './helper';
 
-import type { TUpdateUserResponse } from '../../model/user/types';
+import type { TUpdateUserResponse, TUserResponseUser } from '../../model/user/types';
 
 export type TUserAuthStates = `${ EUserAuthStates }`;
 
-interface IUser {
-	login: string | null;
-	email: string | null;
-	fio: string | null;
-}
-export type TUser = IUser | null;
+export type TUser = TUserResponseUser | null;
 
 interface IUserLoginData {
 	success: boolean;

@@ -46,6 +46,7 @@ const useUser: TUserController = () => {
 				login: data.User.login,
 				email: data.User.email,
 				fio: data.User.fio,
+				phone: data.User.phone,
 			};
 		} else {
 			return null;
