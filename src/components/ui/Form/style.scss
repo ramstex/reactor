@@ -34,3 +34,11 @@
 		margin-top: layout.toVh( 32 );
 	}
 }
+
+.form-header {
+	margin-bottom: layout.toVw( 20 );
+
+	@media (media.$landscape) {
+		margin-bottom: layout.toVh( 24 );
+	}
+}

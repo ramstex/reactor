@@ -2,7 +2,9 @@ import classBuilder from '../../../plugins/classBuilder';
 
 import './style.scss';
 
-import type { TFormComponent, TFormTextFieldComponent, TFormSubmitComponent } from './types';
+import type {
+	TFormComponent, TFormTextFieldComponent, TFormSubmitComponent, TFormHeaderComponent
+} from './types';
 
 const Form: TFormComponent = ( props ) => {
 	const {
@@ -52,6 +54,22 @@ export const FormSubmit: TFormSubmitComponent = ( props ) => {
 	} = props;
 
 	const classNameRoot = 'form-submit';
+	const classNames = { root: classBuilder( classNameRoot, className ) };
+
+	return (
+		<div className={ classNames.root }>
+			{ children }
+		</div>
+	);
+}
+
+export const FormHeader: TFormHeaderComponent = ( props ) => {
+	const {
+		className,
+		children,
+	} = props;
+
+	const classNameRoot = 'form-header';
 	const classNames = { root: classBuilder( classNameRoot, className ) };
 
 	return (

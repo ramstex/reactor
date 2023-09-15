@@ -14,3 +14,6 @@ export type TFormTextFieldComponent = TComponent<TFormTextFieldProps>;
 
 type TFormSubmitProps = IComponentProps;
 export type TFormSubmitComponent = TComponent<TFormSubmitProps>;
+
+type TFormHeaderProps = IComponentProps;
+export type TFormHeaderComponent = TComponent<TFormHeaderProps>;
