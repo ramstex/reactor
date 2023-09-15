@@ -8,6 +8,7 @@ import UiKitColors from '/src/pages/UiKit/pages/Colors/Colors';
 import UiKitIcons from '/src/pages/UiKit/pages/Icons/Icons';
 import UiKitButtons from '/src/pages/UiKit/pages/Buttons/Buttons';
 import UiKitInputs from '/src/pages/UiKit/pages/Inputs/Inputs';
+import UiKitCheckbox from '/src/pages/UiKit/pages/Checkbox/Checkbox';
 import UiKitForms from '/src/pages/UiKit/pages/Forms/Forms';
 
 import _ROUTES from '../../../config/routes.js';
@@ -62,6 +63,12 @@ const _UI_KIT_CONFIG = {
 			name: 'inputs',
 			href: _ROUTES.uiKit.inputs,
 			component: <UiKitInputs />,
+		},
+
+		{
+			name: 'checkbox',
+			href: _ROUTES.uiKit.checkbox,
+			component: <UiKitCheckbox />,
 		},
 
 		{

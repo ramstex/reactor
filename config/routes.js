@@ -17,6 +17,7 @@ const _ROUTES = {
 		icons: `${ uiKitRoute }/icons`,
 		buttons: `${ uiKitRoute }/buttons`,
 		inputs: `${ uiKitRoute }/inputs`,
+		checkbox: `${ uiKitRoute }/checkbox`,
 		forms: `${ uiKitRoute }/forms`,
 	},
 };

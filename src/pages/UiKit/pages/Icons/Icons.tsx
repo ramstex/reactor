@@ -89,6 +89,10 @@ const UiKitIcons = () => {
 					<Col>
 						<Icon name={ EIconName.refresh } />
 					</Col>
+
+					<Col>
+						<Icon name={ EIconName.check } />
+					</Col>
 				</Row>
 
 				<Row className={ '_mb_3' }>

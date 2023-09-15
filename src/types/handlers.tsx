@@ -1,6 +1,7 @@
 import type {
 	MouseEventHandler,
-	FormEvent
+	FormEvent,
+	ChangeEvent
 } from 'react';
 
 /**
@@ -8,7 +9,7 @@ import type {
  */
 export type TOnClick<T> = MouseEventHandler<T>;
 
-export type IFormEvent = FormEvent<HTMLFormElement>;
+export type TFormEvent = FormEvent<HTMLFormElement>;
 
-export type TOnSubmit = ( event?: IFormEvent ) => void;
-export type TOnInvalid = ( event?: IFormEvent ) => void;
+export type TOnSubmit = ( event?: TFormEvent ) => void;
+export type TOnInvalid = ( event?: TFormEvent ) => void;

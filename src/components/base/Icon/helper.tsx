@@ -19,6 +19,7 @@ import Plus from '../../../assets/icons/plus.svg';
 import Minus from '../../../assets/icons/minus.svg';
 import Search from '../../../assets/icons/search.svg';
 import Refresh from '../../../assets/icons/refresh.svg';
+import Check from '../../../assets/icons/check.svg';
 
 import ProfileNoUser from '../../../assets/icons/profile-no-user.svg';
 import ProfileUser from '../../../assets/icons/profile-user.svg';
@@ -54,6 +55,7 @@ export enum EIconName {
 	minus = 'minus',
 	search = 'search',
 	refresh = 'refresh',
+	check = 'check',
 
 	profileNoUser = 'profile-no-user',
 	profileUser = 'profile-user',
@@ -106,6 +108,8 @@ export const getIconByName: ( name: TIconName ) => TComponent<TSvgProps> | null 
 			return Search;
 		case EIconName.refresh:
 			return Refresh;
+		case EIconName.check:
+			return Check;
 
 		case EIconName.profileNoUser:
 			return ProfileNoUser;

@@ -1,5 +1,5 @@
 import type {
-	TFormValidationRuleResult, TFormApplyItemValidation, TFormApplyRequired, TFormApplyEmail, TFormApplyEquals
+	TFormValidationRuleResult, TFormApplyItemValidation, TFormApplyRequired, TFormApplyEmail
 } from './types';
 
 export enum EFormRules {

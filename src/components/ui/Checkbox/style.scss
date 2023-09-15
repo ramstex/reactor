@@ -1,0 +1,94 @@
+@use 'sass:math';
+
+@use '../../../style/modules/color/module' as color;
+@use '../../../style/modules/fonts/module' as fonts;
+@use '../../../style/modules/layout/module' as layout;
+@use '../../../style/modules/typography/module' as typography;
+@use '../../../style/modules/media/module' as media;
+
+.checkbox {
+	width: fit-content;
+	position: relative;
+	cursor: pointer;
+
+	@media (media.$portrait) {
+		align-items: flex-start;
+	}
+
+	&__body {
+		display: flex;
+		align-items: center;
+	}
+
+	&__input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&__box {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: layout.toVh( 16 );
+		height: layout.toVh( 16 );
+		position: relative;
+		border: 1px solid color.get( text );
+		background-color: color.get( back );
+		transition: all layout.$dur ease;
+
+		@media (media.$portrait) {
+			width: layout.toVw( 16 );
+			height: layout.toVw( 16 );
+		}
+	}
+
+	&__icon {
+		width: 70%;
+		transition: all layout.$dur ease;
+		opacity: 0;
+		fill: color.get( back );
+		transform: translateY( layout.toVh( 4 ) ) scale( 0.5 );
+	}
+
+	&__label {
+		margin-left: layout.toVh( 12 );
+		font-size: layout.toVh( 16 );
+		font-weight: 400;
+		line-height: 125%;
+		user-select: none;
+
+		@media (media.$portrait) {
+			margin-left: layout.toVw( 12 );
+			font-size: layout.toVw( 16 );
+		}
+
+		.link {
+			color: inherit;
+		}
+	}
+
+	&__message {
+		margin-top: layout.toVh( 8 );
+		font-size: layout.toVh( 14 );
+
+		@media (media.$portrait) {
+			margin-top: layout.toVw( 8 );
+			font-size: layout.toVw( 12 );
+		}
+	}
+
+	&._checked &__box {
+		background-color: color.get( text );
+	}
+
+	&._checked &__icon {
+		opacity: 1;
+		transform: translateY( 0 ) scale( 1 );
+	}
+
+	&._invalid &__label {
+		color: color.get( danger );
+	}
+}

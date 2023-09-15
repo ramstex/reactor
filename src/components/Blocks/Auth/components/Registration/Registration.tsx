@@ -9,12 +9,15 @@ import { EAuthStates } from '../../helper';
 import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
 import Button from '../../../../Ui/Button/Button';
 import Input from '../../../../Ui/Input/Input';
+import Checkbox from '../../../../Ui/Checkbox/Checkbox';
 
 import './style.scss';
 
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TEventChange } from '../../../../../types/types';
 import type { TRegistrationComponent, TRegistrationName } from './types';
+import { types } from 'sass';
+import Boolean = types.Boolean;
 
 const rootClassName = 'registration';
 
@@ -41,23 +44,26 @@ const Registration: TRegistrationComponent = ( props ) => {
 			email: '',
 			password: '',
 			confirm: '',
+			agreement: false,
 		},
 
 		rules: {
-			email: {
+			[ ERegistrationForm.email ]: {
 				required: true,
 				email: true,
 			},
 
-			password: {
+			[ ERegistrationForm.password ]: {
 				required: true,
 				equals: ERegistrationForm.confirm,
 			},
 
-			confirm: {
+			[ ERegistrationForm.confirm ]: {
 				required: true,
 				equals: ERegistrationForm.password,
 			},
+
+			[ ERegistrationForm.agreement ]: { required: true },
 		},
 	} );
 
@@ -75,13 +81,19 @@ const Registration: TRegistrationComponent = ( props ) => {
 		login: classBuilder( `${ rootClassName }__login` ),
 	};
 
-	const onChange = ( key: TRegistrationName ) => {
+	const onChangeText = ( key: TRegistrationName ) => {
 		return ( event?: TEventChange ) => {
 			setForm( {
 				[ key ]: event
 					? event.target.value
 					: '',
 			} );
+		};
+	};
+
+	const onChangeBox = ( key: TRegistrationName ) => {
+		return ( event?: TEventChange ) => {
+			setForm( { [ key ]: !!event?.target.checked } );
 		};
 	};
 
@@ -98,9 +110,9 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 		if ( validateSuccess ) {
 			const fData = new FormData();
-			Object.entries( form ).forEach( ( [ key, value ] ) => {
-				fData.append( key, String( value ) );
-			} );
+
+			fData.append( ERegistrationForm.email, String( form.email ) );
+			fData.append( ERegistrationForm.password, String( form.password ) );
 
 			const response = await register( fData );
 
@@ -113,8 +125,9 @@ const Registration: TRegistrationComponent = ( props ) => {
 		}
 	};
 
-	const onInvalid: TOnInvalid = ( event ) => {
+	const onInvalid: TOnInvalid = async ( event ) => {
 		event?.preventDefault();
+		await validateForm();
 	};
 
 	const onLogin = () => {
@@ -138,7 +151,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 					value={ String( form.email ) }
 					message={ validation.items[ ERegistrationForm.email ]?.message }
 					autocomplete={ 'off' }
-					onChange={ onChange( ERegistrationForm.email ) }
+					onChange={ onChangeText( ERegistrationForm.email ) }
 				/>
 			</FormTextField>
 
@@ -152,7 +165,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 					message={ validation.items[ ERegistrationForm.password ]?.message }
 					autocomplete={ 'off' }
 					clearable
-					onChange={ onChange( ERegistrationForm.password ) }
+					onChange={ onChangeText( ERegistrationForm.password ) }
 					onClear={ onInputClear( ERegistrationForm.password ) }
 				/>
 			</FormTextField>
@@ -167,10 +180,21 @@ const Registration: TRegistrationComponent = ( props ) => {
 					message={ validation.items[ ERegistrationForm.confirm ]?.message }
 					autocomplete={ 'off' }
 					clearable
-					onChange={ onChange( ERegistrationForm.confirm ) }
+					onChange={ onChangeText( ERegistrationForm.confirm ) }
 					onClear={ onInputClear( ERegistrationForm.confirm ) }
 				/>
 			</FormTextField>
+
+			<FormSubmit>
+				<Checkbox
+					checked={ !!form.agreement }
+					message={ validation.items[ ERegistrationForm.agreement ]?.message }
+					required
+					onChange={ onChangeBox( ERegistrationForm.agreement ) }
+				>
+					Apply an agreement
+				</Checkbox>
+			</FormSubmit>
 
 			<FormSubmit>
 				<Button

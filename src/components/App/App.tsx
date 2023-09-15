@@ -14,6 +14,7 @@ import UiKitTypography from '../../pages/UiKit/pages/Typography/Typography';
 import UiKitColors from '../../pages/UiKit/pages/Colors/Colors';
 import UiKitIcons from '../../pages/UiKit/pages/Icons/Icons';
 import UiKitInputs from '../../pages/UiKit/pages/Inputs/Inputs';
+import UiKitCheckbox from '../../pages/UiKit/pages/Checkbox/Checkbox';
 import UiKitButtons from '../../pages/UiKit/pages/Buttons/Buttons';
 import UiKitForms from '../../pages/UiKit/pages/Forms/Forms';
 
@@ -84,6 +85,11 @@ const App: TAppComponent = ( props ) => {
 					<Route
 						path={ _ROUTES.uiKit.inputs }
 						element={ <UiKitInputs /> }
+					/>
+
+					<Route
+						path={ _ROUTES.uiKit.checkbox }
+						element={ <UiKitCheckbox /> }
 					/>
 
 					<Route
