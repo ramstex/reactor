@@ -5,16 +5,19 @@ import usePrevious from '../previous';
 import type {
 	TUseForm,
 	TSetForm,
-	TFormReset,
+	TResetForm,
+	TValidate,
+	TValidateAllAndCheck,
+	TFormValidateWithErrors,
+	TValidationErrors,
 	TFormCreateKeysList,
 	TFormValidation,
-	TFormItems,
+	TForm,
 	TFormValidationRuleResult,
 	TSetFormErrors
 } from './types';
-import { TFormValidate, TFormValidateWithErrors, TValidationErrors } from './types';
 
-const getValidationDefault: ( form: TFormItems ) => TFormValidation = ( form ) => {
+const getValidationDefault: ( form: TForm ) => TFormValidation = ( form ) => {
 	return {
 		success: true,
 		items: Object.keys( form ).reduce( ( result, current ) => {
@@ -79,7 +82,7 @@ const useForm: TUseForm = ( {
 			: [];
 	}
 
-	const resetForm: TFormReset = ( keys ) => {
+	const resetForm: TResetForm = ( keys ) => {
 		const keysList = createKeysList( keys );
 		const values = keysList.reduce( ( acc, curr ) => {
 			return {
@@ -89,10 +92,10 @@ const useForm: TUseForm = ( {
 		}, {} );
 
 		setForm( values );
+		setValidation( getValidationDefault( formProp ) );
 	};
 
-	// @ts-ignore
-	const validate: TFormValidate = ( keys = Object.keys( formState ), handler ) => {
+	const validate: TValidate = ( keys = Object.keys( formState ), handler ) => {
 		const keysList = createKeysList( keys );
 		const result: TFormValidation = getValidationDefault( formState );
 
@@ -132,8 +135,8 @@ const useForm: TUseForm = ( {
 		return result;
 	}
 
-	const validateAllAndCheck: TFormValidate = () => {
-		return validate( undefined, ( result: TFormValidationRuleResult ) => {
+	const validateAllAndCheck: TValidateAllAndCheck = () => {
+		return validate( Object.keys( formState ), ( result: TFormValidationRuleResult ) => {
 			return {
 				...result,
 				checked: true,

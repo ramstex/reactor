@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
 import useForm from '../../../../../modules/form/index';
@@ -8,6 +8,8 @@ import { ERegistrationForm } from './helpers';
 import Form from '../../../../Ui/Form/Form';
 import Button from '../../../../Ui/Button/Button';
 import Input from '../../../../Ui/Input/Input';
+import Row from '../../../../Grid/Row/Row';
+import Col from '../../../../Grid/Col/Col';
 
 import './style.scss';
 
@@ -88,30 +90,29 @@ const Registration: TRegistrationComponent = ( props ) => {
 	};
 
 	const onSubmit: TOnSubmit = async ( event ) => {
-		// event?.preventDefault();
-		//
-		// const validateSuccess = await validateForm();
-		// console.log( 'onSubmit', validateSuccess );
-		//
-		// if ( validateSuccess ) {
-		// 	const fData = new FormData();
-		// 	Object.entries( form ).forEach( ( [ key, value ] ) => {
-		// 		fData.append( key, String( value ) );
-		// 	} );
-		//
-		// 	const response = await register( fData );
-		//
-		// 	if ( response.error ) {
-		// 		setError( response.error );
-		// 		!!onError && onError();
-		// 	} else {
-		// 		!!onSuccess && onSuccess();
-		// 	}
-		// }
+		event?.preventDefault();
+
+		const validateSuccess = await validateForm();
+
+		if ( validateSuccess ) {
+			const fData = new FormData();
+			Object.entries( form ).forEach( ( [ key, value ] ) => {
+				fData.append( key, String( value ) );
+			} );
+
+			const response = await register( fData );
+
+			if ( response.error ) {
+				setError( response.error );
+				!!onError && onError();
+			} else {
+				!!onSuccess && onSuccess();
+			}
+		}
 	};
 
 	const onInvalid: TOnInvalid = ( event ) => {
-		// event?.preventDefault();
+		event?.preventDefault();
 	};
 
 	const onResetClick = () => {
@@ -131,67 +132,99 @@ const Registration: TRegistrationComponent = ( props ) => {
 			onSubmit={ onSubmit }
 			onInvalid={ onInvalid }
 		>
-			<Input
-				className={ classNames.input.email }
-				type={ 'email' }
-				placeholder={ 'email' }
-				name={ ERegistrationForm.email }
-				value={ String( form.email ) }
-				message={ validation.items[ ERegistrationForm.email ]?.message }
-				autocomplete={ 'off' }
-				onChange={ onChange( ERegistrationForm.email ) }
-			/>
+			<Row>
+				<Col cols={ 12 }>
+					<Input
+						className={ classNames.input.email }
+						type={ 'email' }
+						placeholder={ 'email' }
+						name={ ERegistrationForm.email }
+						value={ String( form.email ) }
+						message={ validation.items[ ERegistrationForm.email ]?.message }
+						autocomplete={ 'off' }
+						onChange={ onChange( ERegistrationForm.email ) }
+					/>
+				</Col>
+			</Row>
 
-			<Input
-				className={ classNames.input.password }
-				type={ 'password' }
-				placeholder={ 'password' }
-				name={ ERegistrationForm.password }
-				value={ String( form.password ) }
-				message={ validation.items[ ERegistrationForm.password ]?.message }
-				autocomplete={ 'off' }
-				clearable
-				onChange={ onChange( ERegistrationForm.password ) }
-			/>
+			<Row>
+				<Col cols={ 12 }>
+					<Input
+						className={ classNames.input.password }
+						type={ 'password' }
+						placeholder={ 'password' }
+						name={ ERegistrationForm.password }
+						value={ String( form.password ) }
+						message={ validation.items[ ERegistrationForm.password ]?.message }
+						autocomplete={ 'off' }
+						clearable
+						onChange={ onChange( ERegistrationForm.password ) }
+					/>
+				</Col>
+			</Row>
 
-			<Input
-				className={ classNames.input.confirm }
-				type={ 'password' }
-				placeholder={ 'confirm password' }
-				name={ ERegistrationForm.confirm }
-				value={ String( form.confirm ) }
-				message={ validation.items[ ERegistrationForm.confirm ]?.message }
-				autocomplete={ 'off' }
-				clearable
-				onChange={ onChange( ERegistrationForm.confirm ) }
-			/>
+			<Row>
+				<Col cols={ 12 }>
+					<Input
+						className={ classNames.input.confirm }
+						type={ 'password' }
+						placeholder={ 'confirm password' }
+						name={ ERegistrationForm.confirm }
+						value={ String( form.confirm ) }
+						message={ validation.items[ ERegistrationForm.confirm ]?.message }
+						autocomplete={ 'off' }
+						clearable
+						onChange={ onChange( ERegistrationForm.confirm ) }
+					/>
+				</Col>
+			</Row>
 
-			<Button
-				className={ classNames.submit }
-				type={ EButtonType.submit }
-			>Register</Button>
+			<Row>
+				<Col>
+					<Button
+						className={ classNames.submit }
+						type={ EButtonType.submit }
+					>Register</Button>
+				</Col>
 
-			<Button
-				className={ classNames.submit }
-				onClick={ onResetClick }
-			>Reset</Button>
+				<Col>
+					<Button
+						className={ classNames.submit }
+						onClick={ onResetClick }
+					>Reset</Button>
+				</Col>
 
-			<Button
-				className={ classNames.submit }
-				onClick={ onValidateClick }
-			>Validate</Button>
+				<Col>
+					<Button
+						className={ classNames.submit }
+						onClick={ onValidateClick }
+					>Validate</Button>
+				</Col>
 
-			<Button
-				className={ classNames.submit }
-				onClick={ onSetErrorsClick }
-			>Set Errors</Button>
+				<Col>
+					<Button
+						className={ classNames.submit }
+						onClick={ onSetErrorsClick }
+					>Set Errors</Button>
+				</Col>
+			</Row>
 
-			{ !!error && <p className={ classNames.error }>{ error }</p> }
+			{ !!error &&
+				<Row>
+					<Col cols={ 12 }>
+						<p className={ classNames.error }>{ error }</p>
+					</Col>
+				</Row>
+			}
 
-			<p
-				className={ classNames.login }
-				onClick={ onLogin }
-			>Have an account already?</p>
+			<Row>
+				<Col cols={ 12 }>
+					<p
+						className={ classNames.login }
+						onClick={ onLogin }
+					>Have an account already?</p>
+				</Col>
+			</Row>
 		</Form>
 	);
 }
