@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
+import useForm from '../../../../../modules/form/index';
 import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ERemindForm } from './helpers';
 
@@ -10,7 +11,7 @@ import Input from '../../../../Ui/Input/Input';
 
 import './style.scss';
 
-import type { TRemindComponent, TRemindData } from './types';
+import type { TRemindComponent } from './types';
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TRemindName } from './types';
 import type { TEventChange } from '../../../../../types/types';
@@ -30,7 +31,23 @@ const Remind: TRemindComponent = ( props ) => {
 		setState,
 	} = useUser();
 
-	const [ form, setForm ] = useState<TRemindData>( { email: '' } );
+	const {
+		form,
+		setForm,
+		validateForm,
+		validation,
+		// setFormErrors,
+	} = useForm( {
+		form: { [ ERemindForm.email ]: '' },
+
+		rules: {
+			[ ERemindForm.email ]: {
+				required: true,
+				email: true,
+			},
+		},
+	} );
+
 	const [ isSuccess, setSuccess ] = useState<boolean>( false );
 	const [ error, setError ] = useState<string | null>( null );
 
@@ -59,22 +76,28 @@ const Remind: TRemindComponent = ( props ) => {
 	const onSubmit: TOnSubmit = async ( event ) => {
 		event?.preventDefault();
 
-		const fData = new FormData();
-		fData.append( ERemindForm.email, form.email );
+		const validateSuccess = await validateForm();
 
-		const response = await remind( fData );
+		if ( validateSuccess.success ) {
+			const fData = new FormData();
+			fData.append( ERemindForm.email, String( form.email ) );
+			const response = await remind( fData );
 
-		if ( response.error ) {
-			setError( response.error );
-			!!onError && onError();
-		} else {
-			setSuccess( true );
-			!!onSuccess && onSuccess();
+			console.log( 'Remind response', response );
+
+			if ( response.error ) {
+				setError( response.error );
+				!!onError && onError();
+			} else {
+				setSuccess( true );
+				!!onSuccess && onSuccess();
+			}
 		}
 	};
 
-	const onInvalid: TOnInvalid = ( event ) => {
+	const onInvalid: TOnInvalid = async ( event ) => {
 		event?.preventDefault();
+		await validateForm();
 	};
 
 	const onLogin = () => {
@@ -106,7 +129,8 @@ const Remind: TRemindComponent = ( props ) => {
 								type={ 'email' }
 								placeholder={ 'email' }
 								name={ ERemindForm.email }
-								value={ form.email }
+								message={ validation.items[ ERemindForm.email ]?.message }
+								value={ String( form.email ) }
 								onChange={ onChange( ERemindForm.email ) }
 							/>
 						</FormTextField>

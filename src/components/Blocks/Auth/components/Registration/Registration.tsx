@@ -16,8 +16,6 @@ import './style.scss';
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TEventChange } from '../../../../../types/types';
 import type { TRegistrationComponent, TRegistrationName } from './types';
-import { types } from 'sass';
-import Boolean = types.Boolean;
 
 const rootClassName = 'registration';
 
@@ -108,13 +106,14 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 		const validateSuccess = await validateForm();
 
-		if ( validateSuccess ) {
+		if ( validateSuccess.success ) {
 			const fData = new FormData();
-
 			fData.append( ERegistrationForm.email, String( form.email ) );
 			fData.append( ERegistrationForm.password, String( form.password ) );
 
 			const response = await register( fData );
+
+			console.log( 'Registration response', response );
 
 			if ( response.error ) {
 				setError( response.error );

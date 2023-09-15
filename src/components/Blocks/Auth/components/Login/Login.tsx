@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
+import useForm from '../../../../../modules/form/index';
 import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
+import { EAuthStates } from '../../helper';
 import { ELoginForm } from './helpers';
 
 import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
@@ -12,8 +14,7 @@ import './style.scss';
 
 import type { TOnInvalid, TOnSubmit } from '../../../../../types/handlers';
 import type { TEventChange } from '../../../../../types/types';
-import type { TLoginComponent, TLoginData, TLoginName } from './types';
-import { EAuthStates } from '../../helper';
+import type { TLoginComponent, TLoginName } from './types';
 
 const rootClassName = 'login';
 
@@ -29,9 +30,26 @@ const Login: TLoginComponent = ( props ) => {
 		setState,
 	} = useUser();
 
-	const [ form, setForm ] = useState<TLoginData>( {
-		login: '',
-		password: '',
+	const {
+		form,
+		setForm,
+		validateForm,
+		validation,
+		// setFormErrors,
+	} = useForm( {
+		form: {
+			login: '',
+			password: '',
+		},
+
+		rules: {
+			[ ELoginForm.login ]: {
+				required: true,
+				email: true,
+			},
+
+			[ ELoginForm.password ]: { required: true },
+		},
 	} );
 
 	const [ error, setError ] = useState<string | null>( null );
@@ -62,22 +80,29 @@ const Login: TLoginComponent = ( props ) => {
 	const onSubmit: TOnSubmit = async ( event ) => {
 		event?.preventDefault();
 
-		const fData = new FormData();
-		fData.append( ELoginForm.login, form.login );
-		fData.append( ELoginForm.password, form.password );
+		const validateSuccess = await validateForm();
 
-		const response = await login( fData );
+		if ( validateSuccess.success ) {
+			const fData = new FormData();
+			fData.append( ELoginForm.login, String( form.login ) );
+			fData.append( ELoginForm.password, String( form.password ) );
 
-		if ( response.error ) {
-			setError( response.error );
-			!!onError && onError();
-		} else {
-			!!onSuccess && onSuccess();
+			const response = await login( fData );
+
+			console.log( 'Login response', response );
+
+			if ( response.error ) {
+				setError( response.error );
+				!!onError && onError();
+			} else {
+				!!onSuccess && onSuccess();
+			}
 		}
 	};
 
-	const onInvalid: TOnInvalid = ( event ) => {
+	const onInvalid: TOnInvalid = async ( event ) => {
 		event?.preventDefault();
+		await validateForm();
 	};
 
 	const onRegistration = () => {
@@ -102,7 +127,8 @@ const Login: TLoginComponent = ( props ) => {
 					type={ 'email' }
 					placeholder={ 'email' }
 					name={ ELoginForm.login }
-					value={ form.login }
+					value={ String( form.login ) }
+					message={ validation.items[ ELoginForm.login ]?.message }
 					autocomplete={ 'off' }
 					onChange={ onChange( ELoginForm.login ) }
 				/>
@@ -114,7 +140,8 @@ const Login: TLoginComponent = ( props ) => {
 					type={ 'password' }
 					placeholder={ 'password' }
 					name={ ELoginForm.password }
-					value={ form.password }
+					value={ String( form.password ) }
+					message={ validation.items[ ELoginForm.password ]?.message }
 					autocomplete={ 'off' }
 					clearable
 					onChange={ onChange( ELoginForm.password ) }
