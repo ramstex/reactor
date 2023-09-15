@@ -3,7 +3,7 @@
 // Modules, packages, plugins
 import axios, { AxiosResponse } from 'axios';
 import { Routes } from './helper';
-import useEnv from '../../plugins/useEnv';
+import useEnv from '../../modules/env/index';
 import dummy from './dummy';
 
 // Enums
