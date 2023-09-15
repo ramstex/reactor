@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import classBuilder from '../../../plugins/classBuilder';
 import useUser from '../../../controllers/user/useUser';
 import { EAuthStates } from './helper';
@@ -13,10 +14,11 @@ const Auth = () => {
 	const {
 		user,
 		state,
-		setState,
 	} = useUser();
-	const isUser = !!user;
-	console.log( 'user', user );
+
+	const isUser = useMemo( () => {
+		return !!user;
+	}, [ user ] );
 
 	const classNames = {
 		root: classBuilder( rootClassName ),
@@ -26,30 +28,6 @@ const Auth = () => {
 		profile: classBuilder( `${ rootClassName }__profile` ),
 	};
 
-	const onRegistrationSuccess = () => {
-		console.log( 'Registration success' );
-	}
-
-	const onRegistrationError = () => {
-		console.log( 'Registration error' );
-	}
-
-	const onLoginSuccess = () => {
-		console.log( 'Login success' );
-	}
-
-	const onLoginError = () => {
-		console.log( 'Login error' );
-	}
-
-	const onRemindSuccess = () => {
-		console.log( 'Remind success' );
-	}
-
-	const onRemindError = () => {
-		console.log( 'Remind error' );
-	}
-
 	return (
 		<div className={ classNames.root }>
 			{
@@ -58,29 +36,17 @@ const Auth = () => {
 					: <>
 						{
 							state === EAuthStates.registration &&
-							<Registration
-								className={ classNames.registration }
-								onSuccess={ onRegistrationSuccess }
-								onError={ onRegistrationError }
-							/>
+							<Registration className={ classNames.registration } />
 						}
 
 						{
 							state === EAuthStates.login &&
-							<Login
-								className={ classNames.login }
-								onSuccess={ onLoginSuccess }
-								onError={ onLoginError }
-							/>
+							<Login className={ classNames.login } />
 						}
 
 						{
 							state === EAuthStates.remind &&
-							<Remind
-								className={ classNames.login }
-								onSuccess={ onRemindSuccess }
-								onError={ onRemindError }
-							/>
+							<Remind className={ classNames.login } />
 						}
 					</>
 			}

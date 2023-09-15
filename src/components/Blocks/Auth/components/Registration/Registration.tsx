@@ -104,7 +104,6 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 			const response = await register( fData );
 
-			console.log( 'reg response', response );
 			if ( response.error ) {
 				setError( response.error );
 				!!onError && onError();
