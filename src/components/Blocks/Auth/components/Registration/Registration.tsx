@@ -30,10 +30,9 @@ const Registration: TRegistrationComponent = ( props ) => {
 	const {
 		form,
 		setForm,
-		resetForm,
 		validateForm,
 		validation,
-		setFormErrors,
+		// setFormErrors,
 	} = useForm( {
 		form: {
 			email: '',
@@ -73,10 +72,6 @@ const Registration: TRegistrationComponent = ( props ) => {
 		login: classBuilder( `${ rootClassName }__login` ),
 	};
 
-	const onSetErrorsClick = () => {
-		setFormErrors( { email: 'This email has already registered' } );
-	};
-
 	const onChange = ( key: TRegistrationName ) => {
 		return ( event?: TEventChange ) => {
 			setForm( {
@@ -106,6 +101,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 			const response = await register( fData );
 
+			console.log( 'reg response', response );
 			if ( response.error ) {
 				setError( response.error );
 				!!onError && onError();
@@ -118,17 +114,6 @@ const Registration: TRegistrationComponent = ( props ) => {
 	const onInvalid: TOnInvalid = ( event ) => {
 		event?.preventDefault();
 	};
-
-	const onResetClick = () => {
-		resetForm();
-	}
-
-	const onValidateClick: TOnSubmit = async ( event ) => {
-		event?.preventDefault();
-
-		const validateSuccess = await validateForm();
-		console.log( 'onValidateClick', validateSuccess );
-	}
 
 	return (
 		<Form
