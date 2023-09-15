@@ -1,4 +1,4 @@
-import useMedia from '../../../../plugins/useMedia';
+import useMedia from '../../../../modules/media/index';
 
 import Section from '../../../../components/Markup/Section/Section';
 import Row from '../../../../components/Grid/Row/Row';

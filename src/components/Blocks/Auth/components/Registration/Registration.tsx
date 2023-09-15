@@ -194,27 +194,6 @@ const Registration: TRegistrationComponent = ( props ) => {
 						type={ EButtonType.submit }
 					>Register</Button>
 				</Col>
-
-				<Col>
-					<Button
-						className={ classNames.submit }
-						onClick={ onResetClick }
-					>Reset</Button>
-				</Col>
-
-				<Col>
-					<Button
-						className={ classNames.submit }
-						onClick={ onValidateClick }
-					>Validate</Button>
-				</Col>
-
-				<Col>
-					<Button
-						className={ classNames.submit }
-						onClick={ onSetErrorsClick }
-					>Set Errors</Button>
-				</Col>
 			</Row>
 
 			{ !!error &&
