@@ -10,7 +10,7 @@ const _BUILD = {
 	production: {
 		output: {
 			filename: 'js/main.js?v=[fullhash]',
-			path: 'production',
+			path: '../SGM/Staging',
 			publicPath: '/visual/',
 		},
 	},

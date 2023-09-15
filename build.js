@@ -15,5 +15,3 @@ if ( fs.existsSync( dir ) ) {
 } else {
 	console.info( 'Production directory does not exists. Continue building...' );
 }
-
-console.log( '' );
