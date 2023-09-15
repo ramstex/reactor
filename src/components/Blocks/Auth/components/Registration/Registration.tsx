@@ -2,7 +2,7 @@ import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
 import useUser from '../../../../../controllers/user/useUser';
 import useForm from '../../../../../modules/form/index';
-import { EButtonType } from '../../../../Ui/Button/helpers';
+import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ERegistrationForm } from './helpers';
 
 import Form, { FormTextField, FormSubmit } from '../../../../Ui/Form/Form';
@@ -187,6 +187,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 				<Button
 					className={ classNames.login }
+					template={ EButtonTemplate.link }
 					onClick={ onLogin }
 				>Have an account already?</Button>
 			</FormSubmit>

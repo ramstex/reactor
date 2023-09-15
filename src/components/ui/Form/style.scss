@@ -2,11 +2,35 @@
 @use '../../../style/modules/color/module' as color;
 @use '../../../style/modules/fonts/module' as fonts;
 @use '../../../style/modules/layout/module' as layout;
+@use '../../../style/modules/media/module' as media;
 
 .form {
 	&__item {
 		&:not(:last-child) {
 			margin-bottom: layout.toVh( 32 );
 		}
+	}
+}
+
+.form-text-field {
+	width: 100%;
+
+	& + & {
+		margin-top: layout.toVw( 12 );
+
+		@media (media.$landscape) {
+			margin-top:  layout.toVh( 16 );
+		}
+	}
+}
+
+.form-submit {
+	display: flex;
+	gap: layout.toVw( 16 );
+	margin-top: layout.toVw( 32 );
+
+	@media (media.$landscape) {
+		gap: layout.toVh( 16 );
+		margin-top: layout.toVh( 32 );
 	}
 }

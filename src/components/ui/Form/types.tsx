@@ -8,3 +8,9 @@ export interface IFormProps extends IComponentProps {
 }
 
 export type TFormComponent = TComponent<IFormProps>;
+
+type TFormTextFieldProps = IComponentProps;
+export type TFormTextFieldComponent = TComponent<TFormTextFieldProps>;
+
+type TFormSubmitProps = IComponentProps;
+export type TFormSubmitComponent = TComponent<TFormSubmitProps>;
