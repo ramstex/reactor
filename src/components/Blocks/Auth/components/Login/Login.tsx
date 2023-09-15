@@ -35,7 +35,7 @@ const Login: TLoginComponent = ( props ) => {
 		setForm,
 		validateForm,
 		validation,
-		// setFormErrors,
+		setFormErrors,
 	} = useForm( {
 		form: {
 			login: '',
@@ -52,7 +52,7 @@ const Login: TLoginComponent = ( props ) => {
 		},
 	} );
 
-	const [ error, setError ] = useState<string | null>( null );
+	const [ error ] = useState<string | null>( null );
 
 	const classNames = {
 		root: classBuilder( rootClassName, className ),
@@ -92,7 +92,13 @@ const Login: TLoginComponent = ( props ) => {
 			console.log( 'Login response', response );
 
 			if ( response.error ) {
-				setError( response.error );
+				if ( response.error.indexOf( 'или пароль неверные' ) >= 0 ) {
+					setFormErrors( {
+						email: 'Login or password are wrong',
+						password: 'Login or password are wrong',
+					} );
+				}
+
 				!!onError && onError();
 			} else {
 				!!onSuccess && onSuccess();
@@ -149,6 +155,13 @@ const Login: TLoginComponent = ( props ) => {
 				/>
 			</FormTextField>
 
+			<FormTextField>
+				<p
+					className={ classNames.remind }
+					onClick={ onRemind }
+				>Forgot the password?</p>
+			</FormTextField>
+
 			<FormSubmit>
 				<Button
 					className={ classNames.submit }
@@ -162,16 +175,11 @@ const Login: TLoginComponent = ( props ) => {
 				>Don't have an account yet?</Button>
 			</FormSubmit>
 
-			<FormTextField>
-				{ !!error && <p className={ classNames.error }>{ error }</p> }
-			</FormTextField>
-
-			<FormSubmit>
-				<p
-					className={ classNames.remind }
-					onClick={ onRemind }
-				>Forgot the password?</p>
-			</FormSubmit>
+			{ !!error &&
+				<FormSubmit>
+					<p className={ classNames.error }>{ error }</p>
+				</FormSubmit>
+			}
 		</Form>
 	);
 }

@@ -49,7 +49,7 @@ const Remind: TRemindComponent = ( props ) => {
 	} );
 
 	const [ isSuccess, setSuccess ] = useState<boolean>( false );
-	const [ error, setError ] = useState<string | null>( null );
+	const [ error ] = useState<string | null>( null );
 
 	const classNames = {
 		root: classBuilder( rootClassName,className ),
@@ -83,10 +83,7 @@ const Remind: TRemindComponent = ( props ) => {
 			fData.append( ERemindForm.email, String( form.email ) );
 			const response = await remind( fData );
 
-			console.log( 'Remind response', response );
-
 			if ( response.error ) {
-				setError( response.error );
 				!!onError && onError();
 			} else {
 				setSuccess( true );
@@ -148,9 +145,11 @@ const Remind: TRemindComponent = ( props ) => {
 							>Back to login</Button>
 						</FormSubmit>
 
-						<FormTextField>
-							{ !!error && <p className={ classNames.error }>{ error }</p> }
-						</FormTextField>
+						{ !!error &&
+							<FormSubmit>
+								<p className={ classNames.error }>{ error }</p>
+							</FormSubmit>
+						}
 					</Form>
 			}
 		</div>

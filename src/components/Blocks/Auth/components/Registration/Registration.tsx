@@ -36,7 +36,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 		setForm,
 		validateForm,
 		validation,
-		// setFormErrors,
+		setFormErrors,
 	} = useForm( {
 		form: {
 			email: '',
@@ -65,7 +65,7 @@ const Registration: TRegistrationComponent = ( props ) => {
 		},
 	} );
 
-	const [ error, setError ] = useState<string | null>( null );
+	const [ error ] = useState<string | null>( null );
 
 	const classNames = {
 		root: classBuilder( rootClassName, className ),
@@ -113,10 +113,11 @@ const Registration: TRegistrationComponent = ( props ) => {
 
 			const response = await register( fData );
 
-			console.log( 'Registration response', response );
-
 			if ( response.error ) {
-				setError( response.error );
+				if ( response.error.indexOf( 'E-mail уже используется' ) >= 0 ) {
+					setFormErrors( { email: 'This email already registered' } );
+				}
+
 				!!onError && onError();
 			} else {
 				!!onSuccess && onSuccess();
