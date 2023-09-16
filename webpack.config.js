@@ -50,8 +50,11 @@ export default ( env, argv ) => {
 			publicPath: _BUILD[ argv.mode ].output.publicPath,
 		},
 
+		watchOptions: { poll: true },
+
 		devServer: {
-			port: 4000,
+			port: 3000,
+			// host: '0.0.0.0',
 			historyApiFallback: true,
 		},
 
