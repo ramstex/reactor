@@ -4,7 +4,7 @@ import useLogin from './login/useLogin';
 import useRemind from './remind/useRemind';
 import useLogout from './logout/useLogout';
 
-const useModel = () =>{
+const useEndpoint = () =>{
 	const { update } = useUser();
 	const { register } = useRegistration();
 	const { login } = useLogin();
@@ -20,4 +20,4 @@ const useModel = () =>{
 	};
 };
 
-export default useModel;
+export default useEndpoint;

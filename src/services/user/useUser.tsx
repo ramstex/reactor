@@ -1,4 +1,4 @@
-import useModel from '../../model/useModel';
+import useEndpoint from '../../endpoint/useEndpoint';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser, setState } from './store';
 
@@ -13,7 +13,7 @@ const useUser: TUserController = () => {
 		login: loginModel,
 		remind: remindModel,
 		logout: logoutModel,
-	} = useModel();
+	} = useEndpoint();
 
 	const dispatch = useDispatch();
 

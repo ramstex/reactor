@@ -1,5 +1,5 @@
 import classBuilder from '../../../../../plugins/classBuilder';
-import useUser from '../../../../../controllers/user/useUser';
+import useUser from '../../../../../services/user/useUser';
 
 // Components
 import Col from '../../../../Grid/Col/Col';

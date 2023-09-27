@@ -1,10 +1,14 @@
 # Reactor todos
 
-- Actualize and describe all [package.json](package.json) scripts in [README.md](README.md)
 - Describe project file structure in [README.md](README.md)
 - Actualize [.stylelintrc](.stylelintrc)
-- Actualize [.eslintrc](.stylelintrc)
+- Actualize [.eslintrc](.eslintrc)
 - Actualize [.prettierrc](.prettierrc)
 - Create GUIDE.md file containing code style descriptions and naming rules
-- Create .editorconfig file
-- Plug in tests via Jest
+- Create BEM module as a replacement for [classBuilder](./src/plugins/classBuilder.tsx)
+- Create data layer including api, store, cookies
+- Create enum dictionaries (api methods, input types, themes, regex's)
+- Implement component Ui/Select
+- Implement component Ui/Radio
+- Implement component Ui/File
+-

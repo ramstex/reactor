@@ -17,30 +17,29 @@ import type {
 	TSetFormErrors
 } from './types';
 
-const getValidationDefault: ( form: TForm ) => TFormValidation = ( form ) => {
-	return {
-		success: true,
-		items: Object.keys( form ).reduce( ( result, current ) => {
-			return {
-				...result,
-				[ current ]: {
-					message: null,
-					checked: true,
-					success: true,
-				},
-			};
-		}, {} ),
-	}
-}
-
 const useForm: TUseForm = ( {
 	form: formProp,
 	rules: rulesProp = {},
 } ) => {
-	const [ initialized, setInitialized ] = useState( false );
 	const [ formState, setFormState ] = useState( formProp );
 	const formPrev = usePrevious( formState );
 	const [ initialForm ] = useState( formProp );
+
+	const getValidationDefault: ( form: TForm ) => TFormValidation = ( form ) => {
+		return {
+			success: true,
+			items: Object.keys( form ).reduce( ( result, current ) => {
+				return {
+					...result,
+					[ current ]: {
+						message: null,
+						checked: true,
+						success: true,
+					},
+				};
+			}, {} ),
+		}
+	}
 
 	const setForm: TSetForm = ( data = {} ) => {
 		const result = {
@@ -162,14 +161,8 @@ const useForm: TUseForm = ( {
 	}
 
 	useEffect( () => {
-		if ( initialized ) {
-			validate( getChangedKeys() );
-		}
+		validate( getChangedKeys() );
 	}, [ formState ] );
-
-	useEffect( () => {
-		setInitialized( true );
-	}, [] );
 
 	return {
 		form: formState,

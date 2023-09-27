@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classBuilder from '../../../../../plugins/classBuilder';
-import useUser from '../../../../../controllers/user/useUser';
+import useUser from '../../../../../services/user/useUser';
 import useForm from '../../../../../modules/form/index';
 import { EButtonTemplate, EButtonType } from '../../../../Ui/Button/helpers';
 import { ERegistrationForm } from './helpers';

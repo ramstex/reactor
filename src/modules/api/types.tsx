@@ -1,7 +1,7 @@
 import { EApiMethods } from './helper';
 
-// Union type for rest api methods
-type TApiRestMethods = `${ EApiMethods }`;
+// Union type for rest endpoint methods
+export type TApiRestMethods = `${ EApiMethods }`;
 
 export type TQuery = <T>( method: TApiRestMethods, url: string, data?: FormData, headers?: object ) => Promise<T>;
 

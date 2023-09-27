@@ -7,9 +7,9 @@ import LoginDummy from './login';
 import LogoutDummy from './logout';
 
 import type { AxiosResponse } from 'axios';
-import type { TApiMethods } from '../../../constants/api';
+import type { TApiRestMethods } from '../types';
 
-type TDummy = ( method: TApiMethods, url: string, data?: FormData, headers?: object ) => Promise<AxiosResponse>;
+type TDummy = ( method: TApiRestMethods, url: string, data?: FormData, headers?: object ) => Promise<AxiosResponse>;
 
 const dummy: TDummy = ( method, url, data ) => {
 	let result: AxiosResponse;

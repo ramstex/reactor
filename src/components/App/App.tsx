@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import buildClass from '../../plugins/classBuilder';
 import { Routes, Route } from '../../plugins/router';
-import useUser from '../../controllers/user/useUser';
+import useUser from '../../services/user/useUser';
 import _ROUTES from '../../../config/routes';
 
 import Header from '../Header/Header';

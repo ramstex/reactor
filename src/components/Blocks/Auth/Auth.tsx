@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import classBuilder from '../../../plugins/classBuilder';
-import useUser from '../../../controllers/user/useUser';
+import useUser from '../../../services/user/useUser';
 import { EAuthStates } from './helper';
 
 import Registration from './components/Registration/Registration';

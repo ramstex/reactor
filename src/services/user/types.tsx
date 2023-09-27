@@ -1,6 +1,6 @@
 import { EUserAuthStates } from './helper';
 
-import type { TUpdateUserResponse, TUserResponseUser } from '../../model/user/types';
+import type { TUpdateUserResponse, TUserResponseUser } from '../../endpoint/user/types';
 
 export type TUserAuthStates = `${ EUserAuthStates }`;
 
